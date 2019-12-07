@@ -1,0 +1,96 @@
+I am not quite familiar with elliptic curve.
+I am trying to implement x25519 curve with gmp library.
+What is wrong with this implementation?
+I don't know whether this is my misunderstanding about elliptic curve or 
+bug in my implementation.
+Anyway it does not work correctly.
+
+Here is my implementation.
+I mainly used operator overloading.
+
+	struct X25519
+	{
+		X25519(mpz_class x = 9, mpz_class y = mpz_class{"14781619447589544791020593568409986887264606134616475288964881837755586237401"});//default is g
+		X25519 operator+(const X25519 &r) const;
+		X25519 operator*(const mpz_class &k) const;
+		bool operator==(const X25519 &r) const;
+		X25519 &operator=(const X25519 &r);
+		mpz_class mod_inv(const mpz_class &z) const;
+		mpz_class x, y;
+		static const mpz_class a, mod;//486662, 2^255-19
+	};
+
+	std::ostream& operator<<(std::ostream &is, const X25519 &r);
+	X25519 operator*(const mpz_class &k, const X25519 &r);
+	static mpz_class init_mod()
+	{//retrun 2^255 - 19
+		mpz_class mod;
+		mpz_ui_pow_ui(mod.get_mpz_t(), 2, 255);
+		mod -= 19;
+		return mod;
+	}
+
+	const mpz_class X25519::mod = init_mod();
+	const mpz_class X25519::a = 486662;
+
+	X25519::X25519(mpz_class x, mpz_class y)
+	{
+		this->x = x; this->y = y;
+	}
+
+	X25519 &X25519::operator=(const X25519 &r) 
+	{//y^2 = x^3 + ax^2 + x
+		x = r.x; y = r.y;
+		return *this;
+	}
+
+	mpz_class X25519::mod_inv(const mpz_class &z) const {
+		mpz_class r;
+		mpz_invert(r.get_mpz_t(), z.get_mpz_t(), mod.get_mpz_t());
+		return r;
+	}
+
+	X25519 X25519::operator+(const X25519 &q) const
+	{//return Xr <- p + q
+		mpz_class s;
+		if(*this == q) s = (3*q.x*q.x + 2*a*q.x + 1) * mod_inv(2 * q.y) % mod;
+		else s = (this->y - q.y) * mod_inv(this->x - q.x) % mod;
+		X25519 r;
+		r.x = (s*s - 3*a - this->x - q.x) % mod;
+		r.y = (s * (this->x - r.x) - this->y) % mod;
+		if(r.x < 0) r.x += mod;
+		if(r.y < 0) r.y += mod;
+		return r;
+	}
+
+	X25519 X25519::operator*(const mpz_class &k) const
+	{//return kp
+		vector<bool> bin;//k = 2^0 + 2^4 + 2^5 + 2^17 + .. + 2^n 
+		for(mpz_class i=0, r=1, flag; i<k; i++, r *= 2) { 
+			mpz_and(flag.get_mpz_t(), k.get_mpz_t(), r.get_mpz_t());
+			bin.push_back(flag != 0);
+		}
+		X25519 R, X = *this;
+		int first = 0;
+		for(auto a : bin) {
+			if(a) R = !first++ ? X : R + X;
+			X = X + X;
+		}
+		return R;
+	}
+
+	X25519 operator*(const mpz_class &k, const X25519 &r)
+	{
+		return r * k;
+	}
+
+	bool X25519::operator==(const X25519 &r) const
+	{
+		return x == r.x && y == r.y;
+	}
+
+	ostream& operator<<(ostream &os, const X25519 &r)
+	{
+		os << hex << '(' << r.x << ",\n " << r.y << ')';
+		return os;
+	}
