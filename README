@@ -1,4 +1,4 @@
-인증서 파일들
+####   인증서 파일들   ####
 
 server-cert.pem : 9장 2절(Certificate장 PEM절)에서 사용된 인증서
 
@@ -8,7 +8,7 @@ cert.pem : 22장에서 만든 인증서
 ec_cert.pem : 35장 5절(TLS 1.3구현 인증서절)에서 생성한 인증서
 ec_key.pem : 35장 5절(TLS 1.3구현 인증서절)에서 생성한 비밀키 파일
 
-실행화일들
+####   실행화일들   ####
 
 catch.tst.x : 테스트 실행 파일
 incltouch.x : 컴파일에 필요한 유틸리티 
