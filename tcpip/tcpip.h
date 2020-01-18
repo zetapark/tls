@@ -1,6 +1,7 @@
 //tcpip.h class definition
 #pragma once
 #include <string>
+#include<optional>
 #include <arpa/inet.h>
 #define BUF_SIZE 4096
 
@@ -11,7 +12,7 @@ public:
 	virtual ~Tcpip();
 	void send(const std::string& s, int fd = 0);
 //	void send(int n);
-	std::string recv(int fd = 0);
+	std::optional<std::string> recv(int fd = 0);
 
 protected:
 	int server_fd;///<server_fd입니다.

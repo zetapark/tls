@@ -21,8 +21,9 @@ TEST_CASE("mpz") {
 
 TEST_CASE("diffie hellman") {
 	DiffieHellman Alice;
-	DiffieHellman Bob{Alice.p, Alice.g, Alice.ya};
-	Alice.set_yb(Bob.yb);
+	DiffieHellman Bob;
+	Alice.set_peer_pubkey(Bob.y);
+	Bob.set_peer_pubkey(Alice.y);
 	REQUIRE(Alice.K == Bob.K);
 }
 
@@ -30,6 +31,10 @@ TEST_CASE("rsa") {
 	RSA rsa{256};//256 바이트 키 크기
 	auto a = rsa.encode(mpz_class{"0x23423423"});
 	REQUIRE(0x23423423 == rsa.decode(a));
+
+	mpz_class msg = 0x143214324234_mpz;
+	auto b = rsa.sign(msg);
+	REQUIRE(rsa.encode(b) == msg);
 }
 
 TEST_CASE("sha1") {

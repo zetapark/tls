@@ -15,3 +15,4 @@ std::array<mpz_class, 2> process_bitstring(std::string s);
 std::array<mpz_class, 3> get_pubkeys(const Json::Value& jv);
 std::array<mpz_class, 3> get_pubkeys(std::istream& is);
 std::array<mpz_class, 3> get_keys(std::istream& is);
+std::array<mpz_class, 3> get_keys(const Json::Value &jv);

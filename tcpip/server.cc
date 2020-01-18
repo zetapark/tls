@@ -12,24 +12,20 @@ using namespace std;
 Vrecv::Vrecv(int port) : Tcpip{port}
 { }
 
-string Vrecv::recv(int fd)
+
+optional<string> Vrecv::recv(int fd)
 {
-	string s;
-	if(trailing_string_ == "") s = Tcpip::recv(fd);
-	s = trailing_string_ + s;
-	trailing_string_ = "";
 	int len;
-	for(int n; !(len = get_full_length(s));) s += Tcpip::recv(fd);
-	// s += string(buffer, n))
-		//n = read(client_fd, buffer, BUF_SIZE);//when less than header came
-	if(len < s.size()) {//two packet once
-		trailing_string_ = s.substr(len);
-		s = s.substr(0, len);
-	} else if(len > s.size()) {//more to come
-		for(int n; s.size() < len; s += string(buffer, n))
-			n = read(fd ? fd : client_fd, buffer, min(BUF_SIZE, (int)(len - s.size())));
+	static thread_local std::string trailing_string;//for thread safety
+	while(!(0 < (len = get_full_length(trailing_string)) && 
+				len <= trailing_string.size())) {
+		if(len == -2) return {};//wrong protocol
+		if(auto a = Tcpip::recv(fd)) trailing_string += *a;
+		else return {};
 	}
-	return s;
+	string r = trailing_string.substr(0, len);
+	trailing_string = trailing_string.substr(len);
+	return r;
 }
 
 int Vrecv::get_full_length(const string& s) 
@@ -53,6 +49,7 @@ TlsLayer::TlsLayer(int port) : Vrecv{port}
 
 int TlsLayer::get_full_length(const string& s)
 {
+	if(s.size() < 5) return -1;
 	return static_cast<unsigned char>(s[3]) * 0x100 + static_cast<unsigned char>(s[4]) + 5;
 }
 
@@ -70,6 +67,11 @@ string Client::get_addr(string host)
 	return inet_ntoa(*(struct in_addr*)a->h_addr);
 }
 
+static void kill_zombie(int) {
+	int status;
+	waitpid(-1, &status, WNOHANG); 
+}
+
 Server::Server(int port, unsigned int t, int queue, string e) : Http(port) 
 {
 	end_string = e;
@@ -80,6 +82,12 @@ Server::Server(int port, unsigned int t, int queue, string e) : Http(port)
 	else cout << "binding" << endl;
 	if(listen(server_fd, queue) == -1) cout << "listen() error" << endl;
 	else cout << "listening port " << port << endl;
+
+	struct sigaction sa;
+	sa.sa_handler = kill_zombie;
+	sigemptyset(&sa.sa_mask);
+	sa.sa_flags = 0;
+	sigaction(SIGCHLD, &sa, 0);
 }
 
 void Server::start(function<string(string)> f)
@@ -93,7 +101,7 @@ void Server::start(function<string(string)> f)
 		setsockopt(client_fd, SOL_SOCKET, SO_RCVTIMEO, &tv, sizeof tv);
 		if(client_fd == -1) cout << "accept() error" << endl;
 		else if(!fork()) {//string size 0 : error -> s.size() : verify 
-			for(string s; (s = recv()) != end_string && s.size(); send(f(s)));//recv server fail 시 에러
+			for(optional<string> s; s = recv(); send(f(*s)));//recv server fail 시 에러
 			send(end_string);
 			break;//forked process ends here
 		}
@@ -108,7 +116,7 @@ void Server::nokeep_start(function<string(string)> f)
 		if(client_fd == -1) cout << "accept() error" << endl;
 		else {//connection established
 			cout << "accepting" << endl;
-			send(f(recv()));
+			send(f(*recv()));
 		}
 	}
 }

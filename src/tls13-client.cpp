@@ -15,8 +15,8 @@ public:
 	void encodeNsend(string s) {
 		send(t.encode(move(s)));
 	}
-	string recvNdecode() {
-		return t.decode(recv());
+	optional<string> recvNdecode() {
+		return t.decode(*recv());
 	}
 private:
 	TLS13<CLIENT> t;
@@ -37,7 +37,8 @@ int main(int ac, char **av) {
 //	cl.send(t.client_hello());
 //	cout << cl.recv();
 //	TLS_client t{"localhost", 4433};//co.get<const char*>("ip"), co.get<int>("port")};
+for(int i=0; i<10000; i++) {
 	t.encodeNsend("GET /");
-	cout << t.recvNdecode() << endl;
+	cout << *t.recvNdecode() << endl;}	
 }
 

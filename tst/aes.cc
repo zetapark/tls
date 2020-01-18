@@ -107,10 +107,52 @@ TEST_CASE("GCM") {
 		GCM<AES> gcm;
 		gcm.iv(IV);
 		gcm.key(K);
-		gcm.aad({A, A+28});
+		gcm.aad(A, 28);
 		auto a = gcm.encrypt(P, 48);
+		REQUIRE(equal(P, P+48, C));
+		REQUIRE(equal(a.begin(), a.end(), Z));
+
+		mpz2bnd(random_prime(12), IV, IV+12);
+		mpz2bnd(random_prime(70), A, A + 70);
+		gcm_aes128_set_iv(&ctx, 12, IV);
+		gcm_aes128_update(&ctx, 28, A);
+		gcm_aes128_encrypt(&ctx, 48, C, P);
+		gcm_aes128_digest(&ctx, 16, Z);
+		
+		gcm.iv(IV);
+		gcm.aad(A, 28);
+		a = gcm.encrypt(P, 48);
 		REQUIRE(equal(P, P+48, C));
 		REQUIRE(equal(a.begin(), a.end(), Z));
 	}
 }
 
+TEST_CASE("inverse mix coulumn matrix verify") {
+	AES aes;
+	unsigned char inv[16] = {
+		14, 9, 13, 11, 11, 14, 9, 13, 13, 11, 14, 9, 9, 13, 11, 14
+	};
+	unsigned char o[16] = { 1,0,0,0, 0,1,0,0, 0,0,1,0, 0,0,0,1};
+
+	aes.mix_column(inv);
+	REQUIRE(equal(inv, inv + 16, o));
+}
+
+TEST_CASE("CBC") {
+	CBC<AES> cbc;
+	unsigned char key[16] = {
+		14, 9, 13, 11, 11, 14, 9, 13, 13, 11, 14, 9, 9, 13, 11, 14
+	};
+	unsigned char iv[16] = {
+		1,0,0,0, 0,1,0,0, 0,0,1,0, 0,0,0,1
+	};
+	cbc.key(key);
+	cbc.iv(iv);
+	string msg = "Hello this is test";
+
+	for(int i=0; i<14; i++) msg += 13;
+	cbc.encrypt((unsigned char*)msg.data(), 32);
+	cbc.decrypt((unsigned char*)msg.data(), 32);
+	for(int i=msg.back(); i >= 0; i--) msg.pop_back();//패딩 제거
+	REQUIRE(msg == "Hello this is test");
+}

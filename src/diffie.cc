@@ -4,17 +4,16 @@
 #include"diffie.h"
 using namespace std;
 
-DiffieHellman::DiffieHellman(mpz_class p, mpz_class g, mpz_class ya)
-{//client side
-	this->p = p; this->g = g; this->ya = ya;
-	xb = random_prime(256);
-	yb = powm(g, xb, p);
-	K = powm(ya, xb, p);
-}
-mpz_class DiffieHellman::set_yb(mpz_class pub_key)
+//DiffieHellman::DiffieHellman(mpz_class p, mpz_class g, mpz_class ya)
+//{//client side
+//	this->p = p; this->g = g; this->ya = ya;
+//	xb = random_prime(256);
+//	yb = powm(g, xb, p);
+//	K = powm(ya, xb, p);
+//}
+mpz_class DiffieHellman::set_peer_pubkey(mpz_class pub_key)
 {//set client pub key
-	yb = pub_key;
-	K = powm(yb, xa, p);
+	K = powm(pub_key, x, p);
 	return K;
 }
 
@@ -102,12 +101,13 @@ EC_Field::EC_Field(mpz_class a, mpz_class b, mpz_class mod)
 	this->b = b;
 	this->mod = mod;
 }
-EC_Field::EC_Field(const EC_Field& r)
-{
-	this->a = r.a;
-	this->b = r.b;
-	this->mod = r.mod;
-}
+
+//EC_Field::EC_Field(const EC_Field& r)
+//{
+//	this->a = r.a;
+//	this->b = r.b;
+//	this->mod = r.mod;
+//}
 
 EC_Point::EC_Point(mpz_class x, mpz_class y, const EC_Field &f) : EC_Field{f}
 {
@@ -127,10 +127,10 @@ EC_Point EC_Point::operator+(const EC_Point &r) const
 	mpz_class s;//slope
 	if(r == *this) {//2P
 		if(y == 0) return {x, mod, *this};
-		s = (3 * x * x + a) * mod_inv(2 * y) % mod;
+		s = (3 * x * x + a) * this->mod_inv(2 * y) % mod;
 	} else {
 		if(x == r.x) return {x, mod, *this};
-		s = (r.y - y) * mod_inv(r.x - x) % mod;
+		s = (r.y - y) * this->mod_inv(r.x - x) % mod;
 	}
 	mpz_class x3 = (s * s - x - r.x) % mod;
 	mpz_class y3 = (s * (x - x3) - y) % mod;
@@ -151,7 +151,7 @@ EC_Point EC_Point::operator*(mpz_class r) const
 EC_Point operator*(const mpz_class &l, const EC_Point &r) {
 	return r * l;
 }
-mpz_class EC_Point::mod_inv(const mpz_class &z) const
+mpz_class EC_Field::mod_inv(const mpz_class &z) const
 {
 	mpz_class r;
 	mpz_invert(r.get_mpz_t(), z.get_mpz_t(), mod.get_mpz_t());

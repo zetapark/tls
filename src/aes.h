@@ -3,6 +3,7 @@
 #include<cassert>
 #include<array>
 #include<vector>
+#include"mpz.h"
 
 class AES
 {//128bit. no padding consider. cbc mode.
@@ -121,9 +122,11 @@ template<class Cipher> class GCM : public CipherMode<Cipher>
 public:
 	void iv(const unsigned char *p);
 	void iv(const unsigned char *p, int from, int sz);
-	void aad(std::vector<unsigned char> v);
+	void xor_with_iv(const unsigned char *p);
+	void aad(const unsigned char *p, int sz);
 	std::array<unsigned char, 16> encrypt(unsigned char *p, int sz);
 	std::array<unsigned char, 16> decrypt(unsigned char *p, int sz);
+	void debug();
 protected:
 	std::vector<unsigned char> aad_;
 	unsigned char lenAC_[16];

@@ -23,10 +23,12 @@ mpz_class RSA::encode(mpz_class m)
 {//K should be bigger than m
 	return powm(m, e, K);
 }
+
 mpz_class RSA::decode(mpz_class m)
 {
 	return powm(m, d, K);
 }
+
 mpz_class RSA::sign(mpz_class m)
 {
 	return decode(m);

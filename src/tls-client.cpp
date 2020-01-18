@@ -10,22 +10,22 @@ class TLS_client : public Client
 public:
 	TLS_client(string ip, int port) : Client{ip, port} {
 		send(t.client_hello()); LOGD << "client hello" << endl;
-		t.server_hello(recv()); LOGD << "server hello" << endl;
-		t.server_certificate(recv());  LOGD << "server certificate" << endl;
-		t.server_key_exchange(recv()); LOGD << "server key exchange" << endl;
-		t.server_hello_done(recv()); LOGD << "server hello done" << endl;
+		t.server_hello(*recv()); LOGD << "server hello" << endl;
+		t.server_certificate(*recv());  LOGD << "server certificate" << endl;
+		t.server_key_exchange(*recv()); LOGD << "server key exchange" << endl;
+		t.server_hello_done(*recv()); LOGD << "server hello done" << endl;
 		string a = t.client_key_exchange();
 		string b = t.change_cipher_spec();
 		string c = t.finished();
 		send(a + b + c);
-		t.change_cipher_spec(recv()); LOGD << "change cipher spec" << endl;
-		t.finished(recv()); LOGD << "handshake finished" << endl;
+		t.change_cipher_spec(*recv()); LOGD << "change cipher spec" << endl;
+		t.finished(*recv()); LOGD << "handshake finished" << endl;
 	}
 	void encodeNsend(string s) {
 		send(t.encode(move(s)));
 	}
-	string recvNdecode() {
-		return t.decode(recv());
+	optional<string> recvNdecode() {
+		return t.decode(*recv());
 	}
 private:
 	TLS<CLIENT> t;
@@ -47,5 +47,5 @@ int main(int ac, char **av) {
 //	cout << cl.recv();
 //	TLS_client t{"localhost", 4433};//co.get<const char*>("ip"), co.get<int>("port")};
 	t.encodeNsend("GET /");
-	cout << t.recvNdecode() << endl;
+	cout << *t.recvNdecode() << endl;
 }

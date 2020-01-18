@@ -15,7 +15,7 @@ template<class H> struct HKDF : public HMAC<H>
 		return std::vector<uint8_t>{a.begin(), a.end()};
 	}
 	std::vector<uint8_t> derive_secret(std::string label, std::string msg) {
-		auto a = this->hash(msg.begin(), msg.end());
+		auto a = this->sha_.hash(msg.begin(), msg.end());
 		return expand_label(label, std::string{a.begin(), a.end()}, H::output_size);
 	}
 	std::vector<uint8_t> expand(std::string info, int L) {
@@ -36,9 +36,11 @@ template<class H> struct HKDF : public HMAC<H>
 		return r;
 	}
 	std::vector<uint8_t> expand_label(std::string label, std::string context, int L) {
-		std::string s = "xxtls13 " + label + context;
+		std::string s = "xxxtls13 " + label + 'x' + context;
 		s[0] = L / 0x100;
 		s[1] = L % 0x100;
+		s[2] = label.size() + 6;
+		s[label.size() + 9] = context.size();
 		return expand(s, L);
 	}
 };

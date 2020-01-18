@@ -54,8 +54,11 @@ array<mpz_class, 3> get_pubkeys(istream& is)
 
 array<mpz_class, 3> get_keys(istream& is)//is key.pem
 {
-	auto jv = pem2json(is);
-	return {str2mpz(jv[0][1].asString()), str2mpz(jv[0][2].asString()), str2mpz(jv[0][3].asString())};
+	return get_keys(pem2json(is));
+	//return {str2mpz(jv[0][1].asString()), str2mpz(jv[0][2].asString()), str2mpz(jv[0][3].asString())};
 }
 
-
+array<mpz_class, 3> get_keys(const Json::Value &jv)
+{
+	return {str2mpz(jv[0][1].asString()), str2mpz(jv[0][2].asString()), str2mpz(jv[0][3].asString())};
+}

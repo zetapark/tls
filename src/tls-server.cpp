@@ -33,7 +33,7 @@ public:
 				 to_send = t.change_cipher_spec();
 				 to_send += t.finished();
 				 break;
-		default: cout << t.decode(move(s)) << endl;
+		default: cout << *t.decode(move(s)) << endl;
 				 to_send = t.encode("Learning cryptography by implementing TLS");
 		}
 		count++;

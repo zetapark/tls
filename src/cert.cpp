@@ -2,7 +2,7 @@
 #include<string>
 #include<iostream>
 #include<sstream>
-#include"mpz.h"
+#include"sha256.h"
 #include"mpz.h"
 #include"cert_util.h"
 using namespace std;
@@ -11,10 +11,12 @@ int main() {
 	ifstream f("server-cert.pem");
 	string s = get_certificate_core(f);
 	auto v = base64_decode(s);
+	SHA2 sha;
+	int length = v[6] * 256 + v[7] + 4;
+	cout << hexprint("hash", sha.hash(v.begin() + 4, v.begin() + length + 4)) << endl;
 	stringstream ss;
 	for(uint8_t c : v) ss << c;
 	auto jv = der2json(ss);
-	cout << jv << endl; 
 	auto [K,e,sign] = get_pubkeys(jv);
 
 	s = get_certificate_core(f);
@@ -23,7 +25,8 @@ int main() {
 	for(uint8_t c : v) ss2 << c;
 	jv = der2json(ss2);
 	auto [K2,e2,sign2] = get_pubkeys(jv);
-	cout << hex << powm(sign, e2, K2) << endl;
+	auto k = powm(sign, e2, K2);
+	cout << hex << k << endl;
 }
 // 출력 : 1ffffffffffffffffffffffffffffffffffffffffffffffff
 //ffffffffffffffffffffffffffffffffffffffffffffffffffffffff

@@ -1,7 +1,5 @@
 #include<algorithm>
-//#include<iostream>
 #include"aes.h"
-#include"mpz.h"
 using namespace std;
 
 template class CBC<AES>;
@@ -150,6 +148,7 @@ template<class Cipher> void CBC<Cipher>::iv(const unsigned char *p)
 {
 	memcpy(this->iv_, p, 16);
 }
+
 template<class Cipher> void CBC<Cipher>::encrypt(unsigned char *p, int sz) const
 {//sequencial
 	assert(sz % 16 == 0);
@@ -160,6 +159,7 @@ template<class Cipher> void CBC<Cipher>::encrypt(unsigned char *p, int sz) const
 	}
 	this->cipher_.encrypt(p);
 }
+
 template<class Cipher> void CBC<Cipher>::decrypt(unsigned char *p, int sz) const
 {//can be serialized
 	assert(sz % 16 == 0);
@@ -174,15 +174,10 @@ template<class Cipher> void GCM<Cipher>::iv(const unsigned char *p)
 {
 	memcpy(this->iv_, p, 12);
 }
+
 template<class Cipher> void GCM<Cipher>::iv(const unsigned char *p, int from, int sz) 
 {
 	memcpy(this->iv_ + from, p, sz);
-}
-template<class Cipher> void GCM<Cipher>::aad(vector<unsigned char> v)
-{
-	aad_ = v;
-	mpz2bnd(aad_.size() * 8, lenAC_, lenAC_ + 8);
-	while(aad_.size() % 16) aad_.push_back(0);
 }
 
 void doub(unsigned char *p) {
@@ -191,6 +186,7 @@ void doub(unsigned char *p) {
 	p[0] >>= 1;
 	if(bit1) p[0] ^= 0b11100001;
 }
+
 void gf_mul(unsigned char *x, unsigned char *y)
 {//x = x * y
 	unsigned char z[16] = {0,};
@@ -203,12 +199,14 @@ void gf_mul(unsigned char *x, unsigned char *y)
 	memcpy(x, z, 16);
 //	cout << hexprint("aad", z) << endl;
 }
+
 template<class Cipher>
 array<unsigned char, 16> GCM<Cipher>::encrypt(unsigned char *p, int sz)
 {
 	for(int i=0; i<sz; i+=16) xor_with_enc_ivNcounter(p + i, min(16, sz-i), i/16 + 2);
 	return generate_auth(p, sz);
 }
+
 template<class Cipher> 
 array<unsigned char, 16> GCM<Cipher>::generate_auth(unsigned char *p, int sz) {
 	unsigned char H[16]={0,};
@@ -233,18 +231,34 @@ array<unsigned char, 16> GCM<Cipher>::generate_auth(unsigned char *p, int sz) {
 	xor_with_enc_ivNcounter(&Auth[0], 16, 1);
 	return Auth;
 }
+
 template<class Cipher>
-void GCM<Cipher>::xor_with_enc_ivNcounter(unsigned char *p, int sz, int ctr) {
+void GCM<Cipher>::xor_with_enc_ivNcounter(unsigned char *p, int sz, int ctr)
+{
 	unsigned char ivNcounter[16];
 	memcpy(ivNcounter, this->iv_, 12);
 	mpz2bnd(ctr, ivNcounter + 12, ivNcounter + 16);
 	this->cipher_.encrypt(ivNcounter);
 	for(int i=0; i<sz; i++) p[i] ^= ivNcounter[i];
 }
+
 template<class Cipher>
 array<unsigned char, 16> GCM<Cipher>::decrypt(unsigned char *p, int sz) 
 {
 	auto a = generate_auth(p, sz);
 	for(int i=0; i<sz; i+=16) xor_with_enc_ivNcounter(p + i, min(16, sz-i), i/16 + 2);
 	return a;
+}
+
+template<class Cipher> void GCM<Cipher>::xor_with_iv(const unsigned char *p) 
+{
+	for(int i=0; i<4; i++) this->iv_[i] ^= 0;
+	for(int i=0; i<8; i++) this->iv_[4 + i] ^= p[i];
+}
+
+template<class Cipher> void GCM<Cipher>::aad(const unsigned char *p, int sz)
+{
+	aad_ = vector<uint8_t>{p, p+sz};
+	mpz2bnd(aad_.size() * 8, lenAC_, lenAC_ + 8);
+	while(aad_.size() % 16) aad_.push_back(0);
 }

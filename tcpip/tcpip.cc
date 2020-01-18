@@ -4,6 +4,7 @@
 #include<unistd.h>//close
 #include<cstring>//memset
 #include<iostream>
+#include<fcntl.h>
 #include"tcpip.h"
 using namespace std;
 
@@ -33,9 +34,11 @@ void Tcpip::send(const string& s, int fd)
 //	write(client_fd, buffer, n);
 //}
 
-string Tcpip::recv(int fd)
+optional<string> Tcpip::recv(int fd)
 {
 	int i = read(!fd ? client_fd : fd, buffer, BUF_SIZE);//error
-	return string(buffer, i);
+	cout << "read " << i << " byte" << endl;
+	if(i > 0) return  string(buffer, i);
+	else return {};
 }
 
