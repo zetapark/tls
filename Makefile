@@ -6,7 +6,6 @@ all :
 	make -C tcpip/
 	make -C src/
 	make -C tst/
-	make -C 8448/
 	make -C obj/
 	./catch.tst.x
 
