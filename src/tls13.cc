@@ -9,6 +9,7 @@ using namespace std;
 template class TLS13<true>;
 template class TLS13<false>;
 
+mpz_class private_key;
 static string init_certificate() {
 	ifstream f("ec_cert.pem");
 	vector<unsigned char> r;
@@ -24,6 +25,11 @@ static string init_certificate() {
 	mpz2bnd(r.size() + 4, v.begin() + 6, v.begin() + 9);
 	mpz2bnd(r.size() + 8, v.begin() + 3, v.begin() + 5);
 	r.insert(r.begin(), v.begin(), v.end());
+
+	ifstream f2{"ec_key.pem"};
+	get_certificate_core(f2);//pass 
+	auto jv = pem2json(f2);
+	private_key = str2mpz(jv[0][1].asString());
 	return {r.begin(), r.end()};
 }
 
@@ -216,7 +222,7 @@ template<bool SV> string TLS13<SV>::certificate_verify()
 
 	ECDSA ecdsa{this->G_, //sign with ECDSA
 		0xFFFFFFFF00000000FFFFFFFFFFFFFFFFBCE6FAADA7179E84F3B9CAC2FC632551_mpz};
-	auto [r, s] = ecdsa.sign(bnd2mpz(a.begin(), a.end()), prv);
+	auto [r, s] = ecdsa.sign(bnd2mpz(a.begin(), a.end()), private_key);
 	mpz2bnd(r, R.begin(), R.end());
 	mpz2bnd(s, S.begin(), S.end());
 	if(R[0] >= 0x80) {//in DER this means negative number
