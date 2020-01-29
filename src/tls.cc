@@ -220,12 +220,12 @@ template<bool SV> string TLS<SV>::server_certificate(string&& s)
 			cerr << "certificate error : " << e << '\n';
 			return alert(2, 44);
 		}
-		auto [K, e, sign] = get_pubkeys(jv);
-
-		LOGD << "K : " << K << endl;
-		LOGD << "e : " << e << endl;
-		LOGD << hex << "sign : " << sign << endl;
-		rsa_.K = K; rsa_.e = e;
+//		auto [K, e, sign] = get_pubkeys(jv);
+//
+//		LOGD << "K : " << K << endl;
+//		LOGD << "e : " << e << endl;
+//		LOGD << hex << "sign : " << sign << endl;
+//		rsa_.K = K; rsa_.e = e;
 		return "";
 	}
 }
