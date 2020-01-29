@@ -15,8 +15,8 @@ static mpz_class ze, zd, zK;//used in TLS constructor
 
 static string init_certificate()
 {//this will run before main -> use for initialization
-	ifstream f2("key.pem");//generated with openssl genrsa 2048 > key.pem
-	ifstream f("cert.pem");//openssl req -x509 -days 1000 -new -key key.pem -out cert.pem
+	ifstream f2("privkey.pem");//generated with openssl genrsa 2048 > key.pem
+	ifstream f("fullchain.pem");//openssl req -x509 -days 1000 -new -key key.pem -out cert.pem
 	auto [K, e, d] = get_keys(f2);
 	zK = K; ze = e; zd = d;
 
