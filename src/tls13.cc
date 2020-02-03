@@ -11,7 +11,7 @@ template class TLS13<false>;
 
 mpz_class private_key;
 static string init_certificate() {
-	ifstream f("ec_cert.pem");
+	ifstream f("../0001_chain.pem");
 	vector<unsigned char> r;
 	for(string s; (s = get_certificate_core(f)) != "";) {
 		auto v = base64_decode(s);
@@ -26,7 +26,7 @@ static string init_certificate() {
 	mpz2bnd(r.size() + 8, v.begin() + 3, v.begin() + 5);
 	r.insert(r.begin(), v.begin(), v.end());
 
-	ifstream f2{"ec_key.pem"};
+	ifstream f2{"../ec.key"};
 	get_certificate_core(f2);//pass 
 	auto jv = pem2json(f2);
 	private_key = str2mpz(jv[0][1].asString());
