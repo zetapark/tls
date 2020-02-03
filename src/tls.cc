@@ -15,11 +15,22 @@ static mpz_class ze, zd, zK;//used in TLS constructor
 
 static string init_certificate()
 {//this will run before main -> use for initialization
-	ifstream f2("key.pem");//generated with openssl genrsa 2048 > key.pem
-	ifstream f("cert.pem");//openssl req -x509 -days 1000 -new -key key.pem -out cert.pem
-	auto [K, e, d] = get_keys(f2);
-	zK = K; ze = e; zd = d;
-
+	ifstream f2("privkey.pem");//generated with openssl genrsa 2048 > key.pem
+	ifstream f("fullchain.pem");//openssl req -x509 -days 1000 -new -key key.pem -out cert.pem
+	try {//key.pem
+		auto jv = pem2json(f2);
+		zK = str2mpz(jv[0][0].asString());
+		ze = str2mpz(jv[0][1].asString());
+		zd = str2mpz(jv[0][2].asString());//signature
+	} catch(...) {//privkey.pem
+		f2.clear();
+		f2.seekg(0);
+		auto ss = remove_colon(pem2json(f2)[0][2].asString());
+		auto jv = der2json(ss);
+		zK = str2mpz(jv[1].asString());
+		ze = str2mpz(jv[2].asString());
+		zd = str2mpz(jv[3].asString());
+	}
 	vector<unsigned char> r;
 	for(string s; (s = get_certificate_core(f)) != "";) {
 		auto v = base64_decode(s);
@@ -220,7 +231,11 @@ template<bool SV> string TLS<SV>::server_certificate(string&& s)
 			cerr << "certificate error : " << e << '\n';
 			return alert(2, 44);
 		}
-		auto [K, e, sign] = get_pubkeys(jv);
+		auto ss2 = remove_colon(jv[0][0][6][1].asString());//asString remove " ";
+		jv = der2json(ss2);
+		auto K = str2mpz(jv[0][0].asString());
+		auto e = str2mpz(jv[0][1].asString());
+		auto sign = str2mpz(jv[0][2].asString());//signature
 
 		LOGD << "K : " << K << endl;
 		LOGD << "e : " << e << endl;

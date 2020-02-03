@@ -1,12 +1,13 @@
 SHELL := /bin/bash
+OPTION = -j 7
 
 all : 
-	make -C util/
+	make $(OPTION) -C util/
 	./incltouch.x
-	make -C tcpip/
-	make -C src/
-	make -C tst/
-	make -C obj/
+	make $(OPTION) -C tcpip/
+	make $(OPTION) -C src/
+	make $(OPTION) -C tst/
+	make $(OPTION) -C obj/
 	./catch.tst.x
 
 clean :
