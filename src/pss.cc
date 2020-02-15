@@ -59,7 +59,8 @@ template<class HASH> bool pss_verify(vector<uint8_t> msg, vector<uint8_t> em)
 	auto mHash = sha.hash(msg.begin(), msg.end());
 	if(em.back() != 0xbc) return false;
 	else em.pop_back();
-	auto dbMask = mgf1<HASH>({em.end() - HASH::output_size, em.end()}, em.size()-HASH::output_size);
+	auto dbMask = mgf1<HASH>({em.end() - HASH::output_size, em.end()},
+								em.size() - HASH::output_size);
 	LOGD << hexprint("dbmask", dbMask) << endl;
 	for(int i=0; i<dbMask.size(); i++) dbMask[i] ^= em[i];//DB
 	vector<uint8_t> M_dash = {0,0,0,0,0,0,0,0};
