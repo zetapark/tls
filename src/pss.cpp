@@ -23,16 +23,16 @@ int main()
 	uint8_t dest[128];
 
 	RSA rsa{e, d, K};
-	PSS<SHA1> pss{rsa};
-	SHA1 sha;
-	cout << hexprint("sha1 hash", sha.hash(m, m + 114)) << endl;
-	auto a = pss.sign(m, 114);
-	cout << a << endl;
-	cout <<	pss.verify(a) << endl;
+//	PSS<SHA1> pss{rsa};
+//	SHA1 sha;
+//	cout << hexprint("sha1 hash", sha.hash(m, m + 114)) << endl;
+//	auto a = pss.sign(m, 114);
+//	cout << a << endl;
+//	cout <<	pss.verify(a) << endl;
 	char msg[] = "Example of ECDSA with P-256";
 	SHA2 sha2;
 	auto z = sha2.hash(msg, msg + sizeof(msg) - 1);//null character!!
-	cout << hexprint("msg", z) << endl;
+//	cout << hexprint("msg", z) << endl;
 	
 	EC_Field secp256r1_{
 		mpz_class{"0xFFFFFFFF00000001000000000000000000000000FFFFFFFFFFFFFFFFFFFFFFFC"},

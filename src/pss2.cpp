@@ -12,15 +12,18 @@ int main() {
 	auto EM = 0x70992c9d95a4908d2a94b3ab9fa1cd643f120e326f9d7808af50cac42c4b0b4eeb7f0d4df303a568fbfb82b0f58300d25357645721bb71861caf81b27a56082c80a146499fb4eab5bde4493f5d00f1a437bbc360dfcd8056fe6be10e608adb30b6c2f7652428b8d32d362945982a46585d2102ef7995a8ba6e8ad8fd16bd7ae8f53c3d7fcfba290b57ce7f8f09c828d6f2d3ce56f131bd9461e5667e5b73edac77f504dac4f202a9570eb4515b2bf516407db831518db8a2083ec701e8fd387c430bb1a72deca5b49d429cf9deb09cc4518dc5f57c089aa2d3420e567e732102c2c92b88a07c69d70917140ab3823c63f312d3f11fa87ba29da3c7224b4fb4bc_mpz;
 	auto S = 0x7e65b998a05f626b028c75dc3fbf98963dce66d0f4c3ae4237cff304d84d8836cb6bad9ac86f9d1b8a28dd70404788b869d2429f1ec0663e51b753f7451c6b4645d99126e457c1dac49551d86a8a974a3131e9b371d5c214cc9ff240c299bd0e62dbc7a9a2dad9fa5404adb00632d36332d5be6106e9e6ec81cac45cd339cc87abbe7f89430800e16e032a66210b25e926eda243d9f09955496ddbc77ef74f17fee41c4435e78b46965b713d72ce8a31af641538add387fedfd88bb22a42eb3bda40f72ecad941dbffdd47b3e77737da741553a45b630d070bcc5205804bf80ee2d51612875dbc4796960052f1687e0074007e6a33ab8b2085c033f9892b6f74_mpz;
 	
-	RSA rsa{e, d, n};
-	PSS<SHA2> pss{rsa};
-	int sz = mpz_sizeinbase(EM.get_mpz_t(), 256);
+	//RSA rsa{e, d, n};
+	//PSS<SHA2> pss{rsa};
+	int sz = mpz_sizeinbase(n.get_mpz_t(), 256);
 	uint8_t em[sz];
 	cout << "size : " << sz << endl;
 	mpz2bnd(EM, em, em + sz);
-	auto sign = pss.sign(em, sz);
-	cout << "sign : " << sign << endl;
-	cout << pss.verify(sign);
+	auto v = pss_encode({em, em+sz}, sz);
+	cout << hexprint("em", v) << endl;
+	cout << pss_verify({em, em+sz}, v) << endl;
+//	auto sign = pss.sign(em, sz);
+//	cout << "sign : " << sign << endl;
+//	cout << pss.verify(sign);
 }
 
 
