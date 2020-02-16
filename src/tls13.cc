@@ -4,36 +4,32 @@
 #include"cert_util.h"
 #include"ecdsa.h"
 #include"tls13.h"
+#include"pss.h"
+#include"util/log.h"
 using namespace std;
 
 template class TLS13<true>;
 template class TLS13<false>;
 
-mpz_class private_key;
-static string init_certificate() {
-	ifstream f("../0001_chain.pem");
+static string init_certificate()
+{
+	ifstream f("fullchain.pem");//openssl req -x509 -days 1000 -new -key key.pem -out cert.pem
 	vector<unsigned char> r;
 	for(string s; (s = get_certificate_core(f)) != "";) {
 		auto v = base64_decode(s);
-		for(int i=0; i<3; i++) r.push_back(0);
+		r.push_back(0); r.push_back(0); r.push_back(0);//fill with length
 		mpz2bnd(v.size(), r.end() - 3, r.end());
 		r.insert(r.end(), v.begin(), v.end());
+		r.push_back(0); r.push_back(0);//extension!!!
 	}
-	r.push_back(0); r.push_back(0);
-	vector<uint8_t> v = {0x16,3,3,0,0, CERTIFICATE, 0, 0, 0, 0, 0, 0, 0};
-	mpz2bnd(r.size(), v.end() - 3, v.end());
-	mpz2bnd(r.size() + 4, v.begin() + 6, v.begin() + 9);
-	mpz2bnd(r.size() + 8, v.begin() + 3, v.begin() + 5);
-	r.insert(r.begin(), v.begin(), v.end());
-
-	ifstream f2{"../ec.key"};
-	get_certificate_core(f2);//pass 
-	auto jv = pem2json(f2);
-	private_key = str2mpz(jv[0][1].asString());
+	const int REQUESTED_CONTEXT = 0;
+	vector<uint8_t> front{CERTIFICATE, 0,0,0, REQUESTED_CONTEXT, 0,0,0};
+	mpz2bnd(r.size(), front.end() - 3, front.end());
+	mpz2bnd(r.size() + 4, front.begin() + 1, front.begin() + 4);
+	r.insert(r.begin(), front.begin(), front.end());
 	return {r.begin(), r.end()};
 }
-
-template<bool SV> string TLS13<SV>::ecdsa_certificate_ = init_certificate();
+static string certificate13 = init_certificate();
 
 #pragma pack(1)
 
@@ -198,45 +194,6 @@ template<bool SV> string TLS13<SV>::encrypted_extension()
 	return r;
 }
 
-template<bool SV> string TLS13<SV>::certificate_verify()
-{
-	SHA2 sha;//hash accumulated handshakes
-	auto a = sha.hash(this->accumulated_handshakes_.begin(), this->accumulated_handshakes_.end());
-	string t;
-	for(int i=0; i<64; i++) t += ' ';
-	t += "TLS 1.3, server CertificateVerify";
-	t += (uint8_t)0x0;
-	t.insert(t.end(), a.begin(), a.end());
-	a = sha.hash(t.begin(), t.end());//?
-   	auto prv = 0xe8750c6f65b817f8937015b0ed18db0c5d9076c0c1cadb9215a9c0384f3350c2_mpz;
-
-	struct {
-		uint8_t type = 0x0f;
-		uint8_t length[3] = {0, 0, 74};
-		uint8_t signature[2] = {4, 3};//ecdsa sha256, 8 4 RSA SHA256 PSS 
-		uint8_t len[2] = {0, 70};
-		uint8_t der[4] = {0x30, 68, 2, 32};
-	} h;
-	vector<uint8_t> R(32), S(32);
-	uint8_t der2[2] = {2, 32};
-
-	ECDSA ecdsa{this->G_, //sign with ECDSA
-		0xFFFFFFFF00000000FFFFFFFFFFFFFFFFBCE6FAADA7179E84F3B9CAC2FC632551_mpz};
-	auto [r, s] = ecdsa.sign(bnd2mpz(a.begin(), a.end()), private_key);
-	mpz2bnd(r, R.begin(), R.end());
-	mpz2bnd(s, S.begin(), S.end());
-	if(R[0] >= 0x80) {//in DER this means negative number
-		h.length[2]++; h.len[1]++; h.der[1]++; h.der[3]++; R.insert(R.begin(), 0);
-	}
-	if(S[0] >= 0x80) {
-		h.length[2]++; h.len[1]++; h.der[1]++; der2[1]++; S.insert(S.begin(), 0);
-	}
-	t = struct2str(h) + string{R.begin(), R.end()} + string{der2, der2 + 2} +
-		string{S.begin(), S.end()};
-	this->accumulated_handshakes_ += t;
-	return t;
-}
-
 template<bool SV> void TLS13<SV>::protect_handshake()
 {//call after server hello
 	hkdf_.zero_salt();
@@ -354,8 +311,35 @@ template<bool SV> string TLS13<SV>::server_hello(string &&s)
 }
 
 template<bool SV> string TLS13<SV>::server_certificate13()
-{//ecdsa certificate
-	return this->accumulate(ecdsa_certificate_).substr(5);
+{
+	this->accumulated_handshakes_ += certificate13;
+	return certificate13;
+}
+
+template<bool SV> string TLS13<SV>::certificate_verify()
+{
+	SHA2 sha;//hash accumulated handshakes
+	auto a = sha.hash(this->accumulated_handshakes_.begin(), this->accumulated_handshakes_.end());
+	string t;
+	for(int i=0; i<64; i++) t += ' ';
+	t += "TLS 1.3, server CertificateVerify";
+	t += (uint8_t)0x0;
+	t.insert(t.end(), a.begin(), a.end());
+
+	struct {
+		uint8_t type = 0x0f;
+		uint8_t length[3] = {0, 1, 4};
+		uint8_t signature[2] = {8, 4};//4 3 : ecdsa sha256, 8 4 : RSA SHA256 PSS 
+		uint8_t len[2] = {1, 0};
+		uint8_t sign[256];
+	} h;
+
+	auto v = pss_encode({t.begin(), t.end()}, mpz_sizeinbase(this->rsa_.K.get_mpz_t(), 256));
+	auto sign = this->rsa_.sign(bnd2mpz(v.begin(), v.end()));
+	mpz2bnd(sign, h.sign, h.sign + 256);
+	t = struct2str(h);
+	this->accumulated_handshakes_ += t;
+	return t;
 }
 
 template<bool SV> bool
