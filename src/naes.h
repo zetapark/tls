@@ -1,10 +1,13 @@
 #pragma once
+#include<array>
 #include<gmpxx.h>
 #include<type_traits>
 #include<cassert>
 #include<vector>
 #include<nettle/aes.h>
 #include<nettle/cbc.h>
+#include<nettle/gcm.h>
+#include"aes.h"
 #define Encryption true
 #define Decryption false
 
@@ -47,3 +50,19 @@ private:
 	void key();
 };
 
+class NettleAes128
+{
+public:
+	void key(const unsigned char *p);
+	void iv(const unsigned char *p);
+	void iv(const unsigned char *p, int from, int sz);
+	std::array<unsigned char, 16> encrypt(unsigned char *p, int sz);
+	std::array<unsigned char, 16> decrypt(unsigned char *p, int sz);
+	void xor_with_iv(const unsigned char *p);
+	void aad(const unsigned char *p, int sz);
+protected:
+	gcm_aes128_ctx ctx_;
+	GCM<AES> aes_;
+	std::vector<uint8_t> aad_;
+	unsigned char iv_[12];
+};

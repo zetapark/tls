@@ -319,7 +319,8 @@ template<bool SV> string TLS13<SV>::server_certificate13()
 template<bool SV> string TLS13<SV>::certificate_verify()
 {
 	SHA2 sha;//hash accumulated handshakes
-	auto a = sha.hash(this->accumulated_handshakes_.begin(), this->accumulated_handshakes_.end());
+	auto a = sha.hash(this->accumulated_handshakes_.begin(),
+					  this->accumulated_handshakes_.end());
 	string t;
 	for(int i=0; i<64; i++) t += ' ';
 	t += "TLS 1.3, server CertificateVerify";
@@ -347,71 +348,71 @@ TLS13<SV>::handshake(function<optional<string>()> read_f, function<void(string)>
 {//handshake according to compromised version
 	string s; optional<string> a;
 	switch(1) { case 1://to use break
-		if constexpr(SV) {
-			if(s = this->alert(2, 0); !(a = read_f()) || 
-					(s = client_hello(move(*a))) != "") break;
-			if(s = server_hello(); premaster_secret_) {
-				protect_handshake();
-				s += this->change_cipher_spec();
-				string t = encrypted_extension();
-				t += server_certificate13();
-				t += certificate_verify();
-				t += finished();
-				string tmp = this->accumulated_handshakes_;//save after server finished
-				s += encode(move(t), 22);//first condition true:read error->alert(2, 0)
-				write_f(s); //second condition true->error message of function v
-				if(s = this->alert(2, 0); !(a = read_f())
-						|| (s = this->change_cipher_spec(move(*a)))!="") break;
-				if(s = this->alert(2, 0); !(a = read_f()) || !(a = this->decode(move(*a))) ||
-					(protect_data(), false) ||	(s = finished(move(*a))) != "") break;
-			} else {
-				s += this->server_certificate();
-				s += this->server_key_exchange();
-				s += this->server_hello_done();	
-				write_f(s);
-				if(s = this->alert(2, 0); !(a = read_f()) ||
-						(s = this->client_key_exchange(move(*a))) != "") break;
-				if(s = this->alert(2, 0); !(a = read_f()) ||
-						(s = this->change_cipher_spec(move(*a))) != "") break;
-				if(s = this->alert(2, 0); !(a = read_f()) ||
-						(s = TLS<SV>::finished(move(*a))) != "") break;
-				s = this->change_cipher_spec();
-				s += TLS<SV>::finished();
-				write_f(move(s));//empty s
-			} 
+	if constexpr(SV) {
+		if(s = this->alert(2, 0); !(a = read_f()) || 
+				(s = client_hello(move(*a))) != "") break;
+		if(s = server_hello(); premaster_secret_) {
+			protect_handshake();
+			s += this->change_cipher_spec();
+			string t = encrypted_extension();
+			t += server_certificate13();
+			t += certificate_verify();
+			t += finished();
+			string tmp = this->accumulated_handshakes_;//save after server finished
+			s += encode(move(t), 22);//first condition true:read error->alert(2, 0)
+			write_f(s); //second condition true->error message of function v
+			if(s = this->alert(2, 0); !(a = read_f())
+					|| (s = this->change_cipher_spec(move(*a)))!="") break;
+			if(s = this->alert(2, 0); !(a = read_f()) || !(a = this->decode(move(*a))) ||
+				(protect_data(), false) ||	(s = finished(move(*a))) != "") break;
 		} else {
-			write_f(client_hello());
-			if(a = read_f(); !a || (s = server_hello(move(*a))) != "") break;
-			if(premaster_secret_) {
-				protect_handshake();//should prepend header?
-				if(s = this->alert(2, 0); !(a = read_f()) ||
-						(s = this->change_cipher_spec(move(*a))) != "") break;
-				if(s = this->alert(2, 0); !(a = read_f()) || !(a = this->decode(move(*a)))) break;
-				else this->accumulated_handshakes_ += *a;
-				string tmp = this->accumulated_handshakes_;
-				s = this->change_cipher_spec();
-				s += this->encode(finished());
-				write_f(move(s));
-				this->accumulated_handshakes_ = tmp;
-				protect_data();
-			} else {
-				if(s = this->alert(2, 0); !(a = read_f()) ||
-						(s = this->server_certificate(move(*a))) != "") break;
-				if(s = this->alert(2, 0); !(a = read_f()) ||
-						(s = this->server_key_exchange(move(*a))) != "") break;
-				if(s = this->alert(2, 0); !(a = read_f()) ||
-						(s = this->server_hello_done(move(*a))) != "") break;
-				s = this->client_key_exchange();
-				s += this->change_cipher_spec();
-				s += TLS<SV>::finished();
-				write_f(move(s));//empty s
-				if(s = this->alert(2, 0); !(a = read_f()) ||
-						(s = this->change_cipher_spec(move(*a))) != "") break;
-				if(s = this->alert(2, 0); !(a = read_f()) ||
-						(s = TLS<SV>::finished(move(*a))) != "") break;
-			} 
-		}
-	}
+			s += this->server_certificate();
+			s += this->server_key_exchange();
+			s += this->server_hello_done();	
+			write_f(s);
+			if(s = this->alert(2, 0); !(a = read_f()) ||
+					(s = this->client_key_exchange(move(*a))) != "") break;
+			if(s = this->alert(2, 0); !(a = read_f()) ||
+					(s = this->change_cipher_spec(move(*a))) != "") break;
+			if(s = this->alert(2, 0); !(a = read_f()) ||
+					(s = TLS<SV>::finished(move(*a))) != "") break;
+			s = this->change_cipher_spec();
+			s += TLS<SV>::finished();
+			write_f(move(s));//empty s
+		} 
+	} else {
+		write_f(client_hello());
+		if(a = read_f(); !a || (s = server_hello(move(*a))) != "") break;
+		if(premaster_secret_) {
+			protect_handshake();//should prepend header?
+			if(s = this->alert(2, 0); !(a = read_f()) ||
+					(s = this->change_cipher_spec(move(*a))) != "") break;
+			if(s = this->alert(2, 0); !(a = read_f()) || !(a = this->decode(move(*a)))) break;
+			else this->accumulated_handshakes_ += *a;
+			string tmp = this->accumulated_handshakes_;
+			s = this->change_cipher_spec();
+			s += this->encode(finished());
+			write_f(move(s));
+			this->accumulated_handshakes_ = tmp;
+			protect_data();
+		} else {
+			if(s = this->alert(2, 0); !(a = read_f()) ||
+					(s = this->server_certificate(move(*a))) != "") break;
+			if(s = this->alert(2, 0); !(a = read_f()) ||
+					(s = this->server_key_exchange(move(*a))) != "") break;
+			if(s = this->alert(2, 0); !(a = read_f()) ||
+					(s = this->server_hello_done(move(*a))) != "") break;
+			s = this->client_key_exchange();
+			s += this->change_cipher_spec();
+			s += TLS<SV>::finished();
+			write_f(move(s));//empty s
+			if(s = this->alert(2, 0); !(a = read_f()) ||
+					(s = this->change_cipher_spec(move(*a))) != "") break;
+			if(s = this->alert(2, 0); !(a = read_f()) ||
+					(s = TLS<SV>::finished(move(*a))) != "") break;
+		} 
+	}//if constexpr
+	}//switch
 	if(s != "") {
 		write_f(s);//send alert message
 		return false;

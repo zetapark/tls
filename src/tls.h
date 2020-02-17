@@ -4,6 +4,7 @@
 #include"diffie.h"
 #include"rsa.h"
 #include"aes.h"
+#include"naes.h"
 
 template<bool SV = true> class TLS
 {//just deals with memory structure -> decoupled from underlying file-descriptor
@@ -25,7 +26,7 @@ public:
 	std::string alert(uint8_t level, uint8_t desc);
 
 protected:
-	GCM<AES> aes_[2];//0 client 1 server
+	NettleAes128 aes_[2];//0 client 1 server
 	mpz_class enc_seq_num_ = 0, dec_seq_num_ = 0, prv_key_ = random_prime(31);
 	EC_Field secp256r1_{
 		0xFFFFFFFF00000001000000000000000000000000FFFFFFFFFFFFFFFFFFFFFFFC_mpz,

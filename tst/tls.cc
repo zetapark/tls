@@ -31,11 +31,11 @@ TEST_CASE("tls") {
 				client.client_random_.begin()));
 	REQUIRE(equal(server.server_random_.begin(), server.server_random_.end(),
 				client.server_random_.begin()));
-	for(int i=0; i<2; i++) {//check key expansion
-		REQUIRE(equal(server.aes_[i].cipher_.schedule_[0],
-					server.aes_[i].cipher_.schedule_[0] + 11*16,
-					client.aes_[i].cipher_.schedule_[0]));
-	}
+//	for(int i=0; i<2; i++) {//check key expansion
+//		REQUIRE(equal(server.aes_[i].cipher_.schedule_[0],
+//					server.aes_[i].cipher_.schedule_[0] + 11*16,
+//					client.aes_[i].cipher_.schedule_[0]));
+//	}
 	//LOGD << server.decode(client.encode("hello world")) << endl;
 	REQUIRE(server.decode(client.encode("hello world")) == "hello world");
 	REQUIRE(client.decode(server.encode("Hello!! world")) == "Hello!! world");
