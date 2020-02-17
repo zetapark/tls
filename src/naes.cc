@@ -47,47 +47,34 @@ void NettleAes128::iv(const unsigned char *p)
 {
 	memcpy(iv_, p, 12);
 	gcm_aes128_set_iv(&ctx_, 12, iv_);
-	aes_.iv(p);
 }
 
 void NettleAes128::key(const unsigned char *p)
 {
 	gcm_aes128_set_key(&ctx_, p);
-	aes_.key(p);
 }
 
 void NettleAes128::iv(const unsigned char *p, int from, int sz)
 {
 	memcpy(iv_ + from, p, sz);
 	gcm_aes128_set_iv(&ctx_, 12, iv_);
-	aes_.iv(p, from, sz);
 }
 
 std::array<unsigned char, 16> NettleAes128::encrypt(unsigned char *p, int sz)
 {
 	array<unsigned char, 16> r;
-	unsigned char tmp[sz];
-	memcpy(tmp, p, sz);
 	gcm_aes128_update(&ctx_, aad_.size(), &aad_[0]);
 	gcm_aes128_encrypt(&ctx_, sz, p, p);
 	gcm_aes128_digest(&ctx_, 16, &r[0]);
-	auto dg = aes_.encrypt(tmp, sz);
-	LOGD << hexprint("dg", dg) << endl << hexprint("r", r) << endl;
-//	assert(equal(tmp, tmp + sz, p));
 	return r;
 }
 
 std::array<unsigned char, 16> NettleAes128::decrypt(unsigned char *p, int sz)
 {
 	array<unsigned char, 16> r;
-	unsigned char tmp[sz];
-	memcpy(tmp, p, sz);
-	auto dg = aes_.decrypt(tmp, sz);
 	gcm_aes128_update(&ctx_, aad_.size(), &aad_[0]);
 	gcm_aes128_decrypt(&ctx_, sz, p, p);
 	gcm_aes128_digest(&ctx_, 16, &r[0]);
-	LOGD << hexprint("dg", dg) << endl << hexprint("r", r) << endl;
-	assert(equal(tmp, tmp + sz, p));
 	return r;
 }
 
@@ -96,11 +83,9 @@ void NettleAes128::xor_with_iv(const unsigned char *p)
 	for(int i=0; i<4; i++) iv_[i] ^= 0;
 	for(int i=0; i<8; i++) iv_[4 + i] ^= p[i];
 	gcm_aes128_set_iv(&ctx_, 12, iv_);
-	aes_.xor_with_iv(p);
 }
 
 void NettleAes128::aad(const unsigned char *p, int sz)
 {
 	aad_ = {p, p + sz};
-	aes_.aad(p, sz);
 }

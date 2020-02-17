@@ -62,7 +62,6 @@ public:
 	void aad(const unsigned char *p, int sz);
 protected:
 	gcm_aes128_ctx ctx_;
-	GCM<AES> aes_;
 	std::vector<uint8_t> aad_;
 	unsigned char iv_[12];
 };
