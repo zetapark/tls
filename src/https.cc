@@ -39,17 +39,7 @@ void Middle::start()
 {//middle server can be managed here
 	thread th{&Middle::conn, this};
 	th.detach();
-	string s;
-	cout << "starting middle server, enter '?' to see commands." << endl;
-	while(cin >> s) {
-		if(s == "end") break;
-		else if(s == "help" || s == "?")
-			cout << "end, timeout [sec]" << endl << "current timeout " << time_out << endl;
-		else if(s == "timeout") {
-			cin >> time_out;
-			cout << "time out set " << time_out << endl;
-		}
-	}
+	while(1) this_thread::sleep_for(10s);
 }
 
 void Middle::connected(int fd)

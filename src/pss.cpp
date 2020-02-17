@@ -1,4 +1,5 @@
 #include<iostream>
+#include"rsa.h"
 #include"sha1.h"
 #include"pss.h"
 #include"mpz.h"
