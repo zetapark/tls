@@ -5,7 +5,6 @@
 #include"ecdsa.h"
 #include"tls13.h"
 #include"pss.h"
-#include"util/log.h"
 using namespace std;
 
 template class TLS13<true>;
@@ -318,7 +317,7 @@ template<bool SV> string TLS13<SV>::server_certificate13()
 
 template<bool SV> string TLS13<SV>::certificate_verify()
 {
-	SHA2 sha;//hash accumulated handshakes
+	SHA2 sha;
 	auto a = sha.hash(this->accumulated_handshakes_.begin(),
 					  this->accumulated_handshakes_.end());
 	string t;
@@ -335,9 +334,8 @@ template<bool SV> string TLS13<SV>::certificate_verify()
 		uint8_t sign[256];
 	} h;
 
-	auto v = pss_encode({t.begin(), t.end()}, mpz_sizeinbase(this->rsa_.K.get_mpz_t(), 256));
-	auto sign = this->rsa_.sign(bnd2mpz(v.begin(), v.end()));
-	mpz2bnd(sign, h.sign, h.sign + 256);
+	auto v = pss_encode({t.begin(), t.end()}, mpz_sizeinbase(this->rsa_.K.get_mpz_t(), 2) - 1);
+	mpz2bnd(this->rsa_.sign(bnd2mpz(v.begin(), v.end())), h.sign, h.sign + 256);
 	t = struct2str(h);
 	this->accumulated_handshakes_ += t;
 	return t;

@@ -18,7 +18,7 @@ int main() {
 	uint8_t em[sz];
 	cout << "size : " << sz << endl;
 	mpz2bnd(EM, em, em + sz);
-	auto v = pss_encode({em, em+sz}, sz);
+	auto v = pss_encode({em, em+sz}, 23300);
 	cout << hexprint("em", v) << endl;
 	cout << pss_verify({em, em+sz}, v) << endl;
 //	auto sign = pss.sign(em, sz);

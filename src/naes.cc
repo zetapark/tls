@@ -1,7 +1,6 @@
 #include<cstring>
 #include"mpz.h"
 #include"naes.h"
-#include"util/log.h"
 using namespace std;
 
 template class nAES<true, 128>;
@@ -46,7 +45,6 @@ template<bool Enc, int B> void nAES<Enc, B>::iv(const unsigned char* iv)
 void NettleAes128::iv(const unsigned char *p)
 {
 	memcpy(iv_, p, 12);
-	gcm_aes128_set_iv(&ctx_, 12, iv_);
 }
 
 void NettleAes128::key(const unsigned char *p)
@@ -57,12 +55,12 @@ void NettleAes128::key(const unsigned char *p)
 void NettleAes128::iv(const unsigned char *p, int from, int sz)
 {
 	memcpy(iv_ + from, p, sz);
-	gcm_aes128_set_iv(&ctx_, 12, iv_);
 }
 
 std::array<unsigned char, 16> NettleAes128::encrypt(unsigned char *p, int sz)
 {
 	array<unsigned char, 16> r;
+	gcm_aes128_set_iv(&ctx_, 12, iv_);
 	gcm_aes128_update(&ctx_, aad_.size(), &aad_[0]);
 	gcm_aes128_encrypt(&ctx_, sz, p, p);
 	gcm_aes128_digest(&ctx_, 16, &r[0]);
@@ -72,6 +70,7 @@ std::array<unsigned char, 16> NettleAes128::encrypt(unsigned char *p, int sz)
 std::array<unsigned char, 16> NettleAes128::decrypt(unsigned char *p, int sz)
 {
 	array<unsigned char, 16> r;
+	gcm_aes128_set_iv(&ctx_, 12, iv_);
 	gcm_aes128_update(&ctx_, aad_.size(), &aad_[0]);
 	gcm_aes128_decrypt(&ctx_, sz, p, p);
 	gcm_aes128_digest(&ctx_, 16, &r[0]);
@@ -82,7 +81,6 @@ void NettleAes128::xor_with_iv(const unsigned char *p)
 {
 	for(int i=0; i<4; i++) iv_[i] ^= 0;
 	for(int i=0; i<8; i++) iv_[4 + i] ^= p[i];
-	gcm_aes128_set_iv(&ctx_, 12, iv_);
 }
 
 void NettleAes128::aad(const unsigned char *p, int sz)
