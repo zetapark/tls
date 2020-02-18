@@ -8,7 +8,6 @@
 #include"src/tls13.h"
 #undef private
 #undef protected
-#include<iostream>
 using namespace std;
 
 TEST_CASE("tls") {
