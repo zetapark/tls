@@ -98,7 +98,7 @@ void Server::start(function<string(string)> f)
 		struct timeval tv;
 		tv.tv_sec = time_out;
 		tv.tv_usec = 0;
-		setsockopt(client_fd, SOL_SOCKET, SO_RCVTIMEO, &tv, sizeof tv);
+		if(time_out) setsockopt(client_fd, SOL_SOCKET, SO_RCVTIMEO, &tv, sizeof tv);
 		if(client_fd == -1) cout << "accept() error" << endl;
 		else if(!fork()) {//string size 0 : error -> s.size() : verify 
 			for(optional<string> s; s = recv(); send(f(*s)));//recv server fail 시 에러
