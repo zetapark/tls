@@ -28,6 +28,15 @@ void DnDD::process()
 	else if(requested_document_ == "close") content_ = close();
 	else if(requested_document_ == "googleapi") google();
 	else if(requested_document_ == "iframe-content.html") content_ = iframe_content_;
+	else if(requested_document_ == "result_view") tut();
+}
+
+void DnDD::tut() {
+	if(!nameNvalue_.empty()) {
+		content_ = "<html><h2>";
+		for(auto [a, b] : nameNvalue_) content_ += a + ':' + b + "<br>";
+		content_ += "</h2></html>";
+	}
 }
 
 void DnDD::google() 

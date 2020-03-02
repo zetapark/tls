@@ -11,7 +11,7 @@ static string level2txt(array<int, 5> allow)
 	r += "<br>Write level &#x2267 " + s[allow[1]];
 	r += "<br>Comment level &#x2267 " + s[allow[2]];
 	r += "<br>Vote level &#x2267 " + s[allow[3]];
-	r += "<br>Voting options = " + to_string(allow[4]) + "</h3></body></html>";
+	r += "<br>Voting util = " + to_string(allow[4]) + "</h3></body></html>";
 	return r;
 }
 

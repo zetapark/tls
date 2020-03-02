@@ -1,6 +1,6 @@
 #include<iostream>
-#include"server.h"//Server class
-#include"website.h"//WebSite class
+#include"tcpip/server.h"//Server class
+#include"tcpip/website.h"//WebSite class
 #include"util/option.h"
 using namespace std;
 

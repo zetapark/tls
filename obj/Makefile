@@ -1,19 +1,34 @@
 CXX = g++
 TOBJ = $(wildcard *.tst.o)
-OBJ = $(patsubst %.tst.o,, $(wildcard *.o))
+SITE = $(wildcard *.site_src.o)
+OBJ = $(wildcard *.src.o)
+UTIL = $(wildcard *.util.o)
+OBJ += $(UTIL)
 EXE = $(patsubst %.x, ../%.x, $(wildcard *.x))
-LDFLAGS = 
-LDLIBS = -lgmpxx -lgmp -lstdc++fs -lnettle -ljsoncpp -lpthread -lhogweed
+LDFLAGS = -L.. -Wl,-rpath=.
+LDLIBS = -lgmpxx -lgmp -lnettle -ljsoncpp -lpthread -lhogweed -lzeta -lstdc++fs
+DB = -lzetadb -lmysqlcppconn
+#filesystem library should be next to zeta library
 
-
-all : $(EXE)
+all : ../libzeta.so ../libzetadb.so $(EXE) ../catch.tst.x ../dndd.dndd.x
 
 ../catch.tst.x : catch.tst.x $(TOBJ) $(OBJ)
 	$(CXX) $(LDFLAGS) -o $@ $^ $(LDLIBS)
 
-../%.x : %.x $(OBJ)
+../%.src.x : %.src.x $(OBJ)
 	$(CXX) $(LDFLAGS) -o $@ $^ $(LDLIBS)
 
+../%.site_src.x : %.site_src.x $(OBJ)
+	$(CXX) $(LDFLAGS) -o $@ $^ $(DB) $(LDLIBS) 
+
+../libzeta.so : $(wildcard *.tcpip.o) 
+	$(CXX) -shared -o $@ $^
+
+../libzetadb.so : $(wildcard *.database.o)
+	$(CXX) -shared -o $@ $^
+
+../dndd.dndd.x : $(wildcard *.dndd.o) $(UTIL) dndd.dndd.x
+	$(CXX) $(LDFLAGS) -o $@ $^ $(DB) $(LDLIBS)
 
 #    $@ |현재 목표 파일의 이름
 #    $* | 확장자를 제외한 현재 목표 파일의 이름

@@ -1,0 +1,163 @@
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1"> 
+		<link rel='stylesheet' href='w3.css'>
+		<link rel='stylesheet' href='tutorial2.css'>
+		<script src="vue.js"></script>
+	</head>
+
+	<body>
+		<h1 class="w3-center w3-panel w3-green">Tutorial 5. Using other libraries together, Using with vue.js</h1>
+		<div class="w3-row w3-border">
+			<div class="w3-hide-small w3-col m2 l2">
+				<a href="index.html" class="w3-bar-item w3-button">Home</a><br>
+				<a href="#" class="w3-bar-item w3-button">Introduction</a><br>
+				<a href="#" class="w3-bar-item w3-button">Install</a><br>
+				<a href="tutorial.html" class="w3-bar-item w3-button">Tutorial</a><br>
+			</div>
+			<div class="w3-rest w3-container">
+
+		<div class='w3-pannel w3-card w3-light-grey'>
+			<h4>Result</h4>
+			<div class='w3-code notranslate'>
+				<div id='vue html'>
+					<div id="app">
+						{{ message }}
+					</div>
+					<div id="app-2">
+						<span v-bind:title="message">
+							Hover your mouse over me for a few seconds
+							to see my dynamically bound title!
+						</span>
+					</div>
+					<div id="app-3">
+						<span v-if="seen">Now you see me</span>
+					</div>
+					<div id="app-4">
+						<ol>
+							<li v-for="todo in todos">
+								{{ todo.text }}
+							</li>
+						</ol>
+					</div>
+					<div id="app-5">
+						<p>{{ message }}</p>
+						<button v-on:click="reverseMessage">Reverse Message</button>
+					</div>
+					<div id="app-6">
+						<p>{{ message }}</p>
+						<input v-model="message">
+					</div>
+				</div>
+			</div>
+		Let's change our index.html to use vue js library.<br>
+		This is copied from vue js tutorial.<br>
+				As we wished, All tutorials just worked fine without any adjusting.
+				We can use libraries out of the box.
+		</div>
+		<div class = 'w3-panel w3-card w3-light-grey'>
+			<h4>index.html</h4>
+			<div class='w3-code notranslate'>
+				<pre>
+&lt;html>
+	&lt;head>
+		&lt;script src="vue.js">&lt;/script>
+		&lt;script src="jquery.js">&lt;/script>
+		&lt;script src='index.js'>&lt;/script>
+	&lt;/head>
+	&lt;body>
+		&lt;div id="app">
+			{{ message }}
+		&lt;/div>
+		&lt;div id="app-2">
+			&lt;span v-bind:title="message">
+				Hover your mouse over me for a few seconds
+				to see my dynamically bound title!
+			&lt;/span>
+		&lt;/div>
+		&lt;div id="app-3">
+			&lt;span v-if="seen">Now you see me&lt;/span>
+		&lt;/div>
+		&lt;div id="app-4">
+			&lt;ol>
+				&lt;li v-for="todo in todos">
+					{{ todo.text }}
+				&lt;/li>
+			&lt;/ol>
+		&lt;/div>
+		&lt;div id="app-5">
+			&lt;p>{{ message }}&lt;/p>
+			&lt;button v-on:click="reverseMessage">Reverse Message&lt;/button>
+		&lt;/div>
+		&lt;div id="app-6">
+			&lt;p>{{ message }}&lt;/p>
+			&lt;input v-model="message">
+		&lt;/div>
+	&lt;/body>
+&lt;/html>
+				</pre>
+			</div>
+		</div>
+
+		<div class = 'w3-panel w3-card w3-light-grey'>
+			<h4>index.js</h4>
+			<div class='w3-code notranslate'>
+				<pre>
+$(function on_ready() {
+	var app = new Vue({
+		el: '#app',
+		data: {
+			message: 'Hello Vue!'
+		}
+	})
+	var app2 = new Vue({
+		el: '#app-2',
+		data: {
+			message: 'You loaded this page on ' + new Date().toLocaleString()
+		}
+	})
+	var app3 = new Vue({
+		el: '#app-3',
+		data: {
+			seen: true
+		}
+	})
+	var app4 = new Vue({
+		el: '#app-4',
+		data: {
+			todos: [
+				{ text: 'Learn JavaScript' },
+				{ text: 'Learn Vue' },
+				{ text: 'Build something awesome' }
+			]
+		}
+	})
+	var app5 = new Vue({
+		el: '#app-5',
+		data: {
+			message: 'Hello Vue.js!'
+		},
+		methods: {
+			reverseMessage: function () {
+				this.message = this.message.split('').reverse().join('')
+			}
+		}
+	})
+	var app6 = new Vue({
+		el: '#app-6',
+		data: {
+			message: 'Hello Vue!'
+		}
+	})
+});
+				</pre>
+			</div>
+		</div>
+			</div></div>
+ <div class="w3-bar w3-border w3-round w3-center">
+  <a href="tutorial4.html" class="w3-button">&#10094; Previous</a>
+	<a href="index.html" class="w3-button w3-center">Home</i></a>
+  <a href="tutorial6.html" class="w3-button">Next &#10095;</a>
+</div> 
+	</body>
+</html>

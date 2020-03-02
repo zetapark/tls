@@ -1,0 +1,64 @@
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1"> 
+		<link rel='stylesheet' href='w3.css'>
+		<link rel='stylesheet' href='tutorial.css'>
+		<script src="vue.js"></script>
+	</head>
+	<body>
+		<h1 class="w3-center w3-green">Tutorial 1. Minimal static web page</h1>
+		<div class="w3-row w3-border">
+			<div class="w3-hide-small w3-col m2 l2">
+				<a href="index.html" class="w3-bar-item w3-button">Home</a><br>
+				<a href="#" class="w3-bar-item w3-button">Introduction</a><br>
+				<a href="#" class="w3-bar-item w3-button">Install</a><br>
+				<a href="tutorial.html" class="w3-bar-item w3-button">Tutorial</a><br>
+			</div>
+			<div class="w3-rest w3-container">
+				<div class = 'w3-panel w3-card w3-light-grey'>
+					<h4>index.html</h4>
+					<div class='w3-code notranslate'>
+						&lt;html><br>
+						&lt;h1>It works CWFS!!&lt;/h1><br>
+						&lt;/html>
+						</pre>
+					</div>
+				</div>
+
+				<div class="w3-panel w3-card w3-light-grey">
+					<h4>C++ side Programming</h4>
+					<div class="w3-code ">
+						<pre tab=4>
+#include&lt;iostream&gt;
+#include"framework/server.h"
+#include"framework/website.h"
+
+int main(int ac, char** av) {
+	WebSite my_site{"site_html"};
+	Server sv{2000};//port number
+	sv.start(my_site);//go infinite loop
+}
+</pre>
+					</div>
+					compile using make.<br>
+					'site_html' is relative directory name to our executable.<br>
+					Go to the directory where our executable is.<br>
+					Make directory named site_html.<br>
+					Locate index.html file there.<br>
+					run the executable.<br>
+					Now, if we access localhost:2000 with any webbrowser,
+				</div>
+				<div class='w3-pannel w3-card w3-light-grey'>
+					<h4>Result</h4>
+					<div class='w3-code'>
+						<h1>It works CWFS!!</h1></div>
+				</div>
+			</div>
+			</div>
+			<div class="w3-bar w3-border w3-round w3-center">
+				<a href="index.html" class="w3-button w3-center">Home</a>
+				<a href="tutorial2.html" class="w3-button">Next &#10095;</a>
+			</div>
+	</body>
+</html>
+

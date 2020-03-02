@@ -7,7 +7,7 @@ class Middle : public Server
 {//use thread for multiple connection, should overload read func-> return exact one req
 public:
 	Middle(int outport = 4433, int inport = 2001, int time_out = 1800, int queue_limit = 10, std::string end_string = "end");
-	void start();
+	int start();
 
 protected:
 	int inport_;

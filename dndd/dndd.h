@@ -1,5 +1,5 @@
 #include"database/mysqldata.h"
-#include"framework/bootstrap.h"
+#include"tcpip/bootstrap.h"
 
 class DnDD : public BootStrapSite
 {
@@ -13,6 +13,10 @@ protected:
 private:
 	void signin(), index(), search(), mn(), pg(), edit(), new_book(), comment(),result(), google();
 	std::string search(std::string s), field(std::string s), follow(), close(), vote();
+<<<<<<< HEAD
+=======
+	void tut();
+>>>>>>> 781115da40a529e096c2c6c0405d7f3abf733403
 	std::array<int, 5> allowlevel(std::string table, std::string book);
 	std::vector<std::string> tables();
 	int maxpage(std::string table, std::string book);

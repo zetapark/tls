@@ -4,7 +4,7 @@
 #include<ctime>
 #include<sstream>
 #include"mysqldata.h"
-#include"options/log.h"
+#include"util/log.h"
 using namespace std;
 
 SqlQuery::SqlQuery(const SqlQuery& r) : Mysqlquery{r}

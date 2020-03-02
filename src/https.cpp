@@ -5,7 +5,7 @@
 using namespace std;
 
 int main(int ac, char** av) 
-{
+{//return 1 : error, 0 : ok
 	CMDoption co{
 		{"port", "listening port", 4433},
 		{"inner port", "http host port", 2001},
@@ -14,7 +14,7 @@ int main(int ac, char** av)
 	if(!co.args(ac, av)) return 0;
 	Log::get_instance()->set_log_filter(co.get<const char*>("log filter"));
 	Middle sv{co.get<int>("port"), co.get<int>("inner")};
-	sv.start();
+	return sv.start();
 }
 
 

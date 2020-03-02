@@ -1,0 +1,122 @@
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1"> 
+		<link rel='stylesheet' href='w3.css'>
+		<link rel='stylesheet' href='tutorial2.css'>
+		<script src="vue.js"></script>
+		<script src="jquery.js"></script>
+		<script src="doc2.js"></script>
+	</head>
+
+	<body>
+		<h1 class="w3-center w3-panel w3-green">Tutorial 6. Using C++ variables for multi page web service</h1>
+		<div class="w3-row w3-border">
+			<div class="w3-hide-small w3-col m2 l2">
+				<a href="index.html" class="w3-bar-item w3-button">Home</a><br>
+				<a href="#" class="w3-bar-item w3-button">Introduction</a><br>
+				<a href="#" class="w3-bar-item w3-button">Install</a><br>
+				<a href="tutorial.html" class="w3-bar-item w3-button">Tutorial</a><br>
+			</div>
+			<div class="w3-rest w3-container">
+
+		<div class = 'w3-panel w3-card w3-light-grey'>
+			<h4>Page 1, form1.html</h4>
+			<div class='w3-code notranslate'>
+				id<input type="text" name="id" value="myId" ><br>
+				name<input type='text' name='name' value="myName"> <button>ok</button>
+			</div>
+			Occasionally, websites get inputs across many pages.
+			Let's consider a form like above.
+		</div>
+
+		<div class = 'w3-panel w3-card w3-light-grey'>
+			<h4>Page 2, form2.html</h4>
+			<div class='w3-code notranslate'>
+			address<input type="text" name="address" value="myAddress"><br>
+			email<input type='text' name='email' value="myEmail"><button>ok</button>
+			</div>
+			And then another form. In another page.
+		</div>
+		<div class = 'w3-panel w3-card w3-light-grey'>
+			<h4>Page 3, result.html</h4>
+			<div class='w3-code notranslate'>
+		Your address is myAddress<br>
+		Your name is myName<br>
+		Your email is myEmail<br>
+		Your id is myId<br>
+			</div>
+			And we show the result at our last page.
+		</div>
+		<div class = 'w3-panel w3-card w3-light-grey'>
+			<h4>Page 1, form1.html</h4>
+			 <div class='w3-code notranslate'>
+		<div class = 'w3-panel w3-card w3-light-grey'>
+<pre>
+		&lt;form action="form2.html" method="post">
+			id&lt;input type="text" name="address" >&lt;br>
+			name&lt;input type='text' name='email'>&lt;br>
+			&lt;input type="submit"  value="ok">
+		&lt;/form>
+			</pre>
+		</div></div>
+		<div class = 'w3-panel w3-card w3-light-grey'>
+			<h4>Page 2, result.html</h4>
+			<div class='w3-code notranslate'>
+				<pre>
+		&lt;form action="result.html" method="post">
+			address&lt;input type="text" name="address" >&lt;br>
+			email&lt;input type='text' name='email'>&lt;br>
+			&lt;input type="submit"  value="ok">
+		&lt;/form>
+				</pre>
+			</div></div>
+		<div class = 'w3-panel w3-card w3-light-grey'>
+			<h4>Page 3, result.html</h4>
+			<div class='w3-code notranslate'>
+				<pre>
+		Your address is @ADDRESS<&lt;br>
+		Your name is @NAME<&lt;br>
+		Your email is @EMAIL<&lt;br>
+		Your id is @ID<&lt;br>
+				</pre>
+			</div>
+		</div>
+
+		<div class = 'w3-panel w3-card w3-light-grey'>
+			<h4>C++ side Programming</h4>
+			<div class='w3-code notranslate'>
+				<pre>
+	class MySite : public WebSite {
+	public:
+		map&lt;string, string> m;
+		void process() {
+			if(requested_document_ == "form2.html" || requested_document_ == "result.html")
+				for(const auto& [name, value] : nameNvalue_) m[name] = value;
+			if(requested_document_ == "result.html") {
+				swap("@ADDRESS", m["address"]);
+				swap("@NAME", m["name"]);
+				swap("@ID", m["id"]);
+				swap("@EMAIL", m["email"]);
+			}
+		}
+	}
+				</pre>
+			</div>
+			We do not need to query parameters. 
+			We can just use variables, just like normal programming.
+			This is enabled by middle server maintaining connections for us.
+			This is where CWFS shines.
+			There is some helper functions.
+			swap(first, second) function will swap the first string in the content_ variable with second string.
+			append(first, second) function will append after the first string in the content_ variable with the second string.
+
+		</div>
+		</div></div>
+
+ <div class="w3-bar w3-border w3-round w3-center">
+  <a href="tutorial5.html" class="w3-button">&#10094; Previous</a>
+	<a href="index.html" class="w3-button w3-center">Home</a>
+  <a href="tutorial7.html" class="w3-button">Next &#10095;</a>
+</div> 
+	</body>
+</html>
