@@ -18,7 +18,7 @@ all : ../libzeta.so ../libzetadb.so $(EXE) ../catch.tst.x ../dndd.dndd.x
 ../%.src.x : %.src.x $(OBJ)
 	$(CXX) $(LDFLAGS) -o $@ $^ $(LDLIBS)
 
-../%.site_src.x : %.site_src.x $(OBJ)
+../%.site_src.x : %.site_src.x $(UTIL)
 	$(CXX) $(LDFLAGS) -o $@ $^ $(DB) $(LDLIBS) 
 
 ../libzeta.so : $(wildcard *.tcpip.o) 
