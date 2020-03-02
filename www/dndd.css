@@ -1,0 +1,25 @@
+
+.navbar-nav > li {
+	padding:15px;
+}
+
+table { width:100%; } 
+table, th, td { border: 1px solid black; border-collapse: collapse; } 
+th, td { padding: 5px; text-align: left; } 
+table tr:nth-child(even) { background-color: #eee; } 
+table tr:nth-child(odd) { background-color:#fff; } 
+table th { background-color: black; color: white; } 
+header{background-color:black; color:white;text-align:center;padding:5px;}
+nav { line-height:30px; background-color:#eeeeee;  
+width:27%; float:right; padding:1%; } 
+section { width:67%; float:left; padding:2%; }
+footer { background-color:black; color:white; clear:both;
+text-align:center; padding:5px;	} 
+
+img {
+      width: 70%;
+      margin: auto;
+  }
+  .carousel-indicators .active{
+    background-color: #f00;
+}

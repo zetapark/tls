@@ -12,7 +12,7 @@ template class TLS13<false>;
 
 static string init_certificate()
 {
-	ifstream f("fullchain.pem");//openssl req -x509 -days 1000 -new -key key.pem -out cert.pem
+	ifstream f("../fullchain.pem");//openssl req -x509 -days 1000 -new -key key.pem -out cert.pem
 	vector<unsigned char> r;
 	for(string s; (s = get_certificate_core(f)) != "";) {
 		auto v = base64_decode(s);
