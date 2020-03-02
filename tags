@@ -4,12 +4,12 @@
 !_TAG_PROGRAM_NAME	Exuberant Ctags	//
 !_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
 !_TAG_PROGRAM_VERSION	5.9~svn20110310	//
-AES	src/aes.h	7;"	c
-ALERT	src/tls.h	56;"	v
+AES	src/aes.h	8;"	c
+ALERT	src/tls.h	54;"	v
 AND_THEN	tst/catch.hpp	11587;"	d
 AND_WHEN	tst/catch.hpp	11585;"	d
 APPLICATION	src/der.h	39;"	e	enum:ber::Class
-APPLICATION_DATA	src/tls.h	58;"	v
+APPLICATION_DATA	src/tls.h	56;"	v
 AllOf	tst/catch.hpp	1169;"	f	namespace:Catch::Matchers
 AllOf	tst/catch.hpp	1173;"	f	namespace:Catch::Matchers
 AnyOf	tst/catch.hpp	1177;"	f	namespace:Catch::Matchers
@@ -23,7 +23,9 @@ AutoReg	tst/catch.hpp	746;"	f	struct:Catch::AutoReg
 BIT_STRING	src/der.h	8;"	e	enum:ber::Tag
 BMP_STRING	src/der.h	35;"	e	enum:ber::Tag
 BOOLEAN	src/der.h	6;"	e	enum:ber::Tag
-BUF_SIZE	tcpip/tcpip.h	5;"	d
+BUF_SIZE	tcpip/tcpip.h	6;"	d
+BootStrapSite	tcpip/bootstrap.cc	5;"	f	class:BootStrapSite
+BootStrapSite	tcpip/bootstrap.h	7;"	c	inherits:WebSite
 BorgType	tst/catch.hpp	1533;"	s	namespace:Catch::Detail
 CATCH_AND_THEN	tst/catch.hpp	11501;"	d
 CATCH_AND_WHEN	tst/catch.hpp	11499;"	d
@@ -150,11 +152,11 @@ CATCH_UNSAFE_UNRETAINED	tst/catch.hpp	1459;"	d
 CATCH_UNSAFE_UNRETAINED	tst/catch.hpp	1475;"	d
 CATCH_WARN	tst/catch.hpp	11458;"	d
 CATCH_WHEN	tst/catch.hpp	11498;"	d
-CBC	src/aes.h	111;"	c	inherits:CipherMode
-CERTIFICATE	src/tls.h	63;"	v
-CERTIFICATE_REQUEST	src/tls.h	65;"	v
-CERTIFICATE_VERIFY	src/tls.h	67;"	v
-CHANGE_CIPHER_SPEC	src/tls.h	55;"	v
+CBC	src/aes.h	112;"	c	inherits:CipherMode
+CERTIFICATE	src/tls.h	61;"	v
+CERTIFICATE_REQUEST	src/tls.h	63;"	v
+CERTIFICATE_VERIFY	src/tls.h	65;"	v
+CHANGE_CIPHER_SPEC	src/tls.h	53;"	v
 CHARACTER_STRING	src/der.h	34;"	e	enum:ber::Tag
 CLARA_AUTO_PTR	tst/catch.hpp	4348;"	d
 CLARA_CONFIG_CONSOLE_WIDTH	tst/catch.hpp	4037;"	d
@@ -188,9 +190,9 @@ CLARA_OVERRIDE	tst/catch.hpp	4341;"	d
 CLARA_PLATFORM_WINDOWS	tst/catch.hpp	4363;"	d
 CLICHE_TBC_TEXT_FORMAT_OUTER_NAMESPACE	tst/catch.hpp	5307;"	d
 CLICHE_TBC_TEXT_FORMAT_OUTER_NAMESPACE	tst/catch.hpp	5466;"	d
-CLIENT	src/tls.h	72;"	v
-CLIENT_HELLO	src/tls.h	61;"	v
-CLIENT_KEY_EXCHANGE	src/tls.h	68;"	v
+CLIENT	src/tls.h	70;"	v
+CLIENT_HELLO	src/tls.h	59;"	v
+CLIENT_KEY_EXCHANGE	src/tls.h	66;"	v
 CMDoption	util/option.cc	6;"	f	class:CMDoption
 CMDoption	util/option.h	8;"	c
 CONSTRUCTED	src/der.h	43;"	e	enum:ber::PC
@@ -209,35 +211,39 @@ Catch	tst/catch.hpp	677;"	n
 Catch	tst/catch.hpp	702;"	n
 Catch	tst/catch.hpp	858;"	n
 Catch	tst/catch.hpp	912;"	n
+ChatServer	dndd/chatserver.h	31;"	c
 Choice	tst/catch.hpp	389;"	g	struct:Catch::CaseSensitive
-CipherMode	src/aes.h	102;"	c
+CipherMode	src/aes.h	103;"	c
 Class	src/der.h	38;"	g	namespace:ber
-Client	tcpip/server.cc	58;"	f	class:Client
-Client	tcpip/server.h	33;"	c	inherits:Http
+Client	tcpip/server.cc	56;"	f	class:Client
+Client	tcpip/server.h	34;"	c	inherits:Http
+Column	database/mysqldata.h	40;"	s	class:SqlQuery
 ContinueOnFailure	tst/catch.hpp	892;"	e	enum:Catch::ResultDisposition::Flags
 CopyableStream	tst/catch.hpp	1198;"	s	namespace:Catch
 CopyableStream	tst/catch.hpp	1199;"	f	struct:Catch::CopyableStream
 CopyableStream	tst/catch.hpp	1200;"	f	struct:Catch::CopyableStream
 DEBUG	util/log.h	30;"	e	enum:Log::LogLevel
 DecomposedExpression	tst/catch.hpp	916;"	s	namespace:Catch
-Decryption	src/naes.h	9;"	d
+Decryption	src/naes.h	12;"	d
 Detail	tst/catch.hpp	1528;"	n	namespace:Catch
 Detail	tst/catch.hpp	1644;"	n	namespace:Catch
 DidntThrowException	tst/catch.hpp	875;"	e	enum:Catch::ResultWas::OfType
-DiffieHellman	src/diffie.cc	7;"	f	class:DiffieHellman
-DiffieHellman	src/diffie.h	5;"	c
-EC_Field	src/diffie.cc	105;"	f	class:EC_Field
-EC_Field	src/diffie.cc	99;"	f	class:EC_Field
-EC_Field	src/diffie.h	34;"	c
+DiffieHellman	src/diffie.h	5;"	s
+DnDD	dndd/dndd.cc	8;"	f	class:DnDD
+DnDD	dndd/dndd.h	4;"	c	inherits:BootStrapSite
+ECDSA	src/ecdsa.cc	5;"	f	class:ECDSA
+ECDSA	src/ecdsa.h	4;"	c	inherits:EC_Point
+EC_Field	src/diffie.cc	98;"	f	class:EC_Field
+EC_Field	src/diffie.h	28;"	c
 EC_Point	src/diffie.cc	112;"	f	class:EC_Point
-EC_Point	src/diffie.h	43;"	c	inherits:EC_Field
+EC_Point	src/diffie.h	38;"	s	inherits:EC_Field
 EMBEDDED_PDV	src/der.h	16;"	e	enum:ber::Tag
 ENUMERATED	src/der.h	15;"	e	enum:ber::Tag
 EOC	src/der.h	5;"	e	enum:ber::Tag
 ERROR	util/log.h	30;"	e	enum:Log::LogLevel
 EXTERNAL	src/der.h	13;"	e	enum:ber::Tag
 Edge	util/graph.h	12;"	s
-Encryption	src/naes.h	8;"	d
+Encryption	src/naes.h	11;"	d
 EnumStringMaker	tst/catch.hpp	1570;"	s	namespace:Catch::Detail
 EnumStringMaker	tst/catch.hpp	1576;"	s	namespace:Catch::Detail
 Evaluator	tst/catch.hpp	1329;"	s	namespace:Catch::Internal
@@ -259,7 +265,7 @@ Exception	tst/catch.hpp	872;"	e	enum:Catch::ResultWas::OfType
 ExplicitFailure	tst/catch.hpp	870;"	e	enum:Catch::ResultWas::OfType
 ExpressionFailed	tst/catch.hpp	869;"	e	enum:Catch::ResultWas::OfType
 FATAL	util/log.h	30;"	e	enum:Log::LogLevel
-FINISHED	src/tls.h	69;"	v
+FINISHED	src/tls.h	67;"	v
 FailureBit	tst/catch.hpp	867;"	e	enum:Catch::ResultWas::OfType
 FalseTest	tst/catch.hpp	893;"	e	enum:Catch::ResultDisposition::Flags
 FalseType	tst/catch.hpp	1538;"	s	namespace:Catch::Detail
@@ -268,23 +274,22 @@ FileExpansion	util/option.h	26;"	c
 Flags	tst/catch.hpp	889;"	g	struct:Catch::ResultDisposition
 Func	src/tls-server.cpp	17;"	c	file:
 Func	src/tls-server.cpp	20;"	f	class:Func
-Func	src/tls13-server.cpp	19;"	c	file:
-Func	src/tls13-server.cpp	22;"	f	class:Func
-GCM	src/aes.h	119;"	c	inherits:CipherMode
+GCM	src/aes.h	120;"	c	inherits:CipherMode
 GENERALIZED_TIME	src/der.h	29;"	e	enum:ber::Tag
 GENERAL_STRING	src/der.h	32;"	e	enum:ber::Tag
 GIVEN	tst/catch.hpp	11583;"	d
 GRAPHIC_STRING	src/der.h	30;"	e	enum:ber::Tag
 Graph	util/graph.h	39;"	c
-HANDSHAKE	src/tls.h	57;"	v
-HELLO_REQUEST	src/tls.h	60;"	v
+HANDSHAKE	src/tls.h	55;"	v
+HASH	src/tls13.h	5;"	d
+HELLO_REQUEST	src/tls.h	58;"	v
 HKDF	src/hkdf.h	4;"	s	inherits:HMAC
 HMAC	src/hmac.h	5;"	c
 HMAC	src/hmac.h	8;"	f	class:HMAC
-Handshake_header	src/tls.cc	248;"	s	file:
-Hello_header	src/tls.cc	294;"	s	file:
-Http	tcpip/server.cc	39;"	f	class:Http
-Http	tcpip/server.h	15;"	c	inherits:Vrecv
+Handshake_header	src/tls.cc	124;"	s	file:
+Hello_header	src/tls.cc	135;"	s	file:
+Http	tcpip/server.cc	36;"	f	class:Http
+Http	tcpip/server.h	16;"	c	inherits:Vrecv
 IA5_STRING	src/der.h	27;"	e	enum:ber::Tag
 IContext	tst/catch.hpp	643;"	s	namespace:Catch
 IGeneratorInfo	tst/catch.hpp	534;"	s	namespace:Catch
@@ -339,7 +344,7 @@ IsLessThanOrEqualTo	tst/catch.hpp	1308;"	e	enum:Catch::Internal::Operator
 IsNotEqualTo	tst/catch.hpp	1305;"	e	enum:Catch::Internal::Operator
 IsStreamInsertable	tst/catch.hpp	1546;"	s	namespace:Catch::Detail
 IsStreamInsertable	tst/catch.hpp	1553;"	c	namespace:Catch::Detail
-K	src/diffie.h	15;"	m	class:DiffieHellman
+K	src/diffie.h	9;"	m	struct:DiffieHellman
 K	src/rsa.h	10;"	m	class:RSA
 LOG	util/log.h	6;"	d
 LOGD	util/log.h	8;"	d
@@ -362,13 +367,21 @@ MatcherUntypedBase	tst/catch.hpp	1038;"	c	namespace:Catch::Matchers::Impl
 Matchers	tst/catch.hpp	1031;"	n	namespace:Catch
 MethodTestCase	tst/catch.hpp	705;"	c	namespace:Catch	inherits:SharedImpl
 MethodTestCase	tst/catch.hpp	708;"	f	class:Catch::MethodTestCase
-N	src/aes.h	15;"	m	class:AES
+Middle	src/https.cc	10;"	f	class:Middle
+Middle	src/https.h	6;"	c	inherits:Server
+My_site	site_src/doc3.cpp	11;"	f	class:My_site
+My_site	site_src/doc3.cpp	8;"	c	file:	inherits:WebSite
+My_site	site_src/doc4.cpp	6;"	c	file:	inherits:WebSite
+My_site	site_src/doc4.cpp	9;"	f	class:My_site
+Mysqlquery	database/mysqlquery.h	7;"	c
+N	src/aes.h	16;"	m	class:AES
 NOMINMAX	tst/catch.hpp	6340;"	d
 NOMINMAX	tst/catch.hpp	6353;"	d
 NULL_TYPE	src/der.h	10;"	e	enum:ber::Tag
 NUMERIC_STRING	src/der.h	23;"	e	enum:ber::Tag
 NameAndDesc	tst/catch.hpp	723;"	s	namespace:Catch
 NameAndDesc	tst/catch.hpp	724;"	f	struct:Catch::NameAndDesc
+NettleAes128	src/naes.h	53;"	c
 No	tst/catch.hpp	391;"	e	enum:Catch::CaseSensitive::Choice
 NonCopyable	tst/catch.hpp	394;"	c	namespace:Catch
 NonCopyable	tst/catch.hpp	406;"	f	class:Catch::NonCopyable
@@ -402,7 +415,7 @@ REAL	src/der.h	14;"	e	enum:ber::Tag
 RELATIVE_OID	src/der.h	18;"	e	enum:ber::Tag
 RESERVED1	src/der.h	19;"	e	enum:ber::Tag
 RESERVED2	src/der.h	20;"	e	enum:ber::Tag
-ROUND	src/aes.h	16;"	m	class:AES
+ROUND	src/aes.h	17;"	m	class:AES
 RSA	src/rsa.cc	15;"	f	class:RSA
 RSA	src/rsa.cc	5;"	f	class:RSA
 RSA	src/rsa.h	4;"	c
@@ -412,17 +425,15 @@ ResultWas	tst/catch.hpp	861;"	s	namespace:Catch
 SCENARIO	tst/catch.hpp	11577;"	d
 SCENARIO_METHOD	tst/catch.hpp	11578;"	d
 SEQUENCE	src/der.h	21;"	e	enum:ber::Tag
-SERVER	src/tls.h	72;"	v
-SERVER_DONE	src/tls.h	66;"	v
-SERVER_HELLO	src/tls.h	62;"	v
-SERVER_KEY_EXCHANGE	src/tls.h	64;"	v
+SERVER	src/tls.h	70;"	v
+SERVER_DONE	src/tls.h	64;"	v
+SERVER_HELLO	src/tls.h	60;"	v
+SERVER_KEY_EXCHANGE	src/tls.h	62;"	v
 SET	src/der.h	22;"	e	enum:ber::Tag
 SHA1	src/sha1.cc	11;"	f	class:SHA1
 SHA1	src/sha1.h	6;"	c
 SHA2	src/sha256.h	11;"	f	class:SHA2
 SHA2	src/sha256.h	6;"	c
-SHA5	src/sha256.h	25;"	c
-SHA5	src/sha256.h	30;"	f	class:SHA5
 STITCH_CLARA_CLOSE_NAMESPACE	tst/catch.hpp	4053;"	d
 STITCH_CLARA_CLOSE_NAMESPACE	tst/catch.hpp	5060;"	d
 STITCH_CLARA_OPEN_NAMESPACE	tst/catch.hpp	4042;"	d
@@ -432,11 +443,16 @@ STITCH_CLARA_OPEN_NAMESPACE	tst/catch.hpp	5063;"	d
 STITCH_TBC_TEXT_FORMAT_OPEN_NAMESPACE	tst/catch.hpp	4058;"	d
 STITCH_TBC_TEXT_FORMAT_OPEN_NAMESPACE	tst/catch.hpp	4209;"	d
 SafeBool	tst/catch.hpp	410;"	c	namespace:Catch
-Server	tcpip/server.cc	72;"	f	class:Server
-Server	tcpip/server.h	41;"	c	inherits:Http
+Server	tcpip/server.cc	75;"	f	class:Server
+Server	tcpip/server.h	42;"	c	inherits:Http
+Server2	dndd/chatserver.h	3;"	c	inherits:Server
 SharedImpl	tst/catch.hpp	613;"	s	namespace:Catch	inherits:T
 SharedImpl	tst/catch.hpp	615;"	f	struct:Catch::SharedImpl
+Site	site_src/my_site.cc	7;"	f	class:Site
+Site	site_src/my_site.h	4;"	c	inherits:WebSite
 SourceLineInfo	tst/catch.hpp	455;"	s	namespace:Catch
+SqlQuery	database/mysqldata.cc	10;"	f	class:SqlQuery
+SqlQuery	database/mysqldata.h	8;"	c	inherits:Mysqlquery,Json::Value
 StreamEndStop	tst/catch.hpp	489;"	s	namespace:Catch
 StringMaker	tst/catch.hpp	1620;"	s	namespace:Catch	inherits:Detail::StringMakerBase
 StringMaker	tst/catch.hpp	1624;"	s	namespace:Catch
@@ -448,18 +464,17 @@ T61_STRING	src/der.h	25;"	e	enum:ber::Tag
 TBC_TEXT_FORMAT_CONSOLE_WIDTH	tst/catch.hpp	5305;"	d
 TBC_TEXT_FORMAT_H_INCLUDED	tst/catch.hpp	4065;"	d
 THEN	tst/catch.hpp	11586;"	d
-TLS	src/tls.h	7;"	c
-TLS13	src/tls13.h	6;"	c	inherits:TLS
+TLS	src/tls.h	9;"	c
+TLS13	src/tls13.h	7;"	c	inherits:TLS
 TLS_client	src/tls-client.cpp	11;"	f	class:TLS_client
 TLS_client	src/tls-client.cpp	8;"	c	file:	inherits:Client
 TLS_client	src/tls13-client.cpp	11;"	f	class:TLS_client
 TLS_client	src/tls13-client.cpp	8;"	c	file:	inherits:Client
-TLS_header	src/tls.cc	203;"	s	file:
+TLS_header	src/tls.cc	116;"	s	file:
+TLS_header	src/tls13.cc	420;"	s	file:
 TRACE	util/log.h	30;"	e	enum:Log::LogLevel
 TServer	src/tls-server.cpp	7;"	c	file:	inherits:Server
 TServer	src/tls-server.cpp	9;"	f	class:TServer
-TServer	src/tls13-server.cpp	7;"	c	file:	inherits:Server
-TServer	src/tls13-server.cpp	9;"	f	class:TServer
 TWOBLUECUBES_CATCH_APPROX_HPP_INCLUDED	tst/catch.hpp	2711;"	d
 TWOBLUECUBES_CATCH_ASSERTIONRESULT_HPP_INCLUDED	tst/catch.hpp	8082;"	d
 TWOBLUECUBES_CATCH_ASSERTIONRESULT_H_INCLUDED	tst/catch.hpp	908;"	d
@@ -556,13 +571,13 @@ TWOBLUECUBES_CLARA_H_INCLUDED	tst/catch.hpp	4051;"	d
 TWOBLUECUBES_SINGLE_INCLUDE_CATCH_HPP_INCLUDED	tst/catch.hpp	12;"	d
 TWOBLUECUBES_TEXT_FORMAT_H_ALREADY_INCLUDED	tst/catch.hpp	5313;"	d
 Tag	src/der.h	4;"	g	namespace:ber
-Tcpip	tcpip/tcpip.cc	10;"	f	class:Tcpip
-Tcpip	tcpip/tcpip.h	7;"	c
+Tcpip	tcpip/tcpip.cc	11;"	f	class:Tcpip
+Tcpip	tcpip/tcpip.h	8;"	c
 TestFailureException	tst/catch.hpp	1194;"	s	namespace:Catch
 TestFunction	tst/catch.hpp	721;"	t	namespace:Catch
 ThrewException	tst/catch.hpp	874;"	e	enum:Catch::ResultWas::OfType
-TlsLayer	tcpip/server.cc	50;"	f	class:TlsLayer
-TlsLayer	tcpip/server.h	24;"	c	inherits:Vrecv
+TlsLayer	tcpip/server.cc	47;"	f	class:TlsLayer
+TlsLayer	tcpip/server.h	25;"	c	inherits:Vrecv
 TrueType	tst/catch.hpp	1537;"	s	namespace:Catch::Detail
 TupleDetail	tst/catch.hpp	1664;"	n	namespace:Catch
 Type	src/der.h	46;"	s	namespace:ber
@@ -575,68 +590,92 @@ VIDEOTEX_STRING	src/der.h	26;"	e	enum:ber::Tag
 VISIBLE_STRING	src/der.h	31;"	e	enum:ber::Tag
 Vertex	util/graph.h	21;"	s
 Vrecv	tcpip/server.cc	12;"	f	class:Vrecv
-Vrecv	tcpip/server.h	5;"	c	inherits:Tcpip
+Vrecv	tcpip/server.h	6;"	c	inherits:Tcpip
 WARNING	util/log.h	30;"	e	enum:Log::LogLevel
 WHEN	tst/catch.hpp	11584;"	d
 WIN32_LEAN_AND_MEAN	tst/catch.hpp	6343;"	d
 WIN32_LEAN_AND_MEAN	tst/catch.hpp	6356;"	d
 Warning	tst/catch.hpp	865;"	e	enum:Catch::ResultWas::OfType
-X25519	src/diffie.cc	32;"	f	class:X25519
-X25519	src/diffie.h	19;"	s
+WebSite	tcpip/website.cc	13;"	f	class:WebSite
+WebSite	tcpip/website.h	6;"	c
+X25519	src/diffie.cc	31;"	f	class:X25519
+X25519	src/diffie.h	13;"	s
 Yes	tst/catch.hpp	390;"	e	enum:Catch::CaseSensitive::Choice
 _BSD_SOURCE	tst/catch.hpp	159;"	d
-a	src/diffie.cc	30;"	m	class:X25519	file:
-a	src/diffie.h	28;"	m	struct:X25519
-a	src/diffie.h	40;"	m	class:EC_Field
-aad	src/aes.cc	181;"	f	class:GCM
-aad_	src/aes.h	128;"	m	class:GCM
-accumulate	src/tls.cc	300;"	f	class:TLS
+a	src/diffie.cc	29;"	m	class:X25519	file:
+a	src/diffie.h	22;"	m	struct:X25519
+a	src/diffie.h	34;"	m	class:EC_Field
+aad	src/aes.cc	259;"	f	class:GCM
+aad	src/naes.cc	86;"	f	class:NettleAes128
+aad_	src/aes.h	131;"	m	class:GCM
+aad_	src/naes.h	65;"	m	class:NettleAes128
+accumulate	src/tls.cc	142;"	f	class:TLS
 accumulated_handshakes_	src/tls.h	43;"	m	class:TLS
 addRef	tst/catch.hpp	617;"	f	struct:Catch::SharedImpl
-add_round_key	src/aes.cc	139;"	f	class:AES
-aes_	src/naes.h	44;"	m	class:nAES
+add_round_key	src/aes.cc	137;"	f	class:AES
+aes_	src/naes.h	47;"	m	class:nAES
 aes_	src/tls.h	29;"	m	class:TLS
-alert	src/tls.cc	860;"	f	class:TLS
-alert	src/tls.cc	873;"	f	class:TLS
+alert	src/tls.cc	436;"	f	class:TLS
+alert	src/tls.cc	449;"	f	class:TLS
+allow	dndd/dndd.h	22;"	m	class:DnDD
+allowlevel	dndd/dnddsub.cc	16;"	f	class:DnDD
 alwaysFalse	tst/catch.hpp	478;"	f	namespace:Catch
 alwaysTrue	tst/catch.hpp	477;"	f	namespace:Catch
+append	tcpip/website.cc	30;"	f	class:WebSite
 arcSafeRelease	tst/catch.hpp	1451;"	f
 arcSafeRelease	tst/catch.hpp	1462;"	f
 args	util/option.cc	11;"	f	class:CMDoption
-b	src/diffie.h	40;"	m	class:EC_Field
+b	src/diffie.h	34;"	m	class:EC_Field
+b2c	dndd/base64.cc	5;"	f	file:
 b2c	src/base64.cc	5;"	f	file:
+base64_decode	dndd/base64.cc	36;"	f
 base64_decode	src/base64.cc	36;"	f
+base64_encode	dndd/base64.cc	21;"	f
 base64_encode	src/base64.cc	21;"	f
 begin	util/option.h	33;"	f	class:FileExpansion
 ber	src/der.h	3;"	n
 big_endian_	src/sha1.h	26;"	m	class:SHA1
 block_size	src/sha1.h	9;"	m	class:SHA1
-block_size	src/sha256.h	28;"	m	class:SHA5
 block_size	src/sha256.h	9;"	m	class:SHA2
-bnd2mpz	src/mpz.h	13;"	f
+bnd2mpz	src/mpz.h	19;"	f
+book	dndd/dndd.h	20;"	m	class:DnDD
 breadth	util/graph.h	151;"	f	class:Graph
 breadth	util/graph.h	284;"	f	class:Graph
 bridge	util/graph.h	158;"	f	class:Graph
-buffer	tcpip/tcpip.h	20;"	m	class:Tcpip
+buffer	tcpip/tcpip.h	21;"	m	class:Tcpip
+c2b	dndd/base64.cc	13;"	f	file:
 c2b	src/base64.cc	13;"	f	file:
 caesar_decode	src/caesar.cpp	9;"	f
 caesar_encode	src/caesar.cpp	5;"	f
 capturedExpression	tst/catch.hpp	949;"	m	struct:Catch::AssertionInfo
-certificate_	src/tls.cc	52;"	m	class:TLS	file:
+carousel	tcpip/bootstrap.cc	8;"	f	class:BootStrapSite
+certificate13	src/tls13.cc	31;"	v	file:
+certificate_	src/tls.cc	49;"	m	class:TLS	file:
 certificate_	src/tls.h	44;"	m	class:TLS
-change_cipher_spec	src/tls.cc	647;"	f	class:TLS
-cipher_	src/aes.h	108;"	m	class:CipherMode
+certificate_verify	src/tls13.cc	318;"	f	class:TLS13
+change_cipher_spec	src/tls.cc	310;"	f	class:TLS
+cipher_	src/aes.h	109;"	m	class:CipherMode
 clearv	util/graph.h	212;"	f	class:Graph
-client_addr	tcpip/tcpip.h	19;"	m	class:Tcpip	typeref:struct:Tcpip::
-client_ext	src/tls13.cc	10;"	f	class:TLS13
-client_ext	src/tls13.cc	90;"	f	class:TLS13
-client_fd	tcpip/tcpip.h	18;"	m	class:Tcpip
-client_hello	src/tls.cc	305;"	f	class:TLS
-client_hello	src/tls13.cc	179;"	f	class:TLS13
-client_key_exchange	src/tls.cc	658;"	f	class:TLS
+client_addr	tcpip/tcpip.h	20;"	m	class:Tcpip	typeref:struct:Tcpip::
+client_ext	src/tls13.cc	127;"	f	class:TLS13
+client_ext	src/tls13.cc	35;"	f	class:TLS13
+client_fd	tcpip/tcpip.h	19;"	m	class:Tcpip
+client_hello	src/tls.cc	148;"	f	class:TLS
+client_hello	src/tls13.cc	268;"	f	class:TLS13
+client_key_exchange	src/tls.cc	322;"	f	class:TLS
 client_random_	src/tls.h	41;"	m	class:TLS
+close	dndd/dndd.cc	59;"	f	class:DnDD
 cls	src/der.h	48;"	m	struct:ber::Type
-content_type	src/tls.cc	204;"	m	struct:TLS_header	file:
+columns	database/mysqldata.h	46;"	m	class:SqlQuery
+comment	dndd/dndd.cc	107;"	f	class:DnDD
+con	database/mysqlquery.h	11;"	m	class:Mysqlquery
+conn	src/https.cc	23;"	f	class:Middle
+connect	database/mysqlquery.cc	31;"	f	class:Mysqlquery
+connect	database/mysqlquery.cc	51;"	f	class:Mysqlquery
+connected	src/https.cc	46;"	f	class:Middle
+content_	tcpip/website.h	16;"	m	class:WebSite
+content_type	src/tls.cc	117;"	m	struct:TLS_header	file:
+content_type	src/tls13.cc	421;"	m	struct:TLS_header	file:
 convert	tst/catch.hpp	1572;"	f	struct:Catch::Detail::EnumStringMaker
 convert	tst/catch.hpp	1578;"	f	struct:Catch::Detail::EnumStringMaker
 convert	tst/catch.hpp	1590;"	f	struct:Catch::Detail::StringMakerBase
@@ -645,47 +684,62 @@ convert	tst/catch.hpp	1626;"	f	struct:Catch::StringMaker
 convert	tst/catch.hpp	1636;"	f	struct:Catch::StringMaker
 count	src/tls-server.cpp	43;"	m	class:Func	file:
 count	src/tls-server.cpp	47;"	m	class:Func	file:
-count	src/tls13-server.cpp	45;"	m	class:Func	file:
-count	src/tls13-server.cpp	49;"	m	class:Func	file:
-d	src/rsa.h	12;"	m	class:RSA
+ctx_	src/naes.h	64;"	m	class:NettleAes128
+d	src/rsa.h	10;"	m	class:RSA
+d_	src/ecdsa.h	15;"	m	class:ECDSA
 data	util/graph.h	23;"	m	struct:Vertex
 data	util/graph.h	95;"	f	class:Graph
 data	util/graph.h	98;"	f	class:Graph
+db	dndd/dndd.h	20;"	m	class:DnDD
+debug_	src/https.h	14;"	m	class:Middle
 dec_seq_num_	src/tls.h	30;"	m	class:TLS
-decode	src/rsa.cc	26;"	f	class:RSA
-decode	src/tls.cc	706;"	f	class:TLS
+decode	src/rsa.cc	27;"	f	class:RSA
+decode	src/tls.cc	350;"	f	class:TLS
+decode	src/tls13.cc	434;"	f	class:TLS13
+decode13	src/tls13.cc	463;"	f	class:TLS13
 decomposedExpression	tst/catch.hpp	985;"	m	struct:Catch::AssertionResultData
 decrypt	src/aes.cc	163;"	f	class:CBC
-decrypt	src/aes.cc	245;"	f	class:GCM
-decrypt	src/aes.cc	60;"	f	class:AES
-decrypt	src/naes.h	32;"	f	class:nAES
+decrypt	src/aes.cc	246;"	f	class:GCM
+decrypt	src/aes.cc	58;"	f	class:AES
+decrypt	src/naes.cc	70;"	f	class:NettleAes128
+decrypt	src/naes.h	35;"	f	class:nAES
 deleteAll	tst/catch.hpp	422;"	f	namespace:Catch
 deleteAllValues	tst/catch.hpp	429;"	f	namespace:Catch
 depth	util/graph.h	146;"	f	class:Graph
 depth	util/graph.h	272;"	f	class:Graph
 der2json	src/der.cc	90;"	f
-derive_keys	src/tls.cc	92;"	f	class:TLS
+derive_keys	src/tls.cc	85;"	f	class:TLS
 derive_secret	src/hkdf.h	17;"	f	struct:HKDF
 description	tst/catch.hpp	729;"	m	struct:Catch::NameAndDesc
+deserialize	database/util.cc	14;"	f
 dijkstra	util/graph.h	134;"	f	class:Graph
 distance	util/graph.h	220;"	m	class:Graph
-doub	src/aes.cc	11;"	f	file:
-doub	src/aes.cc	188;"	f
+doub	src/aes.cc	183;"	f
+doub	src/aes.cc	9;"	f	file:
+driver	database/mysqlquery.h	10;"	m	class:Mysqlquery
 e	src/rsa.h	10;"	m	class:RSA
+ecdsa_certificate_	src/tls13.h	29;"	m	class:TLS13
+echo_id_	src/tls13.h	28;"	m	class:TLS13
 edge	util/graph.h	18;"	m	struct:Edge
 edge	util/graph.h	25;"	m	struct:Vertex
+edit	dndd/dndd.cc	120;"	f	class:DnDD
 efree	util/graph.h	297;"	f	class:Graph
 enc_seq_num_	src/tls.h	30;"	m	class:TLS
 encode	src/rsa.cc	22;"	f	class:RSA
-encode	src/tls.cc	758;"	f	class:TLS
+encode	src/tls.cc	381;"	f	class:TLS
+encode	src/tls13.cc	428;"	f	class:TLS13
+encode13	src/tls13.cc	440;"	f	class:TLS13
 encodeNsend	src/tls-client.cpp	24;"	f	class:TLS_client
-encodeNsend	src/tls13-client.cpp	14;"	f	class:TLS_client
-encrypt	src/aes.cc	153;"	f	class:CBC
-encrypt	src/aes.cc	207;"	f	class:GCM
-encrypt	src/aes.cc	46;"	f	class:AES
-encrypt	src/naes.h	20;"	f	class:nAES
+encodeNsend	src/tls13-client.cpp	15;"	f	class:TLS_client
+encrypt	database/mysqldata.cc	64;"	f	class:SqlQuery
+encrypt	src/aes.cc	152;"	f	class:CBC
+encrypt	src/aes.cc	204;"	f	class:GCM
+encrypt	src/aes.cc	44;"	f	class:AES
+encrypt	src/naes.cc	60;"	f	class:NettleAes128
+encrypt	src/naes.h	23;"	f	class:nAES
+encrypted_extension	src/tls13.cc	181;"	f	class:TLS13
 end	util/option.h	34;"	f	class:FileExpansion
-end_string	tcpip/server.h	50;"	m	class:Server
+end_string	tcpip/server.h	51;"	m	class:Server
 evaluate	tst/catch.hpp	1333;"	f	struct:Catch::Internal::Evaluator
 evaluate	tst/catch.hpp	1339;"	f	struct:Catch::Internal::Evaluator
 evaluate	tst/catch.hpp	1345;"	f	struct:Catch::Internal::Evaluator
@@ -704,20 +758,24 @@ expand	src/hkdf.h	21;"	f	struct:HKDF
 expand_label	src/hkdf.h	38;"	f	struct:HKDF
 extract	src/hkdf.h	13;"	f	struct:HKDF
 false_type	tst/catch.hpp	1559;"	m	class:Catch::Detail::IsStreamInsertable::std
+field	dndd/dnddsub.cc	34;"	f	class:DnDD
 file	tst/catch.hpp	469;"	m	struct:Catch::SourceLineInfo
+fileNhtml_	tcpip/website.h	19;"	m	class:WebSite
 find	util/graph.h	268;"	f	class:Graph
 find_closest	util/graph.h	248;"	f	class:Graph
 find_entry	util/graph.h	328;"	f	class:Graph
 find_greed	util/graph.h	349;"	f	class:Graph
 find_parent	util/graph.h	53;"	f	class:Graph
 find_vertex	util/graph.h	59;"	f	class:Graph
-finish_msg_count_	src/tls.h	49;"	m	class:TLS
-finished	src/tls.cc	812;"	f	class:TLS
+finished	src/tls.cc	413;"	f	class:TLS
+finished	src/tls13.cc	213;"	f	class:TLS13
+finished_key_	src/tls13.h	33;"	m	class:TLS13
 floyd	util/graph.h	116;"	f	class:Graph
-g	src/diffie.h	14;"	m	class:DiffieHellman
-garbage_int_to_execute_init	src/aes.cc	29;"	v	file:
-generate_auth	src/aes.cc	213;"	f	class:GCM
-generate_signature	src/tls.cc	64;"	f	class:TLS
+follow	dndd/dndd.cc	79;"	f	class:DnDD
+g	src/diffie.h	9;"	m	struct:DiffieHellman
+garbage_int_to_execute_init	src/aes.cc	27;"	v	file:
+generate_auth	src/aes.cc	211;"	f	class:GCM
+generate_signature	src/tls.cc	61;"	f	class:TLS
 get	tst/catch.hpp	596;"	f	class:Catch::Ptr
 get	util/option.h	13;"	f	class:CMDoption
 getName	tst/catch.hpp	1312;"	f	struct:Catch::Internal::OperatorTraits
@@ -727,50 +785,67 @@ getName	tst/catch.hpp	1315;"	f	struct:Catch::Internal::OperatorTraits
 getName	tst/catch.hpp	1316;"	f	struct:Catch::Internal::OperatorTraits
 getName	tst/catch.hpp	1317;"	f	struct:Catch::Internal::OperatorTraits
 getName	tst/catch.hpp	1318;"	f	struct:Catch::Internal::OperatorTraits
-get_addr	tcpip/server.cc	66;"	f	class:Client
+get_addr	tcpip/server.cc	64;"	f	class:Client
 get_certificate_core	src/cert.cc	8;"	f
-get_content_type	src/tls.cc	58;"	f	class:TLS
+get_content_type	src/tls.cc	54;"	f	class:TLS
+get_full_length	src/https.cc	16;"	f	class:Middle
 get_full_length	src/tls-client.cpp	32;"	f	class:TLS_client	file:
 get_full_length	src/tls-server.cpp	11;"	f	class:TServer	file:
 get_full_length	src/tls13-client.cpp	23;"	f	class:TLS_client	file:
-get_full_length	src/tls13-server.cpp	13;"	f	class:TServer	file:
-get_full_length	tcpip/server.cc	34;"	f	class:Vrecv
-get_full_length	tcpip/server.cc	42;"	f	class:Http
-get_full_length	tcpip/server.cc	53;"	f	class:TlsLayer
+get_full_length	tcpip/server.cc	31;"	f	class:Vrecv
+get_full_length	tcpip/server.cc	39;"	f	class:Http
+get_full_length	tcpip/server.cc	50;"	f	class:TlsLayer
 get_instance	util/log.cc	9;"	f	class:Log
-get_keys	src/cert.cc	55;"	f
-get_length	src/tls.cc	208;"	f	struct:TLS_header
-get_length	src/tls.cc	256;"	f	struct:Handshake_header
+get_length	src/tls.cc	121;"	f	struct:TLS_header
+get_length	src/tls.cc	132;"	f	struct:Handshake_header
+get_length	src/tls13.cc	425;"	f	struct:TLS_header
 get_n_byte	src/prf.h	19;"	f	class:PRF
 get_n_byte2	src/prf.h	36;"	f	class:PRF
-get_pubkeys	src/cert.cc	43;"	f
-get_pubkeys	src/cert.cc	50;"	f
-gf_mul	src/aes.cc	194;"	f
+get_pubkeys	src/cert.cpp	10;"	f	file:
+getdir	database/ls.cc	6;"	f
+gf_mul	src/aes.cc	190;"	f
 gfree	util/graph.h	303;"	f	class:Graph
+google	dndd/dndd.cc	42;"	f	class:DnDD
 greedy	util/graph.h	167;"	f	class:Graph
+group	dndd/dndd.h	20;"	m	class:DnDD
+group_by	database/mysqldata.cc	99;"	f	class:SqlQuery
+group_desc	dndd/dndd.h	20;"	m	class:DnDD
 h	src/sha1.h	27;"	m	class:SHA1
 h_stored_value	src/sha1.h	28;"	m	class:SHA1
-handshake	src/tls13.cc	216;"	f	class:TLS13
-handshake_type	src/tls.cc	249;"	m	struct:Handshake_header	file:
+handshake	src/tls13.cc	345;"	f	class:TLS13
+handshake_type	src/tls.cc	125;"	m	struct:Handshake_header	file:
 hash	src/hmac.h	24;"	f	class:HMAC
 hash	src/sha1.h	12;"	f	class:SHA1
 hash	src/sha256.h	15;"	f	class:SHA2
-hash	src/sha256.h	34;"	f	class:SHA5
-hexprint	src/mpz.h	20;"	f
-hkdf_	src/tls13.h	17;"	m	class:TLS13
+header_	tcpip/website.h	20;"	m	class:WebSite
+hexprint	src/mpz.h	26;"	f
+hkdf_	src/tls13.h	20;"	m	class:TLS13
 hmac_	src/prf.h	52;"	m	class:PRF
 i_key_pad_	src/hmac.h	37;"	m	class:HMAC
-init_certificate	src/tls.cc	22;"	f	file:
-init_mod	src/diffie.cc	21;"	f	file:
-initialize_precomputed	src/aes.cc	19;"	f
+id	dndd/dndd.h	20;"	m	class:DnDD
+id	site_src/my_site.h	12;"	m	class:Site
+iframe_content_	dndd/dndd.h	23;"	m	class:DnDD
+index	dndd/dndd.cc	137;"	f	class:DnDD
+index	site_src/my_site.cc	20;"	f	class:Site
+init_certificate	src/tls.cc	16;"	f	file:
+init_certificate	src/tls13.cc	13;"	f	file:
+init_mod	src/diffie.cc	20;"	f	file:
+initialize_precomputed	src/aes.cc	17;"	f
+inport_	src/https.h	13;"	m	class:Middle
+insert	database/mysqldata.cc	13;"	f	class:SqlQuery
+insert	database/mysqldata.cc	34;"	f	class:SqlQuery
+insert	database/mysqldata.h	16;"	f	class:SqlQuery
+insert	database/mysqldata.h	21;"	f	class:SqlQuery
+insert	database/mysqldata.h	26;"	f	class:SqlQuery
 insert	util/graph.h	181;"	f	class:Graph
 insert	util/graph.h	191;"	f	class:Graph
 insert_edge	util/graph.h	86;"	f	class:Graph
+insert_nth_row	database/mysqldata.cc	47;"	f	class:SqlQuery
 insert_vertex	util/graph.h	47;"	f	class:Graph
-inv_mix_column	src/aes.cc	120;"	f	class:AES
-inv_sbox	src/aes.h	66;"	m	class:AES
-inv_shift_row	src/aes.cc	92;"	f	class:AES
-inv_substitute	src/aes.cc	79;"	f	class:AES
+inv_mix_column	src/aes.cc	118;"	f	class:AES
+inv_sbox	src/aes.h	67;"	m	class:AES
+inv_shift_row	src/aes.cc	90;"	f	class:AES
+inv_substitute	src/aes.cc	77;"	f	class:AES
 invoke	tst/catch.hpp	710;"	f	class:Catch::MethodTestCase
 isBinaryExpression	tst/catch.hpp	919;"	f	struct:Catch::DecomposedExpression
 isFalseTest	tst/catch.hpp	902;"	f	namespace:Catch
@@ -778,28 +853,39 @@ isJustInfo	tst/catch.hpp	884;"	f	namespace:Catch
 isOk	tst/catch.hpp	881;"	f	namespace:Catch
 isTrue	tst/catch.hpp	476;"	f	namespace:Catch
 is_bridge	util/graph.h	202;"	f	class:Graph
+is_int	database/mysqldata.cc	23;"	f	class:SqlQuery
 is_primitive	src/powm_primitive.cpp	14;"	f
-iv	src/aes.cc	149;"	f	class:CBC
+is_real	database/mysqldata.cc	28;"	f	class:SqlQuery
+iv	src/aes.cc	147;"	f	class:CBC
 iv	src/aes.cc	173;"	f	class:GCM
-iv	src/aes.cc	177;"	f	class:GCM
+iv	src/aes.cc	178;"	f	class:GCM
 iv	src/naes.cc	34;"	f	class:nAES
 iv	src/naes.cc	39;"	f	class:nAES
-iv_	src/aes.h	109;"	m	class:CipherMode
-iv_	src/naes.h	45;"	m	class:nAES
-key	src/aes.cc	144;"	f	class:CipherMode
-key	src/aes.cc	31;"	f	class:AES
+iv	src/naes.cc	45;"	f	class:NettleAes128
+iv	src/naes.cc	55;"	f	class:NettleAes128
+iv_	src/aes.h	110;"	m	class:CipherMode
+iv_	src/naes.h	48;"	m	class:nAES
+iv_	src/naes.h	66;"	m	class:NettleAes128
+key	src/aes.cc	142;"	f	class:CipherMode
+key	src/aes.cc	29;"	f	class:AES
 key	src/hmac.h	10;"	f	class:HMAC
 key	src/naes.cc	11;"	f	class:nAES
 key	src/naes.cc	17;"	f	class:nAES
 key	src/naes.cc	23;"	f	class:nAES
-key_	src/naes.h	45;"	m	class:nAES
-key_share	src/tls13.cc	74;"	f	class:TLS13
+key	src/naes.cc	50;"	f	class:NettleAes128
+key_	src/naes.h	48;"	m	class:nAES
+key_share	src/tls13.cc	113;"	f	class:TLS13
+kill_zombie	tcpip/server.cc	70;"	f	file:
 label	src/prf.h	11;"	f	class:PRF
 label_	src/prf.h	53;"	m	class:PRF
 left_rotate	src/sha1.cc	6;"	f	file:
-lenAC_	src/aes.h	129;"	m	class:GCM
-length	src/tls.cc	206;"	m	struct:TLS_header	file:
-length	src/tls.cc	250;"	m	struct:Handshake_header	file:
+lenAC_	src/aes.h	132;"	m	class:GCM
+length	src/tls.cc	119;"	m	struct:TLS_header	file:
+length	src/tls.cc	126;"	m	struct:Handshake_header	file:
+length	src/tls13.cc	423;"	m	struct:TLS_header	file:
+level	dndd/dndd.h	20;"	m	class:DnDD
+level	site_src/my_site.h	13;"	m	class:Site
+level2txt	dndd/page.cc	7;"	f	file:
 line	tst/catch.hpp	470;"	m	struct:Catch::SourceLineInfo
 lineInfo	tst/catch.hpp	948;"	m	struct:Catch::AssertionInfo
 lnd2mpz	tst/x25519.cc	13;"	f	file:
@@ -807,6 +893,8 @@ log_file_	util/log.h	35;"	m	class:Log
 log_level	util/log.cc	29;"	f	class:Log
 log_level_	util/log.h	30;"	m	class:Log	typeref:enum:Log::LogLevel
 log_on_	util/log.h	38;"	m	class:Log
+logo	dndd/dndd.h	20;"	m	class:DnDD
+m	site_src/doc3.cpp	32;"	m	class:My_site	file:
 m_assertionInfo	tst/catch.hpp	1257;"	m	class:Catch::ResultBuilder
 m_cachedToString	tst/catch.hpp	1049;"	m	class:Catch::Matchers::Impl::MatcherUntypedBase
 m_count	tst/catch.hpp	451;"	m	struct:Catch::pluralise
@@ -828,69 +916,86 @@ m_underlyingMatcher	tst/catch.hpp	1143;"	m	struct:Catch::Matchers::Impl::MatchNo
 m_usedStream	tst/catch.hpp	1279;"	m	class:Catch::ResultBuilder
 m_what	tst/catch.hpp	515;"	m	class:Catch::NotImplementedException
 macroName	tst/catch.hpp	947;"	m	struct:Catch::AssertionInfo
-main	src/bitset.cpp	7;"	f
+main	dndd/dndd.cpp	6;"	f
+main	site_src/doc1.cpp	6;"	f
+main	site_src/doc3.cpp	35;"	f
+main	site_src/doc4.cpp	17;"	f
+main	site_src/site.cpp	7;"	f
 main	src/caesar.cpp	13;"	f
-main	src/cert.cpp	10;"	f
+main	src/cert.cpp	17;"	f
 main	src/client.cpp	5;"	f
-main	src/diffie.cpp	10;"	f
+main	src/https.cpp	7;"	f
 main	src/pem.cpp	9;"	f
 main	src/powm_primitive.cpp	30;"	f
 main	src/server.cpp	5;"	f
 main	src/svcl.cpp	6;"	f
 main	src/tls-client.cpp	38;"	f
 main	src/tls-server.cpp	49;"	f
-main	src/tls13-client.cpp	28;"	f
-main	src/tls13-server.cpp	51;"	f
-main	src/x255.cpp	10;"	f
+main	src/tls13-client.cpp	29;"	f
 main	util/incltouch.cpp	20;"	f
 makeSafe	tst/catch.hpp	414;"	f	class:Catch::SafeBool
 manipulators	util/log.cc	18;"	f	class:Log
 master_secret_	src/tls.h	42;"	m	class:TLS
+maxpage	dndd/dnddsub.cc	28;"	f	class:DnDD
 message	tst/catch.hpp	987;"	m	struct:Catch::AssertionResultData
-mix_column	src/aes.cc	100;"	f	class:AES
-mod	src/diffie.cc	29;"	m	class:X25519	file:
-mod	src/diffie.h	28;"	m	struct:X25519
-mod	src/diffie.h	40;"	m	class:EC_Field
-mod_inv	src/diffie.cc	154;"	f	class:EC_Point
-mod_inv	src/diffie.cc	43;"	f	class:X25519
+mgf1	src/pss.cc	10;"	f
+mix_column	src/aes.cc	98;"	f	class:AES
+mn	dndd/dndd.cc	169;"	f	class:DnDD
+mod	src/diffie.cc	28;"	m	class:X25519	file:
+mod	src/diffie.h	22;"	m	struct:X25519
+mod	src/diffie.h	34;"	m	class:EC_Field
+mod_inv	src/diffie.cc	154;"	f	class:EC_Field
+mod_inv	src/diffie.cc	42;"	f	class:X25519
+mod_inv	src/ecdsa.cc	11;"	f	class:ECDSA
+mpz2bnd	src/mpz.h	14;"	f
 mpz2bnd	src/mpz.h	9;"	f
 mpz2lnd	tst/x25519.cc	6;"	f	file:
 mtx_	util/log.h	36;"	m	class:Log
-nAES	src/naes.h	12;"	c
+myQuery	database/mysqlquery.cc	10;"	f	class:Mysqlquery
+nAES	src/naes.h	15;"	c
+nBit_	src/ecdsa.h	14;"	m	class:ECDSA
+n_	src/ecdsa.h	12;"	m	class:ECDSA
+name	database/mysqldata.h	41;"	m	struct:SqlQuery::Column
+name	dndd/dndd.h	20;"	m	class:DnDD
+name	site_src/my_site.h	12;"	m	class:Site
 name	tst/catch.hpp	728;"	m	struct:Catch::NameAndDesc
+nameNvalue_	tcpip/website.h	15;"	m	class:WebSite
 negate	tst/catch.hpp	961;"	f	struct:Catch::AssertionResultData
 negated	tst/catch.hpp	989;"	m	struct:Catch::AssertionResultData
+new_book	dndd/dndd.cc	114;"	f	class:DnDD
 nextprime	src/mpz.cc	6;"	f
-nokeep_start	tcpip/server.cc	98;"	f	class:Server
+nokeep_start	tcpip/server.cc	116;"	f	class:Server
+now	database/mysqldata.cc	57;"	f	class:SqlQuery
 o_key_pad_	src/hmac.h	37;"	m	class:HMAC
+ok_	tcpip/server.h	53;"	m	class:Server
 operator !	tst/catch.hpp	1155;"	f	class:Catch::Matchers::Impl::MatcherBase
 operator !	tst/catch.hpp	599;"	f	class:Catch::Ptr
 operator &&	tst/catch.hpp	1093;"	f	struct:Catch::Matchers::Impl::MatchAllOf
 operator &&	tst/catch.hpp	1147;"	f	class:Catch::Matchers::Impl::MatcherBase
 operator ()	src/tls-server.cpp	21;"	f	class:Func
-operator ()	src/tls13-server.cpp	23;"	f	class:Func
+operator ()	tcpip/website.cc	37;"	f	class:WebSite
 operator *	src/diffie.cc	139;"	f	class:EC_Point
 operator *	src/diffie.cc	151;"	f
-operator *	src/diffie.cc	62;"	f	class:X25519
-operator *	src/diffie.cc	78;"	f
+operator *	src/diffie.cc	61;"	f	class:X25519
+operator *	src/diffie.cc	77;"	f
 operator *	tst/catch.hpp	597;"	f	class:Catch::Ptr
 operator +	src/diffie.cc	123;"	f	class:EC_Point
-operator +	src/diffie.cc	49;"	f	class:X25519
+operator +	src/diffie.cc	48;"	f	class:X25519
 operator +	tst/catch.hpp	490;"	f	struct:Catch::StreamEndStop
 operator +	tst/catch.hpp	495;"	f	namespace:Catch
 operator +	util/option.h	29;"	f	class:FileExpansion
 operator ->	tst/catch.hpp	598;"	f	class:Catch::Ptr
-operator <<	src/diffie.cc	88;"	f
-operator <<	src/diffie.cc	94;"	f
+operator <<	src/diffie.cc	87;"	f
+operator <<	src/diffie.cc	93;"	f
 operator <<	tst/catch.hpp	1225;"	f	class:Catch::ResultBuilder
 operator <<	util/graph.h	382;"	f
 operator <<	util/log.h	20;"	f	class:Log
-operator =	src/diffie.cc	37;"	f	class:X25519
+operator =	src/diffie.cc	36;"	f	class:X25519
 operator =	tst/catch.hpp	1203;"	f	struct:Catch::CopyableStream
 operator =	tst/catch.hpp	585;"	f	class:Catch::Ptr
 operator =	tst/catch.hpp	590;"	f	class:Catch::Ptr
 operator ==	src/diffie.cc	119;"	f	class:EC_Point
-operator ==	src/diffie.cc	83;"	f	class:X25519
+operator ==	src/diffie.cc	82;"	f	class:X25519
 operator >>	util/graph.h	371;"	f
 operator SafeBool::type	tst/catch.hpp	600;"	f	class:Catch::Ptr
 operator |	tst/catch.hpp	897;"	f	namespace:Catch
@@ -901,22 +1006,27 @@ oss	tst/catch.hpp	1208;"	m	struct:Catch::CopyableStream
 other	tst/catch.hpp	460;"	m	struct:Catch::SourceLineInfo
 output_size	src/sha1.h	10;"	m	class:SHA1
 output_size	src/sha256.h	10;"	m	class:SHA2
-output_size	src/sha256.h	29;"	m	class:SHA5
 p	src/rsa.h	12;"	m	class:RSA
+page	dndd/dndd.h	20;"	m	class:DnDD
+param	database/util.cc	47;"	f
 parenthesized	tst/catch.hpp	990;"	m	struct:Catch::AssertionResultData
+parse_multi	tcpip/website.cc	93;"	f	class:WebSite
+parse_one	tcpip/website.cc	71;"	f	class:WebSite
+parse_post	tcpip/website.cc	100;"	f	class:WebSite
 pc	src/der.h	49;"	m	struct:ber::Type
 pem2json	src/cert.cc	23;"	f
 performOptionalSelector	tst/catch.hpp	1454;"	f
 performOptionalSelector	tst/catch.hpp	1463;"	f
+pg	dndd/page.cc	20;"	f	class:DnDD
 phi	src/rsa.h	12;"	m	class:RSA
 plog_	util/log.h	41;"	m	class:Log
 pluralise	tst/catch.hpp	446;"	s	namespace:Catch
-point_format	src/tls13.cc	59;"	f	class:TLS13
-powm	src/mpz.cc	26;"	f
+point_format	src/tls13.cc	92;"	f	class:TLS13
+powm	src/mpz.cc	25;"	f
 powm	src/powm_primitive.cpp	5;"	f
-precomputed	src/aes.cc	28;"	m	class:AES	file:
-precomputed	src/aes.h	29;"	m	class:AES
-premaster_secret_	src/tls13.h	18;"	m	class:TLS13
+precomputed	src/aes.cc	26;"	m	class:AES	file:
+precomputed	src/aes.h	30;"	m	class:AES
+premaster_secret_	src/tls13.h	21;"	m	class:TLS13
 preprocess	src/sha1.cc	17;"	f	class:SHA1
 prim	util/graph.h	102;"	f	class:Graph
 primitive_root	src/powm_primitive.cpp	24;"	f
@@ -924,21 +1034,29 @@ print_help	util/option.cc	42;"	f	class:CMDoption
 private	tst/aes.cc	11;"	d	file:
 private	tst/aes.cc	8;"	d	file:
 private	tst/tls.cc	3;"	d	file:
-private	tst/tls.cc	6;"	d	file:
-process_bitstring	src/cert.cc	30;"	f
+private	tst/tls.cc	9;"	d	file:
+process	dndd/dndd.cc	13;"	f	class:DnDD
+process	site_src/doc3.cpp	13;"	f	class:My_site
+process	site_src/doc4.cpp	11;"	f	class:My_site
+process	site_src/my_site.cc	12;"	f	class:Site
+process	tcpip/website.h	13;"	f	class:WebSite
 process_chunk	src/sha1.cc	26;"	f	class:SHA1
-protect_data	src/tls13.cc	147;"	f	class:TLS13
-protect_handshake	src/tls13.cc	130;"	f	class:TLS13
+protect_data	src/tls13.cc	233;"	f	class:TLS13
+protect_handshake	src/tls13.cc	196;"	f	class:TLS13
 protected	tst/aes.cc	12;"	d	file:
 protected	tst/aes.cc	9;"	d	file:
+protected	tst/tls.cc	10;"	d	file:
 protected	tst/tls.cc	4;"	d	file:
-protected	tst/tls.cc	7;"	d	file:
+prv_	src/tls13.h	28;"	m	class:TLS13
 prv_key_	src/tls.h	30;"	m	class:TLS
+pss_encode	src/pss.cc	24;"	f
+pss_verify	src/pss.cc	48;"	f
+psstm	database/util.cc	36;"	f
 q	src/rsa.h	12;"	m	class:RSA
-random	src/tls.cc	296;"	m	struct:Hello_header	file:
+random	src/tls.cc	137;"	m	struct:Hello_header	file:
 random_prime	src/mpz.cc	13;"	f
 rawMemoryToString	tst/catch.hpp	1613;"	f	namespace:Catch::Detail
-rcon	src/aes.h	30;"	m	class:AES
+rcon	src/aes.h	31;"	m	class:AES
 read_constructed	src/der.cc	76;"	f	file:
 read_length	src/der.cc	20;"	f	file:
 read_type	src/der.cc	11;"	f	file:
@@ -946,118 +1064,145 @@ read_value	src/der.cc	34;"	f	file:
 reconstructExpression	tst/catch.hpp	970;"	f	class:Catch::AssertionResultData::std
 reconstructedExpression	tst/catch.hpp	986;"	m	struct:Catch::AssertionResultData
 recur_touch	util/incltouch.cpp	10;"	f
-recv	tcpip/server.cc	15;"	f	class:Vrecv
-recv	tcpip/tcpip.cc	36;"	f	class:Tcpip
+recv	tcpip/server.cc	16;"	f	class:Vrecv
+recv	tcpip/tcpip.cc	37;"	f	class:Tcpip
 recvNdecode	src/tls-client.cpp	27;"	f	class:TLS_client
-recvNdecode	src/tls13-client.cpp	17;"	f	class:TLS_client
+recvNdecode	src/tls13-client.cpp	18;"	f	class:TLS_client
 release	tst/catch.hpp	620;"	f	struct:Catch::SharedImpl
 removeConst	tst/catch.hpp	1321;"	f	namespace:Catch::Internal
 removeConst	tst/catch.hpp	1323;"	f	namespace:Catch::Internal
+remove_colon	src/cert.cc	30;"	f
 remove_edge	util/graph.h	236;"	f	class:Graph
 remove_edge	util/graph.h	64;"	f	class:Graph
 remove_vertex	util/graph.h	224;"	f	class:Graph
 remove_vertex	util/graph.h	69;"	f	class:Graph
+requested_document_	tcpip/website.h	16;"	m	class:WebSite
+res	database/mysqlquery.h	15;"	m	class:Mysqlquery
 reset	tst/catch.hpp	580;"	f	class:Catch::Ptr
+result	dndd/dndd.cc	72;"	f	class:DnDD
 resultDisposition	tst/catch.hpp	950;"	m	struct:Catch::AssertionInfo
 resultType	tst/catch.hpp	988;"	m	struct:Catch::AssertionResultData
+rooms_	dndd/chatserver.h	37;"	m	class:ChatServer
 root	util/graph.h	179;"	m	class:Graph
-rsa_	src/tls.h	48;"	m	class:TLS
+rsa_	src/tls.h	46;"	m	class:TLS
 s	tst/catch.hpp	1547;"	m	struct:Catch::Detail::IsStreamInsertable
 salt	src/hkdf.h	10;"	f	struct:HKDF
-sbox	src/aes.h	32;"	m	class:AES
+sbox	src/aes.h	33;"	m	class:AES
 schedule	tst/aes.cc	16;"	v
-schedule_	src/aes.h	17;"	m	class:AES
+schedule_	src/aes.h	18;"	m	class:AES
+search	dndd/dndd.cc	149;"	f	class:DnDD
 secondArg	tst/catch.hpp	951;"	m	struct:Catch::AssertionInfo
 secret	src/prf.h	8;"	f	class:PRF
 seed	src/prf.h	15;"	f	class:PRF
 seed_	src/prf.h	53;"	m	class:PRF
-send	tcpip/tcpip.cc	26;"	f	class:Tcpip
-server_addr	tcpip/tcpip.h	19;"	m	class:Tcpip	typeref:struct:Tcpip::sockaddr_in
-server_certificate	src/tls.cc	450;"	f	class:TLS
-server_ext	src/tls13.cc	110;"	f	class:TLS13
-server_ext	src/tls13.cc	167;"	f	class:TLS13
-server_fd	tcpip/tcpip.h	17;"	m	class:Tcpip
-server_hello	src/tls.cc	397;"	f	class:TLS
-server_hello	src/tls13.cc	196;"	f	class:TLS13
-server_hello_done	src/tls.cc	613;"	f	class:TLS
-server_key_exchange	src/tls.cc	533;"	f	class:TLS
+select	database/mysqldata.cc	71;"	f	class:SqlQuery
+send	tcpip/tcpip.cc	27;"	f	class:Tcpip
+serialize	database/util.cc	6;"	f
+server_addr	tcpip/tcpip.h	20;"	m	class:Tcpip	typeref:struct:Tcpip::sockaddr_in
+server_certificate	src/tls.cc	210;"	f	class:TLS
+server_certificate13	src/tls13.cc	312;"	f	class:TLS13
+server_ext	src/tls13.cc	147;"	f	class:TLS13
+server_ext	src/tls13.cc	256;"	f	class:TLS13
+server_fd	tcpip/tcpip.h	18;"	m	class:Tcpip
+server_hello	src/tls.cc	179;"	f	class:TLS
+server_hello	src/tls13.cc	291;"	f	class:TLS13
+server_hello_done	src/tls.cc	294;"	f	class:TLS
+server_key_exchange	src/tls.cc	248;"	f	class:TLS
 server_random_	src/tls.h	41;"	m	class:TLS
-session_id	src/tls.cc	298;"	m	struct:Hello_header	file:
+session_id	src/tls.cc	139;"	m	struct:Hello_header	file:
 session_id_	src/tls.h	41;"	m	class:TLS
-session_id_length	src/tls.cc	297;"	m	struct:Hello_header	file:
-set_aes	src/tls13.cc	153;"	f	class:TLS13
-set_length	src/tls.cc	207;"	f	struct:TLS_header
-set_length	src/tls.cc	251;"	f	struct:Handshake_header
+session_id_length	src/tls.cc	138;"	m	struct:Hello_header	file:
+set_aes	src/tls13.cc	239;"	f	class:TLS13
+set_length	src/tls.cc	120;"	f	struct:TLS_header
+set_length	src/tls.cc	127;"	f	struct:Handshake_header
+set_length	src/tls13.cc	424;"	f	struct:TLS_header
 set_log_filter	util/log.cc	51;"	f	class:Log
 set_log_level	util/log.cc	46;"	f	class:Log
-set_yb	src/diffie.cc	14;"	f	class:DiffieHellman
+set_peer_pubkey	src/diffie.cc	14;"	f	class:DiffieHellman
 sha_	src/hmac.h	36;"	m	class:HMAC
 sha_	src/sha256.h	22;"	m	class:SHA2
-sha_	src/sha256.h	41;"	m	class:SHA5
-shift_row	src/aes.cc	84;"	f	class:AES
+shift_row	src/aes.cc	82;"	f	class:AES
 shortest	util/graph.h	310;"	f	class:Graph
 shouldContinueOnFailure	tst/catch.hpp	901;"	f	namespace:Catch
 shouldSuppressFailure	tst/catch.hpp	903;"	f	namespace:Catch
-sign	src/rsa.cc	30;"	f	class:RSA
+show_tables	database/mysqldata.cc	91;"	f	class:SqlQuery
+sign	src/ecdsa.cc	18;"	f	class:ECDSA
+sign	src/rsa.cc	32;"	f	class:RSA
+signin	dndd/dndd.cc	203;"	f	class:DnDD
+signup	site_src/my_site.cc	39;"	f	class:Site
+size	database/mysqldata.h	42;"	m	struct:SqlQuery::Column
 sizer	tst/catch.hpp	1537;"	m	struct:Catch::Detail::TrueType
 sizer	tst/catch.hpp	1538;"	m	struct:Catch::Detail::FalseType
-start	tcpip/server.cc	84;"	f	class:Server
+sq	dndd/dndd.h	10;"	m	class:DnDD
+sq	site_src/my_site.h	10;"	m	class:Site
+start	dndd/chatserver.h	6;"	f	class:Server2
+start	src/https.cc	38;"	f	class:Middle
+start	tcpip/server.cc	96;"	f	class:Server
+stmt	database/mysqlquery.h	12;"	m	class:Mysqlquery
 str2mpz	src/cert.cc	16;"	f
 stream	tst/catch.hpp	1260;"	f	class:Catch::ResultBuilder
-struct2str	src/tls.h	74;"	f
+struct2str	src/tls.h	72;"	f
 sub_apply	util/graph.h	74;"	f	class:Graph
-sub_key_share	src/tls13.cc	65;"	f	class:TLS13
-substitute	src/aes.cc	74;"	f	class:AES
-supported_group	src/tls13.cc	53;"	f	class:TLS13
-supported_version	src/tls13.cc	84;"	f	class:TLS13
+sub_key_share	src/tls13.cc	98;"	f	class:TLS13
+substitute	src/aes.cc	72;"	f	class:AES
+supported_group	src/tls13.cc	86;"	f	class:TLS13
+supported_version	src/tls13.cc	121;"	f	class:TLS13
+swap	tcpip/website.cc	23;"	f	class:WebSite
 swap	tst/catch.hpp	595;"	f	class:Catch::Ptr
 t	src/tls-client.cpp	31;"	m	class:TLS_client	file:
 t	src/tls-server.cpp	44;"	m	class:Func	file:
-t	src/tls13-client.cpp	21;"	m	class:TLS_client	file:
-t	src/tls13-server.cpp	11;"	m	class:TServer	file:
-t	src/tls13-server.cpp	46;"	m	class:Func	file:
+t	src/tls13-client.cpp	22;"	m	class:TLS_client	file:
 t	tst/catch.hpp	1548;"	m	struct:Catch::Detail::IsStreamInsertable
-t2	src/tls13-client.cpp	22;"	m	class:TLS_client	file:
+table	dndd/dndd.h	20;"	m	class:DnDD
+table_name	database/mysqldata.h	45;"	m	class:SqlQuery
+tables	dndd/dnddsub.cc	8;"	f	class:DnDD
 tag	src/der.h	47;"	m	struct:ber::Type
 time	util/log.cc	35;"	f	class:Log
-time_out	tcpip/server.h	51;"	m	class:Server
+time_out	tcpip/server.h	52;"	m	class:Server
+tmp	dndd/dndd.h	21;"	m	class:DnDD
 toString	tst/catch.hpp	1040;"	f	class:Catch::Matchers::Impl::MatcherUntypedBase
 toString	tst/catch.hpp	1657;"	f	namespace:Catch
-to_byte	src/tls.cc	16;"	f	file:
 topology	util/graph.h	108;"	f	class:Graph
-trailing_string_	tcpip/server.h	11;"	m	class:Vrecv
 trueValue	tst/catch.hpp	418;"	f	class:Catch::SafeBool
+tut	dndd/dndd.cc	34;"	f	class:DnDD
+type	database/mysqldata.h	43;"	m	struct:SqlQuery::Column
 type_change	src/der.cc	44;"	f	file:
 union_set	util/graph.h	222;"	m	class:Graph
 unite	util/graph.h	344;"	f	class:Graph
+upload	site_src/my_site.cc	32;"	f	class:Site
 use_mutex_	util/log.h	37;"	m	class:Log
 v	util/graph.h	16;"	m	struct:Edge
 v	util/graph.h	24;"	m	struct:Vertex
 v	util/option.h	36;"	m	class:FileExpansion
 value	tst/catch.hpp	1549;"	e	enum:Catch::Detail::IsStreamInsertable::__anon1
 value	tst/catch.hpp	1562;"	m	class:Catch::Detail::IsStreamInsertable
-version	src/tls.cc	205;"	m	struct:TLS_header	file:
-version	src/tls.cc	295;"	m	struct:Hello_header	file:
+values_	database/mysqldata.h	51;"	m	class:SqlQuery
+verify	src/ecdsa.cc	38;"	f	class:ECDSA
+version	src/tls.cc	118;"	m	struct:TLS_header	file:
+version	src/tls.cc	136;"	m	struct:Hello_header	file:
+version	src/tls13.cc	422;"	m	struct:TLS_header	file:
 vertex	util/graph.h	17;"	m	struct:Edge
 vertex	util/graph.h	26;"	m	struct:Vertex
+vote	dndd/dndd.cc	94;"	f	class:DnDD
 w	src/sha1.h	27;"	m	class:SHA1
 waypoint	util/graph.h	221;"	m	class:Graph
 weight	util/graph.h	14;"	m	struct:Edge
-x	src/diffie.h	27;"	m	struct:X25519
-x	src/diffie.h	47;"	m	class:EC_Point
-xa	src/diffie.h	8;"	m	class:DiffieHellman
-xb	src/diffie.h	8;"	m	class:DiffieHellman
-xor_with_enc_ivNcounter	src/aes.cc	237;"	f	class:GCM
-y	src/diffie.h	27;"	m	struct:X25519
-y	src/diffie.h	47;"	m	class:EC_Point
-ya	src/diffie.h	15;"	m	class:DiffieHellman
-yb	src/diffie.h	15;"	m	class:DiffieHellman
-zK	src/tls.cc	15;"	v	file:
-zd	src/tls.cc	15;"	v	file:
-ze	src/tls.cc	15;"	v	file:
+x	src/diffie.h	21;"	m	struct:X25519
+x	src/diffie.h	41;"	m	struct:EC_Point
+x	src/diffie.h	9;"	m	struct:DiffieHellman
+xor_with_enc_ivNcounter	src/aes.cc	236;"	f	class:GCM
+xor_with_iv	src/aes.cc	253;"	f	class:GCM
+xor_with_iv	src/naes.cc	80;"	f	class:NettleAes128
+y	src/diffie.h	21;"	m	struct:X25519
+y	src/diffie.h	41;"	m	struct:EC_Point
+y	src/diffie.h	9;"	m	struct:DiffieHellman
+zK	src/tls.cc	14;"	v	file:
+zd	src/tls.cc	14;"	v	file:
+ze	src/tls.cc	14;"	v	file:
 zero_salt	src/hkdf.h	6;"	f	struct:HKDF
 ~DecomposedExpression	tst/catch.hpp	918;"	f	struct:Catch::DecomposedExpression
 ~Graph	util/graph.h	42;"	f	class:Graph
 ~MethodTestCase	tst/catch.hpp	716;"	f	class:Catch::MethodTestCase
+~Mysqlquery	database/mysqlquery.cc	59;"	f	class:Mysqlquery
 ~Ptr	tst/catch.hpp	576;"	f	class:Catch::Ptr
-~Tcpip	tcpip/tcpip.cc	20;"	f	class:Tcpip
+~Tcpip	tcpip/tcpip.cc	21;"	f	class:Tcpip
