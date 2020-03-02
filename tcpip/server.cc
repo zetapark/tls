@@ -77,11 +77,14 @@ Server::Server(int port, unsigned int t, int queue, string e) : Http(port)
 	end_string = e;
 	time_out = t;
 	server_addr.sin_addr.s_addr = htonl(INADDR_ANY);
-	if(bind(server_fd, (sockaddr*)&server_addr, sizeof(server_addr)) == -1)
+	if(bind(server_fd, (sockaddr*)&server_addr, sizeof(server_addr)) == -1) {
+		ok_ = false;
 		cout << "bind() error" << endl;
-	else cout << "binding" << endl;
-	if(listen(server_fd, queue) == -1) cout << "listen() error" << endl;
-	else cout << "listening port " << port << endl;
+	} else cout << "binding" << endl;
+	if(listen(server_fd, queue) == -1) {
+		ok_ = false;
+		cout << "listen() error" << endl;
+	} else cout << "listening port " << port << endl;
 
 	struct sigaction sa;
 	sa.sa_handler = kill_zombie;
@@ -90,8 +93,9 @@ Server::Server(int port, unsigned int t, int queue, string e) : Http(port)
 	sigaction(SIGCHLD, &sa, 0);
 }
 
-void Server::start(function<string(string)> f)
+int Server::start(function<string(string)> f)
 {
+	if(!ok_) return 1;
 	int cl_size = sizeof(client_addr);
 	while(1) {
 		client_fd = accept(server_fd, (sockaddr*)&client_addr, (socklen_t*)&cl_size);
@@ -106,6 +110,7 @@ void Server::start(function<string(string)> f)
 			break;//forked process ends here
 		}
 	}
+	return 0;
 }
 
 void Server::nokeep_start(function<string(string)> f)

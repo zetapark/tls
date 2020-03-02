@@ -35,8 +35,9 @@ void Middle::conn()
 	}
 }
 
-void Middle::start()
+int Middle::start()
 {//middle server can be managed here
+	if(!ok_) return 1;
 	thread th{&Middle::conn, this};
 	th.detach();
 	while(1) this_thread::sleep_for(10s);

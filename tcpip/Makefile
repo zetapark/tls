@@ -1,6 +1,6 @@
 CXX = g++
 CPPFLAGS = -I../ -I/usr/include/jsoncpp
-CXXFLAGS = -g -c -std=c++17 -fmax-errors=1
+CXXFLAGS = -g -c -std=c++17 -fmax-errors=1 -fpic
 DIR = $(notdir $(shell pwd))
 OBJ = $(patsubst %.cc, ../obj/%.$(DIR).o, $(wildcard *.cc))
 MAIN_OBJ = $(patsubst %.cpp, ../obj/%.$(DIR).x, $(wildcard *.cpp))

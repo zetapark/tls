@@ -1,12 +1,14 @@
 CXX = g++
 TOBJ = $(wildcard *.tst.o)
-OBJ = $(patsubst %.tst.o,, $(wildcard *.o))
+SHARED_OBJ = $(wildcard *.tcpip.o)
+TMP = $(patsubst %.tst.o,, $(wildcard *.o))
+OBJ = $(patsubst %.tcpip.o,, $(TMP))
 EXE = $(patsubst %.x, ../%.x, $(wildcard *.x))
-LDFLAGS = 
-LDLIBS = -lgmpxx -lgmp -lstdc++fs -lnettle -ljsoncpp -lpthread -lhogweed
+LDFLAGS = -L.. -Wl,-rpath=.
+LDLIBS = -lgmpxx -lgmp -lnettle -ljsoncpp -lpthread -lhogweed -lzeta -lstdc++fs
+#filesystem library should be next to zeta library
 
-
-all : $(EXE)
+all : ../libzeta.so $(EXE) ../catch.tst.x
 
 ../catch.tst.x : catch.tst.x $(TOBJ) $(OBJ)
 	$(CXX) $(LDFLAGS) -o $@ $^ $(LDLIBS)
@@ -14,6 +16,8 @@ all : $(EXE)
 ../%.x : %.x $(OBJ)
 	$(CXX) $(LDFLAGS) -o $@ $^ $(LDLIBS)
 
+../libzeta.so : $(SHARED_OBJ) 
+	$(CXX) -shared -o $@ $^
 
 #    $@ |현재 목표 파일의 이름
 #    $* | 확장자를 제외한 현재 목표 파일의 이름
