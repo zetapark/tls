@@ -1,0 +1,64 @@
+<html>
+ <head>
+  <meta charset="utf8" />
+  <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> 
+<script>
+function f() {
+	$.post("search", {search : $("#search-text").val()}, function (data, status) {
+		$('.panel').html(data);
+	});
+}  
+</script>
+  <style type="text/css">
+  .jumbotron {
+    background: transparent url("LOGO");
+    background-color: paleturquoise;
+    background-repeat: no-repeat;
+    background-position: right bottom;
+    background-size: contain;
+}
+  </style>
+ </head>
+ <body>
+	 <br>
+	 <div class="container">
+
+		 <form class="form-inline" action="main.html" method="post">	 
+			 <div class="form-group">
+				 <label for="email">Email address:</label>
+				 <input type="email" class="form-control" id="email" name="email">
+			 </div>
+			 <div class="form-group">
+				 <label for="pwd">Password:</label>
+				 <input type="password" class="form-control" id="pwd" name="pwd">
+			 </div>
+			 <button type="submit" class="btn btn-default">LogIn</button>
+		 <a href="signin.html" class="btn btn-default">가입</a>
+		 </form> 
+
+		 <div class="jumbotron">
+			 <h1>GROUP</h1>
+			 <p>GROUP_DESC</p>
+		 </div>
+		 <nav class="navbar navbar-inverse bg-primary">
+			 <ul class="nav nav-pills" id="li">
+				 NAVITEM
+			 </ul>
+		 </nav>
+		<input type="text" id="search-text" /> <button onclick="f()">Search</button>
+		 <div class="panel panel-info">
+			 PANEL
+		 </div>
+
+		 <a href="new.html" class="btn btn-success">New Discussion</a>
+			
+	 </div>
+ </body>
+</html>

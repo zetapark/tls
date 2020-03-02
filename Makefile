@@ -5,7 +5,10 @@ all :
 	make $(OPTION) -C util/
 	./incltouch.x
 	make $(OPTION) -C tcpip/
+	make $(OPTION) -C database/
 	make $(OPTION) -C src/
+	make $(OPTION) -C site_src/
+	make $(OPTION) -C dndd/
 	make $(OPTION) -C tst/
 	make $(OPTION) -C obj/
 	./catch.tst.x

@@ -1,0 +1,48 @@
+<html>
+	<head>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA0g_kK9ELz9b2IRDSeEXsdlEqaN0YXynw&libraries=places"></script>
+		<script src='html2canvas.js'> </script>
+		<script src='googleapi.js'> </script>
+	</head>
+	<body>
+		<h1>Hi there</h1>
+		<input type='text' id='name'> 
+		<button id='search' onclick="myclick()">search</button>
+		<div id='map' style="width:800px;height:600px"></div>
+
+		<input id="autocomplete" placeholder="Enter your address" onFocus="geolocate()" type="text"></input>
+		<button onclick='start()'>start</button>
+		<button onclick='end()'>end</button>
+		<button onclick='waypoint()'>waypoint</button>
+		<button onclick='find()'>find</button>
+		<button onclick='save()'>save</button>
+
+		<table id="address">
+			<tr>
+				<td class="label">Street address</td>
+				<td class="slimField"><input class="field" id="street_number" disabled="true"></input></td>
+				<td class="wideField" colspan="2"><input class="field" id="route" disabled="true"></input></td>
+			</tr>
+			<tr>
+				<td class="label">City</td>
+				<!-- Note: Selection of address components in this example is typical.
+			You may need to adjust it for the locations relevant to your app. See
+			https://developers.google.com/maps/documentation/javascript/examples/places-autocomplete-addressform
+				-->
+				<td class="wideField" colspan="3"><input class="field" id="locality" disabled="true"></input></td>
+			</tr>
+			<tr>
+				<td class="label">State</td>
+				<td class="slimField"><input class="field" id="administrative_area_level_1" disabled="true"></input></td>
+				<td class="label">Zip code</td>
+				<td class="wideField"><input class="field" id="postal_code" disabled="true"></input></td>
+			</tr>
+			<tr>
+				<td class="label">Country</td>
+				<td class="wideField" colspan="3"><input class="field" id="country" disabled="true"></input></td>
+			</tr>
+		</table>
+
+	</body>
+</html>
