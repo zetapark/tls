@@ -9,5 +9,5 @@ int main(int ac, char** av)
 	int port = ac < 2 ? 2001 : atoi(av[1]);
 	Server sv{port};
 	cout << "opening port " << port << endl;
-	sv.start(f);
+	return sv.start(f);
 }

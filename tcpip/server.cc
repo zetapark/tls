@@ -77,6 +77,9 @@ Server::Server(int port, unsigned int t, int queue, string e) : Http(port)
 	end_string = e;
 	time_out = t;
 	server_addr.sin_addr.s_addr = htonl(INADDR_ANY);
+	int enable = 1;
+	if (setsockopt(server_fd, SOL_SOCKET, SO_REUSEADDR, &enable, sizeof(int)) < 0)
+    	cout << "setsockopt(SO_REUSEADDR) failed";
 	if(bind(server_fd, (sockaddr*)&server_addr, sizeof(server_addr)) == -1) {
 		ok_ = false;
 		cout << "bind() error" << endl;
