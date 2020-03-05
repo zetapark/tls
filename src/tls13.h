@@ -16,6 +16,7 @@ public:
 	std::optional<std::string> decode(std::string &&s);
 	std::string encode(std::string &&s, int type = 23);
 	std::string server_certificate13();
+	std::string new_session_ticket();
 protected:
 	HKDF<HASH> hkdf_;
 	mpz_class premaster_secret_;//inspect this to check tls version
@@ -31,6 +32,7 @@ private:
 	std::array<std::vector<uint8_t>, 2> set_aes(std::vector<uint8_t> salt,
 			std::string client_label, std::string server_label);
 	std::array<std::vector<uint8_t>, 2> finished_key_;
+	std::vector<uint8_t> resumption_master_secret_;
 	bool supported_group(unsigned char *p, int len);
 	bool point_format(unsigned char *p, int len);
 	bool sub_key_share(unsigned char *p);
