@@ -9,6 +9,7 @@ using namespace std;
 
 template class TLS13<true>;
 template class TLS13<false>;
+template<bool SV> map<array<uint8_t, 56>, SClient> TLS13<SV>::pskNclient_;
 
 static string init_certificate()
 {
@@ -124,6 +125,29 @@ template<bool SV> bool TLS13<SV>::supported_version(unsigned char *p, int len)
 	return false;
 }
 
+template<bool SV> bool TLS13<SV>::psk(unsigned char *p, int len)
+{
+	struct {
+		uint8_t identities_sz[2] = {0, 21};
+		uint8_t ticket_sz[2] = {0, 15};
+		uint8_t ticket[15];
+		uint8_t obfuscated_ticket_age[4];
+		uint8_t binder_sz[2];
+		uint8_t bind_sz[2];
+		uint8_t binder[32];
+	} h;
+	int id_sz = *p++ * 0x100 + *p++;
+	for(unsigned char *q = p; p < q + id_sz;) {
+		int ticket_sz = *p++ * 0x100 + *p++;
+		vector<uint8_t> ar{p, p += ticket_sz};
+		if(auto it = pskNclient_.find(ar); it != pskNclient_.end() &&
+				chrono::system_clock::now() < it->second.issue_time + 9 * 256s) 
+			sclient_ = it->second;
+	}
+
+	return true;
+}
+
 template<bool SV> bool TLS13<SV>::client_ext(unsigned char *p) //buggy
 {//check extension and return if it is capable of negotiating with us
 	int total_len = *p++ * 0x100 + *p++;
@@ -137,6 +161,7 @@ template<bool SV> bool TLS13<SV>::client_ext(unsigned char *p) //buggy
 			case 43: check_ext[2] = supported_version(p, len); break;
 			case 45: check_ext[3] = true; break;
 			case 51: check_ext[4] = key_share(p, len); break;
+			case 41: psk(p, len); break;
 		}
 		p += len;
 	}
@@ -244,19 +269,24 @@ template<bool SV> string TLS13<SV>::new_session_ticket()
 		uint8_t size[3] = {0, 0, HASH::output_size + 45};
 		uint8_t ticket_lifetime_in_sec[4] = {0, 0, 9, 0};
 		uint8_t ticket_age_add[4];
-		uint8_t ticket_nonce_size = 32;
-		uint8_t ticket_nonce[32];
-		uint8_t ticket_size[2] = {0, HASH::output_size};
-		uint8_t ticket[HASH::output_size];
+		uint8_t ticket_nonce_size = 16;
+		uint8_t ticket_nonce[16];
+		uint8_t ticket_size[2] = {0, 16};
+		uint8_t ticket_id[16];
 		uint8_t extension[2] = {0, 0};
 	} h;
 	mpz2bnd(random_prime(4), h.ticket_age_add, h.ticket_age_add + 4);
 	mpz2bnd(random_prime(h.ticket_nonce_size),
 			h.ticket_nonce, h.ticket_nonce + h.ticket_nonce_size);
+	memcpy(h.ticket_id, h.ticket_nonce, h.ticket_nonce_size);
 	hkdf_.salt(&resumption_master_secret_[0], resumption_master_secret_.size());
-	auto ticket = hkdf_.expand_label("resumption", 
-			{h.ticket_nonce, h.ticket_nonce+32}, HASH::output_size);
-	std::copy(ticket.begin(), ticket.end(), h.ticket);
+	auto binder = hkdf_.expand_label("resumption", 
+			{h.ticket_nonce, h.ticket_nonce+10}, HASH::output_size);
+	std::vector<uint8_t> ar{h.ticket_id, h.ticket_id + 16};
+	sclient_.issue_time = chrono::system_clock::now();
+	if(!sclient_.sp_client)
+		sclient_.sp_client = make_shared<MClient>("localhost", inport_);
+	pskNclient_[ar] = sclient_;
 	return struct2str(h);
 }
 
@@ -274,6 +304,8 @@ TLS13<SV>::set_aes(vector<uint8_t> salt, string cl, string sv) {
 		this->aes_[i].key(&key[0]);
 		this->aes_[i].iv(&iv[0], 0, iv.size());
 		finished_key[i] = hkdf_.expand_label("finished", "", HASH::output_size);
+		sclient_.key[i] = move(key);
+		sclient_.iv[i] = move(iv);
 	}
 	return finished_key;
 }
@@ -366,7 +398,7 @@ template<bool SV> string TLS13<SV>::certificate_verify()
 	return t;
 }
 
-template<bool SV> bool
+template<bool SV> shared_ptr<MClient>
 TLS13<SV>::handshake(function<optional<string>()> read_f, function<void(string)> write_f)
 {//handshake according to compromised version
 	string s; optional<string> a;
@@ -437,10 +469,8 @@ TLS13<SV>::handshake(function<optional<string>()> read_f, function<void(string)>
 		} 
 	}//if constexpr
 	}//switch
-	if(s != "") {
-		write_f(s);//send alert message
-		return false;
-	} else return true;
+	if(s != "") write_f(s);//send alert message
+	return sclient_.sp_client;
 }
 
 struct TLS_header {

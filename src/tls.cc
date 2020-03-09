@@ -13,7 +13,7 @@ mpz_class get_prvkey(istream& is);
 //static member initialization
 static mpz_class ze, zd, zK;//used in TLS constructor
 
-static string init_certificate()
+template<bool SV> string TLS<SV>::init_certificate()
 {//this will run before main -> use for initialization
 	ifstream f2("privkey.pem");//generated with openssl genrsa 2048 > key.pem
 	ifstream f("fullchain.pem");//openssl req -x509 -days 1000 -new -key key.pem -out cert.pem
@@ -46,8 +46,9 @@ static string init_certificate()
 	return {r.begin(), r.end()};
 }
 
-template<bool SV> string TLS<SV>::certificate_ = init_certificate();
+template<bool SV> string TLS<SV>::certificate_ = TLS<SV>::init_certificate();
 template<bool SV> RSA TLS<SV>::rsa_{ze, zd, zK};
+template<bool SV> NettleAes128 TLS<SV>::aes_for_psk_;
 template class TLS<true>;//server
 template class TLS<false>;//client
 

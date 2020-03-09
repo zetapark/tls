@@ -14,7 +14,7 @@ protected:
 	bool debug_ = false;
 
 private:
-	void connected(int client_fd), conn();
+	void connected(int client_fd);
 	int get_full_length(const std::string &s);
 };
 
