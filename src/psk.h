@@ -13,8 +13,7 @@ struct SClient
 {
 	std::chrono::system_clock::time_point issue_time;//set in new session ticket
 	std::shared_ptr<MClient> sp_client;//set in psk ext or new session ticket
-	std::array<std::vector<uint8_t>, 3> key, iv;//set in set_aes
-	std::vector<uint8_t> binder;
+	std::vector<uint8_t> binder, resumption_master_secret;
 };
 
 class PSK : public ThreadSafeMap<std::vector<uint8_t>, SClient>

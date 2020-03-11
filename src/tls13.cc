@@ -145,10 +145,7 @@ template<bool SV> bool TLS13<SV>::psk(unsigned char *p, int len)
 		p += ticket_sz;
 		if(optional<SClient> a = pskNclient_[v];
 				a && chrono::system_clock::now() < a->issue_time + DUR) {
-			for(int i=0; i<2; i++) {
-				this->aes_[i].key(&a->key[i][0]);
-				this->aes_[i].iv(&a->iv[i][0]);
-			}
+			resumption_master_secret_ = a->resumption_master_secret;
 			sclient_.sp_client = a->sp_client;
 			return selected;
 		}
@@ -242,8 +239,9 @@ template<bool SV> string TLS13<SV>::encrypted_extension()
 template<bool SV> void TLS13<SV>::protect_handshake()
 {//call after server hello
 	hkdf_.zero_salt();
-	uint8_t psk[HASH::output_size] = {0,}, pre[32];
-	auto early_secret = hkdf_.extract(psk, HASH::output_size);
+	uint8_t pre[32], zeros[32] = {0,};
+	if(resumption_master_secret_.size() == 0) resumption_master_secret_.resize(32);
+	auto early_secret = hkdf_.extract(&resumption_master_secret_[0], HASH::output_size);
 	hkdf_.salt(&early_secret[0], early_secret.size());
 	auto a = hkdf_.derive_secret("derived", "");
 	hkdf_.salt(&a[0], a.size());
@@ -253,7 +251,7 @@ template<bool SV> void TLS13<SV>::protect_handshake()
 	hkdf_.salt(&handshake_secret[0], handshake_secret.size());
 	a = hkdf_.derive_secret("derived", "");
 	hkdf_.salt(&a[0], a.size());
-	this->master_secret_ = hkdf_.extract(psk, HASH::output_size);
+	this->master_secret_ = hkdf_.extract(zeros, HASH::output_size);
 }
 
 template<bool SV> string TLS13<SV>::finished(string &&s)
@@ -303,6 +301,7 @@ template<bool SV> string TLS13<SV>::new_session_ticket(int inport)
 	hkdf_.salt(&resumption_master_secret_[0], resumption_master_secret_.size());
 	sclient_.binder = hkdf_.expand_label("resumption", 
 			{h.ticket_nonce, h.ticket_nonce+16}, HASH::output_size);
+	sclient_.resumption_master_secret = resumption_master_secret_;
 	sclient_.issue_time = chrono::system_clock::now();
 	if(!sclient_.sp_client)//for multiple ticket
 		sclient_.sp_client = make_shared<MClient>("localhost", inport);
@@ -324,8 +323,6 @@ TLS13<SV>::set_aes(vector<uint8_t> salt, string cl, string sv) {
 		this->aes_[i].key(&key[0]);
 		this->aes_[i].iv(&iv[0], 0, iv.size());
 		finished_key[i] = hkdf_.expand_label("finished", "", HASH::output_size);
-		sclient_.key[i] = move(key);
-		sclient_.iv[i] = move(iv);
 	}
 	return finished_key;
 }
@@ -418,6 +415,7 @@ template<bool SV> string TLS13<SV>::certificate_verify()
 	return t;
 }
 
+static void f() {}
 template<bool SV> shared_ptr<MClient>
 TLS13<SV>::handshake(function<optional<string>()> read_f, function<void(string)> write_f, int inport)
 {//handshake according to compromised version
@@ -427,14 +425,15 @@ TLS13<SV>::handshake(function<optional<string>()> read_f, function<void(string)>
 		if(s = this->alert(2, 0); !(a = read_f()) || 
 				(s = client_hello(move(*a))) != "") break;
 		if(s = server_hello(); premaster_secret_) {
-			if(selected_psk_ >= 0) break;//this is not error, using former connection
 			protect_handshake();
 			s += this->change_cipher_spec();
 			string t = encrypted_extension();
-			t += server_certificate13();
-			t += certificate_verify();
+			if(selected_psk_ < 0) {
+				t += server_certificate13();
+				t += certificate_verify();
+			}
 			t += finished();
-			string tmp = this->accumulated_handshakes_;//save after server finished
+//			string tmp = this->accumulated_handshakes_;//save after server finished
 			s += encode(move(t), 22);//first condition true:read error->alert(2, 0)
 			write_f(s); //second condition true->error message of function v
 			if(s = this->alert(2, 0); !(a = read_f())
