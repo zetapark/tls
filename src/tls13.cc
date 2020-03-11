@@ -127,7 +127,7 @@ template<bool SV> bool TLS13<SV>::supported_version(unsigned char *p, int len)
 }
 
 template<bool SV> bool TLS13<SV>::psk(unsigned char *p, int len)
-{
+{//should add binder check
 //	struct {
 //		uint8_t identities_sz[2] = {0, 21};
 //		uint8_t ticket_sz[2] = {0, 15};
@@ -138,19 +138,22 @@ template<bool SV> bool TLS13<SV>::psk(unsigned char *p, int len)
 //		uint8_t binder[32];
 //	} h;
 	int id_sz = *p++ * 0x100 + *p++;
-	for(unsigned char *q = p; p < q + id_sz;) {
+	int selected = 0;
+	for(unsigned char *q = p; p < q + id_sz; selected++) {
 		int ticket_sz = *p++ * 0x100 + *p++;
-		if(optional<SClient> a = pskNclient_[{p, p += ticket_sz}]; a && 
-				chrono::system_clock::now() < a->issue_time + DUR) {
+		vector<uint8_t> v{p, p + ticket_sz};
+		p += ticket_sz;
+		if(optional<SClient> a = pskNclient_[v];
+				a && chrono::system_clock::now() < a->issue_time + DUR) {
 			for(int i=0; i<2; i++) {
 				this->aes_[i].key(&a->key[i][0]);
 				this->aes_[i].iv(&a->iv[i][0]);
 			}
 			sclient_.sp_client = a->sp_client;
-			return true;
+			return selected;
 		}
 	}
-	return false;
+	return -1;
 }
 
 template<bool SV> bool TLS13<SV>::client_ext(unsigned char *p) //buggy
@@ -166,7 +169,7 @@ template<bool SV> bool TLS13<SV>::client_ext(unsigned char *p) //buggy
 			case 43: check_ext[2] = supported_version(p, len); break;
 			case 45: check_ext[3] = true; break;
 			case 51: check_ext[4] = key_share(p, len); break;
-			case 41: psk(p, len); break;
+			case 41: selected_psk_ = psk(p, len); break;
 		}
 		p += len;
 	}
@@ -176,7 +179,7 @@ template<bool SV> bool TLS13<SV>::client_ext(unsigned char *p) //buggy
 
 template<bool SV> string TLS13<SV>::server_ext() {
 	struct Ext {
-		uint8_t extension_length[2] = {0, 79};
+		uint8_t extension_length[2] = {0, 6};
 
 		uint8_t supported_version[2] = {0, 43};
 		uint8_t supported_version_length[2] = {0, 2};
@@ -197,15 +200,28 @@ template<bool SV> string TLS13<SV>::server_ext() {
 		uint8_t key_length[2] = {0, 32};
 		uint8_t x[32];
 	} x25519;
+	struct {
+		uint8_t selected_identity[2] = {0, 41};
+		uint8_t length[2] = {0, 2};
+		uint8_t id[2] = {0, 0};
+	} psk;
+	string r;
 	if(this->P_.x == -1) {
 		curve25519_mul_g(x25519.x, prv_);
-		ext.extension_length[1] = 46;
-		return struct2str(ext) + struct2str(x25519);
+		ext.extension_length[1] += sizeof(x25519);
+		r = struct2str(x25519);
 	} else {
+		ext.extension_length[1] += sizeof(secp);
 		mpz2bnd(this->P_.x, secp.x, secp.x + 32);
 		mpz2bnd(this->P_.y, secp.y, secp.y + 32);
-		return struct2str(ext) + struct2str(secp);
+		r =  struct2str(secp);
 	}
+	if(selected_psk_ >= 0) {
+		ext.extension_length[1] += sizeof(psk);
+		psk.id[1] = selected_psk_;
+		r += struct2str(psk);
+	}
+	return struct2str(ext) + r;
 }
 
 template<bool SV> string TLS13<SV>::encrypted_extension()
@@ -285,8 +301,8 @@ template<bool SV> string TLS13<SV>::new_session_ticket(int inport)
 			h.ticket_nonce, h.ticket_nonce + h.ticket_nonce_size);
 	memcpy(h.ticket_id, h.ticket_nonce, h.ticket_nonce_size);
 	hkdf_.salt(&resumption_master_secret_[0], resumption_master_secret_.size());
-	auto binder = hkdf_.expand_label("resumption", 
-			{h.ticket_nonce, h.ticket_nonce+10}, HASH::output_size);
+	sclient_.binder = hkdf_.expand_label("resumption", 
+			{h.ticket_nonce, h.ticket_nonce+16}, HASH::output_size);
 	sclient_.issue_time = chrono::system_clock::now();
 	if(!sclient_.sp_client)//for multiple ticket
 		sclient_.sp_client = make_shared<MClient>("localhost", inport);
@@ -410,8 +426,8 @@ TLS13<SV>::handshake(function<optional<string>()> read_f, function<void(string)>
 	if constexpr(SV) {
 		if(s = this->alert(2, 0); !(a = read_f()) || 
 				(s = client_hello(move(*a))) != "") break;
-		if(sclient_.sp_client) break;//this is not error, using former connection
 		if(s = server_hello(); premaster_secret_) {
+			if(selected_psk_ >= 0) break;//this is not error, using former connection
 			protect_handshake();
 			s += this->change_cipher_spec();
 			string t = encrypted_extension();
@@ -425,7 +441,7 @@ TLS13<SV>::handshake(function<optional<string>()> read_f, function<void(string)>
 					|| (s = this->change_cipher_spec(move(*a)))!="") break;
 			if(s = this->alert(2, 0); !(a = read_f()) || !(a = this->decode(move(*a))) ||
 					(protect_data(), false) || (s = finished(move(*a))) != "") break;
-			write_f(encode(new_session_ticket(inport) + new_session_ticket(inport), HANDSHAKE));
+			write_f(encode(new_session_ticket(inport) + new_session_ticket(inport) + new_session_ticket(inport) + new_session_ticket(inport), HANDSHAKE));
 		} else {
 			s += this->server_certificate();
 			s += this->server_key_exchange();

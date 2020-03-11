@@ -31,6 +31,7 @@ protected: HKDF<HASH> hkdf_;
 	static PSK pskNclient_;
 private:
 	SClient sclient_;
+	int selected_psk_ = -2;
 	uint8_t prv_[32], echo_id_[32];
 	static std::string ecdsa_certificate_;
 	void protect_data(), protect_handshake();
