@@ -5,11 +5,12 @@
 #include"ecdsa.h"
 #include"tls13.h"
 #include"pss.h"
+#define DUR (9 * 256s)
 using namespace std;
 
 template class TLS13<true>;
 template class TLS13<false>;
-template<bool SV> map<array<uint8_t, 56>, SClient> TLS13<SV>::pskNclient_;
+template<bool SV> PSK TLS13<SV>::pskNclient_;
 
 static string init_certificate()
 {
@@ -127,25 +128,29 @@ template<bool SV> bool TLS13<SV>::supported_version(unsigned char *p, int len)
 
 template<bool SV> bool TLS13<SV>::psk(unsigned char *p, int len)
 {
-	struct {
-		uint8_t identities_sz[2] = {0, 21};
-		uint8_t ticket_sz[2] = {0, 15};
-		uint8_t ticket[15];
-		uint8_t obfuscated_ticket_age[4];
-		uint8_t binder_sz[2];
-		uint8_t bind_sz[2];
-		uint8_t binder[32];
-	} h;
+//	struct {
+//		uint8_t identities_sz[2] = {0, 21};
+//		uint8_t ticket_sz[2] = {0, 15};
+//		uint8_t ticket[15];
+//		uint8_t obfuscated_ticket_age[4];
+//		uint8_t binder_sz[2];
+//		uint8_t bind_sz[2];
+//		uint8_t binder[32];
+//	} h;
 	int id_sz = *p++ * 0x100 + *p++;
 	for(unsigned char *q = p; p < q + id_sz;) {
 		int ticket_sz = *p++ * 0x100 + *p++;
-		vector<uint8_t> ar{p, p += ticket_sz};
-		if(auto it = pskNclient_.find(ar); it != pskNclient_.end() &&
-				chrono::system_clock::now() < it->second.issue_time + 9 * 256s) 
-			sclient_ = it->second;
+		if(optional<SClient> a = pskNclient_[{p, p += ticket_sz}]; a && 
+				chrono::system_clock::now() < a->issue_time + DUR) {
+			for(int i=0; i<2; i++) {
+				this->aes_[i].key(&a->key[i][0]);
+				this->aes_[i].iv(&a->iv[i][0]);
+			}
+			sclient_.sp_client = a->sp_client;
+			return true;
+		}
 	}
-
-	return true;
+	return false;
 }
 
 template<bool SV> bool TLS13<SV>::client_ext(unsigned char *p) //buggy
@@ -262,11 +267,11 @@ template<bool SV> void TLS13<SV>::protect_data()
 	resumption_master_secret_ = hkdf_.derive_secret("res master", this->accumulated_handshakes_);
 }
 
-template<bool SV> string TLS13<SV>::new_session_ticket()
+template<bool SV> string TLS13<SV>::new_session_ticket(int inport)
 {
 	struct {
 		uint8_t new_session_ticket = 4;
-		uint8_t size[3] = {0, 0, HASH::output_size + 45};
+		uint8_t size[3] = {0, 0, 45};
 		uint8_t ticket_lifetime_in_sec[4] = {0, 0, 9, 0};
 		uint8_t ticket_age_add[4];
 		uint8_t ticket_nonce_size = 16;
@@ -282,11 +287,10 @@ template<bool SV> string TLS13<SV>::new_session_ticket()
 	hkdf_.salt(&resumption_master_secret_[0], resumption_master_secret_.size());
 	auto binder = hkdf_.expand_label("resumption", 
 			{h.ticket_nonce, h.ticket_nonce+10}, HASH::output_size);
-	std::vector<uint8_t> ar{h.ticket_id, h.ticket_id + 16};
 	sclient_.issue_time = chrono::system_clock::now();
-	if(!sclient_.sp_client)
-		sclient_.sp_client = make_shared<MClient>("localhost", inport_);
-	pskNclient_[ar] = sclient_;
+	if(!sclient_.sp_client)//for multiple ticket
+		sclient_.sp_client = make_shared<MClient>("localhost", inport);
+	pskNclient_.insert({h.ticket_id, h.ticket_id+16}, sclient_);
 	return struct2str(h);
 }
 
@@ -399,13 +403,14 @@ template<bool SV> string TLS13<SV>::certificate_verify()
 }
 
 template<bool SV> shared_ptr<MClient>
-TLS13<SV>::handshake(function<optional<string>()> read_f, function<void(string)> write_f)
+TLS13<SV>::handshake(function<optional<string>()> read_f, function<void(string)> write_f, int inport)
 {//handshake according to compromised version
 	string s; optional<string> a;
 	switch(1) { case 1://to use break
 	if constexpr(SV) {
 		if(s = this->alert(2, 0); !(a = read_f()) || 
 				(s = client_hello(move(*a))) != "") break;
+		if(sclient_.sp_client) break;//this is not error, using former connection
 		if(s = server_hello(); premaster_secret_) {
 			protect_handshake();
 			s += this->change_cipher_spec();
@@ -420,7 +425,7 @@ TLS13<SV>::handshake(function<optional<string>()> read_f, function<void(string)>
 					|| (s = this->change_cipher_spec(move(*a)))!="") break;
 			if(s = this->alert(2, 0); !(a = read_f()) || !(a = this->decode(move(*a))) ||
 					(protect_data(), false) || (s = finished(move(*a))) != "") break;
-			write_f(encode(new_session_ticket() + new_session_ticket(), HANDSHAKE));
+			write_f(encode(new_session_ticket(inport) + new_session_ticket(inport), HANDSHAKE));
 		} else {
 			s += this->server_certificate();
 			s += this->server_key_exchange();

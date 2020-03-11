@@ -1,15 +1,27 @@
 #include"psk.h"
+#define DUR (9 * 256s)
 using namespace std;
 
-template<class K, class V> V Map::operator[](const K &k) const
+MClient::MClient(string ip, int port) : Client{ip, port}
+{ }
+
+PSK::PSK() : th_{&PSK::garbage_collect, this}
+{ }
+
+PSK::~PSK() 
 {
-	shared_lock<shared_mutex> lck{mtx_, 3s};
-	return map::operator[](k);
+	run_ = false;
+	th_.join(); 
 }
 
-template<class K, class V> V& Map::insert(K k, V v)
+void PSK::garbage_collect()
 {
-	unique_lock<shared_mutex> lck{mtx_, 3s};
-	return map::operator[](k);
+	while(1) {
+		for(int i=0; i<200; i++) {//sleep phase
+			if(run_) this_thread::sleep_for(3s);
+			else return;
+		}
+		remove_if([](std::pair<std::vector<uint8_t>, SClient> p) { return
+				p.second.issue_time < std::chrono::system_clock::now() - DUR; });
+	}
 }
-

@@ -1,9 +1,8 @@
 #pragma once
-#include<map>
-#include<mutex>
+#include<thread>
 #include<chrono>
-#include<shared_mutex>
 #include"tcpip/server.h"
+#include"tvec.h"
 
 struct MClient : Client, std::mutex
 {
@@ -17,45 +16,14 @@ struct SClient
 	std::array<std::vector<uint8_t>, 2> key, iv;//set in set_aes
 };
 
-template<class V> struct WithMutex : std::mutex, V
-{ };
-
-template<class K, class V, class Cond = int> class Smap
-	: std::map<K, std::shared_ptr<WithMutex<V>>>
-{//session ticket database class 
+class PSK : public ThreadSafeMap<std::vector<uint8_t>, SClient>
+{
 public:
-	Smap() {
-		if constexpr(!std::is_same<int, Cond>::value)
-			th_ = std::thread{garbage_collect, this};
-	}
-	~Smap() {
-		run_ = false;
-		if(th_.joinable()) th_.join();
-	}
-	std::shared_ptr<WithMutex<V>> operator[](K k) const {
-		std::shared_lock<std::shared_mutex> lck{mtx_};
-		return find(k) == end() ? nullptr : at(k);
-	}
-	bool insert(K k, V v);
-
+	PSK();
+	~PSK();
 protected:
 	std::thread th_;
-	std::shared_mutex mtx_;
 	bool run_ = true;
-
 private:
-	void garbage_collect() {
-		std::unique_lock<std::shared_mutex> lck{mtx_, std::defer_lock};
-		while(1) {
-			for(int i=0; i<200; i++) {
-				if(run_) this_thread::sleep_for(3s);
-				else break;
-			}
-			lck.lock();
-			auto it = std::remove_if(begin(), end(), Cond);
-			erase(it, end());
-			lck.unlock();
-		}
-
-	}
+	void garbage_collect();
 };

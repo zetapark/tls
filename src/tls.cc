@@ -48,7 +48,6 @@ template<bool SV> string TLS<SV>::init_certificate()
 
 template<bool SV> string TLS<SV>::certificate_ = TLS<SV>::init_certificate();
 template<bool SV> RSA TLS<SV>::rsa_{ze, zd, zK};
-template<bool SV> NettleAes128 TLS<SV>::aes_for_psk_;
 template class TLS<true>;//server
 template class TLS<false>;//client
 
