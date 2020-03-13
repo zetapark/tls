@@ -240,7 +240,7 @@ template<bool SV> void TLS13<SV>::protect_handshake()
 {//call after server hello
 	hkdf_.zero_salt();
 	uint8_t pre[32], zeros[32] = {0,};
-	if(resumption_master_secret_.size() == 0) resumption_master_secret_.resize(32);
+	resumption_master_secret_.resize(HASH::output_size);//for empty resumption secret
 	auto early_secret = hkdf_.extract(&resumption_master_secret_[0], HASH::output_size);
 	hkdf_.salt(&early_secret[0], early_secret.size());
 	auto a = hkdf_.derive_secret("derived", "");
@@ -422,19 +422,19 @@ TLS13<SV>::handshake(function<optional<string>()> read_f, function<void(string)>
 	string s; optional<string> a;
 	switch(1) { case 1://to use break
 	if constexpr(SV) {
-		if(s = this->alert(2, 0); !(a = read_f()) || 
-				(s = client_hello(move(*a))) != "") break;
+		if(s = this->alert(2, 0);
+				!(a = read_f()) || (s = client_hello(move(*a))) != "") break;
 		if(s = server_hello(); premaster_secret_) {
 			protect_handshake();
 			s += this->change_cipher_spec();
 			string t = encrypted_extension();
-			if(selected_psk_ < 0) {
+			if(selected_psk_ < 0) {//not resumption
 				t += server_certificate13();
 				t += certificate_verify();
 			}
 			t += finished();
 //			string tmp = this->accumulated_handshakes_;//save after server finished
-			s += encode(move(t), 22);//first condition true:read error->alert(2, 0)
+			s += encode(move(t), HANDSHAKE);//first condition true:read error->alert(2, 0)
 			write_f(s); //second condition true->error message of function v
 			if(s = this->alert(2, 0); !(a = read_f())
 					|| (s = this->change_cipher_spec(move(*a)))!="") break;

@@ -7,6 +7,7 @@ all :
 	make $(OPTION) -C tcpip/
 	make $(OPTION) -C database/
 	make $(OPTION) -C src/
+	make $(OPTION) -C pybind/
 	make $(OPTION) -C site_src/
 	make $(OPTION) -C dndd/
 	make $(OPTION) -C tst/
