@@ -39,6 +39,21 @@ PYBIND11_MODULE(tls_crypt, m) {
 		.def("secret", &PyPRF::secret)
 		.def("get_n_byte", &PyPRF::get_n_byte)
 		;
+	class_<PyHKDF>(m, "HKDF")
+		.def(init<>())
+		.def("zero_salt", &PyHKDF::zero_salt)
+		.def("salt", &PyHKDF::salt)
+		.def("extract", &PyHKDF::extract)
+		.def("derive_secret", &PyHKDF::derive_secret)
+		.def("expand", &PyHKDF::expand)
+		.def("expand_label", &PyHKDF::expand_label)
+		.def("hash", &PyHKDF::hash)
+		;
+	class_<PyX25519>(m, "X25519")
+		.def(init<>())
+		.def("mul", &PyX25519::mul)
+		.def("mul_g", &PyX25519::mul_g)
+		;
 //	class_<PyDiffie>(m, "DiffieHellman")
 //		.def(init<int>(), "bit"_a = 1024)
 //		.def(init<int_, int_, int_>())

@@ -3,6 +3,7 @@
 #include<string>
 #include<json/json.h>
 #include<pybind11/pybind11.h>
+#include<nettle/curve25519.h>
 #include"wrapper.h"
 using namespace std;
 namespace py = pybind11;
@@ -57,14 +58,43 @@ void PyPRF::seed(vector<unsigned char> v)
 	PRF<SHA2>::seed(v.cbegin(), v.cend());
 }
 
-void PyPRF::label(string s)
+vector<uint8_t> PyHKDF::extract(vector<uint8_t> v)
 {
-	PRF<SHA2>::label(s.data());
+	return HKDF<SHA2>::extract((uint8_t*)v.data(), v.size());
 }
 
-vector<unsigned char> PyPRF::get_n_byte(int n) 
+array<uint8_t, 32> PyHKDF::hash(vector<uint8_t> v)
 {
-	return PRF<SHA2>::get_n_byte(n);
+	return HKDF<SHA2>::hash(v.begin(), v.end());
+}
+
+void PyHKDF::salt(vector<uint8_t> v)
+{
+	HKDF<SHA2>::salt(v.data(), v.size());
+}
+
+vector<uint8_t> PyHKDF::derive_secret(string label, vector<uint8_t> msg)
+{
+	return HKDF<SHA2>::derive_secret(label, {msg.begin(), msg.end()});
+}
+
+py::int_ PyX25519::mul_g(pybind11::int_ n)
+{
+	uint8_t za[32], q[32];
+	mpz_class z{py::str(n)};
+	mpz2bnd(z, za, za + 32);
+	curve25519_mul_g(q, za);
+	return py::str(bnd2mpz(q, q+32).get_str());
+}
+
+py::int_ PyX25519::mul(py::int_ n, py::int_ p)
+{
+	uint8_t za[32], zb[32], q[32];
+	mpz_class z1{py::str(n)}, z2{py::str(p)};
+	mpz2bnd(z1, za, za + 32);
+	mpz2bnd(z2, zb, zb + 32);
+	curve25519_mul(q, za, zb);
+	return py::str(bnd2mpz(q, q + 32).get_str());
 }
 //
 //PyDiffie::PyDiffie(int bit) : DHE{bit}

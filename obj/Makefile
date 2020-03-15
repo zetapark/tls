@@ -12,15 +12,6 @@ DB = -lzetadb -lmysqlcppconn
 
 all : ../libzeta.so ../libzetadb.so $(EXE) ../catch.tst.x ../dndd.dndd.x ../tls_crypt.so
 
-../catch.tst.x : catch.tst.x $(TOBJ) $(OBJ)
-	$(CXX) $(LDFLAGS) -o $@ $^ $(LDLIBS)
-
-../%.src.x : %.src.x $(OBJ)
-	$(CXX) $(LDFLAGS) -o $@ $^ $(LDLIBS)
-
-../%.site_src.x : %.site_src.x $(UTIL)
-	$(CXX) $(LDFLAGS) -o $@ $^ $(DB) $(LDLIBS) 
-
 ../libzeta.so : $(wildcard *.tcpip.o) 
 	$(CXX) -shared -o $@ $^
 
@@ -29,6 +20,15 @@ all : ../libzeta.so ../libzetadb.so $(EXE) ../catch.tst.x ../dndd.dndd.x ../tls_
 
 ../tls_crypt.so : $(wildcard *.pybind.o) $(wildcard *.fpic.o) $(wildcard *.tcpip.o)
 	$(CXX) -shared -o $@ $^ $(LDFLAGS) $(LDLIBS)
+
+../catch.tst.x : catch.tst.x $(TOBJ) $(OBJ)
+	$(CXX) $(LDFLAGS) -o $@ $^ $(LDLIBS)
+
+../%.src.x : %.src.x $(OBJ)
+	$(CXX) $(LDFLAGS) -o $@ $^ $(LDLIBS)
+
+../%.site_src.x : %.site_src.x $(UTIL)
+	$(CXX) $(LDFLAGS) -o $@ $^ $(DB) $(LDLIBS) 
 
 ../dndd.dndd.x : $(wildcard *.dndd.o) $(UTIL) dndd.dndd.x
 	$(CXX) $(LDFLAGS) -o $@ $^ $(DB) $(LDLIBS)

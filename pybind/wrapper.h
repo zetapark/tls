@@ -1,5 +1,6 @@
 #pragma once
 #include<pybind11/pybind11.h>
+#include"src/hkdf.h"
 #include"tcpip/server.h"
 #include"src/prf.h"
 #include"src/hmac.h"
@@ -50,9 +51,22 @@ struct PyPRF : public PRF<SHA2>
 {
 	void secret(std::vector<unsigned char> v);
 	void seed(std::vector<unsigned char> v);
-	void label(std::string s);
-	std::vector<unsigned char> get_n_byte(int n);
 };
+
+struct PyHKDF : HKDF<SHA2>
+{
+	std::vector<uint8_t> extract(std::vector<uint8_t> v);
+	void salt(std::vector<uint8_t> v);
+	std::array<uint8_t, 32> hash(std::vector<uint8_t> v);
+	std::vector<uint8_t> derive_secret(std::string label, std::vector<uint8_t> msg);
+};
+
+struct PyX25519
+{
+	pybind11::int_ mul_g(pybind11::int_ n);
+	pybind11::int_ mul(pybind11::int_ n, pybind11::int_ p);
+};
+
 //
 //struct PyDiffie : public DHE
 //{
