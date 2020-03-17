@@ -38,7 +38,7 @@ private:
 	std::array<std::vector<uint8_t>, 2> set_aes(std::vector<uint8_t> salt,
 			std::string client_label, std::string server_label);
 	std::array<std::vector<uint8_t>, 2> finished_key_;
-	std::vector<uint8_t> resumption_master_secret_;
+	std::vector<uint8_t> psk_, resumption_master_secret_;
 	bool supported_group(unsigned char *p, int len);
 	bool point_format(unsigned char *p, int len);
 	bool sub_key_share(unsigned char *p);

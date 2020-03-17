@@ -143,11 +143,10 @@ template<bool SV> bool TLS13<SV>::psk(unsigned char *p, int len)
 		int ticket_sz = *p++ * 0x100 + *p++;
 		vector<uint8_t> v{p, p + ticket_sz};
 		p += ticket_sz;
-		if(optional<SClient> a = pskNclient_[v];
-				a && chrono::system_clock::now() < a->issue_time + DUR) {
-			resumption_master_secret_ = a->resumption_master_secret;
+		if(auto a = pskNclient_[v]; a && chrono::system_clock::now() < a->issue_time + DUR) {
+			psk_ = a->psk;
 			sclient_.sp_client = a->sp_client;
-			return selected;
+			return selected;//need to check binder
 		}
 	}
 	return -1;
@@ -240,8 +239,8 @@ template<bool SV> void TLS13<SV>::protect_handshake()
 {//call after server hello
 	hkdf_.zero_salt();
 	uint8_t pre[32], zeros[32] = {0,};
-	resumption_master_secret_.resize(HASH::output_size);//for empty resumption secret
-	auto early_secret = hkdf_.extract(&resumption_master_secret_[0], HASH::output_size);
+	psk_.resize(HASH::output_size);//for empty resumption secret
+	auto early_secret = hkdf_.extract(&psk_[0], HASH::output_size);
 	hkdf_.salt(&early_secret[0], early_secret.size());
 	auto a = hkdf_.derive_secret("derived", "");
 	hkdf_.salt(&a[0], a.size());
@@ -299,9 +298,8 @@ template<bool SV> string TLS13<SV>::new_session_ticket(int inport)
 			h.ticket_nonce, h.ticket_nonce + h.ticket_nonce_size);
 	memcpy(h.ticket_id, h.ticket_nonce, h.ticket_nonce_size);
 	hkdf_.salt(&resumption_master_secret_[0], resumption_master_secret_.size());
-	sclient_.binder = hkdf_.expand_label("resumption", 
+	sclient_.psk = hkdf_.expand_label("resumption", 
 			{h.ticket_nonce, h.ticket_nonce+16}, HASH::output_size);
-	sclient_.resumption_master_secret = resumption_master_secret_;
 	sclient_.issue_time = chrono::system_clock::now();
 	if(!sclient_.sp_client)//for multiple ticket
 		sclient_.sp_client = make_shared<MClient>("localhost", inport);

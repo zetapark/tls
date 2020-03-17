@@ -20,6 +20,7 @@ PYBIND11_MODULE(tls_crypt, m) {
 		.def("decrypt", &PyAES::decrypt)
 		.def("encrypt", &PyAES::encrypt)
 		.def("aad", &PyAES::aad)
+		.def("xor_with_iv", &PyAES::xor_with_iv)
 		;
 	class_<PySHA256>(m, "SHA256")
 		.def(init<>())

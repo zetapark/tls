@@ -42,10 +42,11 @@ template<class K, class V, int N = 1000> class ThreadSafeMap
 	: public ThreadSafeVector<std::pair<K, V>, N>
 {
 public:
-	V operator[](K k) {
+	std::optional<V> operator[](K k) {
 		std::shared_lock<std::shared_mutex> lck{this->mtx_};
+		int position = this->pos_;
 		int pos = this->find_if([k](std::pair<K, V> p) { return p.first == k; });
-		return this->ar_[pos].second;
+		return position <= pos ? std::optional<V>{} : this->ar_[pos].second;
 	}
 	void insert(K k, V v) {
 		this->push_back({k, v});

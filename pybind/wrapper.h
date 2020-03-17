@@ -21,6 +21,7 @@ struct PyAES : NettleAes128
 		decrypt(std::vector<unsigned char> m);
 	std::pair<std::vector<unsigned char>, std::array<unsigned char, 16>>
 		encrypt(std::vector<unsigned char> m);
+	void xor_with_iv(std::vector<uint8_t> v);
 };
 
 struct PySHA1 : public SHA1

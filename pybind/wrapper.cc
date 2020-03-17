@@ -36,6 +36,11 @@ void PyAES::aad(vector<unsigned char> v)
 	NettleAes128::aad(&v[0], v.size());
 }
 
+void PyAES::xor_with_iv(vector<uint8_t> v)
+{
+	NettleAes128::xor_with_iv(&v[0]);
+}
+
 pair<vector<unsigned char>, array<unsigned char, 16>> PyAES::encrypt(vector<unsigned char> v)
 {
 	auto a = NettleAes128::encrypt(&v[0], v.size());
