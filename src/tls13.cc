@@ -1,6 +1,8 @@
 #include<utility>
+#include<iostream>
 #include<nettle/curve25519.h>
 #include<fstream>
+#include"mpz.h"
 #include"cert_util.h"
 #include"ecdsa.h"
 #include"tls13.h"
@@ -277,34 +279,39 @@ template<bool SV> string TLS13<SV>::finished(string &&s)
 template<bool SV> void TLS13<SV>::protect_data()
 {//call after serverfinished, set resumption master secret
 	set_aes(this->master_secret_, "c ap traffic", "s ap traffic");
-	hkdf_.salt(&this->master_secret_[0], this->master_secret_.size());
-	resumption_master_secret_ = hkdf_.derive_secret("res master", this->accumulated_handshakes_);
 }
 
 template<bool SV> string TLS13<SV>::new_session_ticket(int inport)
 {
+	static atomic<unsigned> ticket_num{0};
 	struct {
 		uint8_t new_session_ticket = 4;
-		uint8_t size[3] = {0, 0, 45};
+		uint8_t size[3] = {0, 0, 19};
 		uint8_t ticket_lifetime_in_sec[4] = {0, 0, 9, 0};
 		uint8_t ticket_age_add[4];
-		uint8_t ticket_nonce_size = 16;
-		uint8_t ticket_nonce[16];
-		uint8_t ticket_size[2] = {0, 16};
-		uint8_t ticket_id[16];
+		uint8_t ticket_nonce_size = 2;
+		uint8_t ticket_nonce[2] = {0, 0};
+		uint8_t ticket_size[2] = {0, 4};
+		uint8_t ticket_id[4];
 		uint8_t extension[2] = {0, 0};
 	} h;
-	mpz2bnd(random_prime(4), h.ticket_age_add, h.ticket_age_add + 4);
-	mpz2bnd(random_prime(h.ticket_nonce_size),
-			h.ticket_nonce, h.ticket_nonce + h.ticket_nonce_size);
-	memcpy(h.ticket_id, h.ticket_nonce, h.ticket_nonce_size);
+	hkdf_.salt(&this->master_secret_[0], this->master_secret_.size());
+	resumption_master_secret_ = hkdf_.derive_secret("res master", this->accumulated_handshakes_);
+	mpz2bnd(ticket_num++, h.ticket_id, h.ticket_id+4);
+//	mpz2bnd(random_prime(4), h.ticket_age_add, h.ticket_age_add + 4);
+//	mpz2bnd(random_prime(h.ticket_nonce_size),
+//			h.ticket_nonce, h.ticket_nonce + h.ticket_nonce_size);
+//	std::copy(h.ticket_nonce, h.ticket_nonce+16, h.ticket_id);
+
 	hkdf_.salt(&resumption_master_secret_[0], resumption_master_secret_.size());
-	sclient_.psk = hkdf_.expand_label("resumption", 
-			{h.ticket_nonce, h.ticket_nonce+16}, HASH::output_size);
+	sclient_.psk = hkdf_.expand_label("resumption", {0,0}, HASH::output_size);
+	cout << hexprint("master", this->master_secret_) << endl;
+	cout << hexprint("res master", resumption_master_secret_) << endl;
+	cout << hexprint("resum", sclient_.psk) << endl;
 	sclient_.issue_time = chrono::system_clock::now();
 	if(!sclient_.sp_client)//for multiple ticket
 		sclient_.sp_client = make_shared<MClient>("localhost", inport);
-	pskNclient_.insert({h.ticket_id, h.ticket_id+16}, sclient_);
+	pskNclient_.insert({h.ticket_id, h.ticket_id+4}, sclient_);
 	return struct2str(h);
 }
 
@@ -439,7 +446,7 @@ TLS13<SV>::handshake(function<optional<string>()> read_f, function<void(string)>
 					|| (s = this->change_cipher_spec(move(*a)))!="") break;
 			if(s = this->alert(2, 0); !(a = read_f()) || !(a = this->decode(move(*a))) ||
 					(protect_data(), false) || (s = finished(move(*a))) != "") break;
-			write_f(encode(new_session_ticket(inport) + new_session_ticket(inport) + new_session_ticket(inport) + new_session_ticket(inport), HANDSHAKE));
+			write_f(encode(new_session_ticket(inport) + new_session_ticket(inport), HANDSHAKE));
 		} else {
 			s += this->server_certificate();
 			s += this->server_key_exchange();
