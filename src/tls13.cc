@@ -140,9 +140,9 @@ template<bool SV> bool TLS13<SV>::psk(unsigned char *p, int len)
 	int id_sz = *p++ * 0x100 + *p++;
 	int selected = 0;
 	for(unsigned char *q = p; p < q + id_sz; selected++) {
-		int ticket_sz = *p++ * 0x100 + *p++;
-		vector<uint8_t> v{p, p + ticket_sz};
-		p += ticket_sz;
+		int id_len = *p++ * 0x100 + *p++;
+		vector<uint8_t> v{p, p + id_len};
+		p += id_len + 4;//obfuscated ticket age 4 byte
 		if(auto a = pskNclient_[v]; a && chrono::system_clock::now() < a->issue_time + DUR) {
 			psk_ = a->psk;
 			sclient_.sp_client = a->sp_client;
@@ -169,6 +169,7 @@ template<bool SV> bool TLS13<SV>::client_ext(unsigned char *p) //buggy
 		}
 		p += len;
 	}
+	check_ext[1] = true;
 	for(int i=0; i<5; i++) if(check_ext[i] == false) return false;
 	return true;
 }
@@ -461,7 +462,7 @@ TLS13<SV>::handshake(function<optional<string>()> read_f, function<void(string)>
 			protect_handshake();//should prepend header?
 			if(s = this->alert(2, 0); !(a = read_f()) ||
 					(s = this->change_cipher_spec(move(*a))) != "") break;
-			if(s = this->alert(2, 0); !(a = read_f()) || !(a = this->decode(move(*a)))) break;
+			if(s = this->alert(2, 0); !(a = read_f()) || !(a = decode(move(*a)))) break;
 			else this->accumulated_handshakes_ += *a;
 			string tmp = this->accumulated_handshakes_;
 			s = this->change_cipher_spec();
@@ -469,6 +470,8 @@ TLS13<SV>::handshake(function<optional<string>()> read_f, function<void(string)>
 			write_f(move(s));
 			this->accumulated_handshakes_ = tmp;
 			protect_data();
+//			if(a = read_f(); !a || !(a = decode(move(*a))) || 
+//					(s = new_session_ticket(*a)) != "") break;
 		} else {
 			if(s = this->alert(2, 0); !(a = read_f()) ||
 					(s = this->server_certificate(move(*a))) != "") break;

@@ -84,19 +84,19 @@ struct PyX25519
 //	pybind11::int_ encode(pybind11::int_ m), decode(pybind11::int_ m);
 //};
 //
-//struct PyClient : Client
-//{
-//	PyClient(std::string ip, int port);
-//	void send(std::vector<unsigned char> v);
-//	std::vector<unsigned char> recv();
-//};
-//
-//struct PyTLSClient : PyClient 
-//{
-//	PyTLSClient(std::string ip, int port);
-//	int get_full_length(const std::string &s);
-//};
-//
+struct PyClient : Client
+{
+	PyClient(std::string ip, int port);
+	void send(std::vector<unsigned char> v);
+	std::vector<unsigned char> recv();
+};
+
+struct PyTLSClient : PyClient 
+{
+	PyTLSClient(std::string ip, int port);
+	int get_full_length(const std::string &s);
+};
+
 //class PyHTTPSCLient : Client
 //{
 //public:

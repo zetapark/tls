@@ -150,26 +150,25 @@ py::int_ PyX25519::mul(py::int_ n, py::int_ p)
 //{
 //	return py::str(RSA::decode(mpz_class{py::str(m)}).get_str());
 //}
-//PyClient::PyClient(string ip, int port) : Client{ip, port}
-//{ }
-//void PyClient::send(vector<unsigned char> v)
-//{
-//	Client::send(string{v.begin(), v.end()}, 0);
-//}
-//vector<unsigned char> PyClient::recv()
-//{
-//	vector<unsigned char> v;
-//	for(unsigned char c : Client::recv(0)) v.push_back(c);
-//	return v;
-//}
-//PyTLSClient::PyTLSClient(string ip, int port) : PyClient(ip, port)
-//{ }
-//
-//int PyTLSClient::get_full_length(const string &s) 
-//{
-//	return static_cast<unsigned char>(s[3]) * 0x100 + static_cast<unsigned char>(s[4]) + 5;
-//}
-//
+PyClient::PyClient(string ip, int port) : Client{ip, port}
+{ }
+void PyClient::send(vector<unsigned char> v)
+{
+	Client::send(string{v.begin(), v.end()}, 0);
+}
+vector<unsigned char> PyClient::recv()
+{
+	auto s = Client::recv();
+	return {s->begin(), s->end()};
+}
+PyTLSClient::PyTLSClient(string ip, int port) : PyClient(ip, port)
+{ }
+
+int PyTLSClient::get_full_length(const string &s) 
+{
+	return static_cast<unsigned char>(s[3]) * 0x100 + static_cast<unsigned char>(s[4]) + 5;
+}
+
 //PyHTTPSCLient::PyHTTPSCLient(string ip, int port) : Client(ip, port)
 //{
 //	send(t.client_hello());

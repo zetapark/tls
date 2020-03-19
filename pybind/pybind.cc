@@ -72,16 +72,16 @@ PYBIND11_MODULE(tls_crypt, m) {
 //		.def("decode", &PyRSA::decode)
 //		.def("sign", &PyRSA::decode)
 //		;
-//	class_<PyClient>(m, "Client")
-//		.def(init<std::string, int>(), "ip"_a = "127.0.0.1", "port"_a = 2001)
-//		.def("send", &PyClient::send)
-//		.def("recv", &PyClient::recv)
-//		;
-//	class_<PyTLSClient>(m, "TLS_client")
-//		.def(init<std::string, int>(), "ip"_a = "127.0.0.1", "port"_a = 4433)
-//		.def("send", &PyTLSClient::send)
-//		.def("recv", &PyTLSClient::recv)
-//		;
+	class_<PyClient>(m, "Client")
+		.def(init<std::string, int>(), "ip"_a = "127.0.0.1", "port"_a = 2001)
+		.def("send", &PyClient::send)
+		.def("recv", &PyClient::recv)
+		;
+	class_<PyTLSClient>(m, "TLS_client")
+		.def(init<std::string, int>(), "ip"_a = "127.0.0.1", "port"_a = 4433)
+		.def("send", &PyTLSClient::send)
+		.def("recv", &PyTLSClient::recv)
+		;
 //	class_<PyTLS>(m, "TLS")
 //		.def(init<>())
 //		.def("client_hello", &PyTLS::to_vector_func<&TLS<false>::client_hello>)

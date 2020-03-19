@@ -21,7 +21,7 @@ void PSK::garbage_collect()
 			if(run_) this_thread::sleep_for(3s);
 			else return;
 		}
-		remove_if([](std::pair<std::vector<uint8_t>, SClient> p) { return
+		remove_if([](const std::pair<std::vector<uint8_t>, SClient> &p) { return
 				p.second.issue_time < std::chrono::system_clock::now() - DUR; });
 	}
 }
