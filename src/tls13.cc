@@ -446,7 +446,7 @@ TLS13<SV>::handshake(function<optional<string>()> read_f, function<void(string)>
 					|| (s = this->change_cipher_spec(move(*a)))!="") break;
 			if(s = this->alert(2, 0); !(a = read_f()) || !(a = this->decode(move(*a))) ||
 					(protect_data(), false) || (s = finished(move(*a))) != "") break;
-			write_f(encode(new_session_ticket(inport) + new_session_ticket(inport), HANDSHAKE));
+			write_f(encode(new_session_ticket(inport) + new_session_ticket(inport) + new_session_ticket(inport) + new_session_ticket(inport), HANDSHAKE));
 		} else {
 			s += this->server_certificate();
 			s += this->server_key_exchange();
