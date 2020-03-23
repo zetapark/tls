@@ -1,7 +1,7 @@
 #include<utility>
-#include<iostream>
 #include<nettle/curve25519.h>
 #include<fstream>
+#include"util/log.h"
 #include"cert_util.h"
 #include"ecdsa.h"
 #include"tls13.h"
@@ -34,6 +34,10 @@ static string init_certificate()
 static string certificate13 = init_certificate();
 
 #pragma pack(1)
+template<bool SV> TLS13<SV>::TLS13()
+{
+	mpz2bnd(this->prv_key_, prv_, prv_ + 32);
+}
 
 template<bool SV> string TLS13<SV>::client_ext() {
 	struct Ext {
@@ -81,7 +85,6 @@ template<bool SV> string TLS13<SV>::client_ext() {
 	mpz2bnd(this->P_.x, ext.x, ext.x + 32);
 	mpz2bnd(this->P_.y, ext.y, ext.y + 32);
 	mpz2bnd(sizeof(Ext) - 2, ext.extension_length, ext.extension_length + 2);
-	mpz2bnd(this->prv_key_, prv_, prv_ + 32);
 	curve25519_mul_g(ext.x2, prv_);
 	return struct2str(ext);
 }
@@ -127,7 +130,7 @@ template<bool SV> bool TLS13<SV>::supported_version(unsigned char *p, int len)
 	return false;
 }
 
-template<bool SV> bool TLS13<SV>::psk(unsigned char *p, int len)
+template<bool SV> int TLS13<SV>::psk(unsigned char *p, int len)
 {//should add binder check
 //	struct {
 //		uint8_t identities_sz[2] = {0, 21};
@@ -243,11 +246,13 @@ template<bool SV> void TLS13<SV>::protect_handshake()
 	uint8_t pre[32], zeros[32] = {0,};
 	psk_.resize(HASH::output_size);//for empty resumption secret
 	auto early_secret = hkdf_.extract(&psk_[0], HASH::output_size);
+	LOGD << hexprint("early", early_secret) << endl;
 	hkdf_.salt(&early_secret[0], early_secret.size());
 	auto a = hkdf_.derive_secret("derived", "");
 	hkdf_.salt(&a[0], a.size());
 	mpz2bnd(premaster_secret_, pre, pre + 32);
 	auto handshake_secret = hkdf_.extract(pre, 32);
+	LOGD << hexprint("handshake secret", handshake_secret) << endl;
 	finished_key_ = set_aes(handshake_secret, "c hs traffic", "s hs traffic");
 	hkdf_.salt(&handshake_secret[0], handshake_secret.size());
 	a = hkdf_.derive_secret("derived", "");
@@ -301,9 +306,9 @@ template<bool SV> string TLS13<SV>::new_session_ticket(int inport)
 	hkdf_.salt(&resumption_master_secret_[0], resumption_master_secret_.size());
 	sclient_.psk = hkdf_.expand_label("resumption", 
 			{h.ticket_nonce, h.ticket_nonce + sz}, HASH::output_size);
-	cout << hexprint("master", this->master_secret_) << endl;
-	cout << hexprint("res master", resumption_master_secret_) << endl;
-	cout << hexprint("resumption psk", sclient_.psk) << endl;
+	LOGD << hexprint("master", this->master_secret_) << endl;
+	LOGD << hexprint("res master", resumption_master_secret_) << endl;
+	LOGD << hexprint("resumption psk", sclient_.psk) << endl;
 	sclient_.issue_time = chrono::system_clock::now();
 	if(!sclient_.sp_client)//for multiple ticket
 		sclient_.sp_client = make_shared<MClient>("localhost", inport);
@@ -316,6 +321,7 @@ TLS13<SV>::set_aes(vector<uint8_t> salt, string cl, string sv) {
 	this->enc_seq_num_ = 0; this->dec_seq_num_ = 0;
 	hkdf_.salt(&salt[0], salt.size());
 	array<vector<unsigned char>, 2> secret, finished_key;
+	LOGD << hexprint("accum", this->accumulated_handshakes_) << endl;
 	secret[0] = hkdf_.derive_secret(cl, this->accumulated_handshakes_);
 	secret[1] = hkdf_.derive_secret(sv, this->accumulated_handshakes_);
 	for(int i=0; i<2; i++) {
@@ -325,6 +331,9 @@ TLS13<SV>::set_aes(vector<uint8_t> salt, string cl, string sv) {
 		this->aes_[i].key(&key[0]);
 		this->aes_[i].iv(&iv[0], 0, iv.size());
 		finished_key[i] = hkdf_.expand_label("finished", "", HASH::output_size);
+		LOGD << hexprint("s hs traffic", secret[i]) << endl;
+		LOGD << hexprint("key", key) << endl;
+		LOGD << hexprint("iv", iv) << endl;
 	}
 	return finished_key;
 }

@@ -11,6 +11,7 @@
 template<bool SV> class TLS13 : public TLS<SV>
 {
 public:
+	TLS13();
 	std::string client_hello(std::string &&s = "");
 	std::string server_hello(std::string &&s = "");
 	std::shared_ptr<MClient> handshake(std::function<std::optional<std::string>()> read_f,
@@ -44,9 +45,8 @@ private:
 	bool sub_key_share(unsigned char *p);
 	bool key_share(unsigned char *p, int len);
 	bool supported_version(unsigned char *p, int len);
-	bool psk(unsigned char *p, int len);
+	int psk(unsigned char *p, int len);
 	void derive_keys(mpz_class premaster_secret);
 	std::optional<std::string> decode13(std::string &&s);
 	std::string encode13(std::string &&s, int type = APPLICATION_DATA);
 };
-
