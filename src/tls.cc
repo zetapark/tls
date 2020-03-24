@@ -46,7 +46,7 @@ template<bool SV> string TLS<SV>::init_certificate()
 	return {r.begin(), r.end()};
 }
 
-template<bool SV> string TLS<SV>::certificate_ = TLS<SV>::init_certificate();
+template<> string TLS<true>::certificate_ = TLS<true>::init_certificate();
 template<bool SV> RSA TLS<SV>::rsa_{ze, zd, zK};
 template class TLS<true>;//server
 template class TLS<false>;//client
