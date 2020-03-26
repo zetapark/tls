@@ -18,7 +18,6 @@ public:
 	optional<string> recvNdecode() {
 		return t.decode(*recv());
 	}
-private:
 	TLS13<CLIENT> t;
 	int get_full_length(const string &s) {
 		return s.size() < 5 ? 0 : static_cast<unsigned char>(s[3]) * 0x100
@@ -34,10 +33,12 @@ int main(int ac, char **av) {
 	if(!co.args(ac, av)) return 0;
 //	TLS<false> t;
 	TLS_client t{co.get<const char*>("ip"), co.get<int>("port")};
+	const auto &[psk, id] = t.t.new_session_ticket(*t.recvNdecode());
+	LOGD << hexprint("psk", psk) << endl;
+	LOGD << hexprint("ticket id", id) << endl;
 //	cl.send(t.client_hello());
 //	cout << cl.recv();
 //	TLS_client t{"localhost", 4433};//co.get<const char*>("ip"), co.get<int>("port")};
-	t.encodeNsend("GET /");
-	cout << *t.recvNdecode() << endl;
+	for(string s; cin >> s;) t.encodeNsend(s + '\n');
 }
 
