@@ -15,7 +15,7 @@ template<bool SV> PSK TLS13<SV>::pskNclient_;
 
 static string init_certificate()
 {
-	ifstream f("fullchain.pem");//openssl req -x509 -days 1000 -new -key key.pem -out cert.pem
+	ifstream f("../fullchain.pem");//openssl req -x509 -days 1000 -new -key key.pem -out cert.pem
 	vector<unsigned char> r;
 	for(string s; (s = get_certificate_core(f)) != "";) {
 		auto v = base64_decode(s);
@@ -89,29 +89,29 @@ template<bool SV> string TLS13<SV>::client_ext() {
 	return struct2str(ext);
 }
 
-template<bool SV> string 
-TLS13<SV>::psk_ext(vector<uint8_t> resumption_psk, vector<uint8_t> psk_id)
-{//generate sesison ticket to resume handshake
-	int id_sz = psk_id.size();
-	int psk_sz = resumption_psk.size();
-	struct {
-		uint8_t psk[2] = {0, 41};
-		uint8_t len[2];
-		uint8_t all_id_len[2];
-		uint8_t id_len[2];
-		uint8_t id[id_sz];
-		uint8_t obfuscated_age[4];
-		uint8_t binder_len[2] = {0, 33};
-		uint8_t binder_sz = 32;
-		uint8_t binder[32];
-	} h;
-	mpz2bnd(id_sz, h.id_len, h.id_len + id_sz);
-	mpz2bnd(id_sz + 2, h.all_id_len, h.all_id_len + id_sz);
-	mpz2bnd(sizeof(h) - 4, h.len, h.len + 2);
-	std::copy(psk_id.cbegin(), psk_id.cend(), h.id);
-	return struct2str(h);
-}
-
+//template<bool SV> string 
+//TLS13<SV>::psk_ext(vector<uint8_t> resumption_psk, vector<uint8_t> psk_id)
+//{//generate sesison ticket to resume handshake
+//	int id_sz = psk_id.size();
+//	int psk_sz = resumption_psk.size();
+//	struct {
+//		uint8_t psk[2] = {0, 41};
+//		uint8_t len[2];
+//		uint8_t all_id_len[2];
+//		uint8_t id_len[2];
+//		uint8_t id[id_sz];
+//		uint8_t obfuscated_age[4];
+//		uint8_t binder_len[2] = {0, 33};
+//		uint8_t binder_sz = 32;
+//		uint8_t binder[32];
+//	} h;
+//	mpz2bnd(id_sz, h.id_len, h.id_len + id_sz);
+//	mpz2bnd(id_sz + 2, h.all_id_len, h.all_id_len + id_sz);
+//	mpz2bnd(sizeof(h) - 4, h.len, h.len + 2);
+//	std::copy(psk_id.cbegin(), psk_id.cend(), h.id);
+//	return struct2str(h);
+//}
+//
 template<bool SV> bool TLS13<SV>::supported_group(unsigned char *p, int len)
 {//return true when support secp256r1, len = ext leng, p point at the start of actual ext
 	for(int i=2; i<len; i+=2) if(*(p+i) == 0 && *(p+i+1) == 23) return true;

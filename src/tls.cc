@@ -15,8 +15,8 @@ static mpz_class ze, zd, zK;//used in TLS constructor
 
 template<bool SV> string TLS<SV>::init_certificate()
 {//this will run before main -> use for initialization
-	ifstream f2("privkey.pem");//generated with openssl genrsa 2048 > key.pem
-	ifstream f("fullchain.pem");//openssl req -x509 -days 1000 -new -key key.pem -out cert.pem
+	ifstream f2("../privkey.pem");//generated with openssl genrsa 2048 > key.pem
+	ifstream f("../fullchain.pem");//openssl req -x509 -days 1000 -new -key key.pem -out cert.pem
 	try {//key.pem
 		auto jv = pem2json(f2);
 		zK = str2mpz(jv[0][0].asString());
