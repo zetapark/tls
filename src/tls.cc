@@ -152,7 +152,7 @@ template<bool SV> string TLS<SV>::client_hello(string&& s)
 		Handshake_header h2;
 		Hello_header h3;
 		uint8_t cipher_suite_length[2] = {0, 4};
-		uint8_t cipher_suite[4] = {0xc0, 0x2f, 0x13, 1};//ECDHE RSA AES128 GCM SHA256
+		uint8_t cipher_suite[4] = {0x13, 1, 0xc0, 0x2f};//AES128 GCM SHA256 ECDHE RSA 
 		uint8_t compression_length = 1;
 		uint8_t compression_method = 0;//none
 	} r;

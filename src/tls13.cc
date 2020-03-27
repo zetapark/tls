@@ -58,14 +58,14 @@ template<bool SV> string TLS13<SV>::client_ext() {
 		uint8_t key_share_length[2] = {0, 107};//length
 		uint8_t client_key_share_len[2] = {0, 105};
 
+		uint8_t x25519[2] = {0, 29};
+		uint8_t key_length2[2] = {0, 32};
+		uint8_t x2[32];
+
 		uint8_t secp256r1_key[2] = {0, 23};
 		uint8_t key_length[2] = {0, 65};
 		uint8_t type = 4;
 		uint8_t x[32], y[32];
-
-		uint8_t x25519[2] = {0, 29};
-		uint8_t key_length2[2] = {0, 32};
-		uint8_t x2[32];
 
 		uint8_t supported_version[2] = {0, 0x2b};
 		uint8_t supported_version_length[2] = {0, 5};
