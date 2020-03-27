@@ -484,13 +484,11 @@ TLS13<SV>::handshake(function<optional<string>()> read_f, function<void(string)>
 			if(s = this->alert(2, 50); !(a = decode(move(*a)))) break;
 			set_aes(this->master_secret_, "c ap traffic", "s ap traffic");
 			if((s = finished(move(*a))) != "") break;
-			if(selected_psk_ < 0) {
-				hkdf_.salt(&this->master_secret_[0], this->master_secret_.size());
-				resumption_master_secret_ = hkdf_.derive_secret("res master",
-						this->accumulated_handshakes_);
-				write_f(encode(new_session_ticket(inport) + new_session_ticket(inport)
-						+ new_session_ticket(inport) + new_session_ticket(inport), HANDSHAKE));
-			}
+			hkdf_.salt(&this->master_secret_[0], this->master_secret_.size());
+			resumption_master_secret_ = hkdf_.derive_secret("res master",
+					this->accumulated_handshakes_);
+			write_f(encode(new_session_ticket(inport) + new_session_ticket(inport)
+					+ new_session_ticket(inport) + new_session_ticket(inport), HANDSHAKE));
 		} else {//1.2
 			s += this->server_certificate();
 			s += this->server_key_exchange();
