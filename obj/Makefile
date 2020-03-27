@@ -10,7 +10,16 @@ LDLIBS = -lgmpxx -lgmp -lnettle -ljsoncpp -lpthread -lhogweed -lzeta -lstdc++fs
 DB = -lzetadb -lmysqlcppconn
 #filesystem library should be next to zeta library
 
-all : ../libzeta.so ../libzetadb.so $(EXE) ../catch.tst.x ../dndd.dndd.x
+all : ../libzeta.so ../libzetadb.so $(EXE) ../catch.tst.x ../dndd.dndd.x ../tls_crypt.so
+
+../libzeta.so : $(wildcard *.tcpip.o) 
+	$(CXX) -shared -o $@ $^
+
+../libzetadb.so : $(wildcard *.database.o)
+	$(CXX) -shared -o $@ $^
+
+../tls_crypt.so : $(wildcard *.pybind.o) $(wildcard *.fpic.o) $(wildcard *.tcpip.o)
+	$(CXX) -shared -o $@ $^ $(LDFLAGS) $(LDLIBS)
 
 ../catch.tst.x : catch.tst.x $(TOBJ) $(OBJ)
 	$(CXX) $(LDFLAGS) -o $@ $^ $(LDLIBS)
@@ -20,12 +29,6 @@ all : ../libzeta.so ../libzetadb.so $(EXE) ../catch.tst.x ../dndd.dndd.x
 
 ../%.site_src.x : %.site_src.x $(UTIL)
 	$(CXX) $(LDFLAGS) -o $@ $^ $(DB) $(LDLIBS) 
-
-../libzeta.so : $(wildcard *.tcpip.o) 
-	$(CXX) -shared -o $@ $^
-
-../libzetadb.so : $(wildcard *.database.o)
-	$(CXX) -shared -o $@ $^
 
 ../dndd.dndd.x : $(wildcard *.dndd.o) $(UTIL) dndd.dndd.x
 	$(CXX) $(LDFLAGS) -o $@ $^ $(DB) $(LDLIBS)

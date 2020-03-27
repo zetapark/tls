@@ -19,9 +19,10 @@ int Middle::get_full_length(const string &s)
 	else if((uint8_t)s[0] < 0x14 || (uint8_t)s[0] > 0x18) return -2;//not tls message
 	return static_cast<unsigned char>(s[3]) * 0x100 + static_cast<unsigned char>(s[4]) + 5;
 }
-	
-void Middle::conn()
-{
+
+int Middle::start()
+{//middle server can be managed here
+	if(!ok_) return 1;
 	int cl_size = sizeof(client_addr);
 	vector<thread> v;
 	while(1) {
@@ -35,25 +36,21 @@ void Middle::conn()
 	}
 }
 
-int Middle::start()
-{//middle server can be managed here
-	if(!ok_) return 1;
-	thread th{&Middle::conn, this};
-	th.detach();
-	while(1) this_thread::sleep_for(10s);
-}
-
 void Middle::connected(int fd)
 {//will be used in parallel
 	TLS13<SERVER> t;//TLS is decoupled from file descriptor
-	if(t.handshake(bind(&Middle::recv, this, fd),
-			bind(&Middle::send, this, placeholders::_1, fd))) {
-		Client cl{"localhost", inport_};
+	if(auto cl = t.handshake(bind(&Middle::recv, this, fd),//shared pointer
+			bind(&Middle::send, this, placeholders::_1, fd), inport_)) {
+		//Client cl{"localhost", inport_};
 		while(1) {
-			if(auto a = recv(fd)) {
-				if(a = t.decode(move(*a))) cl.send(*a);//to inner server
-				else break;
-				if(auto b = cl.recv()) send(t.encode(move(*b)), fd);//to browser
+			if(auto a = recv(fd)) {//optional<string> a
+				if(a = t.decode(move(*a))) {
+					cl->lock();
+					cl->send(*a);//to inner server
+					a = cl->recv();
+					cl->unlock();
+				} else break;
+				if(a) send(t.encode(move(*a)), fd);//to browser
 				else break;
 			} else break;
 		}

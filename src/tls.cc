@@ -13,7 +13,7 @@ mpz_class get_prvkey(istream& is);
 //static member initialization
 static mpz_class ze, zd, zK;//used in TLS constructor
 
-static string init_certificate()
+template<bool SV> string TLS<SV>::init_certificate()
 {//this will run before main -> use for initialization
 	ifstream f2("../privkey.pem");//generated with openssl genrsa 2048 > key.pem
 	ifstream f("../fullchain.pem");//openssl req -x509 -days 1000 -new -key key.pem -out cert.pem
@@ -46,7 +46,7 @@ static string init_certificate()
 	return {r.begin(), r.end()};
 }
 
-template<bool SV> string TLS<SV>::certificate_ = init_certificate();
+template<> string TLS<true>::certificate_ = TLS<true>::init_certificate();
 template<bool SV> RSA TLS<SV>::rsa_{ze, zd, zK};
 template class TLS<true>;//server
 template class TLS<false>;//client
@@ -151,8 +151,8 @@ template<bool SV> string TLS<SV>::client_hello(string&& s)
 		TLS_header h1;
 		Handshake_header h2;
 		Hello_header h3;
-		uint8_t cipher_suite_length[2] = {0, 2};
-		uint8_t cipher_suite[2] = {0xc0, 0x2f};//ECDHE RSA AES128 GCM SHA256
+		uint8_t cipher_suite_length[2] = {0, 4};
+		uint8_t cipher_suite[4] = {0xc0, 0x2f, 0x13, 1};//ECDHE RSA AES128 GCM SHA256
 		uint8_t compression_length = 1;
 		uint8_t compression_method = 0;//none
 	} r;

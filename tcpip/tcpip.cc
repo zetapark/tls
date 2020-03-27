@@ -37,7 +37,6 @@ void Tcpip::send(const string& s, int fd)
 optional<string> Tcpip::recv(int fd)
 {
 	int i = read(!fd ? client_fd : fd, buffer, BUF_SIZE);//error
-	cout << "read " << i << " byte" << endl;
 	if(i > 0) return  string(buffer, i);
 	else return {};
 }
