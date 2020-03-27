@@ -45,6 +45,7 @@ void Middle::connected(int fd)
 		while(1) {
 			if(auto a = recv(fd)) {//optional<string> a
 				if(a = t.decode(move(*a))) {
+					LOGT << *a << endl;
 					cl->lock();
 					cl->send(*a);//to inner server
 					a = cl->recv();

@@ -36,6 +36,7 @@ void DnDD::tut() {
 		content_ = "<html><h2>";
 		for(auto [a, b] : nameNvalue_) content_ += a + ':' + b + "<br>";
 		content_ += "</h2></html>";
+		cout << content_ << endl;
 	}
 }
 
