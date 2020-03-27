@@ -46,13 +46,15 @@ void Middle::connected(int fd)
 			if(auto a = recv(fd)) {//optional<string> a
 				if(a = t.decode(move(*a))) {
 					LOGT << *a << endl;
-					cl->lock();
-					cl->send(*a);//to inner server
-					a = cl->recv();
-					cl->unlock();
+					if(cl->accumulate(*a)) {
+						cl->lock();
+						cl->send();//to inner server
+						a = cl->recv();
+						cl->unlock();
+						if(a) send(t.encode(move(*a)), fd);//to browser
+						else break;
+					}
 				} else break;
-				if(a) send(t.encode(move(*a)), fd);//to browser
-				else break;
 			} else break;
 		}
 	}

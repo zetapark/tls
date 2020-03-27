@@ -5,6 +5,21 @@ using namespace std;
 MClient::MClient(string ip, int port) : Client{ip, port}
 { }
 
+bool MClient::accumulate(string s)
+{
+	to_send += s;
+	return this->get_full_length(to_send) <= to_send.size() ? true : false;
+}
+
+void MClient::send()
+{
+	int full_sz = this->get_full_length(to_send);
+	Client::send(to_send.substr(0, full_sz));
+	to_send = to_send.substr(full_sz);
+}
+
+thread_local string MClient::to_send;
+
 PSK::PSK() : th_{&PSK::garbage_collect, this}
 { }
 

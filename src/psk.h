@@ -7,6 +7,9 @@
 struct MClient : Client, std::mutex
 {
 	MClient(std::string ip = "localhost", int port = 2001);
+	bool accumulate(std::string s);
+	static thread_local std::string to_send;
+	void send();
 };
 
 struct SClient 
