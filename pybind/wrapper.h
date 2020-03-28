@@ -11,6 +11,7 @@
 #include"database/mysqldata.h"
 
 std::string pemtojson(std::string filename);
+std::string dertojson(std::vector<uint8_t> v);
 
 struct PyAES : NettleAes128
 {

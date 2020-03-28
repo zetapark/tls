@@ -13,6 +13,7 @@ PYBIND11_MODULE(tls_crypt, m) {
 	m.def("base64_encode", &base64_encode);
 	m.def("base64_decode", &base64_decode);
 	m.def("pem2json", &pemtojson);
+	m.def("der2json", &dertojson);
 	class_<PyAES>(m, "AES")
 		.def(init<>())
 		.def("key", &PyAES::key)

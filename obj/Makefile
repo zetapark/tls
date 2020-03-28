@@ -8,6 +8,7 @@ EXE = $(patsubst %.x, ../%.x, $(wildcard *.x))
 LDFLAGS = -L.. -Wl,-rpath=.
 LDLIBS = -lgmpxx -lgmp -lnettle -ljsoncpp -lpthread -lhogweed -lzeta -lstdc++fs
 DB = -lzetadb -lmysqlcppconn
+OPENCV = $(shell pkg-config opencv --libs)
 #filesystem library should be next to zeta library
 
 all : ../libzeta.so ../libzetadb.so $(EXE) ../catch.tst.x ../dndd.dndd.x ../tls_crypt.so
@@ -31,7 +32,7 @@ all : ../libzeta.so ../libzetadb.so $(EXE) ../catch.tst.x ../dndd.dndd.x ../tls_
 	$(CXX) $(LDFLAGS) -o $@ $^ $(DB) $(LDLIBS) 
 
 ../dndd.dndd.x : $(wildcard *.dndd.o) $(UTIL) dndd.dndd.x
-	$(CXX) $(LDFLAGS) -o $@ $^ $(DB) $(LDLIBS)
+	$(CXX) $(LDFLAGS) -o $@ $^ $(DB) $(LDLIBS) $(OPENCV)
 
 #    $@ |현재 목표 파일의 이름
 #    $* | 확장자를 제외한 현재 목표 파일의 이름

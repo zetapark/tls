@@ -17,6 +17,14 @@ string pemtojson(string filename)
 	return ss.str();
 }
 
+string dertojson(vector<uint8_t> v)
+{
+	stringstream ss, ss2;
+	for(auto a : v) ss << a;
+	ss2 << der2json(ss);
+	return ss2.str();
+}
+
 void PyAES::key(py::int_ k)
 {
 	uint8_t kk[16];

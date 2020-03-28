@@ -1,6 +1,9 @@
 #include<cassert>
 #include<fstream>
 #include<regex>
+#include"cvmatrix.h"//cvmatrix.h should come earlier than ocr.hpp
+#include<opencv2/text/ocr.hpp>
+#include"src/cert_util.h"
 #include"dndd.h"
 #include"database/util.h"
 using namespace std;
@@ -29,6 +32,28 @@ void DnDD::process()
 	else if(requested_document_ == "googleapi") google();
 	else if(requested_document_ == "iframe-content.html") content_ = iframe_content_;
 	else if(requested_document_ == "result_view") tut();
+	else if(requested_document_ == "opencv.html") opencv();
+}
+
+void DnDD::opencv() {
+	vector<uint8_t> v{nameNvalue_["file"].begin(), nameNvalue_["file"].end()};
+	swap("@IMG1", base64_encode(v));
+	cv::Mat mat{v, true};
+	CVMat m{cv::imdecode(mat, 1)};
+	m.get_business_card();
+
+	auto a = cv::text::OCRTesseract::create(NULL, "eng+kor");
+	string s;
+	vector<cv::Rect> vr; vector<string> vs; vector<float> vf;
+	a->run(m, s, &vr, &vs, &vf);
+	swap("@DATA", s);
+//	for(int i=0; i<vr.size(); i++) {
+//		imshow(vs[i] + to_string(vf[i]), t(vr[i]));
+//		cout << vr[i] <<' '<< vf[i] <<' '<< vs[i] << endl;
+//	}
+
+	cv::imencode(".png", m, v);
+	swap("@IMG2", base64_encode(v));
 }
 
 void DnDD::tut() {

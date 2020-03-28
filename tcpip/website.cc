@@ -86,7 +86,7 @@ istream& WebSite::parse_one(istream& is, string boundary)
 	val.pop_back();// + \n
 	val.pop_back();//\r
 	nameNvalue_[name] = val;
-	if(filename != "") nameNvalue_["filename"] = filename;
+	if(filename != "") nameNvalue_[name + "filename"] = filename;
 	return is;
 }
 
