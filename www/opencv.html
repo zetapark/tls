@@ -13,9 +13,55 @@
   </title>
  </head>
  <body>
-	 <img src='data:image/png;base64,@IMG1' alt='pika.jpg' />
-	 <img src='data:image/png;base64,@IMG2' alt='pika.jpg' />
+	 <form action='result_view' method=post enctype='multipart/form-data'>
+	 <div class='w3-card-4'>
 	 @DATA
+	 <div class='w3-container w3-center'>
+	 <table class='w3-table w3-bordered'>
+		 <tr>
+			 <img src='data:image/jpg;base64,@IMG2' alt='pika.jpg' />
+		 </tr>
+		 <tr> 
+			 <td>이름 :</td> <td> <input type='text' name='name'></td>
+		 </tr>
+		 <tr>
+			 <td>주소1 :</td><td><input type='text' name='addr1' size=50></td>
+		 </tr>
+		 <tr>
+			 <td>주소2 :</td><td><input type='text' name='addr2' size=50></td>
+		 </tr>
+		 <tr>
+			 <td>직장 :</td><td><input type='text' name='job'></td>
+		 </tr>
+		 <tr>
+			 <td>직책 :</td><td><input type='text' name='role'></td>
+		 </tr>
+		 <tr>
+			 <td>모바일 :</td><td><input type='text' name='mobile'></td>
+		 </tr>
+		 <tr>
+			 <td>전화 :</td><td><input type='text' name='tel'></td>
+		 </tr>
+		 <tr>
+			 <td>팩스 :</td><td><input type='text' name='fax'></td>
+		 </tr>
+		 <tr>
+			 <td>이메일 :</td><td><input type='email' name='email'></td>
+		 </tr>
+		 <tr>
+			 <td>메모1 :</td><td><input type='text' name='memo1' size=50></td>
+		 </tr>
+		 <tr>
+			 <td>메모2 :</td><td><input type='text' name='memo2' size=50></td>
+		 </tr>
+		 <tr>
+			 <td>메모3 :</td><td><input type='text' name='memo3' size=50></td>
+		 </tr>
+	 </table>
+	 <input type='submit'>
+	 </div>
+	 </div>
+	 </form>
  </body>
 </html>
 

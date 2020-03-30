@@ -20,6 +20,6 @@ private:
 	std::string id, level="0", name, db, table, book, page, group, group_desc, logo;
 	Json::Value tmp;
 	std::array<int, 5> allow;
-	string iframe_content_;
+	string iframe_content_, namecard_;
 };
 

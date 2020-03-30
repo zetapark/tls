@@ -1,3 +1,4 @@
+#include<pybind11/functional.h>
 #include<pybind11/pybind11.h>
 #include<pybind11/stl.h>
 #include"tcpip/server.h"
@@ -55,6 +56,10 @@ PYBIND11_MODULE(tls_crypt, m) {
 		.def(init<>())
 		.def("mul", &PyX25519::mul)
 		.def("mul_g", &PyX25519::mul_g)
+		;
+	class_<Server>(m, "Server")
+		.def(init<int, int, int, string>(), "port"_a = 3003, "timaout"_a = 600, "queue_limit"_a = 10, "end_string"_a = "end")
+		.def("nokeep_start", &Server::nokeep_start)
 		;
 //	class_<PyDiffie>(m, "DiffieHellman")
 //		.def(init<int>(), "bit"_a = 1024)

@@ -1,3 +1,4 @@
+#include<cctype>
 #include<cassert>
 #include<fstream>
 #include<regex>
@@ -6,6 +7,7 @@
 #include"src/cert_util.h"
 #include"dndd.h"
 #include"database/util.h"
+#include"tcpip/server.h"
 using namespace std;
 
 DnDD::DnDD() : BootStrapSite{"www"}
@@ -35,9 +37,80 @@ void DnDD::process()
 	else if(requested_document_ == "opencv.html") opencv();
 }
 
+static string get_email(vector<string> &v)
+{
+	auto it = find_if(v.cbegin(), v.cend(), [](string s) { 
+			return regex_match(s, regex{R"(\S+@\S+\.\S?)"}); }); 
+	string r;
+	if(it != v.cend()) {
+		r = *it;
+		v.erase(it);
+	} 
+	return r;
+}
+
+static string get_tel(vector<string> &v)
+{//use this 3 times, usually mobile comes first, fax comes last
+	auto it = find_if(v.cbegin(), v.cend(), [](string s) {
+			return s.size() * 0.4 < count_if( s.begin(), s.end(), [](char c) {
+					return '0' <= c && c <= '9'; });//number count
+		});
+	string r;
+	if(it != v.cend()) {
+		r = *it;
+		v.erase(it);
+	} 
+	return r;
+}
+
+static string get_addr(vector<string> &v)
+{
+	auto it = std::max_element(v.cbegin(), v.cend(), [](string a, string b) {
+			return a.size() < b.size();});
+	string r = *it;
+	v.erase(it);
+	return r;
+}
+
+static string get_name(vector<string> &v)
+{
+	auto it = min_element(v.cbegin(), v.cend(), [](string a, string b) {
+			return a.size() < b.size(); });
+	string r = *it;
+	cout << "이름은" << r <<  "." << endl;
+	v.erase(it);
+	return r;
+}
+
+static float wordvec(string kor, string eng, string s)
+{
+	string to_send;
+	int korean = count_if(s.begin(), s.end(), [](char c) { return isprint(c) == 0;});
+	stringstream ss1; ss1 << s;
+	while(ss1 >> s) to_send += s + ' ' + (korean > 2 ? kor : eng) + ' ';
+	Client cl{"localhost", 3003};
+	if(!to_send.empty()) cl.send(to_send);
+	stringstream ss;
+	ss << *cl.recv();
+	vector<float> vf;
+	for(float f; ss >> f;) vf.push_back(f);
+	vf.erase(std::remove(vf.begin(), vf.end(), 0));
+	float sum = 0;
+	for(auto f : vf) sum += f;
+	return sum / vf.size();
+}
+
+static string get_with_wordvec(string kor, string eng, vector<string> &v)
+{
+	auto it = max_element(v.begin(), v.end(), [kor, eng](string a, string b) { return 
+			wordvec(kor, eng, a) < wordvec(kor, eng, b); });
+	string r = *it;
+	v.erase(it);
+	return r;
+}
+
 void DnDD::opencv() {
 	vector<uint8_t> v{nameNvalue_["file"].begin(), nameNvalue_["file"].end()};
-	swap("@IMG1", base64_encode(v));
 	cv::Mat mat{v, true};
 	CVMat m{cv::imdecode(mat, 1)};
 	m.get_business_card();
@@ -47,13 +120,33 @@ void DnDD::opencv() {
 	vector<cv::Rect> vr; vector<string> vs; vector<float> vf;
 	a->run(m, s, &vr, &vs, &vf);
 	swap("@DATA", s);
+	vs.clear();
+	stringstream ss; ss << s;
+	while(getline(ss, s)) if(s != "") vs.push_back(s);
+	auto it = remove_if(vs.begin(), vs.end(), [](string s) { return 
+			find_if(s.begin(), s.end(), [](char c) { return !isspace(c);}) == s.end(); });
+	vs.erase(it, vs.end());
+	
+	append("name='email'", " value='" + get_email(vs) + "' ");
+	append("name='mobile'", " value='" + get_tel(vs) + "' ");
+	append("name='tel'", " value='" + get_tel(vs) + "' ");
+	append("name='fax'", " value='" + get_tel(vs) + "' ");
+	append("name='job'", " value='" + get_with_wordvec("직장", "company", vs) + "' ");
+	append("name='role'", " value='" + get_with_wordvec("직책", "role", vs) + "' ");
+	append("name='addr1'", " value='" + get_addr(vs) + "' ");
+	append("name='addr2'", " value='" + get_with_wordvec("주소", "address", vs) + "' ");
+	append("name='name'", " value='" + get_name(vs) + "' ");
+	for(int i=1; i<=vs.size() && i <= 3; i++)
+		append("name='memo" + string{i} + "'", " value='" + vs[i-1] + "' ");
+
 //	for(int i=0; i<vr.size(); i++) {
 //		imshow(vs[i] + to_string(vf[i]), t(vr[i]));
 //		cout << vr[i] <<' '<< vf[i] <<' '<< vs[i] << endl;
 //	}
 
-	cv::imencode(".png", m, v);
-	swap("@IMG2", base64_encode(v));
+	cv::imencode(".jpg", m, v);
+	namecard_ = base64_encode(v);
+	swap("@IMG2", namecard_);
 }
 
 void DnDD::tut() {

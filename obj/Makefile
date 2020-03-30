@@ -19,6 +19,9 @@ all : ../libzeta.so ../libzetadb.so $(EXE) ../catch.tst.x ../dndd.dndd.x ../tls_
 ../libzetadb.so : $(wildcard *.database.o)
 	$(CXX) -shared -o $@ $^
 
+../%.tcpip.x : %.tcpip.x $(wildcard *.tcpip.o) $(wildcard *.util.o)
+	$(CXX) -o $@ $^ -lstdc++fs
+
 ../tls_crypt.so : $(wildcard *.pybind.o) $(wildcard *.fpic.o) $(wildcard *.tcpip.o)
 	$(CXX) -shared -o $@ $^ $(LDFLAGS) $(LDLIBS)
 
