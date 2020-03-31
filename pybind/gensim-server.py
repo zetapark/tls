@@ -22,15 +22,16 @@ vocab_kor = kor.wv.vocab.keys()
 
 
 def f(s):
+    print(s)
     li = s.split()
     r =  ''
     for i in zip(li[::2], li[1::2]): 
-        print(i[0] + ' ' + i[1])
         if i[0] in vocab_eng and i[1] in vocab_eng:
             r += str(eng.similarity(i[0], i[1])) + ' '
         elif i[0] in vocab_kor and i[1] in vocab_kor:
             r += str(kor.wv.similarity(i[0], i[1])) + ' '
         else: r += '0 '
+    print(r)
     return r
 
 

@@ -91,9 +91,10 @@ void CVMat::get_business_card()
 		if(y - x > xy[2].y - xy[2].x) xy[2] = {x, y};
 		if(x + y > xy[3].x + xy[3].y) xy[3] = {x, y};
 	}
-	Point2f dst[4] = {{0,0}, {419, 0}, {0,239}, {419, 239}};
+	const int w = 630, h = 360;
+	Point2f dst[4] = {{0,0}, {w-1, 0}, {0,h-1}, {w-1, h-1}};
 	tmp.copyTo(*this);
-	transform4(xy, dst, {420, 240});
+	transform4(xy, dst, {w, h});
 }
 vector<DMatch> CVMat::match(const CVMat& r, double thres) const
 {
