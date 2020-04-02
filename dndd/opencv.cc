@@ -31,7 +31,7 @@ static array<string, 3> get_tel(string &s)
 		string tel = find_continuous_digits(s, 10, 2);
 		if(tel == "") break;
 		int pos = s.find(tel);
-		for(int i=1; i<=5; i++) {
+		for(int i=1; i<=7; i++) {
 			bool dft = false;
 			switch(toupper(s[pos - i])) {
 				case 'M': r[0] = tel; break;
@@ -42,7 +42,7 @@ static array<string, 3> get_tel(string &s)
 			if(!dft) {//remove tel part
 				s.erase(pos - i, i + tel.size());
 				break;
-			} else if(i == 5) {
+			} else if(i == 7) {
 				tmp[k++] = tel;//if no MFT found
 				s.erase(pos, tel.size());
 			}
@@ -66,31 +66,28 @@ static string get_name(vector<string> &v)
 	auto it = min_element(v.cbegin(), v.cend(), [](string a, string b) {
 			return a.size() < b.size(); });
 	string r = *it;
-	cout << "이름은" << r <<  "." << endl;
 	v.erase(it);
 	return r;
 }
 
 static float wordvec(string kor, string eng, string s)
-{
-	string to_send;
+{//calculate word similarity according to language Korean or English => categorize s
+	for(char &c : s) if(ispunct(c)) c = ' ';
 	int english = count_if(s.begin(), s.end(), [](char c) { return isalpha(c) != 0;});
 	int korean = count_if(s.begin(), s.end(), [](char c) { return isprint(c) == 0;});
 	stringstream ss1; ss1 << s;
-	while(ss1 >> s) {
-	//	s.erase(remove_if(s.begin(), s.end(), [](char c) { return ispunct(c) != 0;}), s.end());
-		if(!s.empty()) to_send += s + ' ' + (english < korean ? kor : eng) + ' ';
-	}
-	Client cl{"localhost", 3003};
-	if(!to_send.empty()) cl.send(to_send);
-	stringstream ss;
-	ss << *cl.recv();
-	vector<float> vf;
-	for(float f; ss >> f;) vf.push_back(f);
-	vf.erase(std::remove(vf.begin(), vf.end(), 0), vf.end());
+	string to_send;
+	while(ss1 >> s) to_send += s + ' ' + (english < korean ? kor : eng) + ' ';
 	float sum = 0;
-	for(auto f : vf) sum += f;
-	return sum / vf.size();
+	if(!to_send.empty()) {
+		Client cl{"localhost", 3003};//connect to gensim server
+		cl.send(to_send);
+		cout << "sending : " << to_send << endl;
+		stringstream ss;
+		ss << *cl.recv();
+		for(float f; ss >> f;) sum += f;
+	}
+	return sum;
 }
 
 static string get_with_wordvec(string kor, string eng, vector<string> &v)
@@ -106,19 +103,18 @@ void DnDD::opencv() {
 	vector<uint8_t> v{nameNvalue_["file"].begin(), nameNvalue_["file"].end()};
 	cv::Mat mat{v, true};
 	CVMat m{cv::imdecode(mat, 1)};
-	m.get_business_card();
+	m.get_businesscard(m.get_points(4));
 
 	auto a = cv::text::OCRTesseract::create(NULL, "eng+kor");
-	string s;
+	string s, email;
 	vector<cv::Rect> vr; vector<string> vs; vector<float> vf;
-	a->run(m, s, &vr, &vs, &vf);
+	a->run(m, s, &vr, &vs, &vf); vs.clear();
 	swap("@DATA", s);
-	smatch sm;
-	regex_search(s, sm, regex{R"(\S+@\S+\.\S+)"});
-	string email = sm[0].str();
-	s = sm.prefix().str() + sm.suffix().str();
+	if(smatch sm; regex_search(s, sm, regex{R"(\S+@\S+\.\S+)"})) {
+		email = sm[0].str();
+		s = sm.prefix().str() + sm.suffix().str();
+	}
 	auto tel = get_tel(s);
-	vs.clear();
 	stringstream ss; ss << s;
 	while(getline(ss, s)) if(s != "") vs.push_back(s);
 	auto it = remove_if(vs.begin(), vs.end(), [](string s) { return 
@@ -129,11 +125,11 @@ void DnDD::opencv() {
 	append("name='mobile'", " value='" + tel[0] + "' ");
 	append("name='tel'", " value='" + tel[1] + "' ");
 	append("name='fax'", " value='" + tel[2] + "' ");
-	append("name='job'", " value='" + get_with_wordvec("직장", "company", vs) + "' ");
-	append("name='role'", " value='" + get_with_wordvec("직책", "role", vs) + "' ");
-	append("name='addr1'", " value='" + get_addr(vs) + "' ");
-	append("name='addr2'", " value='" + get_with_wordvec("주소", "address", vs) + "' ");
-	append("name='name'", " value='" + get_name(vs) + "' ");
+	if(!vs.empty()) append("name='role'", " value='" + get_with_wordvec("직책", "job", vs) + "' ");
+	if(!vs.empty()) append("name='job'", " value='" + get_with_wordvec("직장", "company", vs) + "' ");
+	if(!vs.empty()) append("name='addr1'", " value='" + get_addr(vs) + "' ");
+	if(!vs.empty()) append("name='addr2'", " value='" + get_with_wordvec("주소", "address", vs) + "' ");
+	if(!vs.empty()) append("name='name'", " value='" + get_name(vs) + "' ");
 	for(int i=1; i<=vs.size() && i<=3; i++)
 		append("name='memo" + to_string(i) + "'", " value='" + vs[i-1] + "' ");
 

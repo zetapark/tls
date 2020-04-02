@@ -72,30 +72,54 @@ void CVMat::transform4(Point2f src[4], Point2f dst[4], Size sz)
 	warpPerspective(*this, *this, getPerspectiveTransform(src, dst), (sz == Size{0,0}) ? size() : sz);
 }
 
-void CVMat::get_business_card()
+vector<Point2f> CVMat::get_points(int k)
 {
 	Mat tmp;
 	copyTo(tmp);
 	gray();
+//	equalizeHist(*this, *this);
 	filter(GAUSSIAN);
 	edge();
 	
 	detect_contours(RETR_EXTERNAL);
-	auto it = max_element(contours_.begin(), contours_.end(),
-			[](const vector<Point> &a, const vector<Point> &b) {
-				return a.size() < b.size(); });
+//	auto it = max_element(contours_.begin(), contours_.end(),
+//			[](const vector<Point> &a, const vector<Point> &b) {
+//				return a.size() < b.size(); });
+//	Point2f xy[4] = {{9000,9000}, {0, 1000}, {1000, 0}, {0,0}};
+//	for(auto &[x, y] : *it) {
+//		if(x + y < xy[0].x + xy[0].y) xy[0] = {x, y};
+//		if(x - y > xy[1].x - xy[1].y) xy[1] = {x, y};
+//		if(y - x > xy[2].y - xy[2].x) xy[2] = {x, y};
+//		if(x + y > xy[3].x + xy[3].y) xy[3] = {x, y};
+//	}
+	
+	vector<vector<Point2f>> vapprox;
+	for(auto a : contours_) {
+		vector<Point2f> approx;
+		approxPolyDP(Mat(a), approx, arcLength(Mat(a), true)*0.01, true);
+		if(approx.size() == k && isContourConvex(approx) && 
+				fabs(contourArea(Mat(approx))) > 100) vapprox.push_back(approx);
+	}
+	tmp.copyTo(*this);
+	return *max_element(vapprox.begin(), vapprox.end(), [](vector<Point2f> a,
+				vector<Point2f> b) {
+			return fabs(contourArea(Mat(a))) < fabs(contourArea(Mat(b))); });
+}
+
+void CVMat::get_businesscard(vector<Point2f> v)
+{
 	Point2f xy[4] = {{9000,9000}, {0, 1000}, {1000, 0}, {0,0}};
-	for(auto &[x, y] : *it) {
+	for(auto &[x, y] : v) {
 		if(x + y < xy[0].x + xy[0].y) xy[0] = {x, y};
 		if(x - y > xy[1].x - xy[1].y) xy[1] = {x, y};
 		if(y - x > xy[2].y - xy[2].x) xy[2] = {x, y};
 		if(x + y > xy[3].x + xy[3].y) xy[3] = {x, y};
 	}
-	const int w = 630, h = 360;
-	Point2f dst[4] = {{0,0}, {w-1, 0}, {0,h-1}, {w-1, h-1}};
-	tmp.copyTo(*this);
-	transform4(xy, dst, {w, h});
+	const int width = 630, height = 360;
+	Point2f dst[4] = {{0,0}, {width-1, 0}, {0,height-1}, {width-1, height-1}};
+	transform4(xy, dst, {width, height});//{420, 240});
 }
+
 vector<DMatch> CVMat::match(const CVMat& r, double thres) const
 {
 	cout << "desc: " << descriptor_.size() << ", " << r.descriptor_.size() << endl;

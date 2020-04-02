@@ -3,7 +3,7 @@
 #include<opencv.hpp>
 #include<core.hpp>
 #include<highgui.hpp>
-#include<video/background_segm.hpp>
+#include<opencv2/video/background_segm.hpp>
 #include<opencv2/features2d/features2d.hpp>
 
 class CVMat : public cv::Mat
@@ -25,13 +25,13 @@ public:
 			int thickness = 2, int fontFace = cv::FONT_HERSHEY_SIMPLEX, 
 			int lineType = 8, bool bottomleftorigin = false);
 
-	template<class T> int polyline(const T& x, const T& y, 
-			cv::Scalar color = {0,0,0,255}, int thickness = 2, int shift = 0) {
+	template<class T> int polyline(const T& x, const T& y, cv::Scalar color = {0,0,0,255},
+			int thickness = 2, int shift = 0, bool is_closed = true) {
 		const int sz = x.size();
 		cv::Point pt[sz];
 		const cv::Point* p = pt;
 		for(int i=0; i<sz; i++) pt[i] = {x[i], y[i]};
-		polylines(*this, &p, &sz, 1, false, color, thickness, 8, shift);
+		polylines(*this, &p, &sz, 1, is_closed, color, thickness, 8, shift);
 		return sz;
 	}
 
@@ -63,7 +63,8 @@ public:
 	void rotate(double angle, cv::Point center={-1,-1}, double scale=1);
 	void transform3(cv::Point2f src[3], cv::Point2f dst[3], cv::Size sz = {0,0});
 	void transform4(cv::Point2f src[4], cv::Point2f dst[4], cv::Size sz = {0,0});
-	void get_business_card();// ^ affine and perspective transform
+	std::vector<cv::Point2f> get_points(int k);// ^ affine and perspective transform
+	void get_businesscard(std::vector<cv::Point2f> v);
 	
 protected:
 	cv::Mat save_, harris_, descriptor_;
