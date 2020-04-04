@@ -125,21 +125,80 @@ void DnDD::opencv() {
 	append("name='mobile'", " value='" + tel[0] + "' ");
 	append("name='tel'", " value='" + tel[1] + "' ");
 	append("name='fax'", " value='" + tel[2] + "' ");
-	if(!vs.empty()) append("name='role'", " value='" + get_with_wordvec("직책", "job", vs) + "' ");
-	if(!vs.empty()) append("name='job'", " value='" + get_with_wordvec("직장", "company", vs) + "' ");
+	if(!vs.empty())
+		append("name='role'", " value='" + get_with_wordvec("직책", "job", vs) + "' ");
+	if(!vs.empty())
+		append("name='job'", " value='" + get_with_wordvec("직장", "company", vs) + "' ");
 	if(!vs.empty()) append("name='addr1'", " value='" + get_addr(vs) + "' ");
-	if(!vs.empty()) append("name='addr2'", " value='" + get_with_wordvec("주소", "address", vs) + "' ");
+	if(!vs.empty())
+		append("name='addr2'", " value='" + get_with_wordvec("주소", "address", vs) + "' ");
 	if(!vs.empty()) append("name='name'", " value='" + get_name(vs) + "' ");
 	for(int i=1; i<=vs.size() && i<=3; i++)
 		append("name='memo" + to_string(i) + "'", " value='" + vs[i-1] + "' ");
-
-//	for(int i=0; i<vr.size(); i++) {
-//		imshow(vs[i] + to_string(vf[i]), t(vr[i]));
-//		cout << vr[i] <<' '<< vf[i] <<' '<< vs[i] << endl;
-//	}
 
 	cv::imencode(".jpg", m, v);
 	namecard_ = base64_encode(v);
 	swap("@IMG2", namecard_);
 }
 
+void DnDD::insert_bcard()
+{
+	if(id2_ == "") return;
+	int num = 1;
+	if(sq2.query("select max(num) from image where user = '" + id2_ + "';")) 
+		num += sq2[0][""].asInt();
+	cout << sq2 << endl;
+	sq2.select("bcard", "limit 1");
+	sq2.insert(id2_, nameNvalue_["name"], nameNvalue_["addr1"], nameNvalue_["addr2"],
+			nameNvalue_["job"], nameNvalue_["role"], nameNvalue_["mobile"], 
+			nameNvalue_["tel"], nameNvalue_["fax"], nameNvalue_["email"], 
+			nameNvalue_["memo1"], nameNvalue_["memo2"], nameNvalue_["memo3"], num, 0);
+	sq2.select("image", "limit 1");
+	sq2.insert(id2_, num, namecard_);
+}
+
+void DnDD::busi()
+{
+	if(nameNvalue_["email"] != "") {//if login or signin
+		if(nameNvalue_["submit"] == "login") {
+			if(sq2.select("user", "where email = '" + nameNvalue_["email"]
+						+"' and password = '" + sq.encrypt(nameNvalue_["pwd"]) + "'"))
+				id2_ = sq2[0]["email"].asString();
+		} else if(nameNvalue_["submit"] == "signin") {
+			if(!sq2.select("user", "where email ='" + nameNvalue_["email"] + "'")) {
+				sq2.insert(nameNvalue_["email"], sq2.encrypt(nameNvalue_["pwd"]));
+				id2_ = nameNvalue_["email"];
+			}
+		}
+	}
+
+	if(id2_ != "") {//if already logged
+		regex e{R"(<form[\s\S]+?</form>)"};
+		content_ = regex_replace(content_, e, id2_ + "님 로그인되었습니다.",
+				regex_constants::format_first_only);
+		sq2.select("bcard", "where user = '" + id2_ + "'");
+		string s;
+		for(auto a : sq2)
+			s += "<a href='view.html?name=" + a["name"].asString() + "'>" + a["name"].asString() + "</a><br>";
+		prepend("</body>", s);
+	}
+}
+
+void DnDD::view()
+{
+	sq2.select("bcard", "where user = '" + id2_ + "' and name ='" + nameNvalue_["name"] + "'");
+	append("이름 :</td><td>", sq2[0]["name"].asString());
+	append("주소1 :</td><td>", sq2[0]["address1"].asString());
+	append("주소2 :</td><td>", sq2[0]["address2"].asString());
+	append("직장 :</td><td>", sq2[0]["company"].asString());
+	append("직책 :</td><td>", sq2[0]["role"].asString());
+	append("모바일 :</td><td>", sq2[0]["mobile"].asString());
+	append("전화 :</td><td>", sq2[0]["tel"].asString());
+	append("팩스 :</td><td>", sq2[0]["fax"].asString());
+	append("이메일 :</td><td>", sq2[0]["email"].asString());
+	append("메모1 :</td><td>", sq2[0]["memo1"].asString());
+	append("메모2 :</td><td>", sq2[0]["memo2"].asString());
+	append("메모3 :</td><td>", sq2[0]["memo3"].asString());
+	sq2.select("image", "where user='" + id2_ + "' and num=" + sq2[0]["front"].asString());
+	swap("@IMG", sq2[0]["image"].asString());
+}

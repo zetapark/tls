@@ -34,6 +34,13 @@ bool WebSite::append(string a, string b)
 	return true;	
 }
 
+bool WebSite::prepend(string a, string b)
+{
+	if(content_.find(a) == string::npos) return false;
+	content_.insert(content_.find(a), b);
+	return true;
+}
+
 std::string WebSite::operator()(string s) 
 {//will set requested_document and nameNvalue (= parameter of post or get)
 	nameNvalue_.clear();

@@ -101,8 +101,8 @@ vector<Point2f> CVMat::get_points(int k)
 				fabs(contourArea(Mat(approx))) > 100) vapprox.push_back(approx);
 	}
 	tmp.copyTo(*this);
-	return *max_element(vapprox.begin(), vapprox.end(), [](vector<Point2f> a,
-				vector<Point2f> b) {
+	return vapprox.empty() ? vector<Point2f>{{0,0},{10,0},{0,10},{10,10}} :
+		*max_element(vapprox.begin(), vapprox.end(), [](vector<Point2f> a, vector<Point2f> b) {
 			return fabs(contourArea(Mat(a))) < fabs(contourArea(Mat(b))); });
 }
 

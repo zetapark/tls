@@ -13,14 +13,16 @@
   </title>
  </head>
  <body>
+		 <form action="busi.html" method="post">	 
+				 <label for="email">Email address:</label>
+				 <input type="email" id="email" name="email">
+				 <label for="pwd">Password:</label>
+				 <input type="password" name="pwd">
+			 <input type="submit" name='submit' value='login'>
+			 <input type="submit" name='submit' value='signin'>
+		 </form> 
 	 <form action="opencv.html" method="post" enctype="multipart/form-data">
-		 Post with Form<br>
-		 Front image upload<input type="file" name="file" id="file" ><br>
-		 Back image upload<input type="file" name="file2"><br>
-		 product name<input type='text' name='name' id="goods"><br>
-		 description<br>
-		 <textarea name="desc" rows="10" cols="70" class="form-control" id="desc">
-		 </textarea>
+		 Front image upload<input type="file" name="file" id="file" >
 		 <input type="submit" name="up" value="ok" class="btn btn-primary">
 	 </form>
  </body>

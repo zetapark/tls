@@ -10,6 +10,23 @@ using namespace std;
 SqlQuery::SqlQuery(const SqlQuery& r) : Mysqlquery{r}
 { }
 
+bool SqlQuery::query(string q)
+{
+	myQuery(q);
+	sql::ResultSetMetaData* mt = res->getMetaData();
+	columns.clear(); clear();
+	int c = mt->getColumnCount();
+	for(int i = 0; i < c; i++) //populate columns
+		columns.push_back({mt->getColumnName(i+1), mt->getColumnDisplaySize(i+1), mt->getColumnTypeName(i+1)});
+	for(int j=0; res->next(); j++) for(int i = 0; i < c; i++) { //populate contents
+		if(is_int(i)) (*this)[j][columns[i].name] = res->getInt(i+1);
+		else if(is_real(i)) 
+			(*this)[j][columns[i].name] = static_cast<double>(res->getDouble(i+1));
+		else (*this)[j][columns[i].name] = static_cast<string>(res->getString(i+1));
+	}
+	return size();
+}
+
 bool SqlQuery::insert()
 {
 	std::string q = "insert into " + table_name + " values (" + values_.str();

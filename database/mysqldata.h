@@ -2,6 +2,7 @@
 #include<vector>
 #include<sstream>
 #include<json/json.h>
+#include<cstring>
 #include<type_traits>
 #include"mysqlquery.h"
 
@@ -10,6 +11,7 @@ class SqlQuery : public Mysqlquery, public Json::Value
 public:
 	SqlQuery() = default;
 	SqlQuery(const SqlQuery& r);
+	bool query(std::string q);
 	int select(std::string table, std::string where = "");
 	bool insert_nth_row(int n);
 	bool insert(std::vector<std::string> v);
@@ -20,12 +22,14 @@ public:
 	}
 	template<class... T> bool insert(std::string s, T... b)
 	{
-		values_ << "'" << s << "',";
+		if(s == "NULL") values_ << s << ',';
+		else values_ << "'" << s << "',";
 		return insert(b...);
 	}
 	template<class... T> bool insert(const char* p, T... b)
 	{
-		values_ << "'" << p << "',";
+		if(strcmp(p, "NULL")) values_ << "'" << p << "',";
+		else values_ << p << ',';
 		return insert(b...);
 	}
 	bool insert();

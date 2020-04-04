@@ -9,6 +9,7 @@ using namespace std;
 DnDD::DnDD() : BootStrapSite{"www"}
 {//SqlQuery destructor -> mysqlquery destructor nullify
 	sq.connect("localhost", "dndd", "dndddndd", "dndd");//sq prohibit destruct
+	sq2.connect("localhost", "bcard", "bcard", "businesscard");
 }
 
 void DnDD::process()
@@ -31,6 +32,9 @@ void DnDD::process()
 	else if(requested_document_ == "iframe-content.html") content_ = iframe_content_;
 	else if(requested_document_ == "result_view") tut();
 	else if(requested_document_ == "opencv.html") opencv();
+	else if(requested_document_ == "insert.html") insert_bcard();
+	else if(requested_document_ == "busi.html") busi();
+	else if(requested_document_ == "view.html") view();
 }
 
 void DnDD::tut() {
