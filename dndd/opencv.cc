@@ -119,7 +119,7 @@ void DnDD::crop() {
 static void get_b(string s)
 {
 	stringstream ss; ss << s;
-	char c; int x, y;
+	char c; float x, y;
 	vector<cv::Point> vp;
 	for(int i=0; i<8; i+=2) {
 		ss >> c >> x >> c >> y;
