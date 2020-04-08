@@ -2,25 +2,27 @@
  <head>
   <meta charset="utf-8" />
   <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport" />
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="jquery.min.js"></script>
 		<link rel='stylesheet' href='w3.css'>
-		<link rel='stylesheet' href='index.css'>
-  </script>
-  <style type="text/css" src="busi.css"></style>
-  <script src="busi.js"></script>
-  <title>
-   명함 정리
-  </title>
+<style>
+a {
+	visibility : hidden;
+}
+</style>
+<title>
+	명함 정리
+</title>
  </head>
  <body>
-		 <form action="busi.html" method="post">	 
-				 <label for="email">Email address:</label>
-				 <input type="email" id="email" name="email">
-				 <label for="pwd">Password:</label>
-				 <input type="password" name="pwd">
-			 <input type="submit" name='submit' value='login'>
-			 <input type="submit" name='submit' value='signin'>
-		 </form> 
+	 <form action="busi.html" method="post">	 
+		 <label for="email">Email address:</label>
+		 <input type="email" id="email" name="email">
+		 <label for="pwd">Password:</label>
+		 <input type="password" name="pwd">
+		 <input type="submit" name='submit' value='login'>
+		 <input type="submit" name='submit' value='signin'>
+	 </form> 
+	 <a href='busi.html?val=logout'>로그아웃</a>
 	 <form action="crop.html" method="post" enctype="multipart/form-data">
 		 Front image upload<input type="file" name="file" id="file" >
 		 <input type="submit" name="up" value="ok" class="btn btn-primary">

@@ -68,14 +68,14 @@ function on_mouse_move(canvas, event) {
 }
 
 $(function() {
-	var c = document.getElementById('canv');
+	var c = $('canvas')[0];
 	var ctx = c.getContext('2d');
 	c.addEventListener('mousedown', function(e) { on_mouse_down(c, e) }, false);
 	c.addEventListener('mouseup', function(e) { on_mouse_up(c, e) }, false);
 	c.addEventListener('mousemove', function(e) { on_mouse_move(c, e) }, false);
 	draw_rect(c);
 
-	$('form').submit(function(e) {
+	$('form').submit(function() {
 		$('#pos').val(JSON.stringify(rect_pos));
 	});
 })
@@ -87,13 +87,14 @@ $(function() {
   </title>
  </head>
  <body>
-	 <img src='chicago.jpg'>
+	 <p>네 모서리를 드래그 하여 명함의 테두리에 맞추세요.</p>
 	 <div>
 		 <img src='data:image/jpg;base64,@IMG' id='img' alt='none'>
 		 <canvas id='canv' width=@WIDTH height=@HEIGHT></canvas>
 	 </div>
 	 <form action='opencv.html' method='post'>
-		 <input type='submit' id='pos' name='pos' value='제출'>
+		 <input type='submit' name='submit' value='제출'>
+		 <input type='hidden' id='pos' name='pos'>
 	 </form>
  </body>
 </html>

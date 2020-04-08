@@ -188,7 +188,7 @@ void DnDD::busi()
 	if(nameNvalue_["email"] != "") {//if login or signin
 		if(nameNvalue_["submit"] == "login") {
 			if(sq2.select("user", "where email = '" + nameNvalue_["email"]
-						+"' and password = '" + sq.encrypt(nameNvalue_["pwd"]) + "'"))
+						+"' and password = '" + sq2.encrypt(nameNvalue_["pwd"]) + "'"))
 				id2_ = sq2[0]["email"].asString();
 		} else if(nameNvalue_["submit"] == "signin") {
 			if(!sq2.select("user", "where email ='" + nameNvalue_["email"] + "'")) {
@@ -198,6 +198,7 @@ void DnDD::busi()
 		}
 	}
 
+	if(nameNvalue_["val"] == "logout") id2_ = "";
 	if(id2_ != "") {//if already logged
 		regex e{R"(<form[\s\S]+?</form>)"};
 		content_ = regex_replace(content_, e, id2_ + "님 로그인되었습니다.",
@@ -207,6 +208,7 @@ void DnDD::busi()
 		for(auto a : sq2)
 			s += "<a href='view.html?name=" + a["name"].asString() + "'>" + a["name"].asString() + "</a><br>";
 		prepend("</body>", s);
+		swap("hidden", "visible");
 	}
 }
 
