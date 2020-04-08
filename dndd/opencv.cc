@@ -1,9 +1,9 @@
 #include<regex>
-#include"cvmatrix.h"//cvmatrix.h should come earlier than ocr.hpp
-#include<opencv2/text/ocr.hpp>
 #include"tcpip/server.h"
 #include"dndd.h"
 #include"src/cert_util.h"
+#include"cvmatrix.h"//cvmatrix.h should come earlier than ocr.hpp
+#include<text/ocr.hpp>
 using namespace std;
 
 static string find_continuous_digits(string s, int cont, int yield=2) 
@@ -99,16 +99,41 @@ static string get_with_wordvec(string kor, string eng, vector<string> &v)
 	return r;
 }
 
-void DnDD::opencv() {
+static CVMat M;
+
+void DnDD::crop() {
 	vector<uint8_t> v{nameNvalue_["file"].begin(), nameNvalue_["file"].end()};
 	cv::Mat mat{v, true};
-	CVMat m{cv::imdecode(mat, 1)};
-	m.get_businesscard(m.get_points(4));
+	M = CVMat{cv::imdecode(mat, 1)};
+	auto vp = M.get_points(4);
+	swap("@IMG", base64_encode(v));
 
+	string s;
+	for(auto a : vp) s += to_string(a.x) + ',' + to_string(a.y) + ',';
+	s.pop_back();
+	swap("@POS", s);
+	while(swap("@WIDTH", to_string(M.cols)));
+	while(swap("@HEIGHT", to_string(M.rows)));
+}
+
+static void get_b(string s)
+{
+	stringstream ss; ss << s;
+	char c; int x, y;
+	vector<cv::Point> vp;
+	for(int i=0; i<8; i+=2) {
+		ss >> c >> x >> c >> y;
+		vp.push_back({x, y});
+	}
+	M.get_businesscard(vp);
+}
+
+void DnDD::opencv() {
+	get_b(nameNvalue_["pos"]);
 	auto a = cv::text::OCRTesseract::create(NULL, "eng+kor");
 	string s, email;
 	vector<cv::Rect> vr; vector<string> vs; vector<float> vf;
-	a->run(m, s, &vr, &vs, &vf); vs.clear();
+	a->run(M, s, &vr, &vs, &vf); vs.clear();
 	swap("@DATA", s);
 	if(smatch sm; regex_search(s, sm, regex{R"(\S+@\S+\.\S+)"})) {
 		email = sm[0].str();
@@ -136,7 +161,8 @@ void DnDD::opencv() {
 	for(int i=1; i<=vs.size() && i<=3; i++)
 		append("name='memo" + to_string(i) + "'", " value='" + vs[i-1] + "' ");
 
-	cv::imencode(".jpg", m, v);
+	vector<uint8_t> v;
+	cv::imencode(".jpg", M, v);
 	namecard_ = base64_encode(v);
 	swap("@IMG2", namecard_);
 }

@@ -3,8 +3,8 @@
 #include<opencv.hpp>
 #include<core.hpp>
 #include<highgui.hpp>
-#include <opencv2/video/background_segm.hpp>
-//#include "opencv2/features2d/features2d.hpp"
+#include<video/background_segm.hpp>
+#include<features2d/features2d.hpp>
 
 class CVMat : public cv::Mat
 {

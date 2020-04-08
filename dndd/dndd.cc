@@ -35,6 +35,7 @@ void DnDD::process()
 	else if(requested_document_ == "insert.html") insert_bcard();
 	else if(requested_document_ == "busi.html") busi();
 	else if(requested_document_ == "view.html") view();
+	else if(requested_document_ == "crop.html") crop();
 }
 
 void DnDD::tut() {

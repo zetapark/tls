@@ -1,4 +1,4 @@
-var rect_pos = [50, 50, 50, 100, 100,100, 100, 50];
+var rect_pos = [@POS];
 var point_idx = 8;
 
 function on_mouse_down(canvas, event) {
