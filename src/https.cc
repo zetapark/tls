@@ -47,7 +47,7 @@ void Middle::connected(int fd)
 				if(a = t.decode(move(*a))) {
 					LOGT << *a << endl;
 					if(cl->accumulate(*a)) {
-						cl->lock();
+						cl->try_lock_for(1s);
 						cl->send();//to inner server
 						a = cl->recv();
 						cl->unlock();

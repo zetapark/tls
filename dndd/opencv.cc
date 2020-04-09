@@ -4,6 +4,7 @@
 #include"src/cert_util.h"
 #include"cvmatrix.h"//cvmatrix.h should come earlier than ocr.hpp
 #include<text/ocr.hpp>
+#include"src/sha256.h"
 using namespace std;
 
 static string find_continuous_digits(string s, int cont, int yield=2) 
@@ -185,30 +186,34 @@ void DnDD::insert_bcard()
 
 void DnDD::busi()
 {
-	if(nameNvalue_["email"] != "") {//if login or signin
-		if(nameNvalue_["submit"] == "login") {
-			if(sq2.select("user", "where email = '" + nameNvalue_["email"]
-						+"' and password = '" + sq2.encrypt(nameNvalue_["pwd"]) + "'"))
-				id2_ = sq2[0]["email"].asString();
-		} else if(nameNvalue_["submit"] == "signin") {
-			if(!sq2.select("user", "where email ='" + nameNvalue_["email"] + "'")) {
-				sq2.insert(nameNvalue_["email"], sq2.encrypt(nameNvalue_["pwd"]));
-				id2_ = nameNvalue_["email"];
-			}
-		}
+	string enc;
+	if(string s = nameNvalue_["pwd"]; s != "") {
+		SHA2 sha;
+		auto a = sha.hash(s.begin(), s.end());
+		enc = base64_encode({a.begin(), a.end()});
 	}
+	if(nameNvalue_["submit"] == "login") {
+		if(sq2.select("user", "where email = '" + nameNvalue_["email"]
+					+"' and password = '" + enc + "'"))
+			id2_ = nameNvalue_["email"];
+	} else if(nameNvalue_["submit"] == "signin") {
+		if(!sq2.select("user", "where email ='" + nameNvalue_["email"] + "'")) {
+			sq2.insert(nameNvalue_["email"], enc);
+			id2_ = nameNvalue_["email"];
+		}
+	} else if(nameNvalue_["val"] == "logout") id2_ = "";
 
-	if(nameNvalue_["val"] == "logout") id2_ = "";
 	if(id2_ != "") {//if already logged
+		swap("hidden", "visible");//show logout button
 		regex e{R"(<form[\s\S]+?</form>)"};
 		content_ = regex_replace(content_, e, id2_ + "님 로그인되었습니다.",
 				regex_constants::format_first_only);
 		sq2.select("bcard", "where user = '" + id2_ + "'");
 		string s;
 		for(auto a : sq2)
-			s += "<a href='view.html?name=" + a["name"].asString() + "'>" + a["name"].asString() + "</a><br>";
+			s += "<a href='view.html?name=" + a["name"].asString() + "'>" + 
+				a["name"].asString() + "</a><br>";
 		prepend("</body>", s);
-		swap("hidden", "visible");
 	}
 }
 

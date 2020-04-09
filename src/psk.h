@@ -1,10 +1,11 @@
 #pragma once
 #include<thread>
 #include<chrono>
+#include<mutex>
 #include"tcpip/server.h"
 #include"tvec.h"
 
-struct MClient : Client, std::mutex
+struct MClient : Client, std::timed_mutex
 {
 	MClient(std::string ip = "localhost", int port = 2001);
 	bool accumulate(std::string s);
