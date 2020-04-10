@@ -5,17 +5,27 @@
 	<script src="jquery.min.js"></script>
 	<link rel='stylesheet' href='w3.css'>
 <style>
+body,
+html {
+	position : fixed;
+	width : 100%;
+	height : 100%;
+	padding : 0;
+	margin : 0;
+}
 div {
-	width : @WIDTH; 
-	height : @HEIGHT;
+	border : 0;
+	padding : 0;
+	width : 100%; 
+	height : 80%;
 	position : relative; 
 }
 
-#img {
+img {
 	position : absolute;
 	top : 0;
 	left : 0;
-	width : 100%;
+	width : auto;
 	height : 100%;
 	z-index : 1;
 }
@@ -68,14 +78,21 @@ function on_mouse_move(canvas, event) {
 }
 
 $(function() {
+	var width = $('img').width();
+	var height = $('img').height();
+	var ratio = width / @WIDTH;
+	for(var i=0; i<rect_pos.length; i++) rect_pos[i] *= ratio;
 	var c = $('canvas')[0];
 	var ctx = c.getContext('2d');
 	c.addEventListener('mousedown', function(e) { on_mouse_down(c, e) }, false);
 	c.addEventListener('mouseup', function(e) { on_mouse_up(c, e) }, false);
 	c.addEventListener('mousemove', function(e) { on_mouse_move(c, e) }, false);
+	ctx.canvas.width = width;
+	ctx.canvas.height = height;
 	draw_rect(c);
 
 	$('form').submit(function() {
+		for(var i=0; i<rect_pos.length; i++) rect_pos[i] /= ratio;
 		$('#pos').val(JSON.stringify(rect_pos));
 	});
 })
@@ -90,7 +107,7 @@ $(function() {
 	 <p>네 모서리를 드래그 하여 명함의 테두리에 맞추세요.</p>
 	 <div>
 		 <img src='data:image/jpg;base64,@IMG' id='img' alt='none'>
-		 <canvas id='canv' width=@WIDTH height=@HEIGHT></canvas>
+		 <canvas id='canv' ></canvas>
 	 </div>
 	 <form action='opencv.html' method='post'>
 		 <input type='submit' name='submit' value='제출'>

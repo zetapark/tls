@@ -113,8 +113,8 @@ void DnDD::crop() {
 	for(auto a : vp) s += to_string(a.x) + ',' + to_string(a.y) + ',';
 	s.pop_back();
 	swap("@POS", s);
-	while(swap("@WIDTH", to_string(M.cols)));
-	while(swap("@HEIGHT", to_string(M.rows)));
+	swap("@WIDTH", to_string(M.cols));
+//	while(swap("@HEIGHT", to_string(M.rows)));
 }
 
 static void get_b(string s)
