@@ -9,7 +9,6 @@ using namespace std;
 DnDD::DnDD() : BootStrapSite{"www"}
 {//SqlQuery destructor -> mysqlquery destructor nullify
 	sq.connect("localhost", "dndd", "dndddndd", "dndd");//sq prohibit destruct
-	sq2.connect("localhost", "bcard", "bcard", "businesscard");
 }
 
 void DnDD::process()

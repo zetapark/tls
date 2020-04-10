@@ -186,6 +186,7 @@ void DnDD::insert_bcard()
 
 void DnDD::busi()
 {
+	sq2.connect("localhost", "bcard", "bcard", "businesscard");
 	string enc;
 	if(string s = nameNvalue_["pwd"]; s != "") {
 		SHA2 sha;
