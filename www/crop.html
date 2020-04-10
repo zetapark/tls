@@ -37,6 +37,21 @@ canvas {
 	z-index : 2;
 }
 </style>
+	<title>
+   명함 정리
+  </title>
+ </head>
+ <body>
+	 <p>네 모서리를 드래그 하여 명함의 테두리에 맞추세요.</p>
+	 <div>
+		 <img src='data:image/jpg;base64,@IMG' id='img' alt='none'>
+		 <canvas id='canv' ></canvas>
+	 </div>
+	 <form action='opencv.html' method='post'>
+		 <input type='submit' name='submit' value='제출'>
+		 <input type='hidden' id='pos' name='pos'>
+	 </form>
+
 	<script>
 var rect_pos = [@POS];
 var point_idx = 8;
@@ -84,11 +99,11 @@ $(function() {
 	for(var i=0; i<rect_pos.length; i++) rect_pos[i] *= ratio;
 	var c = $('canvas')[0];
 	var ctx = c.getContext('2d');
+	ctx.canvas.width = width;
+	ctx.canvas.height = height;
 	c.addEventListener('mousedown', function(e) { on_mouse_down(c, e) }, false);
 	c.addEventListener('mouseup', function(e) { on_mouse_up(c, e) }, false);
 	c.addEventListener('mousemove', function(e) { on_mouse_move(c, e) }, false);
-	ctx.canvas.width = width;
-	ctx.canvas.height = height;
 	draw_rect(c);
 
 	$('form').submit(function() {
@@ -99,20 +114,6 @@ $(function() {
 
 	</script>
 
-	<title>
-   명함 정리
-  </title>
- </head>
- <body>
-	 <p>네 모서리를 드래그 하여 명함의 테두리에 맞추세요.</p>
-	 <div>
-		 <img src='data:image/jpg;base64,@IMG' id='img' alt='none'>
-		 <canvas id='canv' ></canvas>
-	 </div>
-	 <form action='opencv.html' method='post'>
-		 <input type='submit' name='submit' value='제출'>
-		 <input type='hidden' id='pos' name='pos'>
-	 </form>
  </body>
 </html>
 
