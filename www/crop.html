@@ -63,6 +63,7 @@ function on_mouse_down(canvas, event) {
 	for(i=0; i<rect_pos.length; i+=2) {
 		if(Math.abs(rect_pos[i] - x) < 10 && Math.abs(rect_pos[i+1] - y) < 10) point_idx = i;
 	}
+	event.preventDefault();
 }
 
 function draw_rect(canvas) {
@@ -75,6 +76,7 @@ function draw_rect(canvas) {
 	ctx.strokeStyle = '#0000ff';
 	ctx.lineWidth = 2;
 	ctx.stroke();
+	event.preventDefault();
 }
 
 function on_mouse_up(canvas, event) {
@@ -89,6 +91,7 @@ function on_mouse_move(canvas, event) {
 		rect_pos[point_idx] = x;
 		rect_pos[point_idx + 1] = y;
 		draw_rect(canvas);
+		event.preventDefault();
 	}
 }
 
@@ -102,8 +105,11 @@ $(function() {
 	ctx.canvas.width = width;
 	ctx.canvas.height = height;
 	c.addEventListener('mousedown', function(e) { on_mouse_down(c, e) }, false);
+	c.addEventListener('touchstart', function(e) { on_mouse_down(c, e) }, false);
 	c.addEventListener('mouseup', function(e) { on_mouse_up(c, e) }, false);
+	c.addEventListener('touchend', function(e) { on_mouse_up(c, e) }, false);
 	c.addEventListener('mousemove', function(e) { on_mouse_move(c, e) }, false);
+	c.addEventListener('touchmove', function(e) { on_mouse_move(c, e) }, false);
 	draw_rect(c);
 
 	$('form').submit(function() {
