@@ -42,7 +42,8 @@ canvas {
   </title>
  </head>
  <body>
-	 <p>네 모서리를 드래그 하여 명함의 테두리에 맞추세요.</p>
+	 <p>네 모서리를 드래그 하여 명함의 테두리에 맞추세요.
+	 <button id='show_rect'>테두리 보이기</button></p>
 	 <div>
 		 <img src='data:image/jpg;base64,@IMG' id='img' alt='none'>
 		 <canvas id='canv' ></canvas>
@@ -51,7 +52,6 @@ canvas {
 		 <input type='submit' name='submit' value='제출'>
 		 <input type='hidden' id='pos' name='pos'>
 	 </form>
-	<button id='show_rect'>테두리 보이기</button>
 	<script>
 var rect_pos = [@POS];
 var point_idx = 8;
@@ -114,29 +114,29 @@ function on_touch_move(canvas, event) {
 }
 
 $(function() {
-	var width = $('img').width();
-	var height = $('img').height();
-	var ratio = width / @WIDTH;
-	for(var i=0; i<rect_pos.length; i++) rect_pos[i] *= ratio;
 	var c = $('canvas')[0];
 	var ctx = c.getContext('2d');
-	ctx.canvas.width = width;
-	ctx.canvas.height = height;
+	var width, height, ratio;
 	c.addEventListener('mousedown', function(e) { on_mouse_down(c, e) }, false);
 	c.addEventListener('touchstart', function(e) { on_touch_down(c, e) }, false);
 	c.addEventListener('mouseup', function(e) { on_mouse_up(c, e) }, false);
 	c.addEventListener('touchend', function(e) { on_mouse_up(c, e) }, false);
 	c.addEventListener('mousemove', function(e) { on_mouse_move(c, e) }, false);
 	c.addEventListener('touchmove', function(e) { on_touch_move(c, e) }, false);
-	draw_rect(c);
 
 	$('form').submit(function() {
 		for(var i=0; i<rect_pos.length; i++) rect_pos[i] /= ratio;
 		$('#pos').val(JSON.stringify(rect_pos));
 	});
+
 	$('#show_rect').click(function() {
+		width = $('img').width();
+		height = $('img').height();
+		ctx.canvas.width = width;
+		ctx.canvas.height = height;
+		ratio = width / @WIDTH;
+		for(var i=0; i<rect_pos.length; i++) rect_pos[i] *= ratio;
 		draw_rect(c);
-		alert(JSON.stringify(rect_pos));
 	});
 })
 
