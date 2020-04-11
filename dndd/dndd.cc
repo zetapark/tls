@@ -78,7 +78,7 @@ string DnDD::close()
 
 void DnDD::result()
 {
-	string s = psstm("python dndd.py " + nameNvalue_["table"] + ' ' + nameNvalue_["book"] + ' ' + nameNvalue_["option"] + ' ' + nameNvalue_["db"]);
+	string s = psstm("python3 dndd.py " + nameNvalue_["table"] + ' ' + nameNvalue_["book"] + ' ' + nameNvalue_["option"] + ' ' + nameNvalue_["db"]);
 	swap("GRAPH", s);
 	while(swap("dataframe\"", "dataframe table\""));
 }
