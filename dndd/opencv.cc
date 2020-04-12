@@ -114,6 +114,7 @@ void DnDD::crop() {
 	s.pop_back();
 	swap("@POS", s);
 	swap("@WIDTH", to_string(M.cols));
+	append("id='name'", " value='" + nameNvalue_["name"] + "' ");//attach name if back picture
 //	while(swap("@HEIGHT", to_string(M.rows)));
 }
 
@@ -127,6 +128,49 @@ static void get_b(string s)
 		vp.push_back({x, y});
 	}
 	M.get_businesscard(vp);
+}
+
+void DnDD::viewcv()
+{
+	if(nameNvalue_["from"] == "crop") {//from crop && name != "" back image upload
+		get_b(nameNvalue_["pos"]);
+		vector<uint8_t> v;
+		cv::imencode(".jpg", M, v);
+		namecard_ = base64_encode(v);
+
+		int num = 1;
+		if(sq2.query("select max(num) from image where user = '" + id2_ + "';")) 
+			num += sq2[0][""].asInt();
+		sq2.query("update bcard set back=" + to_string(num) + " where user='" + 
+				id2_ + "' and name='" + nameNvalue_["name"] + "'");
+		sq2.select("image", "limit 1");
+		sq2.insert(id2_, num, namecard_);
+	}
+
+	swap("false", "true");//readonly setting
+	sq2.select("bcard", "where user = '" + id2_ + "' and name = '" + nameNvalue_["name"] + "'");
+	append("name='email'", " value='" + sq[0]["email"].asString() + "' ");
+	append("name='mobile'", " value='" + sq2[0]["mobile"].asString() + "' ");
+	append("name='tel'", " value='" + sq2[0]["tel"].asString() + "' ");
+	append("name='fax'", " value='" + sq2[0]["fax"].asString() + "' ");
+	append("name='role'", " value='" + sq2[0]["role"].asString() + "' ");
+	append("name='job'", " value='" + sq2[0]["company"].asString() + "' ");
+	append("name='addr1'", " value='" + sq2[0]["address1"].asString() + "' ");
+	append("name='addr2'", " value='" + sq2[0]["address2"].asString() + "' ");
+	append("name='name'", " value='" + sq2[0]["name"].asString() + "' ");
+	append("name='memo1'", " value='" + sq2[0]["memo1"].asString() + "' ");
+	append("name='memo2'", " value='" + sq2[0]["memo2"].asString() + "' ");
+	append("name='memo3'", " value='" + sq2[0]["memo3"].asString() + "' ");
+
+	int back_num = sq2[0]["back"].asInt();
+	if(sq2.select("image", "where user='" + id2_ + "' and num=" + sq2[0]["front"].asString())) {
+		auto v = base64_decode(sq2[0]["image"].asString());
+		front_img_ = string{v.begin(), v.end()};
+	}
+	if(sq2.select("image", "where user='" + id2_ + "' and num=" + to_string(back_num))) {
+		auto v = base64_decode(sq2[0]["image"].asString());
+		back_img_ = string{v.begin(), v.end()};
+	}
 }
 
 void DnDD::opencv() {
@@ -164,24 +208,32 @@ void DnDD::opencv() {
 
 	vector<uint8_t> v;
 	cv::imencode(".jpg", M, v);
+	front_img_ = string{v.begin(), v.end()};
 	namecard_ = base64_encode(v);
-	swap("@IMG2", namecard_);
 }
 
 void DnDD::insert_bcard()
 {
 	if(id2_ == "") return;
-	int num = 1;
+	int num = 1, back_num = 0;
 	if(sq2.query("select max(num) from image where user = '" + id2_ + "';")) 
-		num += sq2[0][""].asInt();
+			num += sq2[0][""].asInt();
+	sq2.select("bcard", "where user='" + id2_ + "' and name='" + nameNvalue_["hidden"] + "'");
+	if(nameNvalue_["submit"] == "수정완료") {
+		num = sq2[0]["front"].asInt();
+		back_num = sq2[0]["back"].asInt();
+		sq2.query("delete from bcard where user='" + id2_ + "' and name='" +
+				nameNvalue_["hidden"] + "'");
+	}
 	cout << sq2 << endl;
-	sq2.select("bcard", "limit 1");
 	sq2.insert(id2_, nameNvalue_["name"], nameNvalue_["addr1"], nameNvalue_["addr2"],
 			nameNvalue_["job"], nameNvalue_["role"], nameNvalue_["mobile"], 
 			nameNvalue_["tel"], nameNvalue_["fax"], nameNvalue_["email"], 
-			nameNvalue_["memo1"], nameNvalue_["memo2"], nameNvalue_["memo3"], num, 0);
-	sq2.select("image", "limit 1");
-	sq2.insert(id2_, num, namecard_);
+			nameNvalue_["memo1"], nameNvalue_["memo2"], nameNvalue_["memo3"], num, back_num);
+	if(nameNvalue_["submit"] == "제출") {
+		sq2.select("image", "limit 1");
+		sq2.insert(id2_, num, namecard_);
+	}
 }
 
 void DnDD::busi()
@@ -193,6 +245,8 @@ void DnDD::busi()
 		auto a = sha.hash(s.begin(), s.end());
 		enc = base64_encode({a.begin(), a.end()});
 	}
+	if(string s = nameNvalue_["name"]; id2_ != "" && s != "")//if from delete button
+			sq2.query("delete from bcard where user='" + id2_ + "' and name='" + s + "'");
 	if(nameNvalue_["submit"] == "login") {
 		if(sq2.select("user", "where email = '" + nameNvalue_["email"]
 					+"' and password = '" + enc + "'"))
@@ -212,7 +266,7 @@ void DnDD::busi()
 		sq2.select("bcard", "where user = '" + id2_ + "'");
 		string s;
 		for(auto a : sq2)
-			s += "<a href='view.html?name=" + a["name"].asString() + "'>" + 
+			s += "<a href='opencv.html?name=" + a["name"].asString() + "'>" + 
 				a["name"].asString() + "</a><br>";
 		prepend("</body>", s);
 	}

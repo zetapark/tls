@@ -1,3 +1,5 @@
+import matplotlib
+matplotlib.use('Agg')
 import pandas as pd
 import sqlalchemy as sql
 import mpld3 as d3

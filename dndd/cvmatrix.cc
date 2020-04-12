@@ -82,7 +82,8 @@ vector<Point> CVMat::get_points(int k)
 	copyTo(tmp);
 	gray();
 	filter(GAUSSIAN);
-	edge();
+	auto med = cv::mean(*this);
+	edge(std::max(0., med[0]) * 0.7, std::min(255., med[0] * 1.33));
 	
 	detect_contours(RETR_EXTERNAL);
 	
