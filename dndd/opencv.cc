@@ -268,7 +268,7 @@ void DnDD::busi()
 		string s;
 		for(auto a : sq2)
 			s += "<a href='opencv.html?name=" + a["name"].asString() + "'>" + 
-				a["name"].asString() + "</a><br>";
+				a["name"].asString() + ", " + a["company"].asString() + "</a><br>";
 		prepend("</body>", s);
 	}
 }
