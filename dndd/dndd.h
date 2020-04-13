@@ -13,7 +13,7 @@ protected:
 private:
 	void signin(), index(), search(), mn(), pg(), edit(), new_book(), comment(),result(), google();
 	std::string search(std::string s), field(std::string s), follow(), close(), vote();
-	void tut(), opencv(), insert_bcard(), busi(), view(), crop(), viewcv();
+	void tut(), opencv(), insert_bcard(), busi(), crop();
 	std::array<int, 5> allowlevel(std::string table, std::string book);
 	std::vector<std::string> tables();
 	int maxpage(std::string table, std::string book);

@@ -114,6 +114,8 @@ void DnDD::crop() {
 	s.pop_back();
 	swap("@POS", s);
 	swap("@WIDTH", to_string(M.cols));
+	if(s = nameNvalue_["submit"]; s == "명함 앞면 업로드") swap("@SUBMIT", "앞면 자르기");
+	else if(s == "명함 뒷면 업로드") swap("@SUBMIT", "뒷면 자르기");
 	append("id='name'", " value='" + nameNvalue_["name"] + "' ");//attach name if back picture
 //	while(swap("@HEIGHT", to_string(M.rows)));
 }
@@ -130,14 +132,17 @@ static void get_b(string s)
 	M.get_businesscard(vp);
 }
 
-void DnDD::viewcv()
+void DnDD::opencv()
 {
-	if(nameNvalue_["from"] == "crop") {//from crop && name != "" back image upload
+	if(string s = nameNvalue_["submit"]; s != "") {
 		get_b(nameNvalue_["pos"]);
 		vector<uint8_t> v;
 		cv::imencode(".jpg", M, v);
 		namecard_ = base64_encode(v);
+		if(s == "앞면 자르기") front_img_ = string{v.begin(), v.end()};
+	}
 
+	if(nameNvalue_["submit"] == "뒷면 자르기") {//from crop && name != "" back image upload
 		int num = 1;
 		if(sq2.query("select max(num) from image where user = '" + id2_ + "';")) 
 			num += sq2[0][""].asInt();
@@ -145,71 +150,67 @@ void DnDD::viewcv()
 				id2_ + "' and name='" + nameNvalue_["name"] + "'");
 		sq2.select("image", "limit 1");
 		sq2.insert(id2_, num, namecard_);
+	} else if(nameNvalue_["submit"] == "앞면 자르기") {
+		auto a = cv::text::OCRTesseract::create(NULL, "eng+kor");
+		string s, email;
+		vector<cv::Rect> vr; vector<string> vs; vector<float> vf;
+		a->run(M, s, &vr, &vs, &vf); vs.clear();
+		swap("@DATA", s);
+		if(smatch sm; regex_search(s, sm, regex{R"(\S+@\S+\.\S+)"})) {
+			email = sm[0].str();
+			s = sm.prefix().str() + sm.suffix().str();
+		}
+		auto tel = get_tel(s);
+		stringstream ss; ss << s;
+		while(getline(ss, s)) if(s != "") vs.push_back(s);
+		auto it = remove_if(vs.begin(), vs.end(), [](string s) { return 
+				find_if(s.begin(), s.end(), [](char c) { return !isspace(c);}) == s.end(); });
+		vs.erase(it, vs.end());//remove blank string
+
+		append("name='email'", " value='" + email + "' ");
+		append("name='mobile'", " value='" + tel[0] + "' ");
+		append("name='tel'", " value='" + tel[1] + "' ");
+		append("name='fax'", " value='" + tel[2] + "' ");
+		if(!vs.empty())
+			append("name='role'", " value='" + get_with_wordvec("직책", "job", vs) + "' ");
+		if(!vs.empty())
+			append("name='job'", " value='" + get_with_wordvec("직장", "company", vs) + "' ");
+		if(!vs.empty()) append("name='addr1'", " value='" + get_addr(vs) + "' ");
+		if(!vs.empty())
+			append("name='addr2'", " value='" + get_with_wordvec("주소", "address", vs) + "' ");
+		if(!vs.empty()) append("name='name'", " value='" + get_name(vs) + "' ");
+		for(int i=1; i<=vs.size() && i<=3; i++)
+			append("name='memo" + to_string(i) + "'", " value='" + vs[i-1] + "' ");
 	}
 
-	swap("false", "true");//readonly setting
-	sq2.select("bcard", "where user = '" + id2_ + "' and name = '" + nameNvalue_["name"] + "'");
-	append("name='email'", " value='" + sq[0]["email"].asString() + "' ");
-	append("name='mobile'", " value='" + sq2[0]["mobile"].asString() + "' ");
-	append("name='tel'", " value='" + sq2[0]["tel"].asString() + "' ");
-	append("name='fax'", " value='" + sq2[0]["fax"].asString() + "' ");
-	append("name='role'", " value='" + sq2[0]["role"].asString() + "' ");
-	append("name='job'", " value='" + sq2[0]["company"].asString() + "' ");
-	append("name='addr1'", " value='" + sq2[0]["address1"].asString() + "' ");
-	append("name='addr2'", " value='" + sq2[0]["address2"].asString() + "' ");
-	append("name='name'", " value='" + sq2[0]["name"].asString() + "' ");
-	append("name='memo1'", " value='" + sq2[0]["memo1"].asString() + "' ");
-	append("name='memo2'", " value='" + sq2[0]["memo2"].asString() + "' ");
-	append("name='memo3'", " value='" + sq2[0]["memo3"].asString() + "' ");
+	if(nameNvalue_["name"] != "") {
+		swap("false", "true");//readonly setting
+		sq2.select("bcard", "where user = '" + id2_ + "' and name = '" + nameNvalue_["name"] + "'");
+		append("name='email'", " value='" + sq[0]["email"].asString() + "' ");
+		append("name='mobile'", " value='" + sq2[0]["mobile"].asString() + "' ");
+		append("name='tel'", " value='" + sq2[0]["tel"].asString() + "' ");
+		append("name='fax'", " value='" + sq2[0]["fax"].asString() + "' ");
+		append("name='role'", " value='" + sq2[0]["role"].asString() + "' ");
+		append("name='job'", " value='" + sq2[0]["company"].asString() + "' ");
+		append("name='addr1'", " value='" + sq2[0]["address1"].asString() + "' ");
+		append("name='addr2'", " value='" + sq2[0]["address2"].asString() + "' ");
+		append("name='name'", " value='" + sq2[0]["name"].asString() + "' ");
+		append("name='memo1'", " value='" + sq2[0]["memo1"].asString() + "' ");
+		append("name='memo2'", " value='" + sq2[0]["memo2"].asString() + "' ");
+		append("name='memo3'", " value='" + sq2[0]["memo3"].asString() + "' ");
 
-	int back_num = sq2[0]["back"].asInt();
-	if(sq2.select("image", "where user='" + id2_ + "' and num=" + sq2[0]["front"].asString())) {
-		auto v = base64_decode(sq2[0]["image"].asString());
-		front_img_ = string{v.begin(), v.end()};
+		int back_num = sq2[0]["back"].asInt(), front_num = sq2[0]["front"].asInt();
+		if(!front_num) front_img_ = "";
+		else if(sq2.select("image", "where user='" + id2_ + "' and num=" + to_string(front_num))) {
+			auto v = base64_decode(sq2[0]["image"].asString());
+			front_img_ = string{v.begin(), v.end()};
+		}
+		if(!back_num) back_img_ = "";
+		else if(sq2.select("image", "where user='" + id2_ + "' and num=" + to_string(back_num))) {
+			auto v = base64_decode(sq2[0]["image"].asString());
+			back_img_ = string{v.begin(), v.end()};
+		}
 	}
-	if(sq2.select("image", "where user='" + id2_ + "' and num=" + to_string(back_num))) {
-		auto v = base64_decode(sq2[0]["image"].asString());
-		back_img_ = string{v.begin(), v.end()};
-	}
-}
-
-void DnDD::opencv() {
-	get_b(nameNvalue_["pos"]);
-	auto a = cv::text::OCRTesseract::create(NULL, "eng+kor");
-	string s, email;
-	vector<cv::Rect> vr; vector<string> vs; vector<float> vf;
-	a->run(M, s, &vr, &vs, &vf); vs.clear();
-	swap("@DATA", s);
-	if(smatch sm; regex_search(s, sm, regex{R"(\S+@\S+\.\S+)"})) {
-		email = sm[0].str();
-		s = sm.prefix().str() + sm.suffix().str();
-	}
-	auto tel = get_tel(s);
-	stringstream ss; ss << s;
-	while(getline(ss, s)) if(s != "") vs.push_back(s);
-	auto it = remove_if(vs.begin(), vs.end(), [](string s) { return 
-			find_if(s.begin(), s.end(), [](char c) { return !isspace(c);}) == s.end(); });
-	vs.erase(it, vs.end());//remove blank string
-	
-	append("name='email'", " value='" + email + "' ");
-	append("name='mobile'", " value='" + tel[0] + "' ");
-	append("name='tel'", " value='" + tel[1] + "' ");
-	append("name='fax'", " value='" + tel[2] + "' ");
-	if(!vs.empty())
-		append("name='role'", " value='" + get_with_wordvec("직책", "job", vs) + "' ");
-	if(!vs.empty())
-		append("name='job'", " value='" + get_with_wordvec("직장", "company", vs) + "' ");
-	if(!vs.empty()) append("name='addr1'", " value='" + get_addr(vs) + "' ");
-	if(!vs.empty())
-		append("name='addr2'", " value='" + get_with_wordvec("주소", "address", vs) + "' ");
-	if(!vs.empty()) append("name='name'", " value='" + get_name(vs) + "' ");
-	for(int i=1; i<=vs.size() && i<=3; i++)
-		append("name='memo" + to_string(i) + "'", " value='" + vs[i-1] + "' ");
-
-	vector<uint8_t> v;
-	cv::imencode(".jpg", M, v);
-	front_img_ = string{v.begin(), v.end()};
-	namecard_ = base64_encode(v);
 }
 
 void DnDD::insert_bcard()
