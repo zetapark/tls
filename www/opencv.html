@@ -12,12 +12,14 @@
 
 		<script>
 			$(function() {
-				$('form[id=form1]').find('input[name=submit]').hide();
+				$('#low').hide();
 				$('#form2').submit(function(){
 					$('form[id=form2]').find('input[name=name]').val(
 						$('form[id=form1]').find('input[name=name]').val());
 				});
 				if(false) {//if view -> true
+					$('#low').show();
+					$('form[id=form1]').find('input[name=submit]').hide();
 					$('input').attr('readonly', true);
 					$('input').css('background-color', '#f8f8ff');
 					$('button').show();
@@ -97,6 +99,7 @@
 				</div>
 			</div>
 		</form>
+		<div id=low>
 		<button id='edit'>edit</button>
 		<button id='delete'>delete</button>
 		<form action='crop.html' method=post enctype='multipart/form-data' id=form2>
@@ -104,6 +107,7 @@
 			<input type='hidden' name='name'>
 			<input type='submit' name=submit value='명함 뒷면 업로드'>
 		</form>
+		</div>
 	</body>
 </html>
 
