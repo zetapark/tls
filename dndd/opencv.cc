@@ -192,6 +192,7 @@ void DnDD::opencv()
 		append("name='fax'", " value='" + sq2[0]["fax"].asString() + "' ");
 		append("name='role'", " value='" + sq2[0]["role"].asString() + "' ");
 		append("name='job'", " value='" + sq2[0]["company"].asString() + "' ");
+		append("name='email'", " value='" + sq2[0]["email"].asString() + "' ");
 		append("name='addr1'", " value='" + sq2[0]["address1"].asString() + "' ");
 		append("name='addr2'", " value='" + sq2[0]["address2"].asString() + "' ");
 		append("name='name'", " value='" + sq2[0]["name"].asString() + "' ");
@@ -264,7 +265,7 @@ void DnDD::busi()
 		regex e{R"(<form[\s\S]+?</form>)"};
 		content_ = regex_replace(content_, e, id2_ + "님 로그인되었습니다.",
 				regex_constants::format_first_only);
-		sq2.select("bcard", "where user = '" + id2_ + "'");
+		sq2.select("bcard", "where user = '" + id2_ + "' order by name");
 		string s;
 		for(auto a : sq2)
 			s += "<a href='opencv.html?name=" + a["name"].asString() + "'>" + 
