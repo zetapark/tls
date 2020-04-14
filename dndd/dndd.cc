@@ -30,6 +30,7 @@ void DnDD::process()
 	else if(requested_document_ == "googleapi") google();
 	else if(requested_document_ == "iframe-content.html") content_ = iframe_content_;
 	else if(requested_document_ == "result_view") tut();
+
 	else if(requested_document_ == "opencv.html") opencv();
 	else if(requested_document_ == "insert.html") insert_bcard();
 	else if(requested_document_ == "busi.html") busi();
