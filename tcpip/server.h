@@ -42,7 +42,7 @@ private:
 class Server : public Http
 {
 public:
-	Server(int port = 2001, unsigned int time_out = 600, int queue_limit = 10,
+	Server(int port = 2001, unsigned int time_out = 60*60*5, int queue_limit = 50,
 			std::string end_string = "end");
 	int start(std::function<std::string(std::string)> f);
 	void nokeep_start(std::function<std::string(std::string)> f);
