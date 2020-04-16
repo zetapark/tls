@@ -273,21 +273,21 @@ void DnDD::busi()
 	}
 }
 
-void DnDD::view()
-{
-	sq2.select("bcard", "where user = '" + id2_ + "' and name ='" + nameNvalue_["name"] + "'");
-	append("이름 :</td><td>", sq2[0]["name"].asString());
-	append("주소1 :</td><td>", sq2[0]["address1"].asString());
-	append("주소2 :</td><td>", sq2[0]["address2"].asString());
-	append("직장 :</td><td>", sq2[0]["company"].asString());
-	append("직책 :</td><td>", sq2[0]["role"].asString());
-	append("모바일 :</td><td>", sq2[0]["mobile"].asString());
-	append("전화 :</td><td>", sq2[0]["tel"].asString());
-	append("팩스 :</td><td>", sq2[0]["fax"].asString());
-	append("이메일 :</td><td>", sq2[0]["email"].asString());
-	append("메모1 :</td><td>", sq2[0]["memo1"].asString());
-	append("메모2 :</td><td>", sq2[0]["memo2"].asString());
-	append("메모3 :</td><td>", sq2[0]["memo3"].asString());
-	sq2.select("image", "where user='" + id2_ + "' and num=" + sq2[0]["front"].asString());
-	swap("@IMG", sq2[0]["image"].asString());
-}
+//void DnDD::view()
+//{
+//	sq2.select("bcard", "where user = '" + id2_ + "' and name ='" + nameNvalue_["name"] + "'");
+//	append("이름 :</td><td>", sq2[0]["name"].asString());
+//	append("주소1 :</td><td>", sq2[0]["address1"].asString());
+//	append("주소2 :</td><td>", sq2[0]["address2"].asString());
+//	append("직장 :</td><td>", sq2[0]["company"].asString());
+//	append("직책 :</td><td>", sq2[0]["role"].asString());
+//	append("모바일 :</td><td>", sq2[0]["mobile"].asString());
+//	append("전화 :</td><td>", sq2[0]["tel"].asString());
+//	append("팩스 :</td><td>", sq2[0]["fax"].asString());
+//	append("이메일 :</td><td>", sq2[0]["email"].asString());
+//	append("메모1 :</td><td>", sq2[0]["memo1"].asString());
+//	append("메모2 :</td><td>", sq2[0]["memo2"].asString());
+//	append("메모3 :</td><td>", sq2[0]["memo3"].asString());
+//	sq2.select("image", "where user='" + id2_ + "' and num=" + sq2[0]["front"].asString());
+//	swap("@IMG", sq2[0]["image"].asString());
+//}

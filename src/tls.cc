@@ -81,8 +81,7 @@ void TLS<SV>::generate_signature(unsigned char* pub_key, unsigned char* sign)
 	mpz2bnd(z, sign, sign + 256);
 }
 
-template<bool SV>
-void TLS<SV>::derive_keys(mpz_class premaster_secret)
+template<bool SV> void TLS<SV>::derive_keys(mpz_class premaster_secret)
 {//K distribution OK, master secret derivation err
 	unsigned char pre[32], rand[64];
 	mpz2bnd(premaster_secret, pre, pre + 32);
@@ -97,6 +96,25 @@ void TLS<SV>::derive_keys(mpz_class premaster_secret)
 	prf.label("master secret");
 	master_secret_ = prf.get_n_byte(48);
 	LOGD << hexprint("master secret", master_secret_) << endl;//ok
+	prf.secret(master_secret_.begin(), master_secret_.end());
+	memcpy(rand, server_random_.data(), 32);
+	memcpy(rand + 32, client_random_.data(), 32);
+	prf.seed(rand, rand + 64);
+	LOGD << hexprint("server random", server_random_) << endl;
+	LOGD << hexprint("client random", client_random_) << endl;
+	prf.label("key expansion");
+	auto v = prf.get_n_byte(40);
+	aes_[0].key(&v[0]);
+	aes_[1].key(&v[16]);
+	aes_[0].iv(&v[32], 0, 4);
+	aes_[1].iv(&v[36], 0, 4);
+	LOGD << hexprint("expanded keys", v) << endl;//different client, server
+}
+
+template<bool SV> void TLS<SV>::derive_from_master()
+{
+	unsigned char rand[64];
+	PRF<SHA2> prf;
 	prf.secret(master_secret_.begin(), master_secret_.end());
 	memcpy(rand, server_random_.data(), 32);
 	memcpy(rand + 32, client_random_.data(), 32);

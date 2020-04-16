@@ -44,6 +44,7 @@ protected:
 	std::string accumulated_handshakes_;
 	static std::string certificate_;
 	std::string accumulate(const std::string &s);
+	void derive_from_master();
 	static RSA rsa_;
 		
 private:
