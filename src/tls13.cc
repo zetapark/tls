@@ -6,7 +6,7 @@
 #include"ecdsa.h"
 #include"tls13.h"
 #include"pss.h"
-#define DUR (9 * 256s)
+#define DUR (5 * 60 * 60s)
 using namespace std;
 
 template class TLS13<true>;
@@ -309,7 +309,7 @@ template<bool SV> string TLS13<SV>::new_session_ticket(int inport)
 	struct {
 		uint8_t new_session_ticket = 4;
 		uint8_t size[3] = {0, 0, 29};
-		uint8_t ticket_lifetime_in_sec[4] = {0, 0, 9, 0};
+		uint8_t ticket_lifetime_in_sec[4] = {0, 0, 46, 50};
 		uint8_t ticket_age_add[4];
 		uint8_t ticket_nonce_size = sz;
 		uint8_t ticket_nonce[sz];
