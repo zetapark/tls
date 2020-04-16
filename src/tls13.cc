@@ -410,7 +410,15 @@ template<bool SV> string TLS13<SV>::server_hello(string &&s)
 	if constexpr(SV) {
 		string tmp = this->accumulated_handshakes_;
 		string hello = TLS<SV>::server_hello();
-		if(!premaster_secret_) return hello;
+		if(!premaster_secret_) {
+			if(auto a = pskNclient_[{echo_id_, echo_id_+32}];
+					a && chrono::system_clock::now() < a->issue_time + DUR) {
+				sclient_.sp_client = a->sp_client;
+				this->master_secret_ = a->psk;
+				memcpy(&hello[44], echo_id_, 32);//echo session id
+			}
+			return hello;
+		}
 		memcpy(&hello[44], echo_id_, 32);//echo session id
 		hello[76] = 19; hello[77] = 1;//TLS AES128 GCM SHA256
 		this->accumulated_handshakes_ = tmp;
@@ -490,19 +498,32 @@ TLS13<SV>::handshake(function<optional<string>()> read_f, function<void(string)>
 			write_f(encode(new_session_ticket(inport) + new_session_ticket(inport)
 					+ new_session_ticket(inport) + new_session_ticket(inport), HANDSHAKE));
 		} else {//1.2
-			s += this->server_certificate();
-			s += this->server_key_exchange();
-			s += this->server_hello_done();	
-			write_f(s);
-			if(s = this->alert(2, 0); !(a = read_f()) ||
-					(s = this->client_key_exchange(move(*a))) != "") break;
-			if(s = this->alert(2, 0); !(a = read_f()) ||
-					(s = this->change_cipher_spec(move(*a))) != "") break;
-			if(s = this->alert(2, 0); !(a = read_f()) ||
-					(s = TLS<SV>::finished(move(*a))) != "") break;
+			if(this->master_secret_.empty()) {//no session resumption
+				s += this->server_certificate();
+				s += this->server_key_exchange();
+				s += this->server_hello_done();	
+				write_f(s);
+				if(s = this->alert(2, 0); !(a = read_f()) ||
+						(s = this->client_key_exchange(move(*a))) != "") break;
+				if(s = this->alert(2, 0); !(a = read_f()) ||
+						(s = this->change_cipher_spec(move(*a))) != "") break;
+				if(s = this->alert(2, 0); !(a = read_f()) ||
+						(s = TLS<SV>::finished(move(*a))) != "") break;
+			} else this->derive_from_master();//session resumption
 			s = this->change_cipher_spec();
 			s += TLS<SV>::finished();
 			write_f(move(s));//empty s
+			if(sclient_.sp_client) {//connected to former connection == session resump
+				if(s = this->alert(2, 0); !(a = read_f()) ||
+						(s = this->change_cipher_spec(move(*a))) != "") break;
+				if(s = this->alert(2, 0); !(a = read_f()) ||
+						(s = TLS<SV>::finished(move(*a))) != "") break;
+			} else {
+				sclient_.sp_client = make_shared<MClient>("localhost", inport);
+				sclient_.psk = this->master_secret_;
+				sclient_.issue_time = chrono::system_clock::now();
+				pskNclient_.insert({this->session_id_.begin(), this->session_id_.end()}, sclient_);
+			}
 		} 
 	} else {//client
 		write_f(client_hello());
