@@ -13,6 +13,11 @@ DnDD::DnDD() : BootStrapSite{"www"}
 
 void DnDD::process()
 {
+	static int hit = 0;
+	if(!hit++ && !nameNvalue_.empty()) {
+		requested_document_ = "index.html";
+		content_ = fileNhtml_[requested_document_];
+	}
 	cout << requested_document_ << endl;
 	for(auto& a : nameNvalue_) cout << a.first << ':' << a.second.substr(0, 20) << endl;
 	if(requested_document_ == "index.html") index();

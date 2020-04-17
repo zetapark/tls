@@ -7,7 +7,7 @@ Tutorial
 tutorial1.html
 ny.jpg
 Tomcat Page
-http://www.zeta2374.com
+http://www.zeta2374.com/tomcat.html
 chicago.jpg
 나의 정리노트
 main.html?db=dndd
