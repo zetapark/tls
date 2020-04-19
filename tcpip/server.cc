@@ -59,6 +59,11 @@ Client::Client(string ip, int port) : Http(port)
 	if(-1 == connect(client_fd, (sockaddr*)&server_addr, sizeof(server_addr)))
 		cout << "connect() error" << endl;
 	else cout << "connecting to " << ip << ':' << port  <<endl;
+
+	struct timeval tv;
+	tv.tv_sec = 3;
+	tv.tv_usec = 0;
+	setsockopt(client_fd, SOL_SOCKET, SO_RCVTIMEO, &tv, sizeof tv);
 }
 
 string Client::get_addr(string host)
@@ -102,10 +107,16 @@ int Server::start(function<string(string)> f)
 	int cl_size = sizeof(client_addr);
 	while(1) {
 		client_fd = accept(server_fd, (sockaddr*)&client_addr, (socklen_t*)&cl_size);
-		struct timeval tv;
-		tv.tv_sec = time_out;
-		tv.tv_usec = 0;
-		if(time_out) setsockopt(client_fd, SOL_SOCKET, SO_RCVTIMEO, &tv, sizeof tv);
+		if(time_out) {//set socket option
+			struct timeval tv;
+			tv.tv_sec = time_out;
+			tv.tv_usec = 0;
+			setsockopt(client_fd, SOL_SOCKET, SO_RCVTIMEO, &tv, sizeof tv);
+			tv.tv_sec = 3;
+			setsockopt(client_fd, SOL_SOCKET, SO_SNDTIMEO, &tv, sizeof tv);
+			bool keep_alive = true;
+			setsockopt(client_fd, SOL_SOCKET, SO_KEEPALIVE, &keep_alive, sizeof(keep_alive));
+		}
 		if(client_fd == -1) cout << "accept() error" << endl;
 		else if(!fork()) {//string size 0 : error -> s.size() : verify 
 			for(optional<string> s; s = recv(); send(f(*s)));//recv server fail 시 에러
