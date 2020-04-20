@@ -23,6 +23,7 @@ public:
 	std::string server_certificate13();
 	std::string new_session_ticket(int inport);
 	std::pair<std::vector<uint8_t>, std::vector<uint8_t>> new_session_ticket(std::string s);
+	void remove_psk(std::shared_ptr<MClient> cl);
 protected: HKDF<HASH> hkdf_;
 	mpz_class premaster_secret_;//inspect this to check tls version
 	std::string client_ext();	

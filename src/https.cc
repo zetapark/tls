@@ -52,7 +52,10 @@ void Middle::connected(int fd)
 						a = cl->recv();
 						cl->unlock();
 						if(a) send(t.encode(move(*a)), fd);//to browser
-						else break;
+						else {
+							t.remove_psk(cl);//remove psk 
+							break;
+						}
 					}
 				} else break;
 			} else break;

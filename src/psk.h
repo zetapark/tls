@@ -25,6 +25,7 @@ class PSK : public ThreadSafeMap<std::vector<uint8_t>, SClient>
 public:
 	PSK();
 	~PSK();
+	void remove(std::shared_ptr<MClient> cl);
 protected:
 	std::thread th_;
 	bool run_ = true;

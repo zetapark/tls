@@ -40,3 +40,10 @@ void PSK::garbage_collect()
 				p.second.issue_time < std::chrono::system_clock::now() - DUR; });
 	}
 }
+
+void PSK::remove(shared_ptr<MClient> cl)
+{
+	std::shared_lock<std::shared_mutex> lck{this->mtx_};
+	for(int i=0; i<this->pos_; i++)
+		if(this->ar_[i].second.sp_client == cl) this->ar_[i].second.issue_time -= 100000s;
+}

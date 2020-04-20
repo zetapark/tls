@@ -112,6 +112,12 @@ template<bool SV> string TLS13<SV>::client_ext() {
 //	return struct2str(h);
 //}
 //
+
+template<bool SV> void TLS13<SV>::remove_psk(shared_ptr<MClient> cl)
+{
+	pskNclient_.remove(cl);
+}
+
 template<bool SV> bool TLS13<SV>::supported_group(unsigned char *p, int len)
 {//return true when support secp256r1, len = ext leng, p point at the start of actual ext
 	for(int i=2; i<len; i+=2) if(*(p+i) == 0 && *(p+i+1) == 23) return true;
