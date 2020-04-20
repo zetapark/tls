@@ -6,7 +6,7 @@ UTIL = $(wildcard *.util.o)
 OBJ += $(UTIL)
 EXE = $(patsubst %.x, ../%.x, $(wildcard *.x))
 LDFLAGS = -L.. -Wl,-rpath=.
-LDLIBS = -lgmpxx -lgmp -lnettle -ljsoncpp -lpthread -lhogweed -lzeta -lstdc++fs
+LDLIBS = -lgmpxx -lgmp -lnettle -ljsoncpp -lpthread -lhogweed -lzeta -lstdc++fs -lrt
 DB = -lzetadb -lmysqlcppconn
 OPENCV = $(shell pkg-config opencv --libs)
 #filesystem library should be next to zeta library
@@ -20,7 +20,7 @@ all : ../libzeta.so ../libzetadb.so $(EXE) ../catch.tst.x ../dndd.dndd.x ../tls_
 	$(CXX) -shared -o $@ $^
 
 ../%.tcpip.x : %.tcpip.x $(wildcard *.tcpip.o) $(wildcard *.util.o)
-	$(CXX) -o $@ $^ -lstdc++fs
+	$(CXX) -o $@ $^ -lstdc++fs -lrt
 
 ../tls_crypt.so : $(wildcard *.pybind.o) $(wildcard *.fpic.o) $(wildcard *.tcpip.o)
 	$(CXX) -shared -o $@ $^ $(LDFLAGS) $(LDLIBS)

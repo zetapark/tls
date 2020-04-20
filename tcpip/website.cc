@@ -9,15 +9,16 @@
 using namespace std;
 using namespace std::experimental::filesystem;
 
-map<string, string> WebSite::fileNhtml_;
 WebSite::WebSite(string dir)
 {
+	map<string, string> fnh;
 	for(const path& a : directory_iterator{dir}) {//directory entry has operator path
 		ifstream f(a.string()); string s; char c;
 		while(f >> noskipws >> c) s += c;
-		fileNhtml_[a.filename()] = s;
+		fnh[a.filename()] = s;
 		cout << "loading " << a.filename() << endl;
 	}
+	fileNhtml_.load(move(fnh));
 }
 
 bool WebSite::swap(string b, string a)

@@ -1,6 +1,7 @@
 #pragma once
 #include<map>
 #include<string>
+#include"shared_files.h"
 using namespace std;
 
 class WebSite 
@@ -15,7 +16,7 @@ protected:
 		 prepend(std::string a, std::string b);
 	std::map<std::string, std::string> nameNvalue_;//parameter
 	std::string content_, requested_document_;//set content_
-	static std::map<std::string, std::string> fileNhtml_;
+	SharedMem fileNhtml_;
 
 private:
 	const std::string header_ = 
