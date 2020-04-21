@@ -50,7 +50,7 @@ std::string WebSite::operator()(string s)
 		ss >> requested_document_;
 		requested_document_ = requested_document_.substr(1);
 		string boundary;
-		while(s != "\r") {
+		while(s != "\r") {//check \r\n[\r]\n
 			getline(ss, s);
 			if(s.find("Content-Type: multipart/form-data;") == 0) {
 				boundary = s.substr(s.find("boundary=") + 9);

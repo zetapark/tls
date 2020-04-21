@@ -14,5 +14,5 @@ protected:
 	char *ptr_;
 
 private:
-	const char *name_ = "fileNhtml";
+	char name_[11];
 };

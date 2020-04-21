@@ -1,5 +1,5 @@
 #include"psk.h"
-#define DUR (9 * 256s)
+#define DUR (5 * 60 * 60s)
 using namespace std;
 
 MClient::MClient(string ip, int port) : Client{ip, port}
@@ -46,4 +46,11 @@ void PSK::remove(shared_ptr<MClient> cl)
 	std::shared_lock<std::shared_mutex> lck{this->mtx_};
 	for(int i=0; i<this->pos_; i++)
 		if(this->ar_[i].second.sp_client == cl) this->ar_[i].second.issue_time -= 100000s;
+}
+
+optional<SClient> PSK::operator[](vector<uint8_t> key)
+{
+	auto a = ThreadSafeMap<vector<uint8_t>, SClient>::operator[](key);
+	if(a && chrono::system_clock::now() < a->issue_time + DUR) return a;
+	else return {};
 }

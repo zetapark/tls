@@ -4,11 +4,17 @@
 #include<sys/mman.h>
 #include<sys/shm.h>
 #include<sys/stat.h>
+#include<random>
 #include"shared_files.h"
 using namespace std;
 
 void SharedMem::load(map<string, string> &&fh)
 {
+	uniform_int_distribution<> di{0x20, 0x72};
+	random_device rd;
+	for(int i=0; i<10; i++) name_[i] = di(rd);
+	name_[10] = '\0';
+
 	int offset = 0;
 	for(const auto &[filename, content] : fh) {
 		fileNoffset_[filename] = {offset, content.size()};
@@ -16,8 +22,7 @@ void SharedMem::load(map<string, string> &&fh)
 	}
 	int shm_fd = shm_open(name_, O_CREAT | O_RDWR, 0666);
 	ftruncate(shm_fd, offset);
-	char *ptr = (char*)mmap(0, offset, PROT_READ | PROT_WRITE, MAP_SHARED, shm_fd, 0);
-	ptr_ = ptr;
+	char *ptr = ptr_ = (char*)mmap(0, offset, PROT_READ | PROT_WRITE, MAP_SHARED, shm_fd, 0);
 	for(const auto &[filename, content] : fh) {
 		std::copy(content.cbegin(), content.cend(), ptr);
 		ptr += content.size();

@@ -26,6 +26,7 @@ public:
 	PSK();
 	~PSK();
 	void remove(std::shared_ptr<MClient> cl);
+	std::optional<SClient> operator[](std::vector<uint8_t> key);
 protected:
 	std::thread th_;
 	bool run_ = true;

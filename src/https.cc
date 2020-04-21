@@ -1,3 +1,4 @@
+#include<regex>
 #include<iostream>
 #include<unistd.h>
 #include<cassert>
@@ -5,13 +6,14 @@
 #include"tls13.h"
 #include"https.h"
 #include"util/log.h"
+#include"cert_util.h"
 using namespace std;
 
-Middle::Middle(int outport, int inport, int timeout, int queue, string end)
-	: Server{outport, timeout, queue, end}, inport_{inport}
-{//hI = this; 
-	LOGI << "opening inner port " << inport << endl;
-} 
+PSK PSKnCLIENT;
+
+Middle::Middle(int outport, int timeout, int queue, string end)
+	: Server{outport, timeout, queue, end}
+{ } 
 	
 int Middle::get_full_length(const string &s) 
 {//this make HTTP recv into TLS recv
@@ -36,24 +38,47 @@ int Middle::start()
 	}
 }
 
+pair<string, string> get_hostncookie(string s)
+{
+	s = s.substr(0, s.find("\r\n\r\n")+4);
+	smatch m1, m2;
+	regex e1{R"(Host: (.+?)\r\n)"}, e2{R"(Cookie: .*eZFramework=(.+?)[;\r])"};
+	regex_search(s, m1, e1);
+	regex_search(s, m2, e2);
+	return {m1[1].str(), m2[1].str()};
+}
+
 void Middle::connected(int fd)
 {//will be used in parallel
 	TLS13<SERVER> t;//TLS is decoupled from file descriptor
 	if(auto cl = t.handshake(bind(&Middle::recv, this, fd),//shared pointer
-			bind(&Middle::send, this, placeholders::_1, fd), inport_)) {
-		//Client cl{"localhost", inport_};
+			bind(&Middle::send, this, placeholders::_1, fd))) {//handshake complete
 		while(1) {
+			string cookie;
 			if(auto a = recv(fd)) {//optional<string> a
-				if(a = t.decode(move(*a))) {
+				if(a = t.decode(move(*a))) {//check integrity
+					if(!*cl) {//no session resumption, this part is for web server
+						auto [host, id] = get_hostncookie(*a);//check html header
+						if(id != "") if(auto scl = PSKnCLIENT[base64_decode(id)])
+							*cl = scl->sp_client;//resume using cookie
+						if(!*cl) { //first connection
+							int port = hostNport_[host];
+							if(port == 0) port = 2001;
+							tie(cookie, *cl) = t.new_session(port, t.is_tls13());//cookie is base64 encoded id
+						}
+					}
 					LOGT << *a << endl;
-					if(cl->accumulate(*a)) {
-						cl->try_lock_for(1s);
-						cl->send();//to inner server
-						a = cl->recv();
-						cl->unlock();
-						if(a) send(t.encode(move(*a)), fd);//to browser
-						else {
-							t.remove_psk(cl);//remove psk 
+					if((*cl)->accumulate(*a)) {
+						(*cl)->try_lock_for(1s);
+						(*cl)->send();//to inner server
+						a = (*cl)->recv();
+						(*cl)->unlock();
+						if(a) {
+							if(cookie != "") 
+								a->insert(a->find("\r\n\r\n"), "\r\nSet-Cookie: eZFramework=" + cookie);
+							send(t.encode(move(*a)), fd);//to browser
+						} else {
+							PSKnCLIENT.remove(*cl);//remove psk 
 							break;
 						}
 					}

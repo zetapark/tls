@@ -6,12 +6,12 @@
 #include"ecdsa.h"
 #include"tls13.h"
 #include"pss.h"
-#define DUR (5 * 60 * 60s)
 using namespace std;
 
 template class TLS13<true>;
 template class TLS13<false>;
-template<bool SV> PSK TLS13<SV>::pskNclient_;
+
+extern PSK PSKnCLIENT;
 
 static string init_certificate()
 {
@@ -113,11 +113,6 @@ template<bool SV> string TLS13<SV>::client_ext() {
 //}
 //
 
-template<bool SV> void TLS13<SV>::remove_psk(shared_ptr<MClient> cl)
-{
-	pskNclient_.remove(cl);
-}
-
 template<bool SV> bool TLS13<SV>::supported_group(unsigned char *p, int len)
 {//return true when support secp256r1, len = ext leng, p point at the start of actual ext
 	for(int i=2; i<len; i+=2) if(*(p+i) == 0 && *(p+i+1) == 23) return true;
@@ -176,7 +171,7 @@ template<bool SV> int TLS13<SV>::psk(unsigned char *p, int len)
 		int id_len = *p++ * 0x100 + *p++;
 		vector<uint8_t> v{p, p + id_len};
 		p += id_len + 4;//obfuscated ticket age 4 byte
-		if(auto a = pskNclient_[v]; a && chrono::system_clock::now() < a->issue_time + DUR) {
+		if(auto a = PSKnCLIENT[v]) {
 			psk_ = a->psk;
 			sclient_.sp_client = a->sp_client;
 			return selected;//need to check binder
@@ -309,8 +304,19 @@ template<bool SV> string TLS13<SV>::finished(string &&s)
 	else return s == fin ? "" : this->alert(2, 51);
 }
 
-template<bool SV> string TLS13<SV>::new_session_ticket(int inport)
+template<bool SV> tuple<string, shared_ptr<MClient>> TLS13<SV>::new_session(int port, bool is13)
 {
+	sclient_.sp_client = make_shared<MClient>("localhost", port);
+	sclient_.issue_time = chrono::system_clock::now();
+	if(!is13) sclient_.psk = this->master_secret_;
+	vector<uint8_t> v{this->session_id_.begin(), this->session_id_.end()};
+	if(is13) v = ticket_id_;
+	PSKnCLIENT.insert(v, sclient_);
+	return {base64_encode(v), sclient_.sp_client};
+}
+
+template<bool SV> string TLS13<SV>::new_session_ticket()
+{//return msg, base64 encrypted id, client shared pointer
 	const int sz = 8;
 	struct {
 		uint8_t new_session_ticket = 4;
@@ -333,10 +339,7 @@ template<bool SV> string TLS13<SV>::new_session_ticket(int inport)
 	LOGD << hexprint("master", this->master_secret_) << endl;
 	LOGD << hexprint("res master", resumption_master_secret_) << endl;
 	LOGD << hexprint("resumption psk", sclient_.psk) << endl;
-	sclient_.issue_time = chrono::system_clock::now();
-	if(!sclient_.sp_client)//for multiple ticket
-		sclient_.sp_client = make_shared<MClient>("localhost", inport);
-	pskNclient_.insert({h.ticket_id, h.ticket_id + sz}, sclient_);
+	ticket_id_ = vector<uint8_t>{h.ticket_id, h.ticket_id + sz};
 	return struct2str(h);
 }
 
@@ -417,8 +420,7 @@ template<bool SV> string TLS13<SV>::server_hello(string &&s)
 		string tmp = this->accumulated_handshakes_;
 		string hello = TLS<SV>::server_hello();
 		if(!premaster_secret_) {
-			if(auto a = pskNclient_[{echo_id_, echo_id_+32}];
-					a && chrono::system_clock::now() < a->issue_time + DUR) {
+			if(auto a = PSKnCLIENT[{echo_id_, echo_id_+32}]) {
 				sclient_.sp_client = a->sp_client;
 				this->master_secret_ = a->psk;
 				memcpy(&hello[44], echo_id_, 32);//echo session id
@@ -472,15 +474,20 @@ template<bool SV> string TLS13<SV>::certificate_verify()
 	return t;
 }
 
-template<bool SV> shared_ptr<MClient>
-TLS13<SV>::handshake(function<optional<string>()> read_f, function<void(string)> write_f, int inport)
+template<bool SV> bool TLS13<SV>::is_tls13()
+{
+	return premaster_secret_ != 0;
+}
+
+template<bool SV> optional<shared_ptr<MClient>>
+TLS13<SV>::handshake(function<optional<string>()> read_f, function<void(string)> write_f)
 {//handshake according to compromised version
 	string s; optional<string> a;
 	switch(1) { case 1://to use break
 	if constexpr(SV) {
 		if(s = this->alert(2, 0);
 				!(a = read_f()) || (s = client_hello(move(*a))) != "") break;
-		if(s = server_hello(); premaster_secret_) {
+		if(s = server_hello(); premaster_secret_) {//premaster secret is set in extension if 1.3
 			protect_handshake();
 			s += this->change_cipher_spec();
 			string t = encrypted_extension();
@@ -501,8 +508,7 @@ TLS13<SV>::handshake(function<optional<string>()> read_f, function<void(string)>
 			hkdf_.salt(&this->master_secret_[0], this->master_secret_.size());
 			resumption_master_secret_ = hkdf_.derive_secret("res master",
 					this->accumulated_handshakes_);
-			write_f(encode(new_session_ticket(inport) + new_session_ticket(inport)
-					+ new_session_ticket(inport) + new_session_ticket(inport), HANDSHAKE));
+			write_f(encode(new_session_ticket(), HANDSHAKE));
 		} else {//1.2
 			if(this->master_secret_.empty()) {//no session resumption
 				s += this->server_certificate();
@@ -524,11 +530,6 @@ TLS13<SV>::handshake(function<optional<string>()> read_f, function<void(string)>
 						(s = this->change_cipher_spec(move(*a))) != "") break;
 				if(s = this->alert(2, 0); !(a = read_f()) ||
 						(s = TLS<SV>::finished(move(*a))) != "") break;
-			} else {
-				sclient_.sp_client = make_shared<MClient>("localhost", inport);
-				sclient_.psk = this->master_secret_;
-				sclient_.issue_time = chrono::system_clock::now();
-				pskNclient_.insert({this->session_id_.begin(), this->session_id_.end()}, sclient_);
 			}
 		} 
 	} else {//client
@@ -571,8 +572,10 @@ TLS13<SV>::handshake(function<optional<string>()> read_f, function<void(string)>
 		} 
 	}//if constexpr
 	}//switch
-	if(s != "") write_f(s);//send alert message
-	return sclient_.sp_client;
+	if(s != "") {
+		write_f(s);//send alert message
+		return {};
+	} else return sclient_.sp_client;
 }
 
 struct TLS_header {
