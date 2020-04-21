@@ -13,6 +13,7 @@ int main(int ac, char** av)
 	if(!co.args(ac, av)) return 0;
 	Log::get_instance()->set_log_filter(co.get<const char*>("log filter"));
 	Middle sv{co.get<int>("port")};
+	sv.read_config("eZ.conf");
 	return sv.start();
 }
 

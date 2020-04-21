@@ -22,6 +22,13 @@ int Middle::get_full_length(const string &s)
 	return static_cast<unsigned char>(s[3]) * 0x100 + static_cast<unsigned char>(s[4]) + 5;
 }
 
+void Middle::read_config(string file)
+{
+	ifstream f{file};
+	string subdomain; int port;
+	while(f >> subdomain >> port) hostNport_[subdomain] = port;
+}
+
 int Middle::start()
 {//middle server can be managed here
 	if(!ok_) return 1;
@@ -38,7 +45,7 @@ int Middle::start()
 	}
 }
 
-pair<string, string> get_hostncookie(string s)
+static pair<string, string> get_hostncookie(string s)
 {
 	s = s.substr(0, s.find("\r\n\r\n")+4);
 	smatch m1, m2;
@@ -54,9 +61,8 @@ void Middle::connected(int fd)
 	if(auto cl = t.handshake(bind(&Middle::recv, this, fd),//shared pointer
 			bind(&Middle::send, this, placeholders::_1, fd))) {//handshake complete
 		while(1) {
-			string cookie;
 			if(auto a = recv(fd)) {//optional<string> a
-				if(a = t.decode(move(*a))) {//check integrity
+				if(string cookie; a = t.decode(move(*a))) {//check integrity
 					if(!*cl) {//no session resumption, this part is for web server
 						auto [host, id] = get_hostncookie(*a);//check html header
 						if(id != "") if(auto scl = PSKnCLIENT[base64_decode(id)])

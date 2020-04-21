@@ -8,6 +8,7 @@ class Middle : public Server
 public:
 	Middle(int outport = 4433, int time_out = 0, int queue_limit = 50, std::string end_string = "end$this_is_thie_end#$#$@@@");
 	int start();
+	void read_config(std::string filename);
 
 protected:
 	std::map<std::string, int> hostNport_;
