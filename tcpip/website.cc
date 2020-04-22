@@ -6,8 +6,16 @@
 #include<regex>
 #include"server.h"
 #include"website.h"
+#include"shared_files.h"
 using namespace std;
 using namespace std::experimental::filesystem;
+
+SharedMem fileNhtml_;
+
+string WebSite::get_index()
+{
+	return fileNhtml_["index.html"];
+}
 
 WebSite::WebSite(string dir)
 {
@@ -124,4 +132,3 @@ map<string, string> WebSite::parse_post(istream& post)
 	}
 	return m;
 }
-

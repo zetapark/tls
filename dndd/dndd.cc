@@ -16,7 +16,7 @@ void DnDD::process()
 	static int hit = 0;
 	if(!hit++ && !nameNvalue_.empty()) {
 		requested_document_ = "index.html";
-		content_ = fileNhtml_[requested_document_];
+		content_ = get_index();
 	}
 	cout << requested_document_ << endl;
 	for(auto& a : nameNvalue_) cout << a.first << ':' << a.second.substr(0, 20) << endl;
