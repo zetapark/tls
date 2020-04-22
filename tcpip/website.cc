@@ -15,7 +15,7 @@ SharedMem WebSite::fileNhtml_;
 void destroy_shared_mem(int sig)
 {
 	WebSite::fileNhtml_.destroy();
-	cout << "destroyed shared map" << endl;
+	cout << "destroyed shared map, exiting " << sig << endl;
 	exit(sig);
 }
 
