@@ -68,6 +68,8 @@ void Middle::connected(int fd)
 						if(id != "") if(auto scl = PSKnCLIENT[base64_decode(id)])
 							*cl = scl->sp_client;//resume using cookie
 						if(!*cl) { //first connection
+							stringstream ss; ss << host;
+							getline(ss, host, '.');
 							int port = hostNport_[host];
 							if(port == 0) port = 2001;
 							tie(cookie, *cl) = t.new_session(port, t.is_tls13());//cookie is base64 encoded id
