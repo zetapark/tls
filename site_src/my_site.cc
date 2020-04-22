@@ -4,7 +4,7 @@
 #include"database/util.h"
 using namespace std;
 
-Site::Site() : WebSite{"site_html"}
+Site::Site()
 {//SqlQuery destructor -> mysqlquery destructor nullify
 	sq.connect("localhost", "site", "sitesite", "site");//sq prohibit destruct
 }

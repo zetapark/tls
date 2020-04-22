@@ -8,7 +8,6 @@ using namespace std;
 class My_site : public WebSite
 {
 public:
-	My_site() : WebSite{"site_html"} {}
 protected:
 	void process() {
 		if(requested_document_ == "doc1.html") {
@@ -37,6 +36,7 @@ int main(int ac, char** av)
 	CMDoption co{ {"port", "listening port", 2000}, };
 	if(!co.args(ac, av)) return 0;
 	My_site my_site;//directory name relative to your exe file
+	my_site.init();
 							//directory contains html files
 	Server sv{co.get<int>("port")};//port number
 	cout << "opening port " << co.get<int>("port") << endl;

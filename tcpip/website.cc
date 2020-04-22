@@ -4,20 +4,22 @@
 #include<iostream>
 #include<experimental/filesystem>
 #include<regex>
+#include<csignal>
 #include"server.h"
 #include"website.h"
-#include"shared_files.h"
 using namespace std;
 using namespace std::experimental::filesystem;
 
-SharedMem fileNhtml_;
+SharedMem WebSite::fileNhtml_;
 
-string WebSite::get_index()
+void destroy_shared_mem(int sig)
 {
-	return fileNhtml_["index.html"];
+	WebSite::fileNhtml_.destroy();
+	cout << "destroyed shared map" << endl;
+	exit(sig);
 }
 
-WebSite::WebSite(string dir)
+void WebSite::init(string dir)
 {
 	map<string, string> fnh;
 	for(const path& a : directory_iterator{dir}) {//directory entry has operator path
@@ -27,6 +29,7 @@ WebSite::WebSite(string dir)
 		cout << "loading " << a.filename() << endl;
 	}
 	fileNhtml_.load(move(fnh));
+	signal(SIGINT, destroy_shared_mem);
 }
 
 bool WebSite::swap(string b, string a)

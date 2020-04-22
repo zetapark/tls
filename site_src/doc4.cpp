@@ -6,7 +6,6 @@ using namespace std;
 class My_site : public WebSite
 {
 public:
-	My_site() : WebSite{"site_html"} {}
 protected:
 	void process() {
 		if(requested_document_ == "post-test") 
@@ -18,6 +17,7 @@ int main(int ac, char** av)
 {
 	My_site my_site;//directory name relative to your exe file
 							//directory contains html files
+	my_site.init("site_html");
 	Server sv{2000};//port number
 	cout << "opening port " << 2000 << endl;
 	sv.start(my_site);//go infinite loop
