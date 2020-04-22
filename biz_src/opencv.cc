@@ -1,6 +1,6 @@
 #include<regex>
 #include"tcpip/server.h"
-#include"dndd.h"
+#include"biz.h"
 #include"src/cert_util.h"
 #include"cvmatrix.h"//cvmatrix.h should come earlier than ocr.hpp
 #include<text/ocr.hpp>
@@ -102,7 +102,7 @@ static string get_with_wordvec(string kor, string eng, vector<string> &v)
 
 static CVMat M;
 
-void DnDD::crop() {
+void Biz::crop() {
 	vector<uint8_t> v{nameNvalue_["file"].begin(), nameNvalue_["file"].end()};
 	cv::Mat mat{v, true};
 	M = CVMat{cv::imdecode(mat, 1)};
@@ -132,7 +132,7 @@ static void get_b(string s)
 	M.get_businesscard(vp);
 }
 
-void DnDD::opencv()
+void Biz::opencv()
 {
 	if(string s = nameNvalue_["submit"]; s != "") {
 		get_b(nameNvalue_["pos"]);
@@ -144,12 +144,12 @@ void DnDD::opencv()
 
 	if(nameNvalue_["submit"] == "뒷면 자르기") {//from crop && name != "" back image upload
 		int num = 1;
-		if(sq2.query("select max(num) from image where user = '" + id2_ + "';")) 
-			num += sq2[0][""].asInt();
-		sq2.query("update bcard set back=" + to_string(num) + " where user='" + 
-				id2_ + "' and name='" + nameNvalue_["name"] + "'");
-		sq2.select("image", "limit 1");
-		sq2.insert(id2_, num, namecard_);
+		if(sq.query("select max(num) from image where user = '" + id_ + "';")) 
+			num += sq[0][""].asInt();
+		sq.query("update bcard set back=" + to_string(num) + " where user='" + 
+				id_ + "' and name='" + nameNvalue_["name"] + "'");
+		sq.select("image", "limit 1");
+		sq.insert(id_, num, namecard_);
 	} else if(nameNvalue_["submit"] == "앞면 자르기") {
 		auto a = cv::text::OCRTesseract::create(NULL, "eng+kor");
 		string s, email;
@@ -185,89 +185,89 @@ void DnDD::opencv()
 
 	if(nameNvalue_["name"] != "") {
 		swap("false", "true");//readonly setting
-		sq2.select("bcard", "where user = '" + id2_ + "' and name = '" + nameNvalue_["name"] + "'");
+		sq.select("bcard", "where user = '" + id_ + "' and name = '" + nameNvalue_["name"] + "'");
 		append("name='email'", " value='" + sq[0]["email"].asString() + "' ");
-		append("name='mobile'", " value='" + sq2[0]["mobile"].asString() + "' ");
-		append("name='tel'", " value='" + sq2[0]["tel"].asString() + "' ");
-		append("name='fax'", " value='" + sq2[0]["fax"].asString() + "' ");
-		append("name='role'", " value='" + sq2[0]["role"].asString() + "' ");
-		append("name='job'", " value='" + sq2[0]["company"].asString() + "' ");
-		append("name='email'", " value='" + sq2[0]["email"].asString() + "' ");
-		append("name='addr1'", " value='" + sq2[0]["address1"].asString() + "' ");
-		append("name='addr2'", " value='" + sq2[0]["address2"].asString() + "' ");
-		append("name='name'", " value='" + sq2[0]["name"].asString() + "' ");
-		append("name='memo1'", " value='" + sq2[0]["memo1"].asString() + "' ");
-		append("name='memo2'", " value='" + sq2[0]["memo2"].asString() + "' ");
-		append("name='memo3'", " value='" + sq2[0]["memo3"].asString() + "' ");
+		append("name='mobile'", " value='" + sq[0]["mobile"].asString() + "' ");
+		append("name='tel'", " value='" + sq[0]["tel"].asString() + "' ");
+		append("name='fax'", " value='" + sq[0]["fax"].asString() + "' ");
+		append("name='role'", " value='" + sq[0]["role"].asString() + "' ");
+		append("name='job'", " value='" + sq[0]["company"].asString() + "' ");
+		append("name='email'", " value='" + sq[0]["email"].asString() + "' ");
+		append("name='addr1'", " value='" + sq[0]["address1"].asString() + "' ");
+		append("name='addr2'", " value='" + sq[0]["address2"].asString() + "' ");
+		append("name='name'", " value='" + sq[0]["name"].asString() + "' ");
+		append("name='memo1'", " value='" + sq[0]["memo1"].asString() + "' ");
+		append("name='memo2'", " value='" + sq[0]["memo2"].asString() + "' ");
+		append("name='memo3'", " value='" + sq[0]["memo3"].asString() + "' ");
 
-		int back_num = sq2[0]["back"].asInt(), front_num = sq2[0]["front"].asInt();
+		int back_num = sq[0]["back"].asInt(), front_num = sq[0]["front"].asInt();
 		if(!front_num) front_img_ = "";
-		else if(sq2.select("image", "where user='" + id2_ + "' and num=" + to_string(front_num))) {
-			auto v = base64_decode(sq2[0]["image"].asString());
+		else if(sq.select("image", "where user='" + id_ + "' and num=" + to_string(front_num))) {
+			auto v = base64_decode(sq[0]["image"].asString());
 			front_img_ = string{v.begin(), v.end()};
 		}
 		if(!back_num) back_img_ = "";
-		else if(sq2.select("image", "where user='" + id2_ + "' and num=" + to_string(back_num))) {
-			auto v = base64_decode(sq2[0]["image"].asString());
+		else if(sq.select("image", "where user='" + id_ + "' and num=" + to_string(back_num))) {
+			auto v = base64_decode(sq[0]["image"].asString());
 			back_img_ = string{v.begin(), v.end()};
 		}
 	}
 }
 
-void DnDD::insert_bcard()
+void Biz::insert_bcard()
 {
-	if(id2_ == "") return;
+	if(id_ == "") return;
 	int num = 1, back_num = 0;
-	if(sq2.query("select max(num) from image where user = '" + id2_ + "';")) 
-			num += sq2[0][""].asInt();
-	sq2.select("bcard", "where user='" + id2_ + "' and name='" + nameNvalue_["hidden"] + "'");
+	if(sq.query("select max(num) from image where user = '" + id_ + "';")) 
+			num += sq[0][""].asInt();
+	sq.select("bcard", "where user='" + id_ + "' and name='" + nameNvalue_["hidden"] + "'");
 	if(nameNvalue_["submit"] == "수정완료") {
-		num = sq2[0]["front"].asInt();
-		back_num = sq2[0]["back"].asInt();
-		sq2.query("delete from bcard where user='" + id2_ + "' and name='" +
+		num = sq[0]["front"].asInt();
+		back_num = sq[0]["back"].asInt();
+		sq.query("delete from bcard where user='" + id_ + "' and name='" +
 				nameNvalue_["hidden"] + "'");
 	}
-	cout << sq2 << endl;
-	sq2.insert(id2_, nameNvalue_["name"], nameNvalue_["addr1"], nameNvalue_["addr2"],
+	cout << sq << endl;
+	sq.insert(id_, nameNvalue_["name"], nameNvalue_["addr1"], nameNvalue_["addr2"],
 			nameNvalue_["job"], nameNvalue_["role"], nameNvalue_["mobile"], 
 			nameNvalue_["tel"], nameNvalue_["fax"], nameNvalue_["email"], 
 			nameNvalue_["memo1"], nameNvalue_["memo2"], nameNvalue_["memo3"], num, back_num);
 	if(nameNvalue_["submit"] == "제출") {
-		sq2.select("image", "limit 1");
-		sq2.insert(id2_, num, namecard_);
+		sq.select("image", "limit 1");
+		sq.insert(id_, num, namecard_);
 	}
 }
 
-void DnDD::busi()
+void Biz::index()
 {
-	sq2.connect("localhost", "bcard", "bcard", "businesscard");
+	sq.connect("localhost", "bcard", "bcard", "businesscard");
 	string enc;
 	if(string s = nameNvalue_["pwd"]; s != "") {
 		SHA2 sha;
 		auto a = sha.hash(s.begin(), s.end());
 		enc = base64_encode({a.begin(), a.end()});
 	}
-	if(string s = nameNvalue_["name"]; id2_ != "" && s != "")//if from delete button
-			sq2.query("delete from bcard where user='" + id2_ + "' and name='" + s + "'");
+	if(string s = nameNvalue_["name"]; id_ != "" && s != "")//if from delete button
+			sq.query("delete from bcard where user='" + id_ + "' and name='" + s + "'");
 	if(nameNvalue_["submit"] == "login") {
-		if(sq2.select("user", "where email = '" + nameNvalue_["email"]
+		if(sq.select("user", "where email = '" + nameNvalue_["email"]
 					+"' and password = '" + enc + "'"))
-			id2_ = nameNvalue_["email"];
+			id_ = nameNvalue_["email"];
 	} else if(nameNvalue_["submit"] == "signin") {
-		if(!sq2.select("user", "where email ='" + nameNvalue_["email"] + "'")) {
-			sq2.insert(nameNvalue_["email"], enc);
-			id2_ = nameNvalue_["email"];
+		if(!sq.select("user", "where email ='" + nameNvalue_["email"] + "'")) {
+			sq.insert(nameNvalue_["email"], enc);
+			id_ = nameNvalue_["email"];
 		}
-	} else if(nameNvalue_["val"] == "logout") id2_ = "";
+	} else if(nameNvalue_["val"] == "logout") id_ = "";
 
-	if(id2_ != "") {//if already logged
+	if(id_ != "") {//if already logged
 		swap("hidden", "visible");//show logout button
 		regex e{R"(<form[\s\S]+?</form>)"};
-		content_ = regex_replace(content_, e, id2_ + "님 로그인되었습니다.",
+		content_ = regex_replace(content_, e, id_ + "님 로그인되었습니다.",
 				regex_constants::format_first_only);
-		sq2.select("bcard", "where user = '" + id2_ + "' order by name");
+		sq.select("bcard", "where user = '" + id_ + "' order by name");
 		string s;
-		for(auto a : sq2)
+		for(auto a : sq)
 			s += "<a href='opencv.html?name=" + a["name"].asString() + "'>" + 
 				a["name"].asString() + ", " + a["company"].asString() + "</a><br>";
 		prepend("</body>", s);

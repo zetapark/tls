@@ -35,8 +35,10 @@ all : ../libzeta.so ../libzetadb.so $(EXE) ../catch.tst.x ../dndd.dndd.x ../tls_
 	$(CXX) $(LDFLAGS) -o $@ $^ $(DB) $(LDLIBS) 
 
 ../dndd.dndd.x : $(wildcard *.dndd.o) $(UTIL) dndd.dndd.x
-	$(CXX) $(LDFLAGS) -o $@ $^ $(DB) $(LDLIBS) $(OPENCV)
+	$(CXX) $(LDFLAGS) -o $@ $^ $(DB) $(LDLIBS) base64.src.o
 
+../biz.biz_src.x : $(wildcard *.biz_src.o) $(UTIL) biz.biz_src.x
+	$(CXX) $(LDFLAGS) -o $@ $^ $(DB) $(LDLIBS) $(OPENCV) base64.src.o
 #    $@ |현재 목표 파일의 이름
 #    $* | 확장자를 제외한 현재 목표 파일의 이름
 #    $< | 현재 필수 조건 파일 중 첫 번째 파일 이름
