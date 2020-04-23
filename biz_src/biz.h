@@ -12,10 +12,3 @@ private:
 	std::string id_, front_img_, back_img_, namecard_;
 };
 
-class Biz2 : public WebSite
-{
-protected:
-	void process();
-
-};
-
