@@ -5,7 +5,7 @@ using namespace std;
 
 int main(int ac, char** av)
 {
-	Biz f;
+	Biz2 f;
 	f.init("biz_html");
 	int port = ac < 2 ? 2002 : atoi(av[1]);
 	Server sv{port};

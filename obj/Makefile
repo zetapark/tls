@@ -11,12 +11,15 @@ DB = -lzetadb -lmysqlcppconn
 OPENCV = $(shell pkg-config opencv --libs)
 #filesystem library should be next to zeta library
 
-all : ../libzeta.so ../libzetadb.so $(EXE) ../catch.tst.x ../dndd.dndd.x ../tls_crypt.so
+all : ../libzeta.so ../libzetadb.so ../libbiz.so $(EXE) ../catch.tst.x ../dndd.dndd.x ../tls_crypt.so
 
 ../libzeta.so : $(wildcard *.tcpip.o) 
 	$(CXX) -shared -o $@ $^
 
 ../libzetadb.so : $(wildcard *.database.o)
+	$(CXX) -shared -o $@ $^
+
+../libbiz.so : $(wildcard *.biz_src.o)
 	$(CXX) -shared -o $@ $^
 
 ../%.tcpip.x : %.tcpip.x $(wildcard *.tcpip.o) $(wildcard *.util.o)
@@ -37,8 +40,8 @@ all : ../libzeta.so ../libzetadb.so $(EXE) ../catch.tst.x ../dndd.dndd.x ../tls_
 ../dndd.dndd.x : $(wildcard *.dndd.o) $(UTIL) dndd.dndd.x
 	$(CXX) $(LDFLAGS) -o $@ $^ $(DB) $(LDLIBS) base64.src.o
 
-../biz.biz_src.x : $(wildcard *.biz_src.o) $(UTIL) biz.biz_src.x
-	$(CXX) $(LDFLAGS) -o $@ $^ $(DB) $(LDLIBS) $(OPENCV) base64.src.o
+../biz.biz_src.x : $(UTIL) biz.biz_src.x
+	$(CXX) $(LDFLAGS) -o $@ $^ -lbiz $(DB) $(LDLIBS) $(OPENCV) base64.src.o
 #    $@ |현재 목표 파일의 이름
 #    $* | 확장자를 제외한 현재 목표 파일의 이름
 #    $< | 현재 필수 조건 파일 중 첫 번째 파일 이름

@@ -8,7 +8,7 @@ MAIN_OBJ = $(patsubst %.cpp, ../obj/%.$(DIR).x, $(wildcard *.cpp))
 all : $(OBJ) $(MAIN_OBJ)
 
 ../obj/%.$(DIR).o : %.cc 
-	$(CC) $(INCLUDE) $(CFLAG) $< -o $@
+	$(CC) $(INCLUDE) $(CFLAG) $< -o $@ -fpic
 
 ../obj/%.$(DIR).x : %.cpp
 	$(CC) $(INCLUDE) $(CFLAG) $< -o $@

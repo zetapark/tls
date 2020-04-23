@@ -10,3 +10,6 @@ void Biz::process()
 	else if(requested_document_ == "front.jpg") content_ = front_img_;
 	else if(requested_document_ == "back.jpg") content_ = back_img_;
 }
+
+void Biz2::process()
+{}
