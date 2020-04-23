@@ -61,7 +61,7 @@ Client::Client(string ip, int port) : Http(port)
 	else cout << "connecting to " << ip << ':' << port  <<endl;
 
 	struct timeval tv;
-	tv.tv_sec = 3;
+	tv.tv_sec = 5;
 	tv.tv_usec = 0;
 	setsockopt(client_fd, SOL_SOCKET, SO_RCVTIMEO, &tv, sizeof tv);
 }

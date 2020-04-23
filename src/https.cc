@@ -77,7 +77,7 @@ void Middle::connected(int fd)
 					}
 					LOGT << *a << endl;
 					if((*cl)->accumulate(*a)) {//multiple packets constitute one message
-						if((*cl)->try_lock_for(5s)) {
+						if((*cl)->try_lock_for(7s)) {
 							(*cl)->send();//to inner server
 							a = (*cl)->recv();
 							(*cl)->unlock();
