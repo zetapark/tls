@@ -4,8 +4,6 @@
 
 class Biz : public WebSite
 {
-public:
-	Biz() = default;
 protected:
 	void process();
 	SqlQuery sq;
