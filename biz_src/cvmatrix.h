@@ -66,6 +66,7 @@ public:
 	void transform4(cv::Point2f src[4], cv::Point2f dst[4], cv::Size sz = {0,0});
 	std::vector<cv::Point> get_points(int k);// ^ affine and perspective transform
 	void get_businesscard(std::vector<cv::Point> v);
+	void clear();
 	
 protected:
 	cv::Mat save_, harris_, descriptor_;

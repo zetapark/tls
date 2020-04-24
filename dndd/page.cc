@@ -55,6 +55,7 @@ void DnDD::pg()
 	}
 
 	//set buttons
+	swap("@UP", table);
 	swap("FIRST", table + "&book=" + book + "&page=0");
 	swap("PREV", table + "&book=" + book + "&page=" + to_string(ipage ? ipage-1 : 0));
 	swap("NEXT", table + "&book=" + book + "&page=" + to_string(ipage == max_page ? max_page : ipage + 1));

@@ -35,7 +35,7 @@ string DnDD::field(string s)
 {//return table contents as bootstrap panel string
 	vector<string> v;
 	string t;
-	sq.select(s, "where title <> \'코멘트임.\' order by num desc, page, date, edit desc");
+	sq.query("select num, title, page, email, date, edit from " + s + " where title <> '코멘트임.' order by num desc, page, date, edit desc");
 	sq.group_by({"email", "date"});
 	for(int i=0; i<sq.size(); i++) {
 		string n = sq[i]["num"].asString();

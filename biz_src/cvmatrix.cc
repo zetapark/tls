@@ -473,3 +473,19 @@ void CVMat::template_init()
 	feature<ORB>();
 	feature<BRISK>();
 }
+
+void CVMat::clear()
+{
+	release();
+	save_.release();
+	harris_.release();
+	descriptor_.release();
+	bgr_.clear();
+	lines_.clear();
+	hierachy_.clear();//hierachy for contour
+	circles_.clear();
+	faces_.clear();
+	contours_.clear();
+	keypoints_.clear();
+}
+

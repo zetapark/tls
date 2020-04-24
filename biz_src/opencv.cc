@@ -240,6 +240,7 @@ void Biz::insert_bcard()
 
 void Biz::index()
 {
+	M.clear();
 	sq.connect("localhost", "bcard", "bcard", "businesscard");
 	string enc;
 	if(string s = nameNvalue_["pwd"]; s != "") {
