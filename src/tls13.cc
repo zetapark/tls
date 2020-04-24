@@ -321,7 +321,7 @@ template<bool SV> string TLS13<SV>::new_session_ticket()
 	struct {
 		uint8_t new_session_ticket = 4;
 		uint8_t size[3] = {0, 0, 29};
-		uint8_t ticket_lifetime_in_sec[4] = {0, 0, 46, 50};
+		uint8_t ticket_lifetime_in_sec[4] = {0, 0, 14, 16};
 		uint8_t ticket_age_add[4];
 		uint8_t ticket_nonce_size = sz;
 		uint8_t ticket_nonce[sz];

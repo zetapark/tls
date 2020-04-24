@@ -1,5 +1,5 @@
 #include"psk.h"
-#define DUR (5 * 60 * 60s)
+#define DUR (60 * 60s)
 using namespace std;
 
 MClient::MClient(string ip, int port) : Client{ip, port}
