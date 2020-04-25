@@ -3,6 +3,7 @@
 #include<unordered_map>
 #include<ctime>
 #include<sstream>
+#include<numeric>
 #include"mysqldata.h"
 #include"util/log.h"
 using namespace std;
@@ -12,13 +13,20 @@ SqlQuery::SqlQuery(const SqlQuery& r) : Mysqlquery{r}
 
 bool SqlQuery::query(string q)
 {
-	myQuery(q);
+	bool r = myQuery(q);
 	sql::ResultSetMetaData* mt = res->getMetaData();
 	columns.clear(); clear();
-	int c = mt->getColumnCount();
-	for(int i = 0; i < c; i++) //populate columns
+	column_count_ = mt->getColumnCount();
+	for(int i = 0; i < column_count_; i++) //populate columns
 		columns.push_back({mt->getColumnName(i+1), mt->getColumnDisplaySize(i+1), mt->getColumnTypeName(i+1)});
-	for(int j=0; res->next(); j++) for(int i = 0; i < c; i++) { //populate contents
+	return r;
+}
+
+int SqlQuery::fetch(int n)
+{
+	clear();
+	if(n < 0) n = numeric_limits<int>::max();
+	for(int j=0; j<n && res->next(); j++) for(int i=0; i<column_count_; i++) { //populate contents
 		if(is_int(i)) (*this)[j][columns[i].name] = res->getInt(i+1);
 		else if(is_real(i)) 
 			(*this)[j][columns[i].name] = static_cast<double>(res->getDouble(i+1));

@@ -11,6 +11,7 @@ all :
 	make $(OPTION) -C site_src/
 	make $(OPTION) -C dndd/
 	make $(OPTION) -C biz_src/
+	make $(OPTION) -C kk_src/
 	make $(OPTION) -C tst/
 	make $(OPTION) -C obj/
 	./catch.tst.x

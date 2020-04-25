@@ -12,6 +12,7 @@ public:
 	SqlQuery() = default;
 	SqlQuery(const SqlQuery& r);
 	bool query(std::string q);
+	int fetch(int n = -1);
 	int select(std::string table, std::string where = "");
 	bool insert_nth_row(int n);
 	bool insert(std::vector<std::string> v);
@@ -48,6 +49,7 @@ protected:
 	};
 	std::string table_name;
 	std::vector<Column> columns;
+	int column_count_;
 
 private:
 	bool is_int(int nth_column);

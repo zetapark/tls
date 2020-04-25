@@ -11,7 +11,7 @@ DB = -lzetadb -lmysqlcppconn
 OPENCV = $(shell pkg-config opencv --libs)
 #filesystem library should be next to zeta library
 
-all : ../libzeta.so ../libzetadb.so ../libbiz.so $(EXE) ../catch.tst.x ../dndd.dndd.x ../tls_crypt.so
+all : ../libzeta.so ../libzetadb.so ../libbiz.so $(EXE) ../catch.tst.x ../tls_crypt.so 
 
 ../libzeta.so : $(wildcard *.tcpip.o) 
 	$(CXX) -shared -o $@ $^
@@ -42,6 +42,12 @@ all : ../libzeta.so ../libzetadb.so ../libbiz.so $(EXE) ../catch.tst.x ../dndd.d
 
 ../biz.biz_src.x : $(UTIL) biz.biz_src.x
 	$(CXX) $(LDFLAGS) -o $@ $^ -lbiz $(DB) $(LDLIBS) $(OPENCV) base64.src.o
+
+../insert.database.x : insert.database.x
+	$(CXX) $(LDFLAGS) -o $@ $^ -lbiz $(DB) $(UTIL) $(LDLIBS) $(OPENCV) base64.src.o
+
+../search.kk_src.x : search.kk_src.x
+	$(CXX) $(LDFLAGS) -o $@ $^ -lbiz $(DB) $(UTIL) $(LDLIBS) $(OPENCV) base64.src.o
 #    $@ |현재 목표 파일의 이름
 #    $* | 확장자를 제외한 현재 목표 파일의 이름
 #    $< | 현재 필수 조건 파일 중 첫 번째 파일 이름

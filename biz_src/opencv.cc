@@ -144,8 +144,8 @@ void Biz::opencv()
 
 	if(nameNvalue_["submit"] == "뒷면 자르기") {//from crop && name != "" back image upload
 		int num = 1;
-		if(sq.query("select max(num) from image where user = '" + id_ + "';")) 
-			num += sq[0][""].asInt();
+		sq.query("select max(num) from image where user = '" + id_ + "';");
+		if(sq.fetch(1)) num += sq[0][""].asInt();
 		sq.query("update bcard set back=" + to_string(num) + " where user='" + 
 				id_ + "' and name='" + nameNvalue_["name"] + "'");
 		sq.select("image", "limit 1");
@@ -218,8 +218,11 @@ void Biz::insert_bcard()
 {
 	if(id_ == "") return;
 	int num = 1, back_num = 0;
-	if(sq.query("select max(num) from image where user = '" + id_ + "';")) 
-			num += sq[0][""].asInt();
+	sq.query("select max(num) from image where user = '" + id_ + "';");
+	if(sq.fetch(1)) {
+		cout << "sq : " << sq << endl;
+		num += sq[0][""].asInt();
+	}
 	sq.select("bcard", "where user='" + id_ + "' and name='" + nameNvalue_["hidden"] + "'");
 	if(nameNvalue_["submit"] == "수정완료") {
 		num = sq[0]["front"].asInt();
