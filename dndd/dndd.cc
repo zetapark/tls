@@ -158,9 +158,9 @@ string DnDD::search(string s)
 	vector<string> v1 = tables();
 	string t;
 	for(string table : v1) {
-		sq.select( "(select tt.num, tt.page, email, title, contents, date, edit from "
-				+ table + " tt inner join (select num, page, max(edit) as maxedit from "
-				+ table + " group by num, page) tmp on tt.num = tmp.num and tt.page = tmp.page and tt.edit = tmp.maxedit) tt2",
+		sq.select( "(select tt.num, tt.page, title, edit from " + table + 
+				" tt inner join (select num, page, max(edit) as maxedit from " + table +
+				" group by num, page) tmp on tt.num = tmp.num and tt.page = tmp.page and tt.edit = tmp.maxedit) tt2",
 				"where title like '%" + s + "%' and title <> '코멘트임.';");
 		for(const auto &a : sq) {
 			string n = a["num"].asString();
