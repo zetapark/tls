@@ -257,7 +257,7 @@ void Biz::google_oauth()
 {
 	if(string s = nameNvalue_["token"]; s != "") {//google oauth login, s == token
 		if(s = psstm("./oauth.py " + s); s != "") {//s == email
-			if(!sq.select("user", "where email='" + s)) sq.insert(s, "");
+			if(!sq.select("user", "where email='" + s + "'")) sq.insert(s, "");
 			id_ = s;
 		}
 	}
