@@ -24,8 +24,7 @@
 					auth2.signOut().then(function () { 
 						auth2.disconnect();
 						$.get('logout', function(data) {
-							alert(data);
-					//		location.reload();
+							location.href = 'index.html';
 						});
 					})
 					});
