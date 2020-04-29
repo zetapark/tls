@@ -13,7 +13,13 @@
 					function(data) { if(data.localeCompare('reload') == 0) location.reload(); }
 				);
 			}
-			function signOut() {
+			function init() {
+				gapi.load('auth2', function() {
+					gapi.auth2.init();
+					/* Ready. Make a call to gapi.auth2.init or some other API */
+				});
+			}
+			$($('button').click(function() {
 				$.get('logout');
 				var auth2 = gapi.auth2.getAuthInstance();
 				auth2.signOut().then(function () { 
@@ -21,13 +27,7 @@
 					alert('User signed out.'); 
 					location.reload();
 				});
-			}
-function init() {
-  gapi.load('auth2', function() {
-		gapi.auth2.init();
-    /* Ready. Make a call to gapi.auth2.init or some other API */
-  });
-}
+			});
 		</script>
 		<style>
 			a {
@@ -51,7 +51,7 @@ function init() {
 			<input type="submit" name='submit' value='signin'>
 		</form> 
 		</div>
-		<button onclick=signOut>로그아웃</button>
+		<button>로그아웃</button>
 		<form action="crop.html" method="post" enctype="multipart/form-data">
 			<input type="file" name="file" id="file" >
 			<input type="submit" name="submit" value="명함 앞면 업로드" class="btn btn-primary">
