@@ -3,6 +3,7 @@
 #include"biz.h"
 #include"src/cert_util.h"
 #include"cvmatrix.h"//cvmatrix.h should come earlier than ocr.hpp
+#include"database/util.h"//psstm
 #include<text/ocr.hpp>
 #include"src/sha256.h"
 using namespace std;
@@ -263,6 +264,12 @@ void Biz::index()
 			id_ = nameNvalue_["email"];
 		}
 	} else if(nameNvalue_["val"] == "logout") id_ = "";
+	else if(string s = nameNvalue_["token"]; s != "") {//google oauth login, s == token
+		if(s = psstm("./oauth.py " + s); s != "") {//s == email
+			if(!sq.select("user", "where email='" + s)) sq.insert(s, "");
+			id_ = s;
+		}
+	}
 
 	if(id_ != "") {//if already logged
 		swap("hidden", "visible");//show logout button
