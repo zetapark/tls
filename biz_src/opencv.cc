@@ -8,6 +8,17 @@
 #include"src/sha256.h"
 using namespace std;
 
+void Biz::process() 
+{
+	if(requested_document_ == "index.html") index();
+	else if(requested_document_ == "opencv.html") opencv();
+	else if(requested_document_ == "insert.html") insert_bcard();
+	else if(requested_document_ == "crop.html") crop();
+	else if(requested_document_ == "front.jpg") content_ = front_img_;
+	else if(requested_document_ == "back.jpg") content_ = back_img_;
+	else if(requested_document_ == "google_oauth") google_oauth();
+}
+
 static string find_continuous_digits(string s, int cont, int yield=2) 
 {//yield 1 or 2 non digit
 	string r, y;
@@ -242,6 +253,16 @@ void Biz::insert_bcard()
 	}
 }
 
+void Biz::google_oauth()
+{
+	if(string s = nameNvalue_["token"]; s != "") {//google oauth login, s == token
+		if(s = psstm("./oauth.py " + s); s != "") {//s == email
+			if(!sq.select("user", "where email='" + s)) sq.insert(s, "");
+			id_ = s;
+		}
+	}
+}
+
 void Biz::index()
 {
 	M.clear();
@@ -264,12 +285,6 @@ void Biz::index()
 			id_ = nameNvalue_["email"];
 		}
 	} else if(nameNvalue_["val"] == "logout") id_ = "";
-	else if(string s = nameNvalue_["token"]; s != "") {//google oauth login, s == token
-		if(s = psstm("./oauth.py " + s); s != "") {//s == email
-			if(!sq.select("user", "where email='" + s)) sq.insert(s, "");
-			id_ = s;
-		}
-	}
 
 	if(id_ != "") {//if already logged
 		swap("hidden", "visible");//show logout button

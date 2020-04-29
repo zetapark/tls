@@ -10,11 +10,8 @@
 	 <script src="https://apis.google.com/js/platform.js" async defer></script>
 	 <script>
 		 function onSignIn(googleUser) {
-			 $.post('index.html', {token : googleUser.getAuthResponse().id_token, type : 'google'}
-				 function(data) {
-					 console.log(data);
-					 alert(eval(data).email);
-				 }
+			 $.post('google_oauth', {token : googleUser.getAuthResponse().id_token, type : 'google'},
+				 function() { location.reload(); }
 			 );
 		 }
 function signOut() {
