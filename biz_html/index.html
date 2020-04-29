@@ -7,7 +7,7 @@
   integrity="sha256-MlusDLJIP1GRgLrOflUQtshyP0TwT/RHXsI1wWGnQhs=" crossorigin="anonymous"></script>
 	 <script src="https://apis.google.com/js/platform.js" async defer></script>
 	 <script>
-		$($('.g-signin2').click(function onSignIn(googleUser) {
+		function onSignIn(googleUser) {
 			 var profile = googleUser.getBasicProfile();
 			 console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
 			 console.log('Name: ' + profile.getName());
@@ -23,7 +23,6 @@ function signOut() {
 		console.log('User signed out.');
 	});
 }
-);
 	 </script>
 	 <style>
 a {
