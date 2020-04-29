@@ -9,7 +9,7 @@
 		<script src="https://apis.google.com/js/platform.js" async defer></script>
 		<script>
 			function onSignIn(googleUser) {
-				$.get('google_oauth', {token : googleUser.getAuthResponse().id_token, type : 'google'});
+				$.post('google_oauth', {token : googleUser.getAuthResponse().id_token, type : 'google'});
 			}
 function signOut() {
 	var auth2 = gapi.auth2.getAuthInstance();
@@ -28,8 +28,7 @@ a {
 		</title>
 	</head>
 	<body>
-		<div class="g-signin2" data-onsuccess="onSignIn" data-redirecturi='index.html'></div>
-		<a href="#" onclick="signOut();">Sign out</a>
+		<div class="g-signin2" data-onsuccess="onSignIn" data-redirecturi='https://biz.zeta2374.com/index.html'></div>
 		<form action="index.html" method="post">	 
 			<label for="email">Email address:</label>
 			<input type="email" id="email" name="email">
@@ -38,7 +37,7 @@ a {
 			<input type="submit" name='submit' value='login'>
 			<input type="submit" name='submit' value='signin'>
 		</form> 
-		<a href='index.html?val=logout'>로그아웃</a>
+		<a href='index.html?val=logout' onclick='signOut()'>로그아웃</a>
 		<form action="crop.html" method="post" enctype="multipart/form-data">
 			<input type="file" name="file" id="file" >
 			<input type="submit" name="submit" value="명함 앞면 업로드" class="btn btn-primary">
