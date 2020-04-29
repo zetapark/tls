@@ -9,9 +9,7 @@
 		<script src="https://apis.google.com/js/platform.js" async defer></script>
 		<script>
 			function onSignIn(googleUser) {
-				$.get('google_oauth', {token : googleUser.getAuthResponse().id_token, type : 'google'},
-					function(data) { if(data == "reload") $('body').replace('index.html'); }
-				);
+				$.get('google_oauth', {token : googleUser.getAuthResponse().id_token, type : 'google'});
 			}
 function signOut() {
 	var auth2 = gapi.auth2.getAuthInstance();
@@ -30,7 +28,7 @@ a {
 		</title>
 	</head>
 	<body>
-		<div class="g-signin2" data-onsuccess="onSignIn"></div>
+		<div class="g-signin2" data-onsuccess="onSignIn" data-redirecturi='index.html'></div>
 		<a href="#" onclick="signOut();">Sign out</a>
 		<form action="index.html" method="post">	 
 			<label for="email">Email address:</label>
