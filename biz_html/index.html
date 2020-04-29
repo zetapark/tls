@@ -10,29 +10,29 @@
 		<script>
 			function onSignIn(googleUser) {
 				$.post('google_oauth', {token : googleUser.getAuthResponse().id_token, type : 'google'},
-					function(data) { if(data.localeCompare('reload') == 0) location.href = 'index.html'; }
+					function(data) { if(data.localeCompare('reload') == 0) location.reload(); }
 				);
 			}
-function signOut() {
-	$.post('index.html', {val : 'logout'});
-	var auth2 = gapi.auth2.getAuthInstance();
-	auth2.signOut().then(function () {
-		console.log('User signed out.');
-	});
-}
+			function signOut() {
+				$.get('logout');
+				var auth2 = gapi.auth2.getAuthInstance();
+				auth2.signOut().then(function () { alert('User signed out.'); });
+				location.reload();
+			}
 		</script>
 		<style>
-a {
-	visibility : hidden;
-}
+			a {
+				visibility : hidden;
+			}
 		</style>
 		<title>
 			명함 정리
 		</title>
 	</head>
+
 	<body>
 		<div id=login>
-		<div class="g-signin2" data-onsuccess="onSignIn" data-redirecturi='postmessage'></div>
+		<div class=g-signin2 data-onsuccess=onSignIn></div>
 		<form action="index.html" method="post">	 
 			<label for="email">Email address:</label>
 			<input type="email" id="email" name="email">
@@ -42,7 +42,7 @@ a {
 			<input type="submit" name='submit' value='signin'>
 		</form> 
 		</div>
-		<a href='index.html' onclick='signOut()'>로그아웃</a>
+		<a href=# onclick=signOut>로그아웃</a>
 		<form action="crop.html" method="post" enctype="multipart/form-data">
 			<input type="file" name="file" id="file" >
 			<input type="submit" name="submit" value="명함 앞면 업로드" class="btn btn-primary">

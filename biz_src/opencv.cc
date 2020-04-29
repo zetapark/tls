@@ -17,6 +17,7 @@ void Biz::process()
 	else if(requested_document_ == "front.jpg") content_ = front_img_;
 	else if(requested_document_ == "back.jpg") content_ = back_img_;
 	else if(requested_document_ == "google_oauth") google_oauth();
+	else if(requested_document_ == "logout") id_ = "";
 }
 
 static string find_continuous_digits(string s, int cont, int yield=2) 
@@ -284,7 +285,7 @@ void Biz::index()
 			sq.insert(nameNvalue_["email"], enc);
 			id_ = nameNvalue_["email"];
 		}
-	} else if(nameNvalue_["val"] == "logout") id_ = "";
+	}
 
 	if(id_ != "") {//if already logged
 		swap("hidden", "visible");//show logout button
