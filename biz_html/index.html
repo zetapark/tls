@@ -24,6 +24,7 @@
 				});
 			}
 			$(function() { 
+				$('button').hide();
 				$('button').click(function() {
 					var auth2 = gapi.auth2.getAuthInstance();
 					auth2.signOut().then(function () { 
@@ -35,11 +36,6 @@
 				});
 			});
 		</script>
-		<style>
-			button {
-				visibility : hidden;
-			}
-		</style>
 		<title>
 			명함 정리
 		</title>
