@@ -10,9 +10,7 @@
 	 <script src="https://apis.google.com/js/platform.js" async defer></script>
 	 <script>
 		 function onSignIn(googleUser) {
-			 $.post('google_oauth', {token : googleUser.getAuthResponse().id_token, type : 'google'},
-				 function() { location.reload(); }
-			 );
+			 $.post('google_oauth', {token : googleUser.getAuthResponse().id_token, type : 'google'});
 		 }
 function signOut() {
 	var auth2 = gapi.auth2.getAuthInstance();
