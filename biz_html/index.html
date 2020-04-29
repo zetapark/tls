@@ -17,6 +17,7 @@
 			 console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
 				 $.get('https://oauth2.googleapis.com/tokeninfo', { id_token : googleUser.getAuthResponse().id_token}, function(data) {
 					 console.log(data);
+					 alert(eval(data).email);
 				 });
 		 }
 function signOut() {
