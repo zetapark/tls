@@ -10,7 +10,12 @@
 		<script>
 			function onSignIn(googleUser) {
 				$.post('google_oauth', {token : googleUser.getAuthResponse().id_token, type : 'google'},
-					function(data) { if(data.localeCompare('reload') == 0) location.reload(); }
+					function(data) { 
+						if(data.localeCompare('reload') == 0) {
+							location.reload();
+							$('button').show();
+						}
+					}
 				);
 			}
 			function init() {
@@ -27,7 +32,7 @@
 							location.href = 'index.html';
 						});
 					})
-					});
+				});
 			});
 		</script>
 		<style>
