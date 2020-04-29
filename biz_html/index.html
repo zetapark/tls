@@ -15,9 +15,13 @@
 			}
 			function signOut() {
 				$.get('logout');
+				if(!gapi.auth2) gapi.auth2.init();
 				var auth2 = gapi.auth2.getAuthInstance();
-				auth2.signOut().then(function () { alert('User signed out.'); });
-				location.reload();
+				auth2.signOut().then(function () { 
+					auth2.disconnect();
+					alert('User signed out.'); 
+					location.reload();
+				});
 			}
 		</script>
 		<style>
@@ -42,7 +46,7 @@
 			<input type="submit" name='submit' value='signin'>
 		</form> 
 		</div>
-		<a href=# onclick=signOut>로그아웃</a>
+		<button onclick=signOut>로그아웃</button>
 		<form action="crop.html" method="post" enctype="multipart/form-data">
 			<input type="file" name="file" id="file" >
 			<input type="submit" name="submit" value="명함 앞면 업로드" class="btn btn-primary">
