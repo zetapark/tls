@@ -41,13 +41,13 @@ all : ../libzeta.so ../libzetadb.so ../libbiz.so $(EXE) ../catch.tst.x ../tls_cr
 	$(CXX) $(LDFLAGS) -o $@ $^ $(DB) $(LDLIBS) base64.src.o
 
 ../biz.biz_src.x : $(UTIL) biz.biz_src.x
-	$(CXX) $(LDFLAGS) -o $@ $^ -lbiz $(DB) $(LDLIBS) $(OPENCV) base64.src.o
+	$(CXX) $(LDFLAGS) -o $@ $^ -lbiz -lpython3.6m $(DB) $(LDLIBS) $(OPENCV) base64.src.o
 
 ../insert.database.x : insert.database.x
-	$(CXX) $(LDFLAGS) -o $@ $^ -lbiz $(DB) $(UTIL) $(LDLIBS) $(OPENCV) base64.src.o
+	$(CXX) $(LDFLAGS) -o $@ $^ -lbiz -lpython3.6m $(DB) $(UTIL) $(LDLIBS) $(OPENCV) base64.src.o
 
 ../search.kk_src.x : search.kk_src.x
-	$(CXX) $(LDFLAGS) -o $@ $^ -lbiz $(DB) $(UTIL) $(LDLIBS) $(OPENCV) base64.src.o
+	$(CXX) $(LDFLAGS) -o $@ $^ $(DB) $(UTIL) $(LDLIBS) $(OPENCV) base64.src.o
 #    $@ |현재 목표 파일의 이름
 #    $* | 확장자를 제외한 현재 목표 파일의 이름
 #    $< | 현재 필수 조건 파일 중 첫 번째 파일 이름
