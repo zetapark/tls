@@ -257,15 +257,16 @@ void Biz::insert_bcard()
 
 void Biz::google_oauth()
 {
-//	namespace py = pybind11;
-//	py::object auth = py::module::import("google.oauth2.id_token.verify_oauth2_token");
-//	py::object request = py::module::import("google.auth.transport.requests.Request");
-//	auto id_info = auth(nameNvalue_["token"], request(), "727978600466-bhdht9qmei6fkrap60or1hud2j7ahus4.apps.googleusercontent.com");
-//	py::print(id_info["email"]);
-	if(string s = psstm("./oauth.py " + nameNvalue_["token"]); s != "") {//s == email
-		if(!sq.select("user", "where email='" + s + "'")) sq.insert(s, "");
-		id_ = s;
-	}
+	namespace py = pybind11;
+	py::object auth = py::module::import("google.oauth2.id_token.verify_oauth2_token");
+	py::object request = py::module::import("google.auth.transport.requests.Request");
+	auto id_info = auth(nameNvalue_["token"], request(), "727978600466-bhdht9qmei6fkrap60or1hud2j7ahus4.apps.googleusercontent.com");
+	py::print(id_info["email"]);
+//	if(string s = psstm("./oauth.py " + nameNvalue_["token"]); s != "") {//s == email
+//		s.pop_back();//\n remove
+//		if(!sq.select("user", "where email='" + s + "'")) sq.insert(s, "");
+//		id_ = s;
+//	}
 }
 
 void Biz::index()
