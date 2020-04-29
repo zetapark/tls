@@ -19,7 +19,9 @@
 					/* Ready. Make a call to gapi.auth2.init or some other API */
 				});
 			}
-			$($('button').click(function() {
+$(function() { 
+	$('button').click(function() {
+				alert('hello');
 				$.get('logout');
 				var auth2 = gapi.auth2.getAuthInstance();
 				auth2.signOut().then(function () { 
@@ -27,7 +29,7 @@
 					alert('User signed out.'); 
 					location.reload();
 				});
-			}));
+	})});
 		</script>
 		<style>
 			a {
