@@ -14,7 +14,7 @@
 			 console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
 				 $.get('https://oauth2.googleapis.com/tokeninfo', { id_token : googleUser.getAuthResponse().id_token}, function(data) {
 					 alert(data);
-				 }
+				 });
 		 }
 function signOut() {
 	var auth2 = gapi.auth2.getAuthInstance();
