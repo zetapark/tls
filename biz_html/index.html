@@ -21,9 +21,14 @@
 			$(function() { 
 				$('button').click(function() {
 					var auth2 = gapi.auth2.getAuthInstance();
-					auth2.signOut().then(function () { auth2.disconnect(); });
-					$.get('logout', function() {location.reload();});
-				})
+					auth2.signOut().then(function () { 
+						auth2.disconnect();
+						$.get('logout', function(data) {
+							alert(data);
+					//		location.reload();
+						});
+					})
+					});
 			});
 		</script>
 		<style>
