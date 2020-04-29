@@ -16,11 +16,13 @@
 			function init() {
 				gapi.load('auth2', function() {
 					var Auth = gapi.auth2.init({client_id : '727978600466-bhdht9qmei6fkrap60or1hud2j7ahus4.apps.googleusercontent.com'});
+					/* Ready. Make a call to gapi.auth2.init or some other API */
 				});
 			}
 			$($('button').click(function() {
 				$.get('logout');
-				Auth.signOut().then(function () { 
+				var auth2 = gapi.auth2.getAuthInstance();
+				auth2.signOut().then(function () { 
 					auth2.disconnect();
 					alert('User signed out.'); 
 					location.reload();
