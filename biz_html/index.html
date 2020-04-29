@@ -9,8 +9,8 @@
 		<script src="https://apis.google.com/js/platform.js" async defer></script>
 		<script>
 			function onSignIn(googleUser) {
-				$.post('google_oauth', {token : googleUser.getAuthResponse().id_token, type : 'google'},
-					function(data) { if(data == "reload") location.reload(); }
+				$.get('google_oauth', {token : googleUser.getAuthResponse().id_token, type : 'google'},
+					function(data) { if(data == "reload") $('body').replace('index.html'); }
 				);
 			}
 function signOut() {
