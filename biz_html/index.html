@@ -6,7 +6,7 @@
 		<script src="https://code.jquery.com/jquery-3.5.0.min.js"
 					integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ="
 		 crossorigin="anonymous"></script>
-		<script src="https://apis.google.com/js/platform.js" async defer></script>
+		<script src="https://apis.google.com/js/platform.js?onload=init" async defer></script>
 		<script>
 			function onSignIn(googleUser) {
 				$.post('google_oauth', {token : googleUser.getAuthResponse().id_token, type : 'google'},
@@ -15,7 +15,6 @@
 			}
 			function signOut() {
 				$.get('logout');
-				if(!gapi.auth2) gapi.auth2.init();
 				var auth2 = gapi.auth2.getAuthInstance();
 				auth2.signOut().then(function () { 
 					auth2.disconnect();
@@ -23,6 +22,12 @@
 					location.reload();
 				});
 			}
+function init() {
+  gapi.load('auth2', function() {
+		gapi.auth2.init();
+    /* Ready. Make a call to gapi.auth2.init or some other API */
+  });
+}
 		</script>
 		<style>
 			a {
