@@ -22,11 +22,10 @@
 				$('button').click(function() {
 					$.get('logout');
 					var auth2 = gapi.auth2.getAuthInstance();
-					auth2.signOut().then(function () { 
-						auth2.disconnect();
-						location.reload();
-					});
-				})});
+					auth2.signOut().then(function () { auth2.disconnect(); });
+					location.reload();
+				})
+			});
 		</script>
 		<style>
 			button {
