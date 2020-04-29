@@ -258,9 +258,9 @@ void Biz::google_oauth()
 	if(string s = psstm("./oauth.py " + nameNvalue_["token"]); s != "") {//s == email
 		s.pop_back();//\n remove
 		if(!sq.select("user", "where email='" + s + "'")) sq.insert(s, "");
+		if(id_ == "") content_ = "reload";//in case login first
 		id_ = s;
 	}
-	content_ = fileNhtml_["insert.html"];
 }
 
 void Biz::index()
