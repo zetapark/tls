@@ -289,7 +289,7 @@ void Biz::index()
 
 	if(id_ != "") {//if already logged
 		swap("hidden", "visible");//show logout button
-		regex e{R"(<div id=login[\s\S]+?</form>\s+</div>)"};
+		regex e{R"(<div id=login[\s\S]+?</div>\s+</div>)"};
 		content_ = regex_replace(content_, e, id_ + "님 로그인되었습니다.",
 				regex_constants::format_first_only);
 		sq.select("bcard", "where user = '" + id_ + "' order by name");

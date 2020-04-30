@@ -45,9 +45,8 @@
 	</head>
 
 	<body>
-		<div id=login>
-		<div class=g-signin2 data-onsuccess=onSignIn></div>
-		<form action="index.html" method="post">	 
+		<div id=login style='display : table-row'>
+		<form action="index.html" method="post" style='display:table-cell'>	 
 			<label for="email">Email address:</label>
 			<input type="email" id="email" name="email">
 			<label for="pwd">Password:</label>
@@ -55,6 +54,7 @@
 			<input type="submit" name='submit' value='login'>
 			<input type="submit" name='submit' value='signin'>
 		</form> 
+		<div class=g-signin2 data-onsuccess=onSignIn style='width:200;display:table-cell'></div>
 		</div>
 		<button>로그아웃</button>
 		<form action="crop.html" method="post" enctype="multipart/form-data">
