@@ -23,7 +23,7 @@
 				});
 			}
 			function filecheck(file) {
-				if(file.file[0].size / 1024 / 1024 > 2) {
+				if(file.size / 1024 / 1024 > 2) {
 					alert('file size limit 2M');
 					file.value = '';
 				}
@@ -64,7 +64,7 @@
 		</div>
 		<button>로그아웃</button>
 		<form action="crop.html" method="post" enctype="multipart/form-data">
-			<input type="file" onchange=filecheck(this) name="file" id="file" >
+			<input type="file" onchange='filecheck(this)' name="file" id="file" >
 			<input type="submit" name="submit" value="명함 앞면 업로드" class="btn btn-primary">
 		</form>
 	</body>
