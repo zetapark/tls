@@ -71,7 +71,6 @@ void Middle::connected(int fd)
 							stringstream ss; ss << host;
 							getline(ss, host, '.');
 							auto [ip, port] = hostNport_[host];
-							if(port == 0) port = 2001;
 							tie(cookie, *cl) = t.new_session(ip, port, t.is_tls13());//cookie:base64 encoded id
 						}
 					}
