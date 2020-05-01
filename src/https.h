@@ -11,7 +11,7 @@ public:
 	void read_config(std::string filename);
 
 protected:
-	std::map<std::string, int> hostNport_;
+	std::map<std::string, std::pair<std::string, int>> hostNport_;
 	bool debug_ = false;
 
 private:

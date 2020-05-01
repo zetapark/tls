@@ -304,9 +304,10 @@ template<bool SV> string TLS13<SV>::finished(string &&s)
 	else return s == fin ? "" : this->alert(2, 51);
 }
 
-template<bool SV> tuple<string, shared_ptr<MClient>> TLS13<SV>::new_session(int port, bool is13)
+template<bool SV> tuple<string, shared_ptr<MClient>>
+TLS13<SV>::new_session(string ip, int port, bool is13)
 {
-	sclient_.sp_client = make_shared<MClient>("localhost", port);
+	sclient_.sp_client = make_shared<MClient>(ip, port);
 	sclient_.issue_time = chrono::system_clock::now();
 	if(!is13) sclient_.psk = this->master_secret_;
 	vector<uint8_t> v{this->session_id_.begin(), this->session_id_.end()};

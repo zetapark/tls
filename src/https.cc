@@ -25,8 +25,8 @@ int Middle::get_full_length(const string &s)
 void Middle::read_config(string file)
 {
 	ifstream f{file};
-	string subdomain; int port;
-	while(f >> subdomain >> port) hostNport_[subdomain] = port;
+	string subdomain, ip; int port;
+	while(f >> subdomain >> ip >> port) hostNport_[subdomain] = {ip, port};
 }
 
 int Middle::start()
@@ -70,9 +70,9 @@ void Middle::connected(int fd)
 						if(!*cl) { //first connection
 							stringstream ss; ss << host;
 							getline(ss, host, '.');
-							int port = hostNport_[host];
+							auto [ip, port] = hostNport_[host];
 							if(port == 0) port = 2001;
-							tie(cookie, *cl) = t.new_session(port, t.is_tls13());//cookie is base64 encoded id
+							tie(cookie, *cl) = t.new_session(ip, port, t.is_tls13());//cookie:base64 encoded id
 						}
 					}
 					LOGT << *a << endl;
