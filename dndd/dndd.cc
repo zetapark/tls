@@ -152,8 +152,8 @@ void DnDD::index()
 	}
 	swap("CAROUSEL", carousel(v[0], v[1], v[2]));
 	if(nameNvalue_["email"] != "") {
-		string command = "echo " + nameNvalue_["content"] + " | mailx -s " + 
-			nameNvalue_["title"] + " zeta@zeta2374.com -r " + nameNvalue_["email"];
+		string command = "echo " + nameNvalue_["content"] + " | mailx -s '" + 
+			nameNvalue_["title"] + "' zeta@zeta2374.com -r " + nameNvalue_["email"];
 		system(command.data());
 		command = "echo Your message is deliverded. We will contact you soon. | "
 			"mailx -s 'message received' " + nameNvalue_["email"] + " -r noreply@zeta2374.com";
