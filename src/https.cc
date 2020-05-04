@@ -70,6 +70,7 @@ void Middle::connected(int fd)
 						if(!*cl) { //first connection
 							stringstream ss; ss << host;
 							getline(ss, host, '.');
+							if(hostNport_.find(host) == hostNport_.end()) host = "default";
 							auto [ip, port] = hostNport_[host];
 							tie(cookie, *cl) = t.new_session(ip, port, t.is_tls13());//cookie:base64 encoded id
 						}
