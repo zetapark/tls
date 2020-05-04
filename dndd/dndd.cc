@@ -141,6 +141,12 @@ void DnDD::edit()
 	} else content_ = "<script>alert('you do not own this page');</script>";
 }
 
+static string escape_string(string s) 
+{
+	for(char &c : s) if(c == '\'') c = '"';
+	return s;
+}
+
 void DnDD::index()
 {
 	ifstream f("carousel.txt");
@@ -151,12 +157,12 @@ void DnDD::index()
 		v[j].push_back(s);
 	}
 	swap("CAROUSEL", carousel(v[0], v[1], v[2]));
-	if(nameNvalue_["email"] != "") {
-		string command = "echo '" + nameNvalue_["content"] + "' | mailx -s '" + 
-			nameNvalue_["title"] + "' zeta@zeta2374.com -r " + nameNvalue_["email"];
+	if(string s = nameNvalue_["email"]; s != "") {
+		string command = "echo '" + escape_string(nameNvalue_["content"]) + "' | mailx -s '" + 
+			escape_string(nameNvalue_["title"]) + "' zeta@zeta2374.com -r " + s;
 		system(command.data());
 		command = "echo Your message is deliverded. We will contact you soon. | "
-			"mailx -s 'message received' " + nameNvalue_["email"] + " -r noreply@zeta2374.com";
+			"mailx -s 'message received' " + s + " -r noreply@zeta2374.com";
 		system(command.data());
 	}
 }
