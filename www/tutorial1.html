@@ -17,7 +17,7 @@
 					<h4>index.html</h4>
 					<div class='w3-code notranslate'>
 						&lt;html><br>
-						&lt;h1>It works CWFS!!&lt;/h1><br>
+						&lt;h1>It works eZ Framework!!&lt;/h1><br>
 						&lt;/html>
 						</pre>
 					</div>
@@ -27,12 +27,12 @@
 					<h4>C++ side Programming</h4>
 					<div class="w3-code ">
 						<pre tab=4>
-#include&lt;iostream&gt;
 #include"framework/server.h"
 #include"framework/website.h"
 
 int main(int ac, char** av) {
-	WebSite my_site{"site_html"};
+	WebSite my_site;
+	my_site.init("site_html");//html template directory
 	Server sv{2000};//port number
 	sv.start(my_site);//go infinite loop
 }
@@ -49,7 +49,7 @@ int main(int ac, char** av) {
 				<div class='w3-pannel w3-card w3-light-grey'>
 					<h4>Result</h4>
 					<div class='w3-code'>
-						<h1>It works CWFS!!</h1></div>
+						<h1>It works eZ Framework!!</h1></div>
 				</div>
 			</div>
 			</div>

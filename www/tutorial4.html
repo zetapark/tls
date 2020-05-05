@@ -32,7 +32,7 @@
 		&lt;script src="jquery.js">&lt;/script>
 		&lt;script>
 			function on_click() {
-				$.post('result_view', {name : 'abc', num : 123}, 
+				$.post('result', {name : 'abc', num : 123}, 
 					function(data, status) { alert(data); }
 				);
 			}
@@ -46,19 +46,9 @@
 			</div>
 		</div>
 
-		<div class = 'w3-panel w3-card w3-light-grey'>
-			<h4>C++ side Programming</h4>
-			<div class='w3-code notranslate'>
-				<pre>
-	void process() {
-		if(requested_document_ == "jquery_post") 
-				content_ = "response from server";
-		}
-				</pre>
-			</div>
 Yes, we don't have jquery_post file in our web directory.
 So content_ is empty this time.
-If there is any file in our html directory, the CWFS library will fill the
+If there is any file in our html directory, the eZ Framework library will fill the
 content_ variable with it. If it cannot find one, it will leave content_ empty.
 And, requested document_ can be anything. Not like jsp, asp, it can be html file
 or sometimes non-existing file.

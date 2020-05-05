@@ -29,7 +29,7 @@ So, we need to change our server side programming a little bit.
 				<pre>
 &lt;html>
 	&lt;body>
-	&lt;a href="tutorial1.html?name='park'&day='mon'">go to doc1 with get method&lt;/a>
+	&lt;a href="result?name='park'&day='mon'">go to doc1 with get method&lt;/a>
 	&lt;/body>
 &lt;/html>
 				</pre>
@@ -46,7 +46,7 @@ public:
 	My_site() : WebSite{"site_html"} {}
 protected:
 	void process() {
-		if(requested_document_ == "tutorial1.html") {
+		if(requested_document_ == "result") {
 			if(!nameNvalue_.empty()) {
 				content_ = "&lt;html>&lt;h2>";
 				for(auto [a, b] : nameNvalue_) content_ += a + ':' + b + "&lt;br>";
@@ -59,7 +59,7 @@ protected:
 int main(int ac, char** av)
 {
 	My_site my_site;//directory name relative to your exe file
-							//directory contains html files
+	my_site.init("www");//directory contains html files
 	Server sv{2000};//port number
 	cout << "opening port " << 2000 << endl;
 	sv.start(my_site);//go infinite loop
