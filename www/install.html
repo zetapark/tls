@@ -13,21 +13,41 @@ pre.bash {
 </style>
 	<body>
 		Web Server is mainly operated on *nix systems.
-		<pre class=bash>
-		> git clone https://github.com/zetapark/ez
-		> sudo apt install libmysqlcppconn-dev libjsoncpp-dev nettle-dev libgmp-dev libgmpxx4ldbl
-		> cd ez
-		> make
-		</pre>
-		Directory structure
-		database
-		tcpip
-		util
-		tls
-		obj
-		src
-		www
+<pre class=bash>
+> git clone https://github.com/zetapark/ez
+> sudo apt install libmysqlcppconn-dev libjsoncpp-dev nettle-dev libgmp-dev libgmpxx4ldbl
+> cd ez
+> make </pre>
+		libzeta.so, middle.tls.x and site.src.x will be generated.
+		middle.tls.x is a middle server and site.src.x is a web server.
+		libzeta.so is a dynamic library for our programs.
+		Let's run executables.
+<pre class=bash>
+> middle.tls.x &
+> site.src.x & </pre>
+		Access https://localhost:4433 with any browser.
+		You will see a very simple form.
+		Let's click button.
+		The value in the text field will change.
+		It is from server side.
 
-		If you want to make your own server go into src directory
+<font size=+2>
+		<pre>
+Directory Structure
+.
+├── database : mysql database utility class
+├── obj : object files are genearated here
+├── util : log, command line parameter utility
+├── tcpip : tcpip, website header
+├── tls : middle server and tls
+├── src : webserver source
+└── www : webserver template
+		</pre>
+</font>
+You just need to touch two directories that is 'src' and 'www'.
+		'src' directory is where server side programming sources should be.
+		And web templates are in 'www' directory.
+		
+
 	</body>
 </html>
