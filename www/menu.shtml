@@ -1,5 +1,8 @@
-				<a href="index.html" class="w3-bar-item w3-button">Home</a><br>
-				<a href="introduction.html" class="w3-bar-item w3-button">Introduction</a><br>
-				<a href="install.html" class="w3-bar-item w3-button">Install</a><br>
-				<a href="tutorial.html" class="w3-bar-item w3-button">Tutorial</a><br>
+<a href=index.html class='w3-bar-item w3-button'><img src=zeta.png height=50></a><br>
+<a href="introduction.html" class="w3-bar-item w3-button">Introduction</a><br>
+<a href="install.html" class="w3-bar-item w3-button">Install</a><br>
+<a href="tutorial.html" class="w3-bar-item w3-button">Tutorial</a><br>
+<a href="database.html" class="w3-bar-item w3-button">Database</a><br>
+<a href="reference.html" class="w3-bar-item w3-button">Reference</a><br>
+ 
 
