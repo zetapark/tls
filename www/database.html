@@ -38,10 +38,11 @@
 					int row = sq.fetch(-1);//fetch all, sq.fetch(3) will fetch only 3 rows
 					//fetch returns fetched row count.
 					//if fetch(n) returns a number less than n, it means all the records are fetched.
-					for(int j=0; j<sq.size(); j++) cout << sq[j]["name"].asString() << sq[j]["id"].asInt();
+					for(int j=0; j&lt;sq.size(); j++) 
+						cout &lt;&lt; sq[j]["name"].asString() &lt;&lt; sq[j]["id"].asInt();
 					
 					stringstream ss;
-					ss << sq; // 통째로 json 스트링을 입력받고, javascript로 클라이언트 측에서 화면을 구성할 수도 있습니다.
+					ss &lt;&lt; sq; // 통째로 json 스트링을 입력받고, javascript로 클라이언트 측에서 화면을 구성할 수도 있습니다.
 					content_ = ss.str(); // return json string
 
 					sq.query("insert into table_name values ('joe', 'joe@joe.com', 0103222222)");
