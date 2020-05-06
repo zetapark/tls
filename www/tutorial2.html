@@ -29,7 +29,7 @@ So, we need to change our server side programming a little bit.
 				<pre>
 &lt;html>
 	&lt;body>
-	&lt;a href="result?name='park'&day='mon'">go to doc1 with get method&lt;/a>
+	&lt;a href="result?name='park'&day='mon'">get method test&lt;/a>
 	&lt;/body>
 &lt;/html>
 				</pre>
@@ -42,8 +42,6 @@ So, we need to change our server side programming a little bit.
 				<pre>
 class My_site : public WebSite
 {
-public:
-	My_site() : WebSite{"site_html"} {}
 protected:
 	void process() {
 		if(requested_document_ == "result") {

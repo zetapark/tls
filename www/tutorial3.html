@@ -22,12 +22,12 @@
 	&lt;body>
 	 &lt;form action="result" method="post" enctype="multipart/form-data">
 				Post with Form&lt;br>
-				image upload&lt;input type="file" name="file" id="file" >&lt;br>
-				product name&lt;input type='text' name='name' id="goods">&lt;br>
+				image upload&lt;input type="file" name="file">&lt;br>
+				product name&lt;input type='text' name='name'>&lt;br>
 				description&lt;br>
-					&lt;textarea name="desc" rows="10" cols="70" class="form-control" id="desc">
+					&lt;textarea name="desc" rows="10" cols="70">
 					&lt;/textarea>
-					&lt;input type="submit" name="up" value="ok" class="btn btn-primary">
+					&lt;input type="submit" name="up" value="ok">
 			&lt;/form>
 	&lt;/body>
 &lt;/html>
@@ -36,13 +36,13 @@
 		</div>
 We can use the same server side coding of tutorial2 here.
 Because CWFS library will set nameNvalue_ properly with no regard to get, post, multipart/enc post type. 
-And in case of file uploading, library will add one more infomation, 
-nameNvalue_["filename"] will be set accordingly.
 File contents will be stored to nameNvalue_["file"] in former case.
+And in case of file uploading, library will add one more infomation, which is the filename. 
+nameNvalue_["filefilename"] will be set accordingly.
 		<div class = 'w3-panel w3-card w3-light-grey'>
 			<h4>Result</h4>
 			<div class='w3-code notranslate'>
-		<form action="result_view" method="post" enctype="multipart/form-data">
+		<form action="result" method="post" enctype="multipart/form-data">
 				Post with Form<br>
 				image upload<input type="file" name="file" id="file" ><br>
 				product name<input type='text' name='name' id="goods"><br>
