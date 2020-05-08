@@ -1,6 +1,7 @@
 #include<pybind11/functional.h>
 #include<pybind11/pybind11.h>
 #include<pybind11/stl.h>
+#include<pybind11/stl_bind.h>
 #include"tcpip/server.h"
 #include"src/tls.h"
 #include"wrapper.h"
@@ -8,6 +9,8 @@
 using namespace std;
 using namespace pybind11;
 using namespace pybind11::literals;
+
+PYBIND11_MAKE_OPAQUE(map<string, string>);
 
 PYBIND11_MODULE(tls_crypt, m) {
 	m.doc() = "TLS python module";
@@ -60,6 +63,20 @@ PYBIND11_MODULE(tls_crypt, m) {
 	class_<Server>(m, "Server")
 		.def(init<int, int, int, string>(), "port"_a = 3003, "timaout"_a = 600, "queue_limit"_a = 10, "end_string"_a = "end")
 		.def("nokeep_start", &Server::nokeep_start)
+		.def("start", &Server::start)
+		;
+
+	bind_map<map<string, string>>(m, "mapstring");
+	class_<WebSite, Trampoline>(m, "WebSite")
+		.def(init<>())
+		.def_static("init", &WebSite::init)
+		.def_readonly("nameNvalue_", &Publicist::nameNvalue_)
+		.def_readwrite("content_", []() {return bytes(Publicist::content_))
+		.def_readonly("requested_document_", &Publicist::requested_document_)
+		.def("swap", &Publicist::swap)
+		.def("append", &Publicist::append)
+		.def("process", &Publicist::process)
+		.def("__call__", &WebSite::operator())
 		;
 //	class_<PyDiffie>(m, "DiffieHellman")
 //		.def(init<int>(), "bit"_a = 1024)

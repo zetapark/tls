@@ -9,6 +9,7 @@
 #include"src/naes.h"
 #include"src/cert_util.h"
 #include"database/mysqldata.h"
+#include"tcpip/website.h"
 
 std::string pemtojson(std::string filename);
 std::string dertojson(std::vector<uint8_t> v);
@@ -129,3 +130,20 @@ struct PyTLSClient : PyClient
 //	bool connect(std::string ip, std::string user, std::string pass, std::string db);
 //	std::vector<std::tuple<std::string, int, std::string>> column();
 //};
+
+
+struct Publicist : WebSite
+{
+	using WebSite::content_;//how to make pybind not to inspect utf-8 validity
+	using WebSite::requested_document_;
+	using WebSite::swap;
+	using WebSite::append;
+	using WebSite::process;
+	using WebSite::nameNvalue_;
+};
+
+struct Trampoline : WebSite
+{
+	void process() override { PYBIND11_OVERLOAD(void, WebSite, process, ); }
+};
+
