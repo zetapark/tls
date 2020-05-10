@@ -19,9 +19,16 @@
 			<div class='w3-code notranslate'>
 				<a href="result_view?name='park'&day='mon'">go to doc1 with get method</a>
 			</div>
+			<p class=eng>
 Up until now, our web site was just composed of static web pages.
 Now, we need to process requests like get or post method.
 So, we need to change our server side programming a little bit.
+			</p>
+			<p class=kor>
+			여태까지는 우리의 웹사이트는 정적인 웹페이지만을 포함하였다.
+			이제 get 혹은 post로 요청된 페이지를 한 번 처리해 보자.
+			서버측 프로그래밍이 필요하다.
+			</p>
 		</div>
 		<div class = 'w3-panel w3-card w3-light-grey'>
 			<h4>index.html</h4>
@@ -64,30 +71,50 @@ int main(int ac, char** av)
 }
 				</pre>
 			</div>
-		<p>We need our own version of WebSite class. 
+		<p class=eng>We need our own version of WebSite class. 
 		We should derive this from WebSite class.
 		There are some variables and some rules to make server side programming easy.
 		</p>
-		<p>
+		<p class=kor>
+		우리는 WebSite 클래스로 부터 상속받아 우리의 웹사이트 클래스를 정의해야 한다.
+		서버측 프로그래밍을 위하 몇 개의 변수와 규칙이 있다.
+		</p>
+		<p class=eng>
 		WebSite class has three important variables.
-		string requested_document_, string content_, map<string, string> nameNvalue_.
-		CWFS library will make these variables ready, when a webpage is requested.
+		string requested_document_, string content_, map&lt;string, string> nameNvalue_.
+		eZ Framework will make these variables ready, when a webpage is requested.
 	When a webpage is requested by webbrowser, requested_document_ will have the
 	document name.
 	In upper case it is "tutorial1.html".
-	And the content_ will be same as tutorial.html contents.
+	And the content_ will be same as tutorial1.html contents.
 	And the parameters will fill the nameNvalue_ variable.
 	In upper case it is {"name" : "park", "day" : "mon"}.
 		</p>
-		<p>
+		<p class=kor>
+		WebSite 클래스는 세 개의 중요한 변수가 있다.
+		string requested_document_, string content_, map&lt;string, string> nameNvalue_
+		eZ 프레임워크는 이 세개의 변수들을 준비시켜 놓을 것이다.
+		웹 페이지가 요청되면, requested_document_ 는 요청된 웹페이지를 가지고 있을 것이고, 
+		위의 경우라면 tutorial1.html이 될 것이다.
+		그리고, content_ 는 tutorial1.html의 내용으로 채워질 것이다.
+		파라미터들은 nameNvalue_ 변수에 저장되어 있을 것이다.
+		위의 경우라면 {"name" : "park", "day" : "mon"} 이다.
+		</p>
+		<p class=eng>
 	And just before the server sends content_ to the client, 
-	process method will be called.
+	process method will be called.<br>
 
 	So, what we are to do is to implement the process method.
 	That is all you need to know about this library for server side programming.
-		</p><p>
 	So we will check if parameters are set, and if there is parameters we will print
 	theses on the webpage. That is to change the content_ variable.
+		</p>
+		<p class=kor>
+		그리고, 서버가 content_를 브라우저에게 보내기 직전에 process 함수가 호출될 것이다.<br>
+		그러므로, 우리가 해야 할 것은 process 함수를 구현하는 것이다.
+		이것이 eZ 프레임워크에의 서버측 프로그래밍에 대해 알아야 할 모든 것이다.
+		우리는 파라미터들이 셋팅되었는지 보고, 이 파라미터들을 웹페이지에 프린트할 것이다.
+		즉, content_ 변수를 변화시킬 것이다.
 		</p>
 		</div>
 			</div></div>

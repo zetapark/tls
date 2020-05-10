@@ -26,11 +26,20 @@ pre.bash {
 			</div>
 			<div class="w3-rest w3-container">
 				<div class = 'w3-panel w3-card w3-light-grey'>
+					<p class=eng>
 		eZ Framework is mainly operated on *nix systems.
 		I used Ubuntu 18.04.
 		I expect eZ Framework will also work on other linux or Unix distros.
 		This project is based on gmp and nettle library which is GPL licensed.
 		Therefore, eZ Framework also follows GPL licence.
+					</p>
+					<p class=kor>
+					eZ 프레임워크는 주로 유닉스 계열에서 돌아갑니다.
+					저는 우분투 18.04에서 개발하였습니다.
+					그렇지만, 다른 리눅스나 유닉스에서도 돌아가리라 생각합니다.
+					이 프로젝트는 GPL 라이선스를 가진 nettle, gmp 라이브러리에 기반합니다.
+					그러므로, 자동적으로 eZ 프레임워크는 GPL 라이선스를 따릅니다.
+					</p>
 <pre class=bash>
 > git clone https://github.com/zetapark/ez
 > sudo apt install libmysqlcppconn-dev libjsoncpp-dev \
@@ -46,11 +55,20 @@ pre.bash {
 <pre class=bash>
 > middle.tls.x &
 > site.src.x & </pre>
+<p class=eng>
 		Access https://localhost:4433 with any browser.
 		You will see a very simple form.
 		Let's click button.
 		The value in the text field will change.
 		It is from server side.
+</p>
+<p class=kor>
+https://localhost:4433 을 임의의 브라우저로 접근해 보십시오.
+매우 단순한 입력 폼을 볼 수 있을 것입니다.
+버튼을 클릭해 봅시다.
+텍스트 필드에 있는 값이 변할 것입니다.
+이것은 서버측에서 온 것입니다.
+</p>
 				</div>
 				<div class = 'w3-panel w3-card w3-light-grey'>
 
@@ -67,9 +85,17 @@ Directory Structure
 └── www : webserver template
 		</pre>
 </font>
+<p class=eng>
 Developers just need to touch two directories that is 'src' and 'www'.
 		'src' directory is where server side programming sources should be.
 		And web templates are in 'www' directory.
+</p>
+<p class=kor>
+개발자는 단지 두 개의 디렉토리만을 건드리면 됩니다.
+그것은 src와 www입니다.
+src 디렉토리는 서버측 프로그래밍을 위한 소스들이 들어갈 자리입니다.
+www 디렉토리는 웹 페이지를 위한 템플릿이 들어갈 자리입니다.
+</p>
 				</div>
 			</div>	
 
