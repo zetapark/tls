@@ -34,11 +34,21 @@
 				</pre>
 			</div>
 		</div>
+		<p class=eng>
 We can use the same server side coding of tutorial2 here.
-Because CWFS library will set nameNvalue_ properly with no regard to get, post, multipart/enc post type. 
+Because eZ framework will set nameNvalue_ properly with no regard to get, post, multipart/enc post type. 
 File contents will be stored to nameNvalue_["file"] in former case.
 And in case of file uploading, library will add one more infomation, which is the filename. 
 nameNvalue_["filefilename"] will be set accordingly.
+		</p>
+		<p class=kor>
+		우리는 튜토리얼2에서 사용한 서버측 코드를 여기에 그대로 사용할 수 있다.
+		왜냐하면, eZ 프레임워크는 get, post, multipark/enc post 인지에 상관없이 nameNvalue_ 변수를
+		적절하게 셋팅해 놓을 것이기 때문이다.
+		위의 경우에 업로드된 파일은 nameNvalue_["file"]에 저장되어 있을 것이다.
+		eZ 프레임워크는 웹페이지가 명시하지 않은 변수인 파일명을 nameNvalue_[파일변수이름+"filename"]에
+		저장할 것이다.
+		</p>
 		<div class = 'w3-panel w3-card w3-light-grey'>
 			<h4>Result</h4>
 			<div class='w3-code notranslate'>

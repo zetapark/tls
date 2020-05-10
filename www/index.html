@@ -15,6 +15,12 @@
    토론과 민주적인 의사 결정
   </title>
 </style>
+	<script>
+		$(function() {
+			$('#koflag').click(function() { $.get('korean'); });
+			$('#enflag').click(function() { $.get('english'); });
+		});
+	</script>
 <script data-ad-client="ca-pub-6319373326804504" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
  </head>
  <body>
@@ -22,6 +28,8 @@
 	 <div class="container">
 		 CAROUSEL
 	 </div>
+	<img width=70 src=koreaflag.png id=koflag>
+	<img width=70 src=engflag.png id=enflag>
 	 <h3><p>이 웹사이트는
 		 <a href='introduction.html'><img src='ez.png' alt='eZ Framework' height=70></a>
 		 Framework로 만들어지고, 운영됩니다.

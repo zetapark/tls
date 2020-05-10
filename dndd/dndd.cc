@@ -35,6 +35,9 @@ void DnDD::process()
 	else if(requested_document_ == "googleapi") google();
 	else if(requested_document_ == "iframe-content.html") content_ = iframe_content_;
 	else if(requested_document_ == "result_view") tut();
+	else if(requested_document_ == "korean") language = "korean";
+	else if(requested_document_ == "eng") language = "english";
+	else if(requested_document_ == "tutorial.js") if(language == "korean") swap("kor", "eng");
 }
 
 void DnDD::tut() {
