@@ -17,8 +17,16 @@
 </style>
 	<script>
 		$(function() {
-			$('#koflag').click(function() { $.get('korean'); $('.eng').hide(); });
-			$('#enflag').click(function() { $.get('english'); $('.kor').hide(); });
+			$('#koflag').click(function() {
+				$.get('korean');
+				$('.eng').hide();
+				$('.kor').show();
+			});
+			$('#enflag').click(function() { 
+				$.get('english');
+				$('.kor').hide();
+				$('.eng').show();
+			});
 		});
 	</script>
 <script data-ad-client="ca-pub-6319373326804504" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
