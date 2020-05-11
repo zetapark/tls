@@ -14,6 +14,7 @@
 			</div>
 			<div class="w3-rest w3-container">
 				<div class = 'w3-panel w3-card w3-light-grey'>
+					<p class=kor>
 					eZ 프레임워크는 사용하기 위해 외워야 할 것이 거의 없습니다.
 					MySql 데이터베이스를 위한 SqlQuery 클래스, 원격 접속을 담당하는 Server 클래스,
 					웹사이트의 서버측 로직을 담당하는 WebSite 클래스가 다입니다.
@@ -21,17 +22,42 @@
 					Server 클래스는 생성자에서 포트번호를 정해주고, start함수로 WebSite 클래스 혹은
 					WebSite 클래스에서 파생된 자식 클래스를 실행하면 됩니다.
 					WebSite 클래스는 내부적으로 사용하며 프로그래머가 알아야 하는 세개의 멤버 변수가 있습니다.
-					<ul>
+					</p>
+					<p class=eng>
+					eZ Frammework does not have much to memorize to develop.
+					SqlQeury class for MySql input and output, Server class for networking,
+					WebSite class for server side logic.
+					These are all you should know.
+
+					Server class specify the port number in constructor, and run the WebSite class or a class inherited from WebSite class with start function.
+					There are three member variables you should know in WebSite class.
+					</p>
+					<ul class=kor>
 						<li>requested_document_ : 요청된 페이지 이름</li>
 						<li>content_ : 요청된 페이지의 템플릿 값에 따라 초기화된 문자열</li>
 						<li>nameNvalue_ : post, get, 혹은 multifile-form data 에서 온 파라미터와 그 값들</li>
 					</ul>
+					<ul class=eng>
+						<li>requested_document_ : requested document by the browser</li>
+						<li>content_ : initialized with template of requested document</li>
+						<li>nameNvalue_ : parameters and the values of post, get or multiform data</li>
+					</ul>
 
+					<p class=kor>
 					WebSite 클래스는 단 두개의 편의 함수를 제공합니다. 
 					이 두 함수는 content_값을 변화시키는 데에 사용합니다.
-					<ul>
+					</p>
+					<p class=eng>
+					WebSite class offer just two utility functions.
+					These functions are used to change the content_ variable.
+					</p>
+					<ul class=kor>
 						<li>swap(string a, string b) : content_에서 a를 찾아서 b로 바꿉니다.</li>
 						<li>append(string a, string b) : content_에서 a를 찾아서 그 바로 뒤에 b를 붙입니다.</li>
+					</ul>
+					<ul class=eng>
+						<li>swap(string a, string b) : find a in content_ and change it to b</li>
+						<li>append(string a, string b) : find a in content_ and append b after a</li>
 					</ul>
 
 				</div>
