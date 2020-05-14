@@ -34,19 +34,6 @@ void DnDD::process()
 	else if(requested_document_ == "close") content_ = close();
 	else if(requested_document_ == "googleapi") google();
 	else if(requested_document_ == "iframe-content.html") content_ = iframe_content_;
-	else if(requested_document_ == "result_view") tut();
-	else if(requested_document_ == "korean") language = "korean";
-	else if(requested_document_ == "english") language = "english";
-	else if(requested_document_ == "tutorial.js") if(language == "korean") swap("kor", "eng");
-}
-
-void DnDD::tut() {
-	if(!nameNvalue_.empty()) {
-		content_ = "<html><h2>";
-		for(auto [a, b] : nameNvalue_) content_ += a + ':' + b + "<br>";
-		content_ += "</h2></html>";
-		cout << content_ << endl;
-	}
 }
 
 void DnDD::google() 
@@ -152,14 +139,6 @@ static string escape_string(string s)
 
 void DnDD::index()
 {
-	ifstream f("carousel.txt");
-	int n; string s; vector<string> v[3];
-	f >> n; getline(f, s);
-	for(int i=0; i<n; i++) for(int j=0; j<3; j++) {
-		getline(f, s);
-		v[j].push_back(s);
-	}
-	swap("CAROUSEL", carousel(v[0], v[1], v[2]));
 	if(string s = nameNvalue_["email"]; s != "") {
 		string command = "echo '" + escape_string(nameNvalue_["content"]) + "' | mailx -s '" + 
 			escape_string(nameNvalue_["title"]) + "' zeta@zeta2374.com -r " + s;
