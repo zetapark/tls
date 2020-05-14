@@ -1,0 +1,73 @@
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1"> 
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+		<link rel='stylesheet' href='tutorial.css'>
+		<script src="https://ez.zeta2374.com/tutorial.js"></script>
+	</head>
+
+	<body>
+		<h1 class="w3-center w3-panel w3-green">Tutorial 3. Handling Form Post</h1>
+		<div class="w3-row w3-border">
+			<div class="w3-hide-small w3-col m2 l2">
+			</div>
+			<div class="w3-rest w3-container">
+		<div class = 'w3-panel w3-card w3-light-grey'>
+			<h4>index.html</h4>
+			<div class='w3-code notranslate'>
+				<pre>
+&lt;html>
+	&lt;body>
+	 &lt;form action="result" method="post" enctype="multipart/form-data">
+				Post with Form&lt;br>
+				image upload&lt;input type="file" name="file">&lt;br>
+				product name&lt;input type='text' name='name'>&lt;br>
+				description&lt;br>
+					&lt;textarea name="desc" rows="10" cols="70">
+					&lt;/textarea>
+					&lt;input type="submit" name="up" value="ok">
+			&lt;/form>
+	&lt;/body>
+&lt;/html>
+				</pre>
+			</div>
+		</div>
+		<p class=eng>
+We can use the same server side coding of tutorial2 here.
+Because eZ framework will set nameNvalue_ properly with no regard to get, post, multipart/enc post type. 
+File contents will be stored to nameNvalue_["file"] in former case.
+And in case of file uploading, library will add one more infomation, which is the filename. 
+nameNvalue_["filefilename"] will be set accordingly.
+		</p>
+		<p class=kor>
+		우리는 튜토리얼2에서 사용한 서버측 코드를 여기에 그대로 사용할 수 있다.
+		왜냐하면, eZ 프레임워크는 get, post, multipark/enc post 인지에 상관없이 nameNvalue_ 변수를
+		적절하게 셋팅해 놓을 것이기 때문이다.
+		위의 경우에 업로드된 파일은 nameNvalue_["file"]에 저장되어 있을 것이다.
+		eZ 프레임워크는 웹페이지가 명시하지 않은 변수인 파일명을 nameNvalue_[파일변수이름+"filename"]에
+		저장할 것이다.
+		</p>
+		<div class = 'w3-panel w3-card w3-light-grey'>
+			<h4>Result</h4>
+			<div class='w3-code notranslate'>
+		<form action="https://ez.zeta2374.com/result_view" method="post" enctype="multipart/form-data">
+				Post with Form<br>
+				image upload<input type="file" name="file" id="file" ><br>
+				product name<input type='text' name='name' id="goods"><br>
+				description<br>
+					<textarea name="desc" rows="10" cols="70" class="form-control" id="desc">
+					</textarea>
+					<input type="submit" name="up" value="ok" class="btn btn-primary">
+			</form>
+			</div>
+		</div>
+			</div></div>
+ <div class="w3-bar w3-border w3-round w3-center">
+  <a href="tutorial2.html" class="w3-button">&#10094; Previous</a>
+	<a href="index.html" class="w3-button w3-center">Home</a>
+  <a href="tutorial4.html" class="w3-button">Next &#10095;</a>
+</div> 
+	</body>
+</html>
+

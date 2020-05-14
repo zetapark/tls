@@ -1,14 +1,11 @@
 SHELL := /bin/bash
-OPTION = CPU=$(CPU)
+OPTION = -j $(CPU)
 
 all : 
-	make $(OPTION) -C incltouch/
-	make $(OPTION) -C lib/
-	make $(OPTION) -C biz/
-	make $(OPTION) -C pybind/
-	make $(OPTION) -C dndd/
-	make $(OPTION) -C suwon/
-	make $(OPTION) -C ez/
+	../incltouch.x
+	make $(OPTION) -C src/
+	make $(OPTION) -C tst/
+	make $(OPTION) -C obj/
 
 clean :
 	mv obj/catch.tst.x obj/catch.tst

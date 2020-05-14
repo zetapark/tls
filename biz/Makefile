@@ -1,19 +1,13 @@
 SHELL := /bin/bash
-OPTION = CPU=$(CPU)
+OPTION = -j $(CPU)
 
 all : 
-	make $(OPTION) -C incltouch/
-	make $(OPTION) -C lib/
-	make $(OPTION) -C biz/
-	make $(OPTION) -C pybind/
-	make $(OPTION) -C dndd/
-	make $(OPTION) -C suwon/
-	make $(OPTION) -C ez/
+	../incltouch.x
+	make $(OPTION) -C src/
+	make -C obj/
 
 clean :
-	mv obj/catch.tst.x obj/catch.tst
-	rm *.x obj/*.?
-	mv obj/catch.tst obj/catch.tst.x
+	rm libzetatls.so obj/*.?
 
 # incltouch will touch source files, according to inclusion of header files.
 # incltouch generate tree of header inclusion.

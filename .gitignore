@@ -1,4 +1,5 @@
 .*
+fullchain.pem
 privkey.pem
 !/.gitignore
 core
