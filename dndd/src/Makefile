@@ -1,5 +1,5 @@
 CFLAG = -g -c -std=c++17 -fmax-errors=1 -pthread
-INCLUDE = -I../ -I/usr/include/jsoncpp -I/usr/include/opencv2
+INCLUDE = -I../ -I/usr/include/jsoncpp -I/usr/include/opencv2 -I../../lib/
 DIR = $(notdir $(shell pwd))
 CC = g++
 OBJ = $(patsubst %.cc, ../obj/%.$(DIR).o, $(wildcard *.cc))
