@@ -16,16 +16,16 @@
 	<script>
 		$(function() {
 			$('#koflag').click(function() {
-				$.get('https://ez.zeta2374.com/korean', function(data) { console.log(data); });
+				$.getJSON('https://ez.zeta2374.com/korean', function(data) { console.log(data); });
 				$('.eng').hide();
 				$('.kor').show();
 			});
 			$('#enflag').click(function() { 
-				$.get('https://ez.zeta2374.com/english', function(data) {console.log(data);});
+				$.getJSON('https://ez.zeta2374.com/english', function(data) {console.log(data);});
 				$('.kor').hide();
 				$('.eng').show();
 			});
-			$.get('https://ez.zeta2374.com/carousel', function(data) {
+			$.getJSON('https://ez.zeta2374.com/carousel', function(data) {
 				$('.carousel').html(data)
 			});
 		});
