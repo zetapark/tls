@@ -11,7 +11,6 @@ all :
 	if [ ! -f zeta.so ]; then ln -s middle/zeta.so zeta.so; fi
 	make $(OPTION) -C biz/
 	if [ ! -f libbiz.so ]; then ln -s biz/libbiz.so libbiz.so; fi
-	make $(OPTION) -C pybind/
 	make $(OPTION) -C dndd/
 	make $(OPTION) -C suwon/
 	make $(OPTION) -C ez/

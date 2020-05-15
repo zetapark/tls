@@ -1,3 +1,4 @@
+#include<util/option.h>
 #include<tcpip/server.h>
 #include<database/mysqldata.h>
 #include<tcpip/website.h>
@@ -23,9 +24,15 @@ protected:
 
 int main(int ac, char **av)
 {
+	CMDoption co{
+		{"dir", "template directory", "www"},
+		{"port", "listening port", 2001}
+	};
+	if(!co.args(ac, av)) return 0;
+
 	MyWeb f;
-	f.init(av[1]);
-	Server sv{atoi(av[2])};
+	f.init(co.get<const char*>("dir"));
+	Server sv{co.get<int>("port")};
 	sv.start(f);
 }
 
