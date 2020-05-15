@@ -25,9 +25,22 @@
 				$('.kor').hide();
 				$('.eng').show();
 			});
-			$.getJSON('https://ez.zeta2374.com/carousel?callback=?', function(data) {
-				$('.carousel').html(data);
+			$.ajax({
+				url: "https://ez.zeta2374.com/carousel",
+				type: "POST",
+				crossDomain: true,
+				data: {a : 1},
+				dataType: "json",
+				success: function (response) {
+					$('.carousel').html(response);
+				},
+				error: function (xhr, status) {
+					alert("error");
+				}
 			});
+		//	$.getJSON('https://ez.zeta2374.com/carousel?callback=?', function(data) {
+			//	$('.carousel').html(data);
+	//		});
 		});
 	</script>
 <script data-ad-client="ca-pub-6319373326804504" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
