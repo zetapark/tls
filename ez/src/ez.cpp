@@ -13,8 +13,8 @@ protected:
 			content_ = "<html><h2>";
 			for(auto [a, b] : nameNvalue_) content_ += a + ':' + b + "<br>";
 			content_ += "</h2></html>";
-		} else if(requested_document_ == "korean") language = "korean";
-		else if(requested_document_ == "english") language = "english";
+		} else if(requested_document_ == "korean") content_ = language = "korean";
+		else if(requested_document_ == "english") content_ = language = "english";
 		else if(requested_document_ == "tutorial.js") if(language == "korean") swap("kor", "eng");
 		else if(requested_document_ == "carousel") {
 			ifstream f("carousel.txt");
