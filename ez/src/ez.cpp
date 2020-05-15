@@ -25,6 +25,7 @@ protected:
 			}
 			content_ = carousel(v[0], v[1], v[2]);
 		}
+		cout << requested_document_ << endl;
 	}
 	string language = "korean";
 };
