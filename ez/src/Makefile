@@ -1,11 +1,11 @@
-CFLAG = -g -c -std=c++17 -fmax-errors=1 -pthread -fPIC
-INCLUDE = -I../ -I/usr/include/jsoncpp -I/usr/include/python3.6
+CFLAG = -g -c -std=c++17 -fmax-errors=1 -pthread
+INCLUDE = -I../ -I/usr/include/jsoncpp -I/usr/include/opencv2 -I../../lib/
 DIR = $(notdir $(shell pwd))
 CC = g++
 OBJ = $(patsubst %.cc, ../obj/%.$(DIR).o, $(wildcard *.cc))
 MAIN_OBJ = $(patsubst %.cpp, ../obj/%.$(DIR).x, $(wildcard *.cpp))
 
-all : $(OBJ) $(MAIN_OBJ) 
+all : $(OBJ) $(MAIN_OBJ)
 
 ../obj/%.$(DIR).o : %.cc 
 	$(CC) $(INCLUDE) $(CFLAG) $< -o $@

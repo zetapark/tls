@@ -1,5 +1,5 @@
 SHELL := /bin/bash
-OPTION = -j 7
+OPTION = -j $(CPU)
 
 all : 
 	../incltouch.x

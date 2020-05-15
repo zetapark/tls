@@ -1,11 +1,11 @@
-
+#!/usr/bin/python3
 # coding: utf-8
 
 # In[1]:
 
 
 import gensim
-from tls_crypt import Server
+from zeta import Server
 
 
 # In[21]:

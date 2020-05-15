@@ -4,10 +4,9 @@ OBJ = $(wildcard *.src.o)
 EXE = $(patsubst %.x, ../%.x, $(wildcard *.x))
 LDFLAGS = -L../../ -Wl,-rpath=../
 LDLIBS = -lgmpxx -lgmp -lnettle -ljsoncpp -lpthread -lhogweed -lzeta -lstdc++fs -lrt -lmysqlcppconn
-OPENCV = $(shell pkg-config opencv --libs)
 #filesystem library should be next to zeta library
 
-all : ../catch.tst.x ../middle.src.x ../libzetatls.so
+all : ../catch.tst.x ../middle.src.x ../libzetatls.so ../zeta.so
 
 ../catch.tst.x : catch.tst.x $(TOBJ) $(OBJ)
 	$(CXX) $(LDFLAGS) -o $@ $^ $(LDLIBS)
@@ -15,8 +14,11 @@ all : ../catch.tst.x ../middle.src.x ../libzetatls.so
 ../%.src.x : %.src.x $(OBJ)
 	$(CXX) $(LDFLAGS) -o $@ $^ $(LDLIBS)
 
-../libzetatls.so : $(wildcard *.fpic.o)
+../libzetatls.so : $(wildcard *.fpic.o) 
 	$(CXX) -o $@ $^ -shared $(LDLIBS) $(LDFLAGS)
+
+../zeta.so : $(wildcard *.pybind.o)
+	$(CXX) -o $@ $^ -shared $(LDLIBS) -lzetatls $(LDFLAGS) 
 
 #    $@ |현재 목표 파일의 이름
 #    $* | 확장자를 제외한 현재 목표 파일의 이름

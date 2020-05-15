@@ -1,9 +1,11 @@
 SHELL := /bin/bash
+CPU ?= 3
 OPTION = -j $(CPU)
 
 all : 
 	../incltouch.x
 	make $(OPTION) -C src/
+	make $(OPTION) -C pybind/
 	make $(OPTION) -C tst/
 	make $(OPTION) -C obj/
 
