@@ -7,7 +7,7 @@ all :
 	make -C obj/
 
 clean :
-	rm libzetatls.so obj/*.?
+	rm libzetatls.so obj/*.? *.x
 
 # incltouch will touch source files, according to inclusion of header files.
 # incltouch generate tree of header inclusion.

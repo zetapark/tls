@@ -12,6 +12,7 @@ all :
 clean :
 	mv obj/catch.tst.x obj/catch.tst
 	rm *.x obj/*.?
+	rm *.so
 	mv obj/catch.tst obj/catch.tst.x
 
 # incltouch will touch source files, according to inclusion of header files.
