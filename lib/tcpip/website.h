@@ -22,6 +22,7 @@ private:
 	const std::string header_ = "HTTP/1.1 200 OK\r\n"
 															"Content-Type: text/html; charset=utf-8\r\n"
 															"Access-Control-Allow-Origin: *\r\n"
+															"Access-Control-Allow-Headers: x-requested-with\r\n"
 															"Content-Length: ";
 	void parse_multi(std::istream& is, std::string boundary);
 	std::istream& parse_one(std::istream& is, std::string boundary);
