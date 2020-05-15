@@ -2,11 +2,6 @@
 #include"bootstrap.h"
 using namespace std;
 
-BootStrapSite::BootStrapSite(string dir)
-{
-	WebSite::init(dir);
-}
-
 string BootStrapSite::carousel(vector<string> img, vector<string> desc, vector<string> href)
 {//if you want more than 1 carousel in a page, you should change the id
 	string r = R"(
