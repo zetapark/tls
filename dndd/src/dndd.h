@@ -3,9 +3,6 @@
 
 class DnDD : public BootStrapSite
 {
-public:
-	DnDD();
-
 protected:
 	SqlQuery sq;
 	void process();
