@@ -68,6 +68,9 @@ void Middle::connected(int fd)
 						if(id != "") if(auto scl = PSKnCLIENT[base64_decode(id)])
 							*cl = scl->sp_client;//resume using cookie
 						if(!*cl) { //first connection
+							send(t.encode(t.new_session_ticket() + t.new_session_ticket()
+										+ t.new_session_ticket() + t.new_session_ticket()
+										+ t.new_session_ticket(), HANDSHAKE));
 							stringstream ss; ss << host;
 							getline(ss, host, '.');
 							if(hostNport_.find(host) == hostNport_.end()) host = "default";

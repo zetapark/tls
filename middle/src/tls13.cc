@@ -509,7 +509,7 @@ TLS13<SV>::handshake(function<optional<string>()> read_f, function<void(string)>
 			hkdf_.salt(&this->master_secret_[0], this->master_secret_.size());
 			resumption_master_secret_ = hkdf_.derive_secret("res master",
 					this->accumulated_handshakes_);
-			write_f(encode(new_session_ticket(), HANDSHAKE));
+			//write_f(encode(new_session_ticket(), HANDSHAKE));
 		} else {//1.2
 			if(this->master_secret_.empty()) {//no session resumption
 				s += this->server_certificate();
