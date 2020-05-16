@@ -32,7 +32,7 @@ int main(int ac, char** av)
 	};
 	if(!co.args(ac, av)) return 0;
 
-	ifstream f("../carousel.txt");
+	ifstream f("carousel.txt");
 	int n; string s; vector<string> v[3];
 	f >> n; getline(f, s);
 	for(int i=0; i<n; i++) for(int j=0; j<3; j++) {
