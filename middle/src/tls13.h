@@ -22,7 +22,7 @@ public:
 	std::string encode(std::string &&s, int type = APPLICATION_DATA);
 	std::string server_certificate13();
 	std::string new_session_ticket();
-	std::tuple<std::string, std::shared_ptr<MClient>> new_session(std::string ip, int port, bool is13);
+	std::tuple<std::string, std::shared_ptr<MClient>> new_session(std::string ip, int port);
 	bool is_tls13();
 	std::pair<std::vector<uint8_t>, std::vector<uint8_t>> new_session_ticket(std::string s);
 protected: HKDF<HASH> hkdf_;
@@ -41,7 +41,8 @@ private:
 	std::array<std::vector<uint8_t>, 2> set_aes(std::vector<uint8_t> salt,
 			std::string client_label, std::string server_label);
 	std::array<std::vector<uint8_t>, 2> finished_key_;
-	std::vector<uint8_t> psk_, resumption_master_secret_, ticket_id_;
+	std::vector<uint8_t> psk_, resumption_master_secret_;
+	std::vector<std::vector<uint8_t>> ticket_id_;
 	bool supported_group(unsigned char *p, int len);
 	bool point_format(unsigned char *p, int len);
 	bool sub_key_share(unsigned char *p);

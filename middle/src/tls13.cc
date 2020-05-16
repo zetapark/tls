@@ -305,14 +305,18 @@ template<bool SV> string TLS13<SV>::finished(string &&s)
 }
 
 template<bool SV> tuple<string, shared_ptr<MClient>>
-TLS13<SV>::new_session(string ip, int port, bool is13)
+TLS13<SV>::new_session(string ip, int port)
 {
 	sclient_.sp_client = make_shared<MClient>(ip, port);
 	sclient_.issue_time = chrono::system_clock::now();
-	if(!is13) sclient_.psk = this->master_secret_;
 	vector<uint8_t> v{this->session_id_.begin(), this->session_id_.end()};
-	if(is13) v = ticket_id_;
-	PSKnCLIENT.insert(v, sclient_);
+	if(is_tls13()) {
+		for(auto a : ticket_id_) PSKnCLIENT.insert(a, sclient_);
+		v = ticket_id_[0];
+	} else {
+		sclient_.psk = this->master_secret_;
+		PSKnCLIENT.insert(v, sclient_);
+	}
 	return {base64_encode(v), sclient_.sp_client};
 }
 
@@ -340,7 +344,7 @@ template<bool SV> string TLS13<SV>::new_session_ticket()
 	LOGD << hexprint("master", this->master_secret_) << endl;
 	LOGD << hexprint("res master", resumption_master_secret_) << endl;
 	LOGD << hexprint("resumption psk", sclient_.psk) << endl;
-	ticket_id_ = vector<uint8_t>{h.ticket_id, h.ticket_id + sz};
+	ticket_id_.push_back(vector<uint8_t>{h.ticket_id, h.ticket_id + sz});
 	return struct2str(h);
 }
 
