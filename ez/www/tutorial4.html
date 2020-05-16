@@ -5,11 +5,11 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 		<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 		<link rel='stylesheet' href='tutorial.css'>
-		<script src="https://ez.zeta2374.com/tutorial.js"></script>
+		<script src="tutorial.js"></script>
 		<script>
 			$(function() {
 				$('button').click(function() {
-					$.getJSON("https://ez.zeta2374.com/result_view?abc=123&day=mon&callback=?", 
+					$.post("result_view", {abc : 123, day : 'mon'}, 
 						function(data, status) { alert("Data : " + data + "\nStatus : " + status); });
 				});
 			});

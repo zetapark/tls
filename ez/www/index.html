@@ -8,7 +8,7 @@
   <link crossorigin="anonymous" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" rel="stylesheet" />
   <script crossorigin="anonymous" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js">
   </script>
-	<script src="https://ez.zeta2374.com/tutorial.js"></script>
+	<script src="tutorial.js"></script>
 
   <title>
    토론과 민주적인 의사 결정
@@ -16,31 +16,16 @@
 	<script>
 		$(function() {
 			$('#koflag').click(function() {
-				$.getJSON('https://ez.zeta2374.com/korean?callback=?', function(data) { console.log(data); });
+				$.get('korean', function(data) { console.log(data); });
 				$('.eng').hide();
 				$('.kor').show();
 			});
 			$('#enflag').click(function() { 
-				$.getJSON('https://ez.zeta2374.com/english?callback=?', function(data) {console.log(data);});
+				$.get('english', function(data) {console.log(data);});
 				$('.kor').hide();
 				$('.eng').show();
 			});
-			$.ajax({
-				url: "https://ez.zeta2374.com/carousel",
-				type: "POST",
-				crossDomain: true,
-				data: {a : 1},
-				dataType: "json",
-				success: function (response) {
-					$('.carousel').html(response);
-				},
-				error: function (xhr, status) {
-					alert("error");
-				}
-			});
-		//	$.getJSON('https://ez.zeta2374.com/carousel?callback=?', function(data) {
-			//	$('.carousel').html(data);
-	//		});
+			$.get('carousel', function(data) { $('.carousel').html(data); });
 		});
 	</script>
 <script data-ad-client="ca-pub-6319373326804504" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
