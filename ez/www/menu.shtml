@@ -2,8 +2,8 @@
 <div class='w3-panel w3-border-top w3-border-bottom w3-border-green w3-pale-green'>
 <a href=index.html class='w3-bar-item w3-button'>HOME</a><br>
 </div>
-<div class='w3-panel w3-border-bottom w3-border-top w3-border-green w3-pale-yellow'>
-	<h3>eZ Framework</h3><br>
+<div class='w3-panel w3-border-bottom w3-border-top w3-border-green w3-pale-green'>
+	<h4>eZ Framework</h4>
 <a href="introduction.html" class="w3-bar-item w3-button">Introduction</a><br>
 <a href="install.html" class="w3-bar-item w3-button">Install</a><br>
 <a href="tutorial.html" class="w3-bar-item w3-button">Tutorial</a><br>
@@ -17,7 +17,7 @@
 <a href="reference.html" class="w3-bar-item w3-button">Reference</a><br>
 </div>
 <div class='w3-panel w3-border-top w3-border-bottom w3-border-green w3-pale-green'>
-	<h3>DnDD</h3><br>
+	<h4>DnDD</h4>
 <a href="dndd.html" class="w3-bar-item w3-button">Introduction</a><br>
 </div>
 </div> 
