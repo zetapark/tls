@@ -31,3 +31,4 @@ private:
 	friend void destroy_shared_mem(int sig);
 };
 
+std::string carousel(std::vector<std::string> img, std::vector<std::string> desc, std::vector<std::string> href);

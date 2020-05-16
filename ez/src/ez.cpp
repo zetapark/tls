@@ -2,12 +2,12 @@
 #include<fstream>
 #include<util/option.h>
 #include<tcpip/server.h>
-#include<tcpip/bootstrap.h>
+#include<tcpip/website.h>
 using namespace std;
 
 string car;
 
-class MySite : public BootStrapSite
+class MySite : public WebSite
 {
 protected:
 	void process() {
@@ -41,8 +41,8 @@ int main(int ac, char** av)
 	}
 	car = carousel(v[0], v[1], v[2]);
 
-	MySite f;
-	f.init(co.get<const char*>("dir"));
+	MySite site;
+	site.init(co.get<const char*>("dir"));
 	Server sv{co.get<int>("port")};
-	return sv.start(f);
+	return sv.start(site);
 }
