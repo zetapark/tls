@@ -40,6 +40,7 @@ int main(int ac, char** av)
 		v[j].push_back(s);
 	}
 	car = carousel(v[0], v[1], v[2]);
+	cout << car << endl;
 
 	MySite site;
 	site.init(co.get<const char*>("dir"));
