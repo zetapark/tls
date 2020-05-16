@@ -167,7 +167,7 @@ string DnDD::search(string s)
 void DnDD::mn()
 {//main.html
 	if(nameNvalue_["db"] != "") {//if first connection -> set database
-		sq.connect("localhost", "dndd", "dndddndd", nameNvalue_["db"]);
+		sq.connect("192.168.0.3", "dndd", "dndddndd", nameNvalue_["db"]);
 		if(nameNvalue_["db"] != db) db = nameNvalue_["db"], id = name = "", level="0";
 		ifstream f(db + ".txt");
 		getline(f, group);

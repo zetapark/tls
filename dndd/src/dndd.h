@@ -1,7 +1,7 @@
 #include<database/mysqldata.h>
-#include<tcpip/bootstrap.h>
+#include<tcpip/website.h>
 
-class DnDD : public BootStrapSite
+class DnDD : public WebSite
 {
 protected:
 	SqlQuery sq;
