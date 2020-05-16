@@ -11,14 +11,14 @@ class MySite : public WebSite
 {
 protected:
 	void process() {
-		if(requested_document_ == "result_view") {
+		if(requested_document_ == "index.html") swap("@CAROUSEL", car);
+		else if(requested_document_ == "result_view") {
 			content_ = "<html><h2>";
 			for(auto [a, b] : nameNvalue_) content_ += a + ':' + b + "<br>";
 			content_ += "</h2></html>";
 		} else if(requested_document_ == "korean") content_ = language = "korean";
 		else if(requested_document_ == "english") content_ = language = "english";
 		else if(requested_document_ == "tutorial.js") if(language == "korean") swap("kor", "eng");
-		else if(requested_document_ == "index.html") swap("@CAROUSEL", car);
 		cout << requested_document_ << endl;
 	}
 	string language = "korean";
@@ -37,6 +37,7 @@ int main(int ac, char** av)
 	f >> n; getline(f, s);
 	for(int i=0; i<n; i++) for(int j=0; j<3; j++) {
 		getline(f, s);
+		cout << s << endl;
 		v[j].push_back(s);
 	}
 	car = carousel(v[0], v[1], v[2]);
