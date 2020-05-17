@@ -16,7 +16,7 @@
 			<div class="w3-rest w3-container">
 				<div class = 'w3-panel w3-card w3-light-grey'>
 				<h4>LAN status</h4>
-				<img src=lan.png width=800>
+				<img src=lan.png width=700>
 				<p class=kor>
 				현재 공유기를 맥 미니와 라즈베리파이에 연결하여, 웹 서버를 구현하였다.
 				맥 미니에 데이터 베이스 서버와 eZ 프레임워크의 미들 서버를 올리고,
@@ -30,6 +30,17 @@
 				메모리 사용량을 줄였다.
 				현재 읽고 있는 이 웹 페이지는 ez.src.x 실행 파일이 서비스 한다.
 				</p>
+				<p class=eng>
+				I connected a Mac mini and a Raspberry pi to a router to service web apps.
+				Mac mini houses a mariadb database server, and middle server.
+				Raspberry pi houses web servers.
+				Middle server creates threads per every connection, so no memory increases.
+				Web server forks new process per every connection, so memory consumption increases.
+				For system stability and system management, I prefer forking a new process.
+				Not only libraries but also HTML, JS, image files used as templates are 
+				served from shared memory to reduce memory consumption.
+				This page you are reading is served by ez.src.x web server executable.
+				</p>
 				</div>
 				<div class = 'w3-panel w3-card w3-light-grey'>
 					<h4>Raspberry pi 2 Model B --- Ubuntu Server 20.04</h4>
@@ -41,10 +52,21 @@
 접속이 하나 늘 때마다 실제 메모리 사용량은 1메가가 늘어난다.
 CPU 사용량은 특별히 CPU 과부하가 많이 걸리는 프로그램을 서버측에서 돌리는 것이 아니라면,
 일반적인 한 페이지를 로드하는 데에,
-약 라스베리 파이 하나의 CPU에 대하여 htop에서 피크시에 약 5%의 부하가 걸리는 것으로 나타났다.
+약 라스베리 파이 하나의 코어에 대하여 htop에서 피크시에 약 5%의 부하가 걸리는 것으로 나타났다.
 한 페이지의 이미지가 많은 경우는 피크시에 20%까지도 사용량이 늘어났다.
-라스베리파이 CPU 성능을 고려하고 이 부하가 0.2초 정도 지속 된다는 것을 감안한다면,
+라스베리파이 CPU 성능을 고려하고 이 부하가 0.3~4 초 정도 지속 된다는 것을 감안한다면,
 만족할 만한 수치이다.
+					</p>
+					<p class=eng>
+Raspberry Pi 2 model B is loaded with 900MHz quad core ARM Cortex-A7 CPU and 1GB ram.
+Memory usage per connection of web server ez.src.x is about 4.5M bytes,
+but around 3.5M is via shared memory.
+So real memory consumption per connection is estimated 1M bytes.
+CPU usage is around 5% of 1 core on peak to send a page contents,
+if it is not processing cpu intensive server side work.
+But when lots of images are included in the page, it rises up to 20%.
+If we consider Raspberry Pi cpu performance, and the peak only lasts for a fragment of second,
+it is a satisfactory result.
 					</p>
 				</div>
 				<div class = 'w3-panel w3-card w3-light-grey'>
@@ -62,6 +84,17 @@ opencv 라이브러리를 사용하기에 서버측에서 해야 할 일이 많�
 물론, 서버측에서 이미지 처리를 opencv를 이용해서 하는 경우에는 많은 메모리를 사용한다.
 (수십에서 수백 메가 바이트 정도)
 그러므로, 이런 작업은 작업 종료시에 즉시 메모리를 반환하도록 해야 한다.
+					</p><p class=eng>
+Mac Mini is loaded with 2.4 GHx dual core CPU and 2G ram.
+It works like 4 core CPU with virtual thread generation.
+Middle server burdened 0.7 ~ 1% of one core.
+biz.src.x is a business card organizing app.
+This app uses huge opencv library for server side processing.
+It used up almost 20M, but 18M of this is shared memory.
+Consequently memory usage per connection is around 2M.
+Of course if server process image with opencv it consumes lots of memory.
+(a few tens or hundreds Mbyte)
+Therefore, these kind of job should return memory right after it finishes.
 					</p>
 				</div>
 			</div>
