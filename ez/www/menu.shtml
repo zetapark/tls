@@ -15,6 +15,7 @@
 <a href="tutorial6.html" class="w3-bar-item w3-button">Tutorial6</a><br>
 <a href="database.html" class="w3-bar-item w3-button">Database</a><br>
 <a href="reference.html" class="w3-bar-item w3-button">Reference</a><br>
+<a href="benchmark.html" class="w3-bar-item w3-button">Benchmark</a><br>
 </div>
 <div class='w3-panel w3-border-top w3-border-bottom w3-border-green w3-pale-green'>
 	<h4>DnDD</h4>

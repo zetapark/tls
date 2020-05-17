@@ -14,6 +14,14 @@ all :
 	make $(OPTION) -C dndd/
 	make $(OPTION) -C suwon/
 	make $(OPTION) -C ez/
+	make $(OPTION) -C sample/
+
+safe :
+	make -C lib/
+	if [ ! -f libzeta.so ]; then ln -s lib/libzeta.so libzeta.so; fi
+	cd middle/src/ && make && cd ../obj/ && make
+	if [ ! -f libzetatls.so ]; then ln -s middle/libzetatls.so libzetatls.so; fi
+	make -C sample/
 
 clean :
 	for i in $(shell ls -d */); do cd $$i; make clean; cd ..; done

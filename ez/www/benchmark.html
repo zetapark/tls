@@ -1,0 +1,53 @@
+<html>
+	<head>
+		<meta charset=utf-8>
+		<meta name="viewport" content="width=device-width, initial-scale=1"> 
+		<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+		<link rel='stylesheet' href='tutorial.css'>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		<script src=https://ez.zeta2374.com/tutorial.js></script>
+	</head>
+	<body>
+		<h1 class="w3-center w3-green">Performance</h1>
+		<div class="w3-row w3-border">
+			<div class="w3-hide-small w3-col m2 l2">
+			</div>
+			<div class="w3-rest w3-container">
+				<div class = 'w3-panel w3-card w3-light-grey'>
+					<h4>Raspberry pi 2 Model B --- Ubuntu Server 20.04</h4>
+					<img src=raspp.jpg width=400><br>
+					<p class=kor>
+라스베리파이 2 모델 B는 900MHz quad-core ARM Cortex-A7 CPU에 1GB RAM을 탑재했다.
+웹 서버의 접속당 메모리 사용량은 ez.src.x 의 경우 5메가 정도이지만,
+그 중 4메가 정도는 공유 메모리 영역이기에,
+접속이 하나 늘 때마다 실제 메모리 사용량은 1메가가 늘어난다.
+CPU 사용량은 특별히 CPU 과부하가 많이 걸리는 프로그램을 서버측에서 돌리는 것이 아니라면,
+일반적인 한 페이지를 로드하는 데에,
+약 라스베리 파이 하나의 CPU에 대하여 htop에서 피크시에 약 5%의 부하가 걸리는 것으로 나타났다.
+한 페이지의 이미지가 많은 경우는 피크시에 20%까지도 사용량이 늘어났다.
+라스베리파이 CPU 성능을 고려하고 이 부하가 0.2초 정도 지속 된다는 것을 감안한다면,
+만족할 만한 수치이다.
+					</p>
+				</div>
+				<div class = 'w3-panel w3-card w3-light-grey'>
+					<h4>Mac Mini A1347 core 2 duo - Ubuntu 18.04</h4>
+					<img src=macminip.jpg width=400><br>
+					<p class=kor>
+Mac Mini는 2.4 GHz dual core CPU, 2G Ram을 탑재했다.
+쓰레드 가상화를 통하여 4 코어처럼 작동하는 것 같다.
+미들 서버는 일반적인 문자열을 주고 받고, 암호화와 복호화를 수행하는 데에, 
+하나의 페이지에 대해 약 0.7 ~ 1% 정도의 CPU 부하가 걸렸다.
+biz.src.x는 명함 관리 앱인데, 
+opencv 라이브러리를 사용하기에 서버측에서 해야 할 일이 많다.
+그래서, 메모리를 20메가 가까이 잡아먹지만, 
+대부분 공유메모리를 최대한 활용하기에 접속당 늘어나는 분량은 2메가 정도이다.
+물론, 서버측에서 이미지 처리를 opencv를 이용해서 하는 경우에는 많은 메모리를 사용한다.
+(수십에서 수백 메가 바이트 정도)
+그러므로, 이런 작업은 작업 종료시에 즉시 메모리를 반환하도록 해야 한다.
+					</p>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
+
