@@ -12,14 +12,32 @@
 		<div class="w3-row w3-border">
 			<div class="w3-hide-small w3-col m2 l2">
 			</div>
+
+			<div class="w3-hide-small w3-col m2 l2">
+				<h4>LAN status</h4>
+				<object type="image/svg+xml" data="lan.svg" width=800></object>
+				<p class=kor>
+				현재 공유기를 맥 미니와 라즈베리파이에 연결하여, 웹 서버를 구현하였다.
+				맥 미니에 데이터 베이스 서버와 eZ 프레임워크의 미들 서버를 올리고,
+				대부분의 웹 서버는 라즈베리 파이에 올렸다.
+				미들 서버는 매 접속마다 쓰레드를 생성하기에 메모리의 증가는 없다.
+				웹 서버는 접속마다 fork로 프로세스를 복사하기에 메모리 사용량이 증가한다.
+				시스템 관리와 서버의 안정성 면에서 
+				사용자당 개별적인 프로세스를 생성하는 것이 나으리라고 생각된다.
+				라이브러리뿐만 아니라 템플릿으로 사용되는 
+				HTML, JS, 이미지 파일도 공유 메모리에서 서비스하여,
+				메모리 사용량을 줄였다.
+				현재 읽고 있는 이 웹 페이지는 ez.src.x 실행 파일이 서비스 한다.
+				</p>
+			</div>
 			<div class="w3-rest w3-container">
 				<div class = 'w3-panel w3-card w3-light-grey'>
 					<h4>Raspberry pi 2 Model B --- Ubuntu Server 20.04</h4>
 					<img src=raspp.jpg width=800><br>
 					<p class=kor>
 라스베리파이 2 모델 B는 900MHz quad-core ARM Cortex-A7 CPU에 1GB RAM을 탑재했다.
-웹 서버의 접속당 메모리 사용량은 ez.src.x 의 경우 5메가 정도이지만,
-그 중 4메가 정도는 공유 메모리 영역이기에,
+웹 서버의 접속당 메모리 사용량은 ez.src.x 의 경우 4.5메가 정도이지만,
+그 중 3.5메가 정도는 공유 메모리 영역이기에,
 접속이 하나 늘 때마다 실제 메모리 사용량은 1메가가 늘어난다.
 CPU 사용량은 특별히 CPU 과부하가 많이 걸리는 프로그램을 서버측에서 돌리는 것이 아니라면,
 일반적인 한 페이지를 로드하는 데에,
@@ -30,7 +48,7 @@ CPU 사용량은 특별히 CPU 과부하가 많이 걸리는 프로그램을 서
 					</p>
 				</div>
 				<div class = 'w3-panel w3-card w3-light-grey'>
-					<h4>Mac Mini A1347 core 2 duo - Ubuntu 18.04</h4>
+					<h4>Mac Mini A1347 core 2 duo --- Ubuntu Desktop 18.04</h4>
 					<img src=macminip.jpg width=800><br>
 					<p class=kor>
 Mac Mini는 2.4 GHz dual core CPU, 2G Ram을 탑재했다.
