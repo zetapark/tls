@@ -1,6 +1,7 @@
 #pragma once
 #include<map>
 #include<string>
+#include<vector>
 #include"tcpip/shared_files.h"
 using namespace std;
 
