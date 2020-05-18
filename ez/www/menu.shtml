@@ -20,6 +20,7 @@
 <div class='w3-panel w3-border-top w3-border-bottom w3-border-green w3-pale-green'>
 	<h4>DnDD</h4>
 <a href="dndd.html" class="w3-bar-item w3-button">Introduction</a><br>
+<a href=video.html class='w3-bar-item w3-button'>Vote System</a><br>
 </div>
 </div> 
 
