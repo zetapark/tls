@@ -127,18 +127,32 @@ pre.bash {
 					This is a simple text file located at root directory of this project.
 					</p>
 					<pre class=w3-code>
-default localhost 2001
-www localhost 2002
-ez 192.168.0.14 2001</pre>
+default localhost 2001 1
+www localhost 2002 3
+ez 192.168.0.14 2001 1
+www 192.168.0.14 2002 2</pre>
 					<p class=kor>
 					첫번째 줄은 서브 도메인명이 정의되지 않은 경우 디폴트로 로컬호스트의 2001 포트로 연결함을 의미합니다.
 					두번째 줄은 www 서브 도메인일 경우(www.zeta2374.com 등등) localhost의 2002포트로 연결함을 의미합니다.
 					세번째 줄은 ez 서브 도메인일 경우는 LAN의 192.168.0.14의 2001 포트로 연결함을 의미합니다.
+					<br>
+					각 줄의 맨 마지막에 있는 숫자는 가중치입니다.
+					www 서브 도메인의 경우는 localhost와 192.168.0.14에 3:2의 비율로 접속을 분배합니다.
+					300 : 200으로 가중치를 분배하면 먼저 300개의 접속을 localhost에 분배하고,
+					그 다음에 200개의 접속을 192.168.0.14에 분배합니다.
+					만약 가중치가 0 이라면 그 서버에는 접속이 분배되지 않습니다.
 					</p>
 					<p class=eng>
 					First line means that non listed domain name will be connected to localhost port 2001.
 					Second line means that www subdomain will be connected to localhost port 2002.
 					Third line means that ez subdomain will be connected to 192.168.0.14 port 2001.
+					<br>
+					The last number of each line is a weight.
+					In case of www subdomain, middle server will distribute the connection to 
+					localhost and 192.168.0.14 by 3:2.
+					If weight was 300:200, it will distribute first 300 connections to localhost,
+					and the next 200 connections to 192.168.0.14.
+					If weight is 0, that server will not get any connection.
 					</p>
 				</div>
 			</div>	
