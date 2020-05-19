@@ -11,6 +11,18 @@ using namespace std;
 
 PSK PSKnCLIENT;
 
+pair<string, int> HostNPort::operator[](string host)
+{
+	if(find_if(cbegin(), cend(), [host](const Host &h) {return h.host == host;}) == cend())
+		host = "default";
+	for(auto &a : *this) if(a.host == host && 0 <= a.hit && a.hit < a.weight) {
+		if(++a.hit == a.weight) a.hit = -1;
+		return {a.ip, a.port};
+	}
+	for(auto &a : *this) if(a.host == host) a.hit = 0;
+	return (*this)[host];
+}
+
 Middle::Middle(int outport, int timeout, int queue, string end)
 	: Server{outport, timeout, queue, end}
 { } 
@@ -25,8 +37,9 @@ int Middle::get_full_length(const string &s)
 void Middle::read_config(string file)
 {
 	ifstream f{file};
-	string subdomain, ip; int port;
-	while(f >> subdomain >> ip >> port) hostNport_[subdomain] = {ip, port};
+	string subdomain, ip; int port, weight;
+	while(f >> subdomain >> ip >> port >> weight)
+		hostNport_.push_back({subdomain, ip, port, weight, 0});
 }
 
 int Middle::start()
@@ -70,7 +83,6 @@ void Middle::connected(int fd)
 						if(!*cl) { //first connection
 							stringstream ss; ss << host;
 							getline(ss, host, '.');
-							if(hostNport_.find(host) == hostNport_.end()) host = "default";
 							auto [ip, port] = hostNport_[host];
 							tie(cookie, *cl) = t.new_session(ip, port);//cookie:base64 encoded id
 						}

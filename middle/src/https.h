@@ -3,6 +3,19 @@
 #include<chrono>
 #include<tcpip/server.h>
 
+struct Host {
+	std::string host;
+	std::string ip;
+	int port;
+	int weight;
+	int hit;
+};
+
+struct HostNPort : std::vector<Host>
+{
+	std::pair<std::string, int> operator[](std::string host);
+};
+
 class Middle : public Server
 {//use thread for multiple connection, should overload read func-> return exact one req
 public:
@@ -11,7 +24,7 @@ public:
 	void read_config(std::string filename);
 
 protected:
-	std::map<std::string, std::pair<std::string, int>> hostNport_;
+	HostNPort hostNport_;
 	bool debug_ = false;
 
 private:
