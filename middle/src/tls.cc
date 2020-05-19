@@ -13,7 +13,7 @@ mpz_class get_prvkey(istream& is);
 //static member initialization
 static mpz_class ze, zd, zK;//used in TLS constructor
 
-template<bool SV> void TLS<SV>::init_certificate(string certpem, string keypem)
+template<bool SV> void TLS<SV>::init_certificate(const char* certpem, const char* keypem)
 {//this will run before main -> use for initialization
 	ifstream f2(keypem);//generated with openssl genrsa 2048 > key.pem
 	ifstream f(certpem);//openssl req -x509 -days 1000 -new -key key.pem -out cert.pem

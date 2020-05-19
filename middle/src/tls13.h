@@ -25,7 +25,7 @@ public:
 	std::tuple<std::string, std::shared_ptr<MClient>> new_session(std::string ip, int port);
 	bool is_tls13();
 	std::pair<std::vector<uint8_t>, std::vector<uint8_t>> new_session_ticket(std::string s);
-	static void init_certificate(std::string certpem);
+	static void init_certificate(const char *certpem);
 protected: HKDF<HASH> hkdf_;
 	mpz_class premaster_secret_;//inspect this to check tls version
 	std::string client_ext();	

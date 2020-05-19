@@ -13,7 +13,7 @@ template class TLS13<false>;
 
 extern PSK PSKnCLIENT;
 
-template<bool SV> void TLS13<SV>::init_certificate(string certpem)
+template<bool SV> void TLS13<SV>::init_certificate(const char *certpem)
 {
 	ifstream f(certpem);//openssl req -x509 -days 1000 -new -key key.pem -out cert.pem
 	vector<unsigned char> r;
