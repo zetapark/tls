@@ -11,10 +11,10 @@ using namespace std;
 mpz_class get_prvkey(istream& is);
 
 //static member initialization
-static mpz_class ze, zd, zK;//used in TLS constructor
 
 template<bool SV> void TLS<SV>::init_certificate(const char* certpem, const char* keypem)
 {//this will run before main -> use for initialization
+	mpz_class ze, zd, zK;//used in TLS constructor
 	ifstream f2(keypem);//generated with openssl genrsa 2048 > key.pem
 	ifstream f(certpem);//openssl req -x509 -days 1000 -new -key key.pem -out cert.pem
 	try {//key.pem
@@ -44,10 +44,11 @@ template<bool SV> void TLS<SV>::init_certificate(const char* certpem, const char
 	mpz2bnd(r.size() + 7, v.begin() + 3, v.begin() + 5);
 	r.insert(r.begin(), v.begin(), v.end());
 	certificate_ = string{r.begin(), r.end()};
+	rsa_ = RSA{ze, zd, zK};
 }
 
 template<bool SV> string TLS<SV>::certificate_;
-template<bool SV> RSA TLS<SV>::rsa_{ze, zd, zK};
+template<bool SV> RSA TLS<SV>::rsa_{0,0,0};
 template class TLS<true>;//server
 template class TLS<false>;//client
 
