@@ -42,10 +42,10 @@
 		<div class = 'w3-panel w3-card w3-light-grey'>
 			<h4>Page 3, result.html</h4>
 			<div class='w3-code notranslate'>
-		Your address is myAddress<br>
-		Your name is myName<br>
-		Your email is myEmail<br>
-		Your id is myId<br>
+			Your address is myAddress<br>
+			Your name is myName<br>
+			Your email is myEmail<br>
+			Your id is myId<br>
 			</div>
 			And we show the result at our last page.
 		</div>
@@ -64,45 +64,39 @@
 		<div class = 'w3-panel w3-card w3-light-grey'>
 			<h4>Page 2, form2.html</h4>
 			<div class='w3-code notranslate'>
-				<pre>
-		&lt;form action="result.html" method="post">
-			address&lt;input type="text" name="address" >&lt;br>
-			email&lt;input type='text' name='email'>&lt;br>
-			&lt;input type="submit"  value="ok">
-		&lt;/form>
-				</pre>
+				<pre>&lt;form action="result.html" method="post">
+	address&lt;input type="text" name="address" >&lt;br>
+	email&lt;input type='text' name='email'>&lt;br>
+	&lt;input type="submit"  value="ok">
+&lt;/form></pre>
 			</div></div>
 		<div class = 'w3-panel w3-card w3-light-grey'>
 			<h4>Page 3, result.html</h4>
 			<div class='w3-code notranslate'>
-				<pre>
-		Your address is @ADDRESS<&lt;br>
-		Your name is @NAME<&lt;br>
-		Your email is @EMAIL<&lt;br>
-		Your id is @ID<&lt;br>
-				</pre>
+				<pre>Your address is @ADDRESS<&lt;br>
+Your name is @NAME<&lt;br>
+Your email is @EMAIL<&lt;br>
+Your id is @ID<&lt;br></pre>
 			</div>
 		</div>
 
 		<div class = 'w3-panel w3-card w3-light-grey'>
 			<h4>C++ side Programming</h4>
 			<div class='w3-code notranslate'>
-				<pre>
-	class MySite : public WebSite {
-	public:
-		map&lt;string, string> m;
-		void process() {
-			if(requested_document_ == "form2.html" || requested_document_ == "result.html")
-				for(const auto& [name, value] : nameNvalue_) m[name] = value;
-			if(requested_document_ == "result.html") {
-				swap("@ADDRESS", m["address"]);
-				swap("@NAME", m["name"]);
-				swap("@ID", m["id"]);
-				swap("@EMAIL", m["email"]);
-			}
+				<pre>class MySite : public WebSite {
+public:
+	map&lt;string, string> m;
+	void process() {
+		if(requested_document_ == "form2.html" || requested_document_ == "result.html")
+			for(const auto& [name, value] : nameNvalue_) m[name] = value;
+		if(requested_document_ == "result.html") {
+			swap("@ADDRESS", m["address"]);
+			swap("@NAME", m["name"]);
+			swap("@ID", m["id"]);
+			swap("@EMAIL", m["email"]);
 		}
 	}
-				</pre>
+} </pre>
 			</div>
 			<p class=eng>
 			We do not need to query database or use cookei to know the parameters. 
