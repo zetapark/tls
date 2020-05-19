@@ -24,7 +24,7 @@ public:
 	std::string finished(std::string &&s = "");//if s=="" send, else recv
 	int alert(std::string &&s = "");
 	std::string alert(uint8_t level, uint8_t desc);
-	static std::string init_certificate();
+	static void init_certificate(std::string certpem, std::string keypem);
 
 protected:
 	NettleAes128 aes_[2];//0 client 1 server

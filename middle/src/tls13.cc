@@ -13,9 +13,9 @@ template class TLS13<false>;
 
 extern PSK PSKnCLIENT;
 
-static string init_certificate()
+template<bool SV> void TLS13<SV>::init_certificate(string certpem)
 {
-	ifstream f("../fullchain.pem");//openssl req -x509 -days 1000 -new -key key.pem -out cert.pem
+	ifstream f(certpem);//openssl req -x509 -days 1000 -new -key key.pem -out cert.pem
 	vector<unsigned char> r;
 	for(string s; (s = get_certificate_core(f)) != "";) {
 		auto v = base64_decode(s);
@@ -29,9 +29,10 @@ static string init_certificate()
 	mpz2bnd(r.size(), front.end() - 3, front.end());
 	mpz2bnd(r.size() + 4, front.begin() + 1, front.begin() + 4);
 	r.insert(r.begin(), front.begin(), front.end());
-	return {r.begin(), r.end()};
+	certificate13_ = string{r.begin(), r.end()};
 }
-static string certificate13 = init_certificate();
+
+template<bool SV> string TLS13<SV>::certificate13_;
 
 #pragma pack(1)
 template<bool SV> TLS13<SV>::TLS13()
@@ -449,8 +450,8 @@ template<bool SV> string TLS13<SV>::server_hello(string &&s)
 
 template<bool SV> string TLS13<SV>::server_certificate13()
 {
-	this->accumulated_handshakes_ += certificate13;
-	return certificate13;
+	this->accumulated_handshakes_ += certificate13_;
+	return certificate13_;
 }
 
 template<bool SV> string TLS13<SV>::certificate_verify()

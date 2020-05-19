@@ -13,10 +13,10 @@ mpz_class get_prvkey(istream& is);
 //static member initialization
 static mpz_class ze, zd, zK;//used in TLS constructor
 
-template<bool SV> string TLS<SV>::init_certificate()
+template<bool SV> void TLS<SV>::init_certificate(string certpem, string keypem)
 {//this will run before main -> use for initialization
-	ifstream f2("../privkey.pem");//generated with openssl genrsa 2048 > key.pem
-	ifstream f("../fullchain.pem");//openssl req -x509 -days 1000 -new -key key.pem -out cert.pem
+	ifstream f2(keypem);//generated with openssl genrsa 2048 > key.pem
+	ifstream f(certpem);//openssl req -x509 -days 1000 -new -key key.pem -out cert.pem
 	try {//key.pem
 		auto jv = pem2json(f2);
 		zK = str2mpz(jv[0][0].asString());
@@ -43,10 +43,10 @@ template<bool SV> string TLS<SV>::init_certificate()
 	mpz2bnd(r.size() + 3, v.end() - 6, v.end() - 3);
 	mpz2bnd(r.size() + 7, v.begin() + 3, v.begin() + 5);
 	r.insert(r.begin(), v.begin(), v.end());
-	return {r.begin(), r.end()};
+	certificate_ = string{r.begin(), r.end()};
 }
 
-template<> string TLS<true>::certificate_ = TLS<true>::init_certificate();
+template<bool SV> string TLS<SV>::certificate_;
 template<bool SV> RSA TLS<SV>::rsa_{ze, zd, zK};
 template class TLS<true>;//server
 template class TLS<false>;//client
