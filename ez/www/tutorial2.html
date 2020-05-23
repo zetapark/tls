@@ -33,21 +33,18 @@ So, we need to change our server side programming a little bit.
 		<div class = 'w3-panel w3-card w3-light-grey'>
 			<h4>index.html</h4>
 			<div class='w3-code notranslate'>
-				<pre>
-&lt;html>
+				<pre>&lt;html>
 	&lt;body>
 	&lt;a href="result?name='park'&day='mon'">get method test&lt;/a>
 	&lt;/body>
-&lt;/html>
-				</pre>
+&lt;/html></pre>
 			</div>
 		</div>
 
 		<div class = 'w3-panel w3-card w3-light-grey'>
 			<h4>C++ side Programming</h4>
 			<div class='w3-code notranslate'>
-				<pre>
-class My_site : public WebSite
+				<pre>class My_site : public WebSite
 {
 protected:
 	void process() {
@@ -65,8 +62,7 @@ int main(int ac, char** av)
 	my_site.init("www");//directory contains html files
 	Server sv{2000};//port number
 	sv.start(my_site);//go infinite loop
-}
-				</pre>
+} </pre>
 			</div>
 		<p class=eng>We need our own version of WebSite class. 
 		We should derive this from WebSite class.
