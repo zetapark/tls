@@ -10,6 +10,7 @@ class WebSite
 public:
 	static void init(std::string dir = "www");
 	std::string operator()(std::string s);
+	static void add_header(std::string re, std::string he);
 
 protected:
 	virtual void process() {}//child should implement this
@@ -21,8 +22,8 @@ protected:
 
 private:
 	const std::string header_ = "HTTP/1.1 200 OK\r\n"
-															"Content-Type: text/html; charset=utf-8\r\n"
-															"Content-Length: ";
+															"Content-Type: text/html; charset=utf-8\r\n";
+	static std::multimap<std::string, std::string> added_header_;
 	void parse_multi(std::istream& is, std::string boundary);
 	std::istream& parse_one(std::istream& is, std::string boundary);
 	static std::map<std::string, std::string> parse_post(std::istream& post);

@@ -139,17 +139,3 @@ void Server::nokeep_start(function<string(string)> f)
 		}
 	}
 }
-
-void Server::keep_start(function<string(string)> &f)
-{//all connections share one server state (for adnet)
-	int cl_size = sizeof(client_addr);
-	while(true) {
-		client_fd = accept(server_fd, (sockaddr*)&client_addr, (socklen_t*)&cl_size);
-		if(client_fd == -1) cout << "accept() error" << endl;
-		else {//connection established
-			cout << "accepting" << endl;
-			send(f(*recv()));
-		}
-	}
-}
-

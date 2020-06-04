@@ -26,7 +26,8 @@ public:
 	bool is_tls13();
 	std::pair<std::vector<uint8_t>, std::vector<uint8_t>> new_session_ticket(std::string s);
 	static void init_certificate(const char *certpem);
-protected: HKDF<HASH> hkdf_;
+protected: 
+	HKDF<HASH> hkdf_;
 	mpz_class premaster_secret_;//inspect this to check tls version
 	std::string client_ext();	
 	std::string server_ext();

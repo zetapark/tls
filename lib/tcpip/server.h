@@ -46,7 +46,14 @@ public:
 			std::string end_string = "end");
 	int start(std::function<std::string(std::string)> f);
 	void nokeep_start(std::function<std::string(std::string)> f);
-	void keep_start(std::function<std::string(std::string)> &f);
+	template<class F> void keep_start(F &f)
+	{//all connections share one server state (for adnet)
+		int cl_size = sizeof(client_addr);
+		while(true) {
+			client_fd = accept(server_fd, (sockaddr*)&client_addr, (socklen_t*)&cl_size);
+			if(client_fd != -1) send(f(*recv()));//connection established
+		}
+	}
 
 protected:
 	std::string end_string;

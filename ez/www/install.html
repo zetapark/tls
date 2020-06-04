@@ -144,6 +144,8 @@ www 192.168.0.14 2002 2</pre>
 					300 : 200으로 가중치를 분배하면 먼저 300개의 접속을 localhost에 분배하고,
 					그 다음에 200개의 접속을 192.168.0.14에 분배합니다.
 					만약 가중치가 0 이라면 그 서버에는 접속이 분배되지 않습니다.
+					웹 개발을 할 때, 완전히 분리해서 다뤄도 좋은 부분이 있을 수 있습니다.
+					이럴 경우에는 서브 도메인을 나누어 완전히 독립적으로 여러 개의 서버로 개발할 수 있습니다.
 					</p>
 					<p class=eng>
 					First line means that non listed domain name will be connected to localhost port 2001.
@@ -156,6 +158,9 @@ www 192.168.0.14 2002 2</pre>
 					If weight was 300:200, it will distribute first 300 connections to localhost,
 					and the next 200 connections to 192.168.0.14.
 					If weight is 0, that server will not get any connection.
+					In developing a web site, there could be a part that can be handled separately.
+					In that case, you can divide your website into many separate subdomains and develop
+					the web servers completely separated.
 					</p>
 				</div>
 

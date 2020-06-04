@@ -33,6 +33,6 @@ int main(int ac, char **av)
 	MyWeb f;
 	f.init(co.get<const char*>("dir"));
 	Server sv{co.get<int>("port")};
-	sv.start(f);
+	sv.keep_start(f);
 }
 

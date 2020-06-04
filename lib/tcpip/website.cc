@@ -53,6 +53,11 @@ bool WebSite::prepend(string a, string b)
 	return true;
 }
 
+void WebSite::add_header(string requested_document, string header) 
+{//Access-Control-Allow-Origin: https://foo.example
+	added_header_.insert({requested_document, header});
+}
+
 std::string WebSite::operator()(string s) 
 {//will set requested_document and nameNvalue (= parameter of post or get)
 	nameNvalue_.clear();
@@ -84,7 +89,12 @@ std::string WebSite::operator()(string s)
 	} catch(const exception& e) {
 		cerr << e.what() << endl;
 	}
-	return header_ + to_string(content_.size()) + "\r\n\r\n" + content_;
+
+	s = "";
+	const auto &[begin, end] = added_header_.equal_range(requested_document_);
+	for(auto it = begin; it != end; it++) s += it->second + "\r\n";
+	
+	return header_ + s + "Content-Length: " + to_string(content_.size()) + "\r\n\r\n" + content_;
 }
 
 istream& WebSite::parse_one(istream& is, string boundary)

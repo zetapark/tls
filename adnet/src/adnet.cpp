@@ -5,25 +5,21 @@
 #include<tcpip/website.h>
 using namespace std;
 
-string car;
-
 class AdNET : public WebSite
 {
 protected:
 	SqlQuery sq;
 	void process() {
-		if(requested_document_ == "index.html") swap("@CAROUSEL", car);
-		else if(requested_document_ == "result_view") {
-			content_ = "<html><h2>";
-			for(auto [a, b] : nameNvalue_) content_ += a + ':' + b + "<br>";
-			content_ += "</h2></html>";
-		} else if(requested_document_ == "korean") content_ = language = "korean";
-		else if(requested_document_ == "english") content_ = language = "english";
-		else if(requested_document_ == "tutorial.js") if(language == "korean") swap("kor", "eng");
-		else {
-			requested_document_
-		}
-		cout << requested_document_ << endl;
+		if(requested_document_ == "leave_message") {
+			string s;
+			for(const char &c : nameNvalue_["content"]) {
+				s += c;
+				if(c == '\'') s += "\\''";
+			}
+			system("mailx zeta@zeta2374.com -r " + nameNvalue_["email"] + " -s "
+					+ nameNvalue_["title"] + " <<< '" + s + "'");
+			content_ = "mail sent";
+		} 
 	}
 	string language = "korean";
 };
@@ -36,19 +32,9 @@ int main(int ac, char** av)
 	};
 	if(!co.args(ac, av)) return 0;
 
-	ifstream f("carousel.txt");
-	int n; string s; vector<string> v[3];
-	f >> n; getline(f, s);
-	for(int i=0; i<n; i++) for(int j=0; j<3; j++) {
-		getline(f, s);
-		cout << s << endl;
-		v[j].push_back(s);
-	}
-	car = carousel(v[0], v[1], v[2]);
-	cout << car << endl;
-
 	MySite site;
 	site.init(co.get<const char*>("dir"));
+	site.add_header("leave_message", "Access-Control-Allow-Origin: https://www.zeta2374.com/email.html");
 	Server sv{co.get<int>("port")};
 	return sv.keep_start(site);
 }
