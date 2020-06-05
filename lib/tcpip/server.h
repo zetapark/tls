@@ -59,7 +59,7 @@ public:
 				lck.lock();
 				a = f(*a);
 				lck.unlock();
-				send(*a);
+				send(*a, fd);
 			}
 			close(fd);
 		};
