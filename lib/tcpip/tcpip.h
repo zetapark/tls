@@ -3,6 +3,7 @@
 #include <string>
 #include<optional>
 #include <arpa/inet.h>
+#include<unistd.h>//close
 #define BUF_SIZE 4096
 
 class Tcpip 

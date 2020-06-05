@@ -52,6 +52,7 @@ public:
 		while(true) {
 			client_fd = accept(server_fd, (sockaddr*)&client_addr, (socklen_t*)&cl_size);
 			if(client_fd != -1) send(f(*recv()));//connection established
+			close(client_fd);
 		}
 		return 0;
 	}
