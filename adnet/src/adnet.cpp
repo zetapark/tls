@@ -16,7 +16,7 @@ protected:
 				if(c == '\'') s += "\\''";
 			}
 			string cmd = "mailx zeta@zeta2374.com -r " + nameNvalue_["email"] + " -s '"
-					+ nameNvalue_["title"] + "' <<< '" + s + "'";
+					+ nameNvalue_["title"] + "' <<HERE_CONTENT\n" + s + "\nHERE_CONTENT";
 			cout << cmd << endl;
 			system(cmd.data());
 			content_ = "mail sent";
