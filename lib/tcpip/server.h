@@ -48,6 +48,7 @@ public:
 			std::string end_string = "end");
 	int start(std::function<std::string(std::string)> f);
 	int nokeep_start(std::function<std::string(std::string)> f);
+
 	template<class F> int keep_start(F &f)
 	{//all connections share one server state (for adnet)
 		int cl_size = sizeof(client_addr);
