@@ -15,8 +15,8 @@ protected:
 				s += c;
 				if(c == '\'') s += "\\''";
 			}
-			string cmd = "mailx zeta@zeta2374.com -r " + nameNvalue_["email"] + " -s "
-					+ nameNvalue_["title"] + " <<< '" + s + "'";
+			string cmd = "mailx zeta@zeta2374.com -r " + nameNvalue_["email"] + " -s '"
+					+ nameNvalue_["title"] + "' <<< '" + s + "'";
 			system(cmd.data());
 			content_ = "mail sent";
 		} 
