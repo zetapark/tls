@@ -53,10 +53,13 @@ public:
 		int cl_size = sizeof(client_addr);
 		std::vector<std::thread> v;
 		std::mutex mtx;
+		std::unique_lock lck{mtx, std::defer_lock};
 		auto lambda = [&](int fd) {
-			while(auto a = recv()) {
-				std::lock_guard lck{mtx};
-				send(f(*a));
+			while(auto a = recv(fd)) {
+				lck.lock();
+				a = f(*a);
+				lck.unlock();
+				send(*a);
 			}
 			close(fd);
 		};
