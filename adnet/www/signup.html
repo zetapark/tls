@@ -1,5 +1,7 @@
 <!DOCTYPE html>
 <html>
+<head>
+		<meta charset="utf-8" />
 <style>
 body {font-family: Arial, Helvetica, sans-serif;}
 * {box-sizing: border-box}
@@ -71,9 +73,24 @@ button:hover {
   }
 }
 </style>
+		<script src="https://code.jquery.com/jquery-3.5.0.min.js"
+					integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ="
+		 crossorigin="anonymous"></script>
+	<script>
+		$(function() {
+			$('form').submit(function(event) {
+				event.preventDefault();
+				$.post('check.php', $('form').serialize(), function(data) {
+					alert(data);
+					if(data.localeCompare('you are registered') == 0) window.location.href='index.html';
+				});
+			});
+		});
+	</script>
+</head>
 <body>
 
-<form action="/action_page.php" style="border:1px solid #ccc">
+<form action="index.html" style="border:1px solid #ccc">
   <div class="container">
     <h1>Sign Up</h1>
     <p>Please fill in this form to create an account.</p>
