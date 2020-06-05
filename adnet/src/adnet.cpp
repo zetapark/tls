@@ -17,6 +17,7 @@ protected:
 			}
 			string cmd = "mailx zeta@zeta2374.com -r " + nameNvalue_["email"] + " -s '"
 					+ nameNvalue_["title"] + "' <<< '" + s + "'";
+			cout << cmd << endl;
 			system(cmd.data());
 			content_ = "mail sent";
 		} 
