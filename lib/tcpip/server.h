@@ -1,6 +1,7 @@
 #pragma once
 #include<map>
 #include<functional>
+#include<mutex>
 #include<thread>
 #include"tcpip.h"
 
@@ -51,8 +52,12 @@ public:
 	{//all connections share one server state (for adnet)
 		int cl_size = sizeof(client_addr);
 		std::vector<std::thread> v;
+		std::mutex mtx;
 		auto lambda = [&](int fd) {
-			for(std::optional<std::string> a; a = recv(); send(f(*a)));
+			while(auto a = recv()) {
+				std::lock_guard lck{mtx};
+				send(f(*a));
+			}
 			close(fd);
 		};
 		while(true) {

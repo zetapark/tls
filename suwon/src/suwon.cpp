@@ -8,10 +8,8 @@ using namespace std;
 class MyWeb : public WebSite
 {
 protected:
-	std::mutex mtx_;
 	void process() {
 		sq.connect("192.168.0.3", "kk", "kk", "kyungki");
-		std::lock_guard lck_{mtx_};
 		sq.select("가맹점", "where 상호 like '%" + nameNvalue_["name"] + "%' and 주소 like '%" 
 				+ nameNvalue_["adress"] + "%' and 업종 like '%" + nameNvalue_["kind"] + "%' limit 100");
 		string s;
