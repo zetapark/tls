@@ -45,14 +45,15 @@ public:
 	Server(int port = 2001, unsigned int time_out = 60*60*5, int queue_limit = 50,
 			std::string end_string = "end");
 	int start(std::function<std::string(std::string)> f);
-	void nokeep_start(std::function<std::string(std::string)> f);
-	template<class F> void keep_start(F &f)
+	int nokeep_start(std::function<std::string(std::string)> f);
+	template<class F> int keep_start(F &f)
 	{//all connections share one server state (for adnet)
 		int cl_size = sizeof(client_addr);
 		while(true) {
 			client_fd = accept(server_fd, (sockaddr*)&client_addr, (socklen_t*)&cl_size);
 			if(client_fd != -1) send(f(*recv()));//connection established
 		}
+		return 0;
 	}
 
 protected:

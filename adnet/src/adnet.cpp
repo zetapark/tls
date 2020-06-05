@@ -5,10 +5,9 @@
 #include<tcpip/website.h>
 using namespace std;
 
-class AdNET : public WebSite
+class Misc : public WebSite
 {
 protected:
-	SqlQuery sq;
 	void process() {
 		if(requested_document_ == "leave_message") {
 			string s;
@@ -16,12 +15,12 @@ protected:
 				s += c;
 				if(c == '\'') s += "\\''";
 			}
-			system("mailx zeta@zeta2374.com -r " + nameNvalue_["email"] + " -s "
-					+ nameNvalue_["title"] + " <<< '" + s + "'");
+			string cmd = "mailx zeta@zeta2374.com -r " + nameNvalue_["email"] + " -s "
+					+ nameNvalue_["title"] + " <<< '" + s + "'";
+			system(cmd.data());
 			content_ = "mail sent";
 		} 
 	}
-	string language = "korean";
 };
 
 int main(int ac, char** av)
@@ -32,7 +31,7 @@ int main(int ac, char** av)
 	};
 	if(!co.args(ac, av)) return 0;
 
-	MySite site;
+	Misc site;
 	site.init(co.get<const char*>("dir"));
 	site.add_header("leave_message", "Access-Control-Allow-Origin: https://www.zeta2374.com/email.html");
 	Server sv{co.get<int>("port")};

@@ -11,6 +11,7 @@ using namespace std;
 using namespace std::experimental::filesystem;
 
 SharedMem WebSite::fileNhtml_;
+multimap<string, string> WebSite::added_header_;
 
 void destroy_shared_mem(int sig)
 {

@@ -127,7 +127,7 @@ int Server::start(function<string(string)> f)
 	return 0;
 }
 
-void Server::nokeep_start(function<string(string)> f)
+int Server::nokeep_start(function<string(string)> f)
 {//does not keep connection
 	int cl_size = sizeof(client_addr);
 	while(true) {
@@ -138,4 +138,5 @@ void Server::nokeep_start(function<string(string)> f)
 			send(f(*recv()));
 		}
 	}
+	return 0;
 }
