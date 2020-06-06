@@ -5,6 +5,12 @@
 		<script src="https://code.jquery.com/jquery-3.5.0.min.js"
 					integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ="
 		 crossorigin="anonymous"></script>
+	<script>
+		if(@LOGGED) {
+			$('form').hide();
+			$('a').hide();
+		}
+	</script>
 	</head>
 	<body>
 		<form action="index.html" method="post" style='float:left'>	 
@@ -15,6 +21,7 @@
 			<input type="submit" name='submit' value='login'>
 		</form> 
 		<a href=signup.html><button>signup</button></a>
+
 	</body>
 </html>
 

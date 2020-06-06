@@ -28,8 +28,10 @@ protected:
 			}
 		} else if(requested_document_ == "index.html") {//from login button
 			sq.connect("localhost", "adnet", "adnetadnet", "adnet");
+			swap("@LOGGED", id_ == "" ? "False" : "True");
 			if(id_ != "") {
 				sq.select("Users", "where email = '" + id_ "'");
+				if(std::filesystem::exists("banner/" + id_ + "-square.jpg")) ;//-leader -mobile
 			}
 
 		} 
