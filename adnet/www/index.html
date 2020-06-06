@@ -10,9 +10,26 @@
 			$('form').hide();
 			$('a').hide();
 		}
+	
+		$(function() {
+			setInterval(function() {
+				$.post('https://ad.zeta2374.com/request_ad', { id : $('#adnet').val() },
+					function(data) {
+						var split = data.split('\n');
+						$('#adnet').src = split[0];//link
+						$('#adnet').click(function() {
+							$.post('https://ad.zeta2374.com/clicked', {id : $('#adnet').val(),
+								click : split[1]});//id
+							window.location.href = split[2];//link
+						});
+					});
+			}, 10000);
+		});
 	</script>
+
 	</head>
 	<body>
+		<img width=100% id=adnet value=adnet>
 		<form action="index.html" method="post" style='float:left'>	 
 			<label for="email">Email address:</label>
 			<input type="email" id="email" name="email">

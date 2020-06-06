@@ -15,15 +15,14 @@ protected:
 			if(nameNvalue_["psw"] != nameNvalue_["psw-repeat"]) content_ = "password not match";
 			else if(!sq.select("Users", "where email = '" + nameNvalue_["email"] + "'")) 
 				content_ = "email already exist";
-			else if(!sq.select("Users", "where webpage_id = '" + nameNvalue_["webpage-id"] + "'"))
-				content_ = "webpage id already exist";
+			else if(!sq.select("Users", "where id = '" + nameNvalue_["id"] + "'"))
+				content_ = "id already exist";
 			else {
-				id_ = nameNvalue_["email"];
+				if(nameNvalue_["remember"] == "on") id_ = nameNvalue_["email"];
 				SHA2 sha;
 				auto a = sha.hash(nameNvalue_["psw"].cbegin(), nameNvalue_["psw"].cend());
 				string enc = base64_encode({a.begin(), a.end()});
-				sq.insert(nameNvalue_["email"], enc, 0, nameNvalue_["name"], nameNvalue_["webpage-id"],
-						0, 0, 0, 0);
+				sq.insert(nameNvalue_["email"], enc, 0, nameNvalue_["id"], 0, 0, 0, 0, "");
 				content_ = "you are registered";
 			}
 		} else if(requested_document_ == "index.html") {//from login button

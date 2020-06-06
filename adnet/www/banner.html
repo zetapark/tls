@@ -1,0 +1,101 @@
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport" />
+		<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+		<script src="https://code.jquery.com/jquery-3.5.0.min.js"
+					integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ="
+		 crossorigin="anonymous"></script>
+		<script>
+			function filecheck(file) {
+				if(file.files[0].size / 1024 / 1024 / 10 > 1) {
+					alert('file size limit 100k');
+					file.value = '';
+				}
+			}
+		</script>
+	</head>
+	<body>
+		<p>
+		Members can take part in AdNET by including banner image on their websites,
+		or by making people access adnet with your ID(i.e. https://adnet.zeta2374.com/ID)
+		via your contents like youtube videos.
+		</p>
+		<p>
+		The more clicks your website induces, the more your own banners will be displayed.
+		Webpage id hit will also count as one click.
+		If your website made 10 people click banners, and other website made 5 people to click,
+		your own banner will be displayed two times more than the banner of the other.
+		</p>
+		<p>
+		AdNET will alse introduce some non-free ad banners.
+		We will share those profits with members,
+		<b title='This rate can change according to financial status of AdNET. 
+If this happens we will notice you properly.
+We try our best to share not just ads but also profit.'>50 : 50</b>.
+	If there was non-free ad banner among those clicks your webpage made,
+	you will get profit according to your contribution to all the clicks.
+		</p>
+		<p>
+		All the banner display will be shared among the members.
+		But, AdNET will use some portion of banner display, and charged ad will also consume 
+		some display, the rest will be shared among members.
+		</p>
+		<p>
+		Anyone can advertise on AdNET at some cost per view.
+		10 korean won per display as of now.
+		There is no price per click, only price per display is offered.
+		Your ad will be randomly distributed among member sites.
+		Members can also buy additional display on adnet with the same cost as above.
+		Therefore non-free commercial ads will be charged by cost per view.
+		Whereas the profit will be distributed to members of AdNET according to cost per clicks.
+		This policy will encourage the ads to be attractive and AdNET banner position 
+		to be noticeable.
+		</p>
+		<p>
+		A Member can include AdNET banner at any place with any size in your webpage.
+		But please just mind that clicks will be counted, not the display.
+		You can also add banners in multiple places.
+		</p>
+		<p>
+		You should upload 3 types of your own banner.
+		Your banner will be shown randomly on member websites.
+		If you do not upload all 3 banners, you will get significant disadvantage in displaying your banner.
+		</p>
+		<p>
+		You can only upload JPG files. File size must be less than 100k.
+		Width-height ratio should be maintained.
+		In example, for 300x250 size banner you can upload a 600x500 or 360x300 file.
+		6 : 5 ratio must be maintained. 
+		</p>
+
+	Sample files.
+	Default images will change to your own banner if it is uploaded.
+	<figure>
+		<img src='https://tomcat.zeta2374.com/banner/@ID-leader.jpg' width=728 height=90
+		onerror="this.src='https://tomcat.zeta2374.com/banner/adnet-leader.jpg'">
+		<figcaption>728x90 banner</figcaption>
+	</figure>
+	<figure style=float:left>
+		<img src='https://tomcat.zeta2374.com/banner/@ID-square.jpg' width=300 height=250
+		onerror="this.src='https://tomcat.zeta2374.com/banner/adnet-square.jpg'">
+		<figcaption>300x250 banner</figcaption>
+	</figure>
+	<figure>
+		<img src='https://tomcat.zeta2374.com/banner/@ID-mobile.jpg' width=320 height=50
+		onerror="this.src='https://tomcat.zeta2374.com/banner/adnet-mobile.jpg'">
+		<figcaption>320x50 banner</figcaption>
+	</figure>
+	<form action=upimg.php method=post enctype=multipart/form-data>
+		<label for=leader><b>728 x 90 file upload</b></label>
+		<input type=file name=leader onchange=filecheck(this)><br>
+		<label for=square><b>300 x 250 file upload</b></label>
+		<input type=file name=square onchange=filecheck(this)><br>
+		<label for=mobile><b>320 x 50 file upload</b></label>
+		<input type=file name=mobile onchange=filecheck(this)><br>
+		<label for=link><b>Weppage link to go when banner is clicked</b></label><br>
+		<input type=text name=link size=40><br>
+		<input type=submit name=submit value=submit>
+	</form>
+	</body>
+</html>
