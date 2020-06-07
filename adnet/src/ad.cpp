@@ -1,3 +1,4 @@
+
 #include<iostream>
 #include<fstream>
 #include<util/option.h>
@@ -5,13 +6,13 @@
 #include<tcpip/website.h>
 using namespace std;
 
-class Adnet : public WebSite
+class Ad : public WebSite
 {
 protected:
 	SqlQuery sq;
 	string id_;
 	void process() {
-		if(requested_document_ == "signup.php") {
+		if(requested_document_ == "request_ad.php") {
 			if(nameNvalue_["psw"] != nameNvalue_["psw-repeat"]) content_ = "password not match";
 			else if(!sq.select("Users", "where email = '" + nameNvalue_["email"] + "'")) 
 				content_ = "email already exist";
@@ -25,7 +26,7 @@ protected:
 				sq.insert(nameNvalue_["email"], enc, 0, nameNvalue_["id"], 0, 0, 0, 0, "");
 				content_ = "you are registered";
 			}
-		} else if(requested_document_ == "index.html") {//from login button
+		} else if(requested_document_ == "clicked.php") {//from login button
 			sq.connect("localhost", "adnet", "adnetadnet", "adnet");
 			swap("@LOGGED", id_ == "" ? "false" : "true");
 			if(id_ != "") {

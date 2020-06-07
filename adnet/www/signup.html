@@ -80,7 +80,7 @@ button:hover {
 		$(function() {
 			$('form').submit(function(event) {
 				event.preventDefault();
-				$.post('check.php', $('form').serialize(), function(data) {
+				$.post('signup.php', $('form').serialize(), function(data) {
 					alert(data);
 					if(data.localeCompare('you are registered') == 0) window.location.href='index.html';
 				});

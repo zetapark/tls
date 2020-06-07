@@ -5,31 +5,48 @@
 		<script src="https://code.jquery.com/jquery-3.5.0.min.js"
 					integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ="
 		 crossorigin="anonymous"></script>
+
 	<script>
-		if(@LOGGED) {
-			$('form').hide();
-			$('a').hide();
-		}
-	
-		$(function() {
-			setInterval(function() {
-				$.post('https://ad.zeta2374.com/request_ad', { id : $('#adnet').val() },
-					function(data) {
-						var split = data.split('\n');
-						$('#adnet').src = split[0];//link
-						$('#adnet').click(function() {
-							$.post('https://ad.zeta2374.com/clicked', {id : $('#adnet').val(),
-								click : split[1]});//id
-							window.location.href = split[2];//link
-						});
+		function request_ad() {
+			$.post('https://ad.zeta2374.com/request_ad.php', { id : $('#adnet').attr('myid') },
+				function(data) {
+					var split = data.split('\n');
+					$('#adnet').attr('src', split[0] + '-' + $('#adnet').attr('adtype') + '.jpg');//img
+					$('#adnet').off('click');
+					$('#adnet').click(function() {
+						$.post('https://ad.zeta2374.com/clicked', {id : $('#adnet').attr('myid'),
+							click : split[0]});//id
+						window.location.href = split[1];//link
 					});
-			}, 10000);
+				}
+			);
+		}
+
+		$(function() {
+			$('#adnet').error(function() {
+				$('#adnet').attr('src', 'https://tomcat.zeta2374.com/banner/adnet-' +
+					$('#adnet').attr('adtype') + '.jpg');
+				$('#adnet').off('click');
+				$('#adnet').click(function() {
+					$.post('https://ad.zeta2374.com/clicked.php', {id : $('#adnet').attr('myid'),
+						click : 'adnet'});
+					window.location.href = 'https://adnet.zeta2374.com';
+				});
+			});
+
+			request_ad();
+			setInterval(request_ad, 10000);
+
+			if(@LOGGED) {
+				$('form').hide();
+				$('#signup').hide();
+			} else $('#profile').hide();
 		});
 	</script>
 
 	</head>
 	<body>
-		<img width=100% id=adnet value=adnet>
+		<img width=100% id=adnet myid=adnet adtype=leader>
 		<form action="index.html" method="post" style='float:left'>	 
 			<label for="email">Email address:</label>
 			<input type="email" id="email" name="email">
@@ -37,7 +54,8 @@
 			<input type="password" name="pwd">
 			<input type="submit" name='submit' value='login'>
 		</form> 
-		<a href=signup.html><button>signup</button></a>
+		<a href=signup.html id=signup><button>signup</button></a>
+		<a href=banner.html id=profile><button>My Profile : @ID</button></a>
 
 	</body>
 </html>

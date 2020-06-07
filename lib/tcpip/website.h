@@ -9,7 +9,7 @@ class WebSite
 {//specific server will derive this class
 public:
 	static void init(std::string dir = "www");
-	std::string operator()(std::string s);
+	std::string operator()(std::string s, uint32_t ip);
 	static void add_header(std::string re, std::string he);
 
 protected:
