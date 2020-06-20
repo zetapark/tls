@@ -16,6 +16,7 @@ int main(int ac, char** av)
 
 	Ad site;
 	site.init(co.get<const char*>("dir"));
+	site.add_header("request_ad.php", "Access-Control-Allow-Origin: *");
 	Server sv{co.get<int>("port")};
 	return sv.keep_start(site);
 }
