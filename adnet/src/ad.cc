@@ -29,9 +29,9 @@ string Ad::request_ad()
 		LOGD << "Test" << endl;
 		insert_increment();
 		LOGD << "Test" << endl;
-		sq.query("select count(*) from Users;");
-		sq.fetch(-1);
-		int user_count = sq[0][""].asInt() / 3 + 100;//when service is new and people low
+		sq.query("select id from Users");
+		int user_count = sq.fetch(-1) / 3 + 100;
+		//int user_count = sq[0][""].asInt() / 3 + 100;//when service is new and people low
 		sq.query("select id, link from Users where click_induce <> 0 order by (my_banner_show / click_induce) limit " + to_string(user_count));
 		LOGD << sq << endl;
 		cout << sq << endl;
