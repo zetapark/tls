@@ -1,12 +1,12 @@
 CXX = g++
 EXE = $(patsubst %.x, ../%.x, $(wildcard *.x))
 LDFLAGS = -L../../ -Wl,-rpath=../
-LDLIBS = -lzeta -ljsoncpp -lpthread -lstdc++fs -lrt -lmysqlcppconn -lzetatls
+LDLIBS = -lzeta -ljsoncpp -lpthread -lstdc++fs -lrt -lmysqlcppconn -lzetatls -lnettle
 #filesystem library should be next to zeta library
 
 all : $(EXE)
 
-../%.x : $(wildcard *.o) $(wildcard *.x)
+../%.x : %.x $(wildcard *.o)
 	$(CXX) -o $@ $^ $(LDLIBS) $(LDFLAGS)
 
 #    $@ |현재 목표 파일의 이름

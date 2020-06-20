@@ -5,7 +5,7 @@
 #include<tcpip/website.h>
 using namespace std;
 
-class Misc : public WebSite
+class Misc : public WebSiteIP
 {
 protected:
 	void process() {

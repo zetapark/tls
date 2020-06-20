@@ -3,8 +3,11 @@
 #include<util/option.h>
 #include<tcpip/server.h>
 #include<tcpip/website.h>
+#include<database/mysqldata.h>
+#include<sha256.h>
 using namespace std;
 
+string base64_encode(vector<uint8_t>);
 class Adnet : public WebSite
 {
 protected:
@@ -12,7 +15,6 @@ protected:
 	string id_;
 	void process() {
 		if(requested_document_ == "signup.php") {
-			unsigned ip = client_addr->sin_addr.s_addr;
 			if(nameNvalue_["psw"] != nameNvalue_["psw-repeat"]) content_ = "password not match";
 			else if(!sq.select("Users", "where email = '" + nameNvalue_["email"] + "'")) 
 				content_ = "email already exist";
@@ -30,13 +32,12 @@ protected:
 			sq.connect("localhost", "adnet", "adnetadnet", "adnet");
 			swap("@LOGGED", id_ == "" ? "false" : "true");
 			if(id_ != "") {
-				sq.select("Users", "where email = '" + id_ "'");
-				swap("@ID", sq[0]["id"]);
+				sq.select("Users", "where email = '" + id_ + "'");
+				swap("@ID", sq[0]["id"].asString());
 			}
 		} else {
 			sq.query("update Users set id_hit = id_hit + 1 where id = '" + requested_document_ + "'");
 			content_ = fileNhtml_["index.html"];
-			index();
 		}
 	}
 };

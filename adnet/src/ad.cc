@@ -2,6 +2,10 @@
 #include"ad.h"
 #define INTERVAL 20
 using namespace std;
+using namespace std::chrono;
+
+std::string base64_encode(std::vector<unsigned char> v);
+std::vector<unsigned char> base64_decode(std::string s);
 
 void Ad::process(sockaddr_in &&ip)
 {
@@ -14,7 +18,9 @@ void Ad::process(sockaddr_in &&ip)
 
 string Ad::request_ad() 
 {
-	if(hit_++ % 1000 == 0) {
+	if(last_save_ < system_clock::now() - INTERVAL * 1s) {
+		last_save_ = system_clock::now();
+		prev_token_ = move(token_);
 		insert_increment();
 		sq.query("select count(*) from Users");
 		sq.fetch(-1);
@@ -56,9 +62,6 @@ void Ad::insert_increment()
 
 	view_increase_.clear(); click_increase_.clear();
 	view_induce_.clear(); click_induce_.clear();
-	auto it = token_.remove_if(token_.begin(), token_.end(), [](pair<string,
-			chrono::time_point> a) { return a.second < chrono::system_clock::now() - INTERVALs; });
-	token_.erase(it, token_.end());
 }
 
 string Ad::new_token()
@@ -66,14 +69,15 @@ string Ad::new_token()
 	vector<unsigned char> v;
 	for(int i=0; i<15; i++) v.push_back(di_(rd_) % 0x100);
 	string r = base64_encode(v);
-	token_[r] = chrono::system_clock::now();
+	token_.insert(r);
 	return r;
 }
 
 bool Ad::check_token(string token)
 {
-	if(auto it = token_.find(token); it == token_.end()) return false;
-	else token_.erase(it);
+	if(auto it = token_.find(token); it != token_.end()) token_.erase(it);
+	else if(it = prev_token_.find(token); it != token_.end()) prev_token_.erase(it);
+	else return false;
 	return true;
 }
 
