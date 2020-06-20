@@ -63,7 +63,7 @@ void Ad::insert_increment()
 	const char *col_name[4] = {"click_induce", "show_induce", "mybanner_click", "mybanner_show"};
 	for(int i=0; i<4; i++) {
 		for(const auto &[id, inc] : *p[i]) {//further implement -> check query length
-			cases += " when id = '" + id + "' then mybanner_show + " + to_string(inc);
+			cases += " when id = '" + id + "' then " + col_name[i] + '+' + to_string(inc);
 			ids += "'" + id + "', ";
 		}
 		ids.pop_back();//remove ,
