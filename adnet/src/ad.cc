@@ -20,10 +20,15 @@ void Ad::process(sockaddr_in &&ip)
 string Ad::request_ad() 
 {
 	if(last_save_ < system_clock::now() - INTERVAL * 1s) {
+		LOGD << "Test" << endl;
 		sq.connect("localhost", "adnet", "adnetadnet", "adnet");
+		LOGD << "Test" << endl;
 		last_save_ = system_clock::now();
+		LOGD << "Test" << endl;
 		prev_token_ = move(token_);
+		LOGD << "Test" << endl;
 		insert_increment();
+		LOGD << "Test" << endl;
 		sq.query("select count(*) from Users");
 		sq.fetch(-1);
 		LOGD << sq << endl;
