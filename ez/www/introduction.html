@@ -165,9 +165,10 @@
 					그러나, 브라우저에게 이 값을 보내기 전에 서버단에서의 처리를 위하여,
 					process함수를 부릅니다.
 					이 함수가 바로 서버측 개발자가 구현해야 할 함수입니다.
+					<b>
 					이 process 함수 안에서 제공된 nameNvalue_ 변수를 이용하여,
 					requested_document_에 따라 이미 템플릿 값으로 생성되어 있는
-					content_를 변형시키는 것이 목적입니다.
+					content_를 변형시키는 것이 목적입니다.</b>
 					만약 서버측에서 아무런 해야 할 일이 없다면 아무 것도 하지 않아도 됩니다.
 					<a href='tutorial1.html'>튜토리얼 1</a>에서 이러한 정적인 웹페이지의 예를 볼 수 있습니다.
 					</p>
@@ -180,8 +181,8 @@
 					This content_ will be sent back to browser.
 					But before this, eZ framework will call a function to process server side procedures.
 					This function(named process) is what developers will implement.
-					This process function will change the content_ variable that is formed by the template.
-					Developer is likely to use nameNvalue_ variable to do this.
+					<b>A developer should transform content_ variable formed by the template
+						in this process function, using nameNvalue_ variable.</b>
 					If there is nothing to be done in server side, no programming is needed.
 					<a href=tutorial1.html>Tutorial 1</a> is such example.
 					</p>

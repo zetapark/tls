@@ -6,7 +6,7 @@ LDLIBS = -lgmpxx -lgmp -lnettle -ljsoncpp -lpthread -lhogweed -lzeta -lstdc++fs 
 OPENCV = $(shell pkg-config opencv --libs)
 #filesystem library should be next to zeta library
 
-all : ../libbiz.so ../biz.src.x
+all : ../libbiz.so $(EXE)
 
 ../libbiz.so : $(wildcard *.o)
 	$(CXX) -o $@ $^ -shared $(LDLIBS) $(LDFLAGS)

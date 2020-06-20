@@ -2,6 +2,7 @@
 #include<map>
 #include<string>
 #include<vector>
+#include<netinet/in.h>//sockaddr_in
 #include"tcpip/shared_files.h"
 using namespace std;
 
@@ -9,7 +10,7 @@ class WebSite
 {//specific server will derive this class
 public:
 	static void init(std::string dir = "www");
-	std::string operator()(std::string s, uint32_t ip);
+	std::string operator()(std::string s);
 	static void add_header(std::string re, std::string he);
 
 protected:
@@ -19,6 +20,8 @@ protected:
 	std::map<std::string, std::string> nameNvalue_;//parameter
 	std::string content_, requested_document_;//set content_
 	static SharedMem fileNhtml_;
+	void parse_all(string &&s);
+	std::string return_content();
 
 private:
 	const std::string header_ = "HTTP/1.1 200 OK\r\n"
@@ -32,3 +35,11 @@ private:
 };
 
 std::string carousel(std::vector<std::string> img, std::vector<std::string> desc, std::vector<std::string> href);
+
+class WebSiteIP : public WebSite
+{
+public:
+	std::string operator()(std::string s, sockaddr_in ip);
+protected:
+	virtual void process(sockaddr_in &&ip) {}
+};

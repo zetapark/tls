@@ -61,6 +61,17 @@ void WebSite::add_header(string requested_document, string header)
 
 std::string WebSite::operator()(string s) 
 {//will set requested_document and nameNvalue (= parameter of post or get)
+	parse_all(move(s));
+	try {
+		process();//derived class should implement this -> set content_ & cookie
+	} catch(const exception& e) {
+		cerr << e.what() << endl;
+	}
+	return return_content();
+}
+
+void WebSite::parse_all(string &&s)
+{
 	nameNvalue_.clear();
 	stringstream ss; ss << s; ss >> s;
 	if(s == "POST") {//parse request and header
@@ -85,17 +96,25 @@ std::string WebSite::operator()(string s)
 	}
 	if(requested_document_ == "") requested_document_ = "index.html";
 	content_ = fileNhtml_[requested_document_];
+}
+
+string WebSite::return_content() 
+{
+	string s;
+	const auto &[begin, end] = added_header_.equal_range(requested_document_);
+	for(auto it = begin; it != end; it++) s += it->second + "\r\n";
+	return header_ + s + "Content-Length: " + to_string(content_.size()) + "\r\n\r\n" + content_;
+}
+
+string WebSiteIP::operator()(string s, sockaddr_in ip)
+{
+	parse_all(move(s));
 	try {
-		process();//derived class should implement this -> set content_ & cookie
+		process(move(ip));//derived class should implement this -> set content_ & cookie
 	} catch(const exception& e) {
 		cerr << e.what() << endl;
 	}
-
-	s = "";
-	const auto &[begin, end] = added_header_.equal_range(requested_document_);
-	for(auto it = begin; it != end; it++) s += it->second + "\r\n";
-	
-	return header_ + s + "Content-Length: " + to_string(content_.size()) + "\r\n\r\n" + content_;
+	return return_content();
 }
 
 istream& WebSite::parse_one(istream& is, string boundary)

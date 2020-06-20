@@ -12,6 +12,7 @@ protected:
 	string id_;
 	void process() {
 		if(requested_document_ == "signup.php") {
+			unsigned ip = client_addr->sin_addr.s_addr;
 			if(nameNvalue_["psw"] != nameNvalue_["psw-repeat"]) content_ = "password not match";
 			else if(!sq.select("Users", "where email = '" + nameNvalue_["email"] + "'")) 
 				content_ = "email already exist";
@@ -51,6 +52,6 @@ int main(int ac, char** av)
 	Adnet site;
 	site.init(co.get<const char*>("dir"));
 	Server sv{co.get<int>("port")};
-	return sv.keep_start(site);
+	return sv.start(site);
 }
 

@@ -5,10 +5,10 @@
 #include<tcpip/website.h>
 using namespace std;
 
-class MyWeb : public WebSite
+class MyWeb : public WebSiteIP
 {
 protected:
-	void process() {
+	void process(sockaddr_in) {
 		sq.connect("192.168.0.3", "kk", "kk", "kyungki");
 		sq.select("가맹점", "where 상호 like '%" + nameNvalue_["name"] + "%' and 주소 like '%" 
 				+ nameNvalue_["adress"] + "%' and 업종 like '%" + nameNvalue_["kind"] + "%' limit 100");

@@ -54,11 +54,11 @@ public:
 		int cl_size = sizeof(client_addr);
 		std::vector<std::thread> v;
 		std::mutex mtx;
-		auto lambda = [&](int fd) {
+		auto lambda = [&](int fd, sockaddr_in ip) {
 			std::unique_lock lck{mtx, std::defer_lock};
 			while(auto a = recv(fd)) {
 				lck.lock();
-				a = f(*a);
+				a = f(*a, ip);
 				lck.unlock();
 				send(*a, fd);
 			}
@@ -67,7 +67,7 @@ public:
 		while(true) {
 			client_fd = accept(server_fd, (sockaddr*)&client_addr, (socklen_t*)&cl_size);
 			if(client_fd != -1) {//connection established
-				v.emplace_back(std::thread{lambda, client_fd, client_addr.sin_addr.s_addr});
+				v.emplace_back(std::thread{lambda, client_fd, client_addr});
 				v.back().detach();
 			}
 		}

@@ -15,7 +15,7 @@
 					$('#adnet').off('click');
 					$('#adnet').click(function() {
 						$.post('https://ad.zeta2374.com/clicked', {id : $('#adnet').attr('myid'),
-							click : split[0]});//id
+							click : split[0], token : split[2]});//id
 						window.location.href = split[1];//link
 					});
 				}
