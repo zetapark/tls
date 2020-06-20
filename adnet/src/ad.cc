@@ -1,5 +1,6 @@
 #include<arpa/inet.h>
 #include<util/log.h>
+#include<iostream>
 #include"ad.h"
 using namespace std;
 using namespace std::chrono;
@@ -26,11 +27,13 @@ string Ad::request_ad()
 		sq.query("select count(*) from Users");
 		sq.fetch(-1);
 		LOGD << sq << endl;
+		cout << sq << endl;
 		int user_count = sq[0]["count(*)"].asInt() / 3 + 100;//when service is new and people low
 		sq.query("select id, link from Users order by mybanner_show / click_induce limit "
 				+ to_string(user_count));
 		int users = sq.fetch(-1);//real fetched lines
 		LOGD << sq << endl;
+		cout << sq << endl;
 		uniform_int_distribution<> di{0, users-1};
 		di_.param(di.param());
 	}
