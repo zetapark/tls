@@ -8,7 +8,7 @@
 
 	<script>
 function request_ad() {
-	$.post('https://ad.zeta2374.com/request_ad.php', { id : $('#adnet').attr('myid') },
+	$.post('http://localhost:2002/request_ad.php', { id : $('#adnet').attr('myid') },
 		function(data) {
 			alert(data);//id, link, token
 			var split = data.split('\n');

@@ -18,27 +18,19 @@ void Ad::process(sockaddr_in &&ip)
 }
 
 string Ad::request_ad() 
-{
+{//do not use LOG with sq : LOGD << sq -> error
 	if(last_save_ < system_clock::now() - INTERVAL * 1s) {
-		LOGD << "Test" << endl;
 		sq.connect("localhost", "adnet", "adnetadnet", "adnet");
-		LOGD << "Test" << endl;
 		last_save_ = system_clock::now();
-		LOGD << "Test" << endl;
 		prev_token_ = move(token_);
-		LOGD << "Test" << endl;
 		insert_increment();
-		LOGD << "Test" << endl;
-		sq.query("select id from Users");
-		int user_count = sq.fetch(-1) / 3 + 100;
-		//int user_count = sq[0][""].asInt() / 3 + 100;//when service is new and people low
-		sq.query("select id, link from Users where click_induce <> 0 order by (my_banner_show / click_induce) limit " + to_string(user_count));
-		LOGD << sq << endl;
+		if(sq.query("select count(*) from Users")) sq.fetch(-1);
+		int user_count = sq[0][""].asInt() / 3 + 100;//when service is new and people low
+		if(sq.query("select id, link from Users where click_induce <> 0 order by"
+					" (my_banner_show / click_induce) limit " + to_string(user_count))) 
+			user_count = sq.fetch(-1);//real fetched lines
 		cout << sq << endl;
-		int users = sq.fetch(-1);//real fetched lines
-		LOGD << sq << endl;
-		cout << sq << endl;
-		uniform_int_distribution<> di{0, users-1};
+		uniform_int_distribution<> di{0, user_count - 1};
 		di_.param(di.param());
 	}
 	int pick = di_(rd_);
