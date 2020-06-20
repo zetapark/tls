@@ -15,6 +15,7 @@ all :
 	make $(OPTION) -C suwon/
 	make $(OPTION) -C ez/
 	make $(OPTION) -C sample/
+	make $(OPTION) -C adnet/
 
 safe :
 	make -C lib/

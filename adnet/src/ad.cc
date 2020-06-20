@@ -20,6 +20,7 @@ void Ad::process(sockaddr_in &&ip)
 string Ad::request_ad() 
 {
 	if(last_save_ < system_clock::now() - INTERVAL * 1s) {
+		sq.connect("localhost", "adnet", "adnetadnet", "adnet");
 		last_save_ = system_clock::now();
 		prev_token_ = move(token_);
 		insert_increment();
