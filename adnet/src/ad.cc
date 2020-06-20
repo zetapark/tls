@@ -61,7 +61,7 @@ void Ad::insert_increment()
 	string cases, ids;
 	map<string, int> *p[4] = {&click_induce_, &view_induce_, &click_increase_, &view_increase_};
 	const char *col_name[4] = {"click_induce", "show_induce", "mybanner_click", "mybanner_show"};
-	for(int i=0; i<4; i++) {
+	for(int i=0; i<4; i++) if(!p[i]->empty()) {
 		for(const auto &[id, inc] : *p[i]) {//further implement -> check query length
 			cases += " when id = '" + id + "' then " + col_name[i] + '+' + to_string(inc);
 			ids += "'" + id + "', ";
