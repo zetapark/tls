@@ -55,7 +55,7 @@ void Ad::insert_increment()
 	for(int i=0; i<4; i++) if(!p[i]->empty()) {
 		for(const auto &[id, inc] : *p[i]) {//further implement -> check query length
 			cases += " when id = '" + id + "' then " + col_name[i] + '+' + to_string(inc);
-			ids += "'" + id + "', ";
+			ids += "'" + id + "',";
 		}
 		ids.pop_back();//remove ,
 		sq.query(string{"update Users set "} + col_name[i] + " = case " + cases +

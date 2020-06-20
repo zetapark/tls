@@ -28,4 +28,5 @@ $(function() {
 
 	request_ad();
 	setInterval(request_ad, 10000);
+	$('#adnet').css('cursor', 'pointer');
 });
