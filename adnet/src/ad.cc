@@ -34,8 +34,7 @@ string Ad::request_ad()
 		LOGD << sq << endl;
 		cout << sq << endl;
 		int user_count = sq[0][""].asInt() / 3 + 100;//when service is new and people low
-		sq.query("select id, link from Users order by my_banner_show / click_induce limit "
-				+ to_string(user_count));
+		sq.query("select id, link from Users where click_induce <> 0 order by my_banner_show / click_induce limit " + to_string(user_count));
 		int users = sq.fetch(-1);//real fetched lines
 		LOGD << sq << endl;
 		cout << sq << endl;
