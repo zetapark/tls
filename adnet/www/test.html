@@ -8,9 +8,9 @@
 
 	<script>
 function request_ad() {
-	alert('hello');
 	$.post('https://ad.zeta2374.com/request_ad.php', { id : $('#adnet').attr('myid') },
 		function(data) {
+			alert(data);
 			var split = data.split('\n');
 			$('#adnet').attr('src', split[0] + '-' + $('#adnet').attr('adtype') + '.jpg');//img
 			$('#adnet').off('click');
@@ -36,7 +36,7 @@ $(function() {
 	});
 
 	request_ad();
-	setInterval(request_ad, 10000);
+	setInterval(request_ad, 100000);
 });
 	</script>
 

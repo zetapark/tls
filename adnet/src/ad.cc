@@ -1,4 +1,5 @@
 #include<arpa/inet.h>
+#include<iostream>
 #include"ad.h"
 #define INTERVAL 20
 using namespace std;
@@ -24,10 +25,12 @@ string Ad::request_ad()
 		insert_increment();
 		sq.query("select count(*) from Users");
 		sq.fetch(-1);
+		cout << sq << endl;
 		int user_count = sq[0]["count(*)"].asInt() / 3 + 100;//when service is new and people low
 		sq.query("select id, link from Users order by mybanner_show / click_induce limit "
 				+ to_string(user_count));
 		int users = sq.fetch(-1);//real fetched lines
+		cout << sq << endl;
 		uniform_int_distribution<> di{0, users-1};
 		di_.param(di.param());
 	}
