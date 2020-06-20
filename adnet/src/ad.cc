@@ -1,7 +1,6 @@
 #include<arpa/inet.h>
 #include<util/log.h>
 #include"ad.h"
-#define INTERVAL 20
 using namespace std;
 using namespace std::chrono;
 
@@ -71,7 +70,7 @@ void Ad::insert_increment()
 string Ad::new_token()
 {
 	vector<unsigned char> v;
-	for(int i=0; i<15; i++) v.push_back(di_(rd_) % 0x100);
+	for(int i=0; i<15; i++) v.push_back(token_di_(rd_) % 0x100);
 	string r = base64_encode(v);
 	token_.insert(r);
 	return r;
