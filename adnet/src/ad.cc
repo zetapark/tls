@@ -34,7 +34,7 @@ string Ad::request_ad()
 		LOGD << sq << endl;
 		cout << sq << endl;
 		int user_count = sq[0]["count(*)"].asInt() / 3 + 100;//when service is new and people low
-		sq.query("select id, link from Users order by mybanner_show / click_induce limit "
+		sq.query("select id, link from Users order by my_banner_show / click_induce limit "
 				+ to_string(user_count));
 		int users = sq.fetch(-1);//real fetched lines
 		LOGD << sq << endl;
@@ -60,7 +60,7 @@ void Ad::insert_increment()
 {
 	string cases, ids;
 	map<string, int> *p[4] = {&click_induce_, &view_induce_, &click_increase_, &view_increase_};
-	const char *col_name[4] = {"click_induce", "show_induce", "mybanner_click", "mybanner_show"};
+	const char *col_name[4] = {"click_induce", "show_induce", "my_banner_click", "my_banner_show"};
 	for(int i=0; i<4; i++) if(!p[i]->empty()) {
 		for(const auto &[id, inc] : *p[i]) {//further implement -> check query length
 			cases += " when id = '" + id + "' then " + col_name[i] + '+' + to_string(inc);
