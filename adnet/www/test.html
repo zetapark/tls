@@ -4,11 +4,11 @@
 		<meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport" />
 		<script src="https://code.jquery.com/jquery-3.5.0.min.js"
 					integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ="
-		 crossorigin="anonymous"></script>
+		 crossorigin="anonymous" />
 
 	<script>
 function request_ad() {
-	$.post('http://localhost:2002/request_ad.php', { id : $('#adnet').attr('myid') },
+	$.post('https://ad.zeta2374.com/request_ad.php', { id : $('#adnet').attr('myid') },
 		function(data) {
 			alert(data);//id, link, token
 			var split = data.split('\n');
