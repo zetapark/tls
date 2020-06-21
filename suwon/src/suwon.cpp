@@ -1,4 +1,5 @@
 #include<mutex>
+#include<util/log.h>
 #include<util/option.h>
 #include<tcpip/server.h>
 #include<database/mysqldata.h>
@@ -8,7 +9,7 @@ using namespace std;
 class MyWeb : public WebSiteIP
 {
 protected:
-	void process(sockaddr_in) {
+	void process(sockaddr_in&&) {
 		if(string s; requested_document_ == "index.html") {
 			sq.connect("192.168.0.3", "kk", "kk", "kyungki");
 			sq.select("가맹점", "where 상호 like '%" + nameNvalue_["name"] + "%' and 주소 like '%" +
@@ -19,6 +20,7 @@ protected:
 					+ "</td></tr>";
 			}
 			append("<tbody>", s);
+			LOGD << s << endl;
 		}
 	}
 	SqlQuery sq;
