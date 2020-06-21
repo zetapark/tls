@@ -11,8 +11,7 @@ class MySite : public WebSite
 {
 protected:
 	void process() {
-		if(requested_document_ == "index.html") swap("@CAROUSEL", car);
-		else if(requested_document_ == "result_view") {
+		if(requested_document_ == "result_view") {
 			content_ = "<html><h2>";
 			for(auto [a, b] : nameNvalue_) content_ += a + ':' + b + "<br>";
 			content_ += "</h2></html>";
