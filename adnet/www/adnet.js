@@ -1,6 +1,8 @@
 function request_ad() {
+	alert('hello');
 	$.post('https://ad.zeta2374.com/request_ad.php', { id : $('#adnet').attr('myid') },
 		function(data) {
+			alert('helloinside');
 			var split = data.split('\n');
 			$('#adnet').attr('src', 'https://tomcat.zeta2374.com/banner/' + split[0] 
 					+ '-' + $('#adnet').attr('adtype') + '.jpg');//img
@@ -26,6 +28,7 @@ $(function() {
 		});
 	});
 
+	alert('down');
 	request_ad();
 	setInterval(request_ad, 10000);
 	$('#adnet').css('cursor', 'pointer');
