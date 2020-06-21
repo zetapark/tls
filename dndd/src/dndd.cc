@@ -169,10 +169,6 @@ void DnDD::mn()
 	if(nameNvalue_["db"] != "") {//if first connection -> set database
 		sq.connect("192.168.0.3", "dndd", "dndddndd", nameNvalue_["db"]);
 		if(nameNvalue_["db"] != db) db = nameNvalue_["db"], id = name = "", level="0";
-		ifstream f(db + ".txt");
-		getline(f, group);
-		getline(f, group_desc);
-		getline(f, logo);
 	}
 	
 	vector<string> v = tables();//navbar setting
@@ -181,9 +177,6 @@ void DnDD::mn()
 	swap("NAVITEM", t); t = "";
 	table = nameNvalue_["field"] == "" ? v[0] : nameNvalue_["field"];
 	swap("PANEL", field(table));
-	swap("GROUP", group);
-	swap("GROUP_DESC", group_desc);
-	swap("LOGO", logo);
 	
 	if(nameNvalue_["email"] != "") {//if login attempt
 		sq.select("Users", "where email = '" + nameNvalue_["email"] + "' order by date desc limit 1");
@@ -200,9 +193,6 @@ void DnDD::mn()
 
 void DnDD::signin()
 {//sq.select returns row count
-	swap("GROUP", group);
-	swap("GROUP_DESC", group_desc);
-	swap("LOGO", logo);
 	if(nameNvalue_.empty()) return;
 	if(nameNvalue_["password"] != nameNvalue_["verify"])
 		append("REPLACE\">", "password not match");
