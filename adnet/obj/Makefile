@@ -6,7 +6,7 @@ LDLIBS = -lzeta -ljsoncpp -lpthread -lstdc++fs -lrt -lmysqlcppconn -lzetatls -ln
 
 all : $(EXE)
 
-../%.x : %.x $(wildcard *.o)
+../%.x : %.x %.o
 	$(CXX) -o $@ $^ $(LDLIBS) $(LDFLAGS)
 
 #    $@ |현재 목표 파일의 이름
