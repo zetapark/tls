@@ -6,10 +6,9 @@ using namespace std;
 void Adnet::process()
 {
 	if(requested_document_ == "signup.php") content_ = signup();
-	else if(requested_document_ == "signup.html") ;
 	else if(requested_document_ == "index.html") index();//from login button
 	else if(requested_document_ == "banner.html") banner();
-	else id_hit();//adnet.zeta2374.com/techlead
+	if(requested_document_.find('.') == string::npos) id_hit();//adnet.zeta2374.com/techlead
 }
 
 void Adnet::db_ip(string ip)
