@@ -6,6 +6,7 @@ using namespace std;
 void Adnet::process()
 {
 	if(requested_document_ == "signup.php") content_ = signup();
+	else if(requested_document_ == "signup.html") ;
 	else if(requested_document_ == "index.html") index();//from login button
 	else if(requested_document_ == "banner.html") banner();
 	else id_hit();//adnet.zeta2374.com/techlead
@@ -48,11 +49,12 @@ string Adnet::signup()
 void Adnet::index()
 {
 	sq.connect("192.168.0.3", "adnet", "adnetadnet", "adnet");
-	swap("@LOGGED", id_ == "" ? "false" : "true");
-	if(id_ != "") {
-		sq.select("Users", "where email = '" + id_ + "'");
-		swap("@ID", sq[0]["id"].asString());
+	if(string s = nameNvalue_["email"]; s != "") {
+		sq.select("Users", "where email = '" + s + "'");
+		id_ = sq[0]["id"].asString();
+		swap("@ID", id_);
 	}
+	swap("@LOGGED", id_ == "" ? "false" : "true");
 }
 
 void Adnet::id_hit()
