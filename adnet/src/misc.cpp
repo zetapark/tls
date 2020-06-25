@@ -13,7 +13,7 @@ int main(int ac, char** av)
 
 	Misc site;
 	site.init(co.get<const char*>("dir"));
-	site.add_header("leave_message", "Access-Control-Allow-Origin: https://www.zeta2374.com");
+	site.add_header("leave_message", "Access-Control-Allow-Origin: *");
 	Server sv{co.get<int>("port")};
 	return sv.keep_start(site);
 }
