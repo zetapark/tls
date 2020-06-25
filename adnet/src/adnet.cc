@@ -47,7 +47,7 @@ string Adnet::signup()
 
 void Adnet::index()
 {
-	sq.connect("localhost", "adnet", "adnetadnet", "adnet");
+	sq.connect("192.168.0.3", "adnet", "adnetadnet", "adnet");
 	swap("@LOGGED", id_ == "" ? "false" : "true");
 	if(id_ != "") {
 		sq.select("Users", "where email = '" + id_ + "'");
