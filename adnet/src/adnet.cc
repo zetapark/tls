@@ -71,6 +71,6 @@ void Adnet::id_hit()
 	string id = requested_document_;
 	content_ = fileNhtml_["index.html"];
 	index();
-	sq.query("update Users set click_induce = click_induce + 1 where id = '"
-			+ id + "'");
+	sq.select("Users", "limit 1");
+	sq.query("update Users set click_induce = click_induce + 1 where id = '" + id + "'");
 }
