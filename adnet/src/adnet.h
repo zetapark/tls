@@ -4,10 +4,12 @@
 string base64_encode(vector<uint8_t>);
 class Adnet : public WebSite
 {
+public:
+	void db_ip(std::string ip);
+
 protected:
 	SqlQuery sq;
 	void process();
-	void db_ip(std::string ip);
 
 private:
 	std::string id_, db_ip_;
