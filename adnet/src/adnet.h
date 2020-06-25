@@ -10,7 +10,7 @@ protected:
 	void process();
 
 private:
-	void index(), id_hit();
+	void index(), id_hit(), banner();
 	std::string signup();
 };
 
