@@ -3,6 +3,6 @@
 class Misc : public WebSiteIP
 {
 protected:
-	void process();
+	void process(sockaddr_in&&);
 };
 

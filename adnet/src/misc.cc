@@ -1,7 +1,7 @@
 #include"misc.h"
 using namespace std;
 
-void Misc::process() {
+void Misc::process(sockaddr_in&&) {
 	if(requested_document_ == "leave_message") {
 		if(nameNvalue_["dest"] == "") nameNvalue_["dest"] = "zeta@zeta2374.com";
 		string cmd = "mailx " + nameNvalue_["dest"] + " -r " + nameNvalue_["email"] + " -s '" +
