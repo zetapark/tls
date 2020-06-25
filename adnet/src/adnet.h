@@ -6,10 +6,11 @@ class Adnet : public WebSite
 {
 protected:
 	SqlQuery sq;
-	string id_;
 	void process();
+	void db_ip(std::string ip);
 
 private:
+	std::string id_, db_ip_;
 	void index(), id_hit(), banner();
 	std::string signup();
 };

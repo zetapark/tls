@@ -12,6 +12,11 @@ void Adnet::process()
 	else id_hit();//adnet.zeta2374.com/techlead
 }
 
+void Adnet::db_ip(string ip)
+{
+	db_ip_ = ip;
+}
+
 void Adnet::banner()
 {
 	for(int i=0; i<3; i++) swap("@ID", id_);
@@ -48,7 +53,7 @@ string Adnet::signup()
 
 void Adnet::index()
 {
-	sq.connect("192.168.0.3", "adnet", "adnetadnet", "adnet");
+	sq.connect(db_ip_, "adnet", "adnetadnet", "adnet");
 	if(string s = nameNvalue_["id"]; s != "") {//login
 		SHA2 sha;
 		string pass = nameNvalue_["psw"];
