@@ -4,7 +4,7 @@
 #include<tcpip/website.h>
 #include<random>
 #include<set>
-#define INTERVAL 20
+#define INTERVAL 60
 
 class Ad : public WebSiteIP
 {

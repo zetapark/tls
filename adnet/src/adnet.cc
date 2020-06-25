@@ -6,7 +6,28 @@ void Adnet::process()
 {
 	if(requested_document_ == "signup.php") content_ = signup();
 	else if(requested_document_ == "index.html") index();//from login button
-	else id_hit();
+	else if(requested_document_ == "banner.html") banner();
+	else if(requested_document_ == "upimg.php") upimg();
+	else id_hit();//adnet.zeta2374.com/techlead
+}
+
+void Adnet::banner()
+{
+	for(int i=0; i<3; i++) swap("@ID", id_);
+	if(nameNvalue_["leaderfilename"] != "") {
+		ifstream f{"banner/" + id_ + "-leader.jpg"};
+		f << nameNvalue_["leader"];
+	}
+	if(nameNvalue_["mobilefilename"] != "") {
+		ifstream f{"banner/" + id_ + "-mobile.jpg"};
+		f << nameNvalue_["mobile"];
+	}
+	if(nameNvalue_["squarefilename"] != "") {
+		ifstream f{"banner/" + id_ + "-square.jpg"};
+		f << nameNvalue_["square"];
+	}
+	if(string s = nameNvalue_["link"]; s != "")
+		sq.query("update Users set link = '" + s + "' where id = '" + id_ + "'");
 }
 
 string Adnet::signup()
