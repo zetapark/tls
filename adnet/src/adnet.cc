@@ -49,11 +49,16 @@ string Adnet::signup()
 void Adnet::index()
 {
 	sq.connect("192.168.0.3", "adnet", "adnetadnet", "adnet");
-	if(string s = nameNvalue_["email"]; s != "") {
-		sq.select("Users", "where email = '" + s + "'");
-		id_ = sq[0]["id"].asString();
-		swap("@ID", id_);
+	if(string s = nameNvalue_["id"]; s != "") {//login
+		SHA2 sha;
+		string pass = nameNvalue_["psw"];
+		auto a = sha.hash(pass.cbegin(), pass.cend());
+		pass = base64_encode({a.begin(), a.end()});
+
+		if(sq.select("Users", "where id = '" + s + "' and password = '" + pass + "'"))
+			id_ = sq[0]["id"].asString();
 	}
+	swap("@ID", id_);
 	swap("@LOGGED", id_ == "" ? "false" : "true");
 }
 
