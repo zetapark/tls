@@ -8,7 +8,7 @@ void Adnet::process()
 	if(requested_document_ == "signup.php") content_ = signup();
 	else if(requested_document_ == "index.html") index();//from login button
 	else if(requested_document_ == "banner.html") banner();
-	if(requested_document_.find('.') == string::npos) id_hit();//adnet.zeta2374.com/techlead
+	else if(requested_document_.find('.') == string::npos) id_hit();//adnet.zeta2374.com/techlead
 }
 
 void Adnet::db_ip(string ip)
@@ -68,8 +68,8 @@ void Adnet::index()
 
 void Adnet::id_hit()
 {
-	sq.query("update Users set click_induce = click_induce + 1 where id = '"
-			+ requested_document_ + "'");
 	content_ = fileNhtml_["index.html"];
 	index();
+	sq.query("update Users set click_induce = click_induce + 1 where id = '"
+			+ requested_document_ + "'");
 }
