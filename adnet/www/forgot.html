@@ -33,7 +33,7 @@
 					return;
 				}
 				$.post('forgot.php', {email : $('#em-text').val()}, function(data) {
-					alert('found');
+					alert('found ' + data );
 					$('#id-text').val(data);
 					$('b').html($('#em-text').val());
 				});
