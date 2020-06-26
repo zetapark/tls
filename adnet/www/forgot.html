@@ -49,12 +49,12 @@
 					alert('empty');
 					return;
 				}
-				$.post('forgot.php', {pwd : $('#pwd-text').val(), id : $('#id-text').val()},
+				$.post('forgot.php', {pwd : $('#pwd-text').val(), id_change : $('#id-text').val()},
 					function(data) {
 						$.post('https://misc.zeta2374.com/leave_message', 
 							{
 								dest : $('b').html(),
-								content : data,
+								content : 'type next 5 digit number to activate the new password\n' + data,
 								email : 'adnet@zeta2374.com',
 								title : 'change password from AdNET'
 							},
