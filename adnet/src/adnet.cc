@@ -1,3 +1,4 @@
+#include<random>
 #include<fstream>
 #include<sha256.h>
 #include"adnet.h"
@@ -8,6 +9,7 @@ void Adnet::process()
 	if(requested_document_ == "signup.php") content_ = signup();
 	else if(requested_document_ == "index.html") index();//from login button
 	else if(requested_document_ == "banner.html") banner();
+	else if(requested_document_ == "forgot.php") content_ = forgot();
 	else if(requested_document_.find('.') == string::npos) id_hit();//adnet.zeta2374.com/techlead
 }
 
@@ -71,6 +73,27 @@ void Adnet::id_hit()
 	string id = requested_document_;
 	content_ = fileNhtml_["index.html"];
 	index();
-	sq.select("Users", "limit 1");
+	sq.select("Users", "limit 1");//need this to prevent error
 	sq.query("update Users set click_induce = click_induce + 1 where id = '" + id + "'");
+}
+
+string Adnet::forgot()
+{
+	if(string s = nameNvalue_["id"]; s != "")
+		if(sq.select("Users", "where id = '" + s + "'")) return sq[0]["email"].asString();
+	else if(s = nameNvalue_["email"]; s != "") 
+		if(sq.select("Users", "where email = '" + s + "'")) return sq[0]["id"].asString();
+	else if(s = nameNvalue_["pwd"]; s != "") {
+		uniform_int_distribution<> di{0, 99999};
+		random_device rd;
+		key_ = di(rd);
+		pwd_ = s;
+		change_id_ = nameNvalue_["id-text"];
+		return "type next 5 digit number to activate the new password\n" + to_string(key_);
+	} else if(s = nameNvalue_["num-input"]; s != "" && key_ == stoi(s)) {
+		SHA2 sha;
+		auto a = sha.hash(pwd_.begin(), pwd_.end());
+		sq.query("update Users set password = '" + base64_encode({a.begin(), a.end()})
+				+ "' where id = '" + change_id_ + "'");
+	}
 }

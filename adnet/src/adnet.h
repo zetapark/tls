@@ -12,8 +12,9 @@ protected:
 	void process();
 
 private:
-	std::string id_, db_ip_;
+	std::string id_, db_ip_, pwd_, change_id_;
+	int key_;
 	void index(), id_hit(), banner();
-	std::string signup();
+	std::string signup(), forgot();
 };
 

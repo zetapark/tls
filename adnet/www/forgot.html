@@ -3,18 +3,78 @@
 		<meta charset="utf-8" />
 		<meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport" />
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script>
+		$(function() {
+			$('form').submit(function(event) {
+				event.preventDefault();
+				$.post('check.php', $('form').serialize(), function(data) { 
+					if(data.localeCompare('error') == 0) alert('no such id or email exist');
+					else {
+						$.post('https://misc.zeta2374.com/leave_message', eval(data), function(d){alert(d);});
+						window.location.href = 'index.html';
+					} 
+				});
+			});
+
+			$('#email-search').click(function() {
+				if($('#id-text').val().localeCompare('') == 0) {
+					alert('empty');
+					return;
+				}
+				$.post('forgot.php', {id : $('#id-text').val()}, function(data) {
+					$('#em-text').val(data);
+					$('b').html(data);
+				});
+			});
+
+			$('#id-search').click(function() {
+				if($('#em-text').val().localeCompare('') == 0) {
+					alert('empty');
+					return;
+				}
+				$.post('forgot.php', {email : $('#em-text').val()}, function(data) {
+					$('#id-text').val(data);
+					$('b').html($('#em-text').val());
+				});
+			});
+
+			$('#activate').click(function() {
+				$.post('forgot.php', {num : $('#num-input').val()}, function(data) {
+					alert(data);
+				});
+			});
+
+			$('#pwd-setting').click(function() {
+				if($('b').val().localeCompare('') == 0 || $('#pwd-text').val().localeCompare('') == 0) {
+					alert('empty');
+					return;
+				}
+				$.post('forgot.php', {pwd : $('#pwd-text').val(), id : $('#id-text').val()},
+					function(data) {
+						$.post('https://misc.zeta2374.com/leave_message', 
+							{
+								dest : $('b').html(),
+								content : data,
+								email : 'adnet@zeta2374.com',
+								title : 'change password from AdNET'
+							},
+							function(d) {
+								alert('check your email to get the verification code');
+							}
+						);
+					}
+				);
+			});
+		});
+
+	</script>
 	</head>
 	<body>
-		이메일을 보낼 것입니다. 
-		<form action=forgot.php method=post>
-			<label for="id">Your ID:</label>
-			<input type=text name=id>
-			<label for="email">Your email:</label>
-			<input type=email name=email>
-			<input type=submit value='send email'>
-			<input type=hidden name=dest value=@DEST>
-			<input type=hidden name=content value=@CONTENT>
-		</form>
+		이메일<input type=email id=em-text>로 <button id=id-search>아이디 찾기</button><br>
+		아이디<input type=text id=id-text>로 <button id=email-search>이메일 찾기</button><br>
+		패스워드를 <input type=password id=pwd-text>로 리셋하는 메일을
+		<b></b>로 <button id=pwd-setting>보내기</button><br>
+		새 패스워드를 활성화하기 위해 이메일에서 얻은 다섯자리 숫자<input type=text id=num-input>를 입력하세요.<button id=activate>활성화</button><br>
 	</body>
 </html>
 
