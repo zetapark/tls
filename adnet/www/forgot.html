@@ -45,7 +45,7 @@
 			});
 
 			$('#pwd-setting').click(function() {
-				if($('b').val().localeCompare('') == 0 || $('#pwd-text').val().localeCompare('') == 0) {
+				if($('b').html().localeCompare('') == 0 || $('#pwd-text').val().localeCompare('') == 0) {
 					alert('empty');
 					return;
 				}
