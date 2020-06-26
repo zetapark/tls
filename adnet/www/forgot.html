@@ -33,6 +33,7 @@
 					return;
 				}
 				$.post('forgot.php', {email : $('#em-text').val()}, function(data) {
+					alert('found');
 					$('#id-text').val(data);
 					$('b').html($('#em-text').val());
 				});
@@ -59,7 +60,7 @@
 								title : 'change password from AdNET'
 							},
 							function(d) {
-								alert('check your email to get the verification code');
+								alert(d + 'check your email to get the verification code');
 							}
 						);
 					}

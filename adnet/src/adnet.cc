@@ -84,7 +84,7 @@ string Adnet::forgot()
 	else if(s = nameNvalue_["email"]; s != "") 
 		if(sq.select("Users", "where email = '" + s + "'")) return sq[0]["id"].asString();
 	else if(s = nameNvalue_["pwd"]; s != "") {
-		uniform_int_distribution<> di{0, 99999};
+		uniform_int_distribution<> di{10000, 99999};
 		random_device rd;
 		key_ = di(rd);
 		pwd_ = s;
