@@ -89,7 +89,7 @@ string Adnet::forgot()
 		key_ = di(rd);
 		pwd_ = s;
 		change_id_ = nameNvalue_["id_change"];
-		return to_string(key_);
+		return std::to_string(key_);
 	} else if(s = nameNvalue_["num-input"]; s != "" && key_ == stoi(s)) {
 		SHA2 sha;
 		auto a = sha.hash(pwd_.begin(), pwd_.end());
