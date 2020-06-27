@@ -1,6 +1,7 @@
 #include<random>
 #include<fstream>
 #include<sha256.h>
+#include<util/log.h>
 #include"adnet.h"
 using namespace std;
 
@@ -79,10 +80,11 @@ void Adnet::id_hit()
 
 string Adnet::forgot()
 {
+	LOGD << "here" << endl;
 	if(string s = nameNvalue_["id"]; s != "")
 		if(sq.select("Users", "where id = '" + s + "'")) return sq[0]["email"].asString();
 	else if(s = nameNvalue_["email"]; s != "") {
-		cout << s << endl;
+		LOGD << s << endl;
 		if(sq.select("Users", "where email = '" + s + "'")) return sq[0]["id"].asString();
 	} else if(s = nameNvalue_["pwd"]; s != "") {
 		uniform_int_distribution<> di{10000, 99999};
