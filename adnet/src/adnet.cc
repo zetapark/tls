@@ -93,7 +93,7 @@ string Adnet::forgot()
 		pwd_ = s;
 		change_id_ = nameNvalue_["id_change"];
 		return std::to_string(key_);
-	} else if(s = nameNvalue_["num-input"]; s != "" && key_ == stoi(s)) {
+	} else if(s = nameNvalue_["num"]; s != "" && key_ == stoi(s)) {
 		SHA2 sha;
 		auto a = sha.hash(pwd_.begin(), pwd_.end());
 		sq.query("update Users set password = '" + base64_encode({a.begin(), a.end()})
