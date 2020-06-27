@@ -81,9 +81,9 @@ void Adnet::id_hit()
 string Adnet::forgot()
 {
 	LOGD << "here" << endl;
-	if(string s = nameNvalue_["id"]; s != "")
+	if(string s = nameNvalue_["id"]; s != "") {
 		if(sq.select("Users", "where id = '" + s + "'")) return sq[0]["email"].asString();
-	else if(s = nameNvalue_["email"]; s != "") {
+	} else if(s = nameNvalue_["email"]; s != "") {
 		LOGD << s << endl;
 		if(sq.select("Users", "where email = '" + s + "'")) return sq[0]["id"].asString();
 	} else if(s = nameNvalue_["pwd"]; s != "") {
