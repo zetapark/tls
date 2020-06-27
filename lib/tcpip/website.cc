@@ -153,8 +153,8 @@ map<string, string> WebSite::parse_post(istream& post)
 	while(getline(post, s, '&')) {
 		cout << s << endl;
 		int pos = s.find('=');
-		value = "";
-		if(pos != s.size()-1) {
+		if(s.back() == '=') value = "";
+		else {
 			value = s.substr(pos+1);
 			for(auto& a : value) if(a == '+') a = ' ';
 			for(int i = value.find('%'); i != string::npos; i = value.find('%', i))
@@ -162,6 +162,7 @@ map<string, string> WebSite::parse_post(istream& post)
 			if(value.back() == '\0') value.pop_back();
 		}
 		m[s.substr(0, pos)] = value;
+		cout << value << endl;
 	}
 	return m;
 }
