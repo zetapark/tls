@@ -81,9 +81,10 @@ string Adnet::forgot()
 {
 	if(string s = nameNvalue_["id"]; s != "")
 		if(sq.select("Users", "where id = '" + s + "'")) return sq[0]["email"].asString();
-	else if(s = nameNvalue_["email"]; s != "") 
+	else if(s = nameNvalue_["email"]; s != "") {
+		cout << s << endl;
 		if(sq.select("Users", "where email = '" + s + "'")) return sq[0]["id"].asString();
-	else if(s = nameNvalue_["pwd"]; s != "") {
+	} else if(s = nameNvalue_["pwd"]; s != "") {
 		uniform_int_distribution<> di{10000, 99999};
 		random_device rd;
 		key_ = di(rd);
