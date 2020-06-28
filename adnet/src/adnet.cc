@@ -34,6 +34,10 @@ void Adnet::banner()
 		ofstream f{"banner/" + id_ + "-square.jpg"};
 		f << nameNvalue_["square"];
 	}
+	if(nameNvalue_["skyfilename"] != "") {
+		ofstream f{"banner/" + id_ + "-sky.jpg"};
+		f << nameNvalue_["sky"];
+	}
 	if(string s = nameNvalue_["link"]; s != "")
 		sq.query("update Users set link = '" + s + "' where id = '" + id_ + "'");
 }
