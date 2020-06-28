@@ -64,7 +64,7 @@ void Adnet::index()
 
 		if(sq.select("Users", "where id = '" + s + "' and password = '" + pass + "'"))
 			id_ = sq[0]["id"].asString();
-	}
+	} else if(s = nameNvalue_["opt"]; s != "") id_ = "";
 	swap("@ID", id_);
 	swap("@LOGGED", id_ == "" ? "false" : "true");
 }

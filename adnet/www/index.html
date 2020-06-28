@@ -8,7 +8,11 @@
 			if(@LOGGED) {
 				$('form').hide();
 				$('#signup').hide();
-			} else $('#profile').hide();
+				$('#forgot').hide();
+			} else {
+				$('#profile').hide();
+				$('#logout').hide();
+			}
 		});
 	</script>
 	<script src=https://ad.zeta2374.com/adnet.js></script>
@@ -26,7 +30,8 @@
 		<a href=signup.html id=signup><button>signup</button></a>
 		<a href=banner.html id=profile><button>My Profile : @ID</button></a>
 		<a href=email.html id=email><button>Contact</button></a>
-		<a href=forgot.html><button>Forgot Password</button></a>
+		<a href=forgot.html id=forgot><button>Forgot Password</button></a>
+		<a href=index.html?opt=logout id=logout><button>Logout</button></a>
 	</body>
 </html>
 

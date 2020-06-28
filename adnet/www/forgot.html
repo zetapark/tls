@@ -8,17 +8,6 @@
 			  crossorigin="anonymous"></script>
 	<script>
 		$(function() {
-			$('form').submit(function(event) {
-				event.preventDefault();
-				$.post('check.php', $('form').serialize(), function(data) { 
-					if(data.localeCompare('error') == 0) alert('no such id or email exist');
-					else {
-						$.post('https://misc.zeta2374.com/leave_message', eval(data), function(d){alert(d);});
-						window.location.href = 'index.html';
-					} 
-				});
-			});
-
 			$('#email-search').click(function() {
 				if($('#id-text').val().localeCompare('') == 0) {
 					alert('empty');
