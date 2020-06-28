@@ -45,8 +45,6 @@ void Adnet::banner()
 string Adnet::signup()
 {
 	if(nameNvalue_["psw"] != nameNvalue_["psw-repeat"]) return "password not match";
-	if(!sq.select("Users", "where email = '" + nameNvalue_["email"] + "'")) 
-		return "email already exist";
 	if(!sq.select("Users", "where id = '" + nameNvalue_["id"] + "'"))
 		return "id already exist";
 	if(nameNvalue_["remember"] == "on") id_ = nameNvalue_["id"];
