@@ -51,7 +51,7 @@ string Adnet::signup()
 	SHA2 sha;
 	auto a = sha.hash(nameNvalue_["psw"].cbegin(), nameNvalue_["psw"].cend());
 	string enc = base64_encode({a.begin(), a.end()});
-	sq.insert(nameNvalue_["email"], enc, 0, nameNvalue_["id"], 0, 0, 0, 0, "");
+	sq.insert(nameNvalue_["id"], nameNvalue_["email"], enc, "", 0, 0, 0, 0, 0,0,0,0,0);
 	return "you are registered";
 }
 
