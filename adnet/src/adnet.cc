@@ -21,7 +21,7 @@ void Adnet::db_ip(string ip)
 
 void Adnet::banner()
 {
-	for(int i=0; i<3; i++) swap("@ID", id_);
+	for(int i=0; i<4; i++) swap("@ID", id_);
 	if(nameNvalue_["leaderfilename"] != "") {
 		ofstream f{"banner/" + id_ + "-leader.jpg"};
 		f << nameNvalue_["leader"];
