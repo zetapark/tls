@@ -58,7 +58,7 @@ void Adnet::index()
 	sq.connect(db_ip_, "adnet", "adnetadnet", "adnet");
 	if(string s = nameNvalue_["id"]; s != "") {//login
 		SHA2 sha;
-		string pass = nameNvalue_["psw"];
+		string pass = nameNvalue_["pwd"];
 		auto a = sha.hash(pass.cbegin(), pass.cend());
 		pass = base64_encode({a.begin(), a.end()});
 
