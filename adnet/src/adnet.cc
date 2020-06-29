@@ -51,7 +51,7 @@ string Adnet::signup()
 	SHA2 sha;
 	auto a = sha.hash(nameNvalue_["psw"].cbegin(), nameNvalue_["psw"].cend());
 	string enc = base64_encode({a.begin(), a.end()});
-	sq.insert(nameNvalue_["id"], nameNvalue_["email"], enc, "", 0, 0, 0, 0, 0,0,0,0,0);
+	sq.insert(nameNvalue_["id"], nameNvalue_["email"], enc, "", 0, 1, 0, 0, 0,0,0,0,0);
 	return "you are registered";
 }
 
@@ -64,8 +64,14 @@ void Adnet::index()
 		auto a = sha.hash(pass.cbegin(), pass.cend());
 		pass = base64_encode({a.begin(), a.end()});
 
-		if(sq.select("Users", "where id = '" + s + "' and password = '" + pass + "'"))
+		if(sq.select("Users", "where id = '" + s + "' and password = '" + pass + "'")) {
 			id_ = sq[0]["id"].asString();
+			swap(":</li>", ": " + sq[0]["click_induce"].asString() + "</li>");
+			swap(":</li>", ": " + sq[0]["show_induce"].asString() + "</li>");
+			swap(":</li>", ": " + sq[0]["my_banner_show"].asString() + "</li>");
+			swap(":</li>", ": " + sq[0]["my_banner_click"].asString() + "</li>");
+			swap(":</li>", ": " + sq[0]["link"].asString() + "</li>");
+		}
 	} else if(s = nameNvalue_["opt"]; s != "") id_ = "";
 	swap("@ID", id_);
 	swap("@LOGGED", id_ == "" ? "false" : "true");
@@ -95,7 +101,7 @@ string Adnet::forgot()
 		pwd_ = s;
 		change_id_ = nameNvalue_["id_change"];
 		return std::to_string(key_);
-	} else if(s = nameNvalue_["num"]; s != "" && key_ == stoi(s)) {
+	} else if(s = nameNvalue_["num"]; s != "" && key_ > 9999 && key_ == stoi(s)) {
 		SHA2 sha;
 		auto a = sha.hash(pwd_.begin(), pwd_.end());
 		sq.query("update Users set password = '" + base64_encode({a.begin(), a.end()})
