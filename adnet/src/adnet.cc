@@ -40,6 +40,15 @@ void Adnet::banner()
 	}
 	if(string s = nameNvalue_["link"]; s != "")
 		sq.query("update Users set link = '" + s + "' where id = '" + id_ + "'");
+
+	if(id_ != "" && sq.select("Users", "where id = '" + id_ + "'")) {
+		swap(":</li>", ": " + sq[0]["click_induce"].asString() + "</li>");
+		swap(":</li>", ": " + sq[0]["show_induce"].asString() + "</li>");
+		swap(":</li>", ": " + sq[0]["my_banner_show"].asString() + "</li>");
+		swap(":</li>", ": " + sq[0]["my_banner_click"].asString() + "</li>");
+		swap(":</li>", ": " + sq[0]["link"].asString() + "</li>");
+		swap(":</li>", ": " + sq[0]["point"].asString() + "</li>");
+	}
 }
 
 string Adnet::signup()
@@ -64,15 +73,10 @@ void Adnet::index()
 		auto a = sha.hash(pass.cbegin(), pass.cend());
 		pass = base64_encode({a.begin(), a.end()});
 
-		if(sq.select("Users", "where id = '" + s + "' and password = '" + pass + "'")) {
+		if(sq.select("Users", "where id = '" + s + "' and password = '" + pass + "'"))
 			id_ = sq[0]["id"].asString();
-			swap(":</li>", ": " + sq[0]["click_induce"].asString() + "</li>");
-			swap(":</li>", ": " + sq[0]["show_induce"].asString() + "</li>");
-			swap(":</li>", ": " + sq[0]["my_banner_show"].asString() + "</li>");
-			swap(":</li>", ": " + sq[0]["my_banner_click"].asString() + "</li>");
-			swap(":</li>", ": " + sq[0]["link"].asString() + "</li>");
-		}
-	} else if(s = nameNvalue_["opt"]; s != "") id_ = "";
+	} else if(s = nameNvalue_["opt"]; s != "") id_ = "";//logout
+
 	swap("@ID", id_);
 	swap("@LOGGED", id_ == "" ? "false" : "true");
 }
@@ -88,11 +92,9 @@ void Adnet::id_hit()
 
 string Adnet::forgot()
 {
-	LOGD << "here" << endl;
 	if(string s = nameNvalue_["id"]; s != "") {
 		if(sq.select("Users", "where id = '" + s + "'")) return sq[0]["email"].asString();
 	} else if(s = nameNvalue_["email"]; s != "") {
-		LOGD << s << endl;
 		if(sq.select("Users", "where email = '" + s + "'")) return sq[0]["id"].asString();
 	} else if(s = nameNvalue_["pwd"]; s != "") {
 		uniform_int_distribution<> di{10000, 99999};
