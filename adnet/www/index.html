@@ -32,6 +32,81 @@
 		<a href=email.html id=email><button>Contact</button></a>
 		<a href=forgot.html id=forgot><button>Forgot Password</button></a>
 		<a href=index.html?opt=logout id=logout><button>Logout</button></a>
+
+		<h2>AdNET은 상호부조형 배너 광고 플랫폼입니다.</h2>
+		<p>
+		웹사이트에서의 광고는 거의 검색 엔진에 의해 독점되고 있는 시대입니다.
+		무언가 해보려 한다면 광고비용은 사업비의 큰 부분을 차지합니다.
+		웹사이트의 운영비도 만만치 않습니다.
+		AdNET은 상호부조형 광고 플랫폼입니다.
+		회원 사이트간의 협조를 통해 상호간의 컨텐츠를 홍보해주고,
+		유료 광고가 있을 경우, 수익의 절반은 회원에게 돌아갑니다.
+		AdNET 회원은 무료로 배너 광고를 게재할 수 있고, 수익도 올릴 수 있습니다.
+		</p>
+
+		<h2>이물질처럼 느껴지지 않는 웹사이트에 어울리는 배너 디자인</h2>
+		AdNET은 웹페이지에 이물질처럼 섞여있는 짜증나는 광고가 아니라, 
+		디자인적 요소로 웹페이지와 함께 어울릴 수 있는 광고를 추구합니다.
+		여러분은 웹페이지의 어느 위치에 어떤 크기의 광고 이미지를 삽입할 것인지 자유롭게 결정할 수 있습니다.
+		이로 인해 디자인 단계에서 전체 웹사이트의 내용과 문맥에 조화롭게 광고를 배치할 수 있게 됩니다.
+
+		오로지 자신의 사이트의 내용만을 보여주는 폐쇄된 웹사이트보다
+		다른 곳으로의 링크가 풍부한 열려있는 웹사이트가 방문자에게
+		더 유익한 고품질의 사이트로 느껴진다고 합니다.
+		이물감이 느껴지지 않는 AdNET을 통해 광고를 웹사이트의 조미료로 사용해 보세요.
+
+
+		<h2>AdNET 사용법</h2>
+		<ol>
+			<li><a href=signup.html>가입한다.</a></li>
+			<li>로그인한 후, My Profile 클릭.</li>
+			<li>자신의 컨텐츠를 광고할 4종의 배너를 만들어 업로드한다.</li>
+			<li>배너 클릭시 이동할 웹페이지 주소를 넣는다.</li>
+			<li>나의 컨텐츠에 https://adnet.zeta2374.com/ID(내 아이디가 myid일 경우 https://adnet.zeta2374.com/myid)를 광고하거나 웹사이트에 배너를 삽입한다.</li>
+		</ol>
+		<p>
+
+		<h2>배너를 웹페이지에 삽입하는 방법</h2>
+		
+		&lt;script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js">&lt;/script><br>
+		&lt;script src=https://ad.zeta2374.com/adnet.js>&lt;/script><br>
+		&lt;img id=adnet myid='가입할 때 적었던 아이디' adtype=square width=100% target=_blank><br>
+
+		adtype은 다음의 네 가지가 있습니다.
+		<ul>
+			<li>leader : 728 x 90</li>
+			<li>square : 300 x 250</li>
+			<li>mobile : 320 x 50</li>
+			<li>sky : 160 x 600</li>
+		</ul>
+		img 태그의 id, myid, adtype은 정해진 것이지만,
+		width 혹은 target 요소는 마음대로 정할 수 있습니다.
+		웹페이지에 적절한 범위를 광고가 점유하게 잘 조절하십시오.
+		그러나, 광고를 보여주는 것이 아니라, 광고를 클릭한 횟수가 중요하다는 것을 잊지 마십시오.
+		AdNET은 JQuery를 사용합니다. 
+		AdNET의 자바스크립트를 인용하기 전에 JQuery를 참조해야 합니다.
+		그리고 원하는 위치에 img 태그를 id를 adnet으로 하여 삽입하세요.
+		이 이미지가 들어가는 곳에 광고가 표시될 것입니다.
+		광고는 한 페이지에 여러개가 들어가도 상관없습니다.
+		어떤 페이지에 어떤 위치에 삽입할 것인지, 크기를 어떻게 할 것인지 스스로 정하면 됩니다.
+
+		<h2>컨텐츠에 AdNET광고를 삽입하는 법</h2>
+		자신의 유튜브 등의 컨텐츠에 https://adnet.zeta2374.com/your-id를 액세스하도록 
+		권유하면 됩니다.
+		누군가가 위의 url 주소로 AdNET을 액세스하면 자신의 아이디로 클릭 횟수가 늘어납니다.
+
+		<h2>AdNET의 계산법</h2>
+		<p>
+		회원이 자신의 웹페이지에 삽입한 배너 광고가 클릭될 때마다 이것이 기록되고,
+		이를 바탕으로 회원의 컨텐츠가 얼마나 홍보될 것인지 결정됩니다.
+		만일 내 웹사이트가 클릭을 10번 유발했고, 다른 웹사이트가 클릭을 5번 유발했다면,
+		내 웹사이트를 광고하는 배너가 두 배로 더 많이 노출될 것입니다.
+		이 클릭 유발 횟수는 유료 광고가 있을 경우에 포인트로 전환될 수 있습니다.
+		이 포인트는 암호 화폐로 전환하거나 다시 클릭 유발 횟수로 전환할 수 있습니다.
+		만일 자신의 유튜브 컨텐츠에서 https://adnet.zeta2374.com/my-id를 홍보해서,
+		누군가가 이 url을 액세스 했다면 이것은 한 번의 클릭 유발로 처리됩니다.
+		그러므로, 배너를 삽입할 웹페이지가 없는 사람도 자신의 배너를 광고할 수 있습니다.
+		</p>
 		<p>
 		Members can take part in AdNET by including banner image on their websites,
 		or by making people access adnet with your ID(i.e. https://adnet.zeta2374.com/ID)
@@ -80,23 +155,6 @@ We try our best to share not just ads but also profit.'>50 : 50</b>.
 		But please just mind that clicks will be counted, not the display.
 		You can also add banners in multiple places.
 		</p>
-		<div>
-			오로지 자신의 사이트의 내용만을 보여주는 폐쇄된 웹사이트보다
-			다른 곳으로의 링크가 풍부한 열려있는 웹사이트가 방문자에게
-			더 유익한 고품질의 사이트로 느껴진다고 합니다.
-			AdNET은 웹페이지에 이물질처럼 섞여있는 짜증나는 광고가 아니라, 
-			디자인적 요소로 웹페이지와 함께 어울릴 수 있는 광고를 추구합니다.
-			여러분은 웹페이지의 어느 위치에 어떤 크기의 광고 이미지를 삽입할 것인지 자유롭게 결정할 수 있습니다.
-			이로 인해 디자인 단계에서 전체 웹사이트의 내용과 문맥에 조화롭게 광고를 배치할 수 있게 됩니다.
-
-			웹사이트에서의 광고는 거의 검색 엔진에 의해 독점되고 있는 시대입니다.
-			무언가 해보려 한다면 광고비용은 사업비의 큰 부분을 차지합니다.
-			웹사이트의 운영비도 만만치 않습니다.
-			AdNET은 상호부조형 광고 플랫폼입니다.
-			회원 사이트간의 협조를 통해 상호간의 컨텐츠를 홍보해주고,
-			유료 광고가 있을 경우, 수익의 절반은 회원에게 돌아갑니다.
-
-		</div>
 	</body>
 </html>
 

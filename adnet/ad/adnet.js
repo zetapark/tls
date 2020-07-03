@@ -9,7 +9,7 @@ function request_ad() {
 				$('#adnet').click(function() {
 					$.post('https://ad.zeta2374.com/click_ad.php', {id : $('#adnet').attr('myid'),
 						click : split[0], token : split[2]});//id
-					window.location.href = split[1];//link
+					window.open(split[1], '_blank');//link
 				});
 			}
 		);
@@ -24,7 +24,7 @@ $(function() {
 		$('#adnet').click(function() {
 			$.post('https://ad.zeta2374.com/click_ad.php', {id : $('#adnet').attr('myid'),
 				click : 'adnet'});
-			window.location.href = 'https://adnet.zeta2374.com';
+			window.open('https://adnet.zeta2374.com', '_blank');
 		});
 	});
 
