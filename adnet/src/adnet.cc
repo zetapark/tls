@@ -18,6 +18,7 @@ void Adnet::process()
 void Adnet::db_ip(string ip)
 {
 	db_ip_ = ip;
+	sq.connect(db_ip_, "adnet", "adnetadnet", "adnet");
 }
 
 void Adnet::banner()
@@ -63,10 +64,6 @@ string Adnet::signup()
 	string enc = base64_encode({a.begin(), a.end()});
 	sq.insert(nameNvalue_["id"], nameNvalue_["email"], enc, "", 0, 1, 0, 0, 0,0,0,0,0);
 	return "you are registered";
-}
-
-Adnet::Adnet() {
-	sq.connect(db_ip_, "adnet", "adnetadnet", "adnet");
 }
 
 void Adnet::index()
