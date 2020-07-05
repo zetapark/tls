@@ -18,6 +18,7 @@ protected:
 public:
     bool connect(std::string host, std::string user, std::string pass, std::string db);
     void connect(Mysqlquery& copy);
+		bool reconnect();
 	virtual ~Mysqlquery();
 };
 

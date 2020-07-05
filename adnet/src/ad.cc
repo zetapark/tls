@@ -8,8 +8,14 @@ using namespace std::chrono;
 std::string base64_encode(std::vector<unsigned char> v);
 std::vector<unsigned char> base64_decode(std::string s);
 
+Ad::Ad()
+{
+	sq.connect("localhost", "adnet", "adnetadnet", "adnet");
+}
+
 void Ad::process(sockaddr_in &&ip)
 {
+	sq.reconnect();
 	char client_ip[INET_ADDRSTRLEN];
 	inet_ntop(AF_INET, &(ip.sin_addr), client_ip, INET_ADDRSTRLEN);
 	//psstm(string{"geoiplookup "} + client_ip);
@@ -20,7 +26,6 @@ void Ad::process(sockaddr_in &&ip)
 string Ad::request_ad() 
 {//do not use LOG with sq : LOGD << sq -> error
 	if(last_save_ < system_clock::now() - INTERVAL * 1s) {
-		sq.connect("localhost", "adnet", "adnetadnet", "adnet");
 		last_save_ = system_clock::now();
 		prev_token_ = move(token_);
 		insert_increment();

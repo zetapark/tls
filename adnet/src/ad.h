@@ -8,6 +8,9 @@
 
 class Ad : public WebSiteIP
 {
+public:
+	Ad();
+
 protected:
 	SqlQuery sq;
 	void process(sockaddr_in &&ip);

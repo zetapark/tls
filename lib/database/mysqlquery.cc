@@ -48,6 +48,11 @@ bool Mysqlquery::connect(string host, string user, string pass, string db)
 	}
 }
 
+bool Mysqlquery::reconnect()
+{
+	if(con && !con->isValid()) return con->reconnect();
+}
+
 void Mysqlquery::connect(Mysqlquery& copy)
 {
 	driver = copy.driver;

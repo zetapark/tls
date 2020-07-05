@@ -7,6 +7,7 @@ using namespace std;
 
 void Adnet::process()
 {
+	sq.reconnect();
 	if(requested_document_ == "signup.php") content_ = signup();
 	else if(requested_document_ == "index.html") index();//from login button
 	else if(requested_document_ == "banner.html") banner();
@@ -64,9 +65,12 @@ string Adnet::signup()
 	return "you are registered";
 }
 
+Adnet::Adnet() {
+	sq.connect(db_ip_, "adnet", "adnetadnet", "adnet");
+}
+
 void Adnet::index()
 {
-	sq.connect(db_ip_, "adnet", "adnetadnet", "adnet");
 	if(string s = nameNvalue_["id"]; s != "") {//login
 		SHA2 sha;
 		string pass = nameNvalue_["pwd"];
