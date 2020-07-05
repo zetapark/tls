@@ -5,7 +5,6 @@ string base64_encode(vector<uint8_t>);
 class Adnet : public WebSite
 {
 public:
-	Adnet();
 	void db_ip(std::string ip);
 
 protected:
