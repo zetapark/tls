@@ -7,7 +7,7 @@ using namespace std;
 
 void Adnet::process()
 {
-	sq.reconnect();
+	if(!sq.reconnect()) sq.connect(db_ip_, "adnet", "adnetadnet", "adnet");
 	if(requested_document_ == "signup.php") content_ = signup();
 	else if(requested_document_ == "index.html") index();//from login button
 	else if(requested_document_ == "banner.html") banner();

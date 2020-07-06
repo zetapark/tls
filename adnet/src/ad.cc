@@ -25,7 +25,7 @@ void Ad::process(sockaddr_in &&ip)
 string Ad::request_ad() 
 {//do not use LOG with sq : LOGD << sq -> error
 	if(last_save_ < system_clock::now() - INTERVAL * 1s) {
-		sq.reconnect();
+		if(!sq.reconnect()) sq.connect("localhost", "adnet", "adnetadnet", "adnet");
 		last_save_ = system_clock::now();
 		prev_token_ = move(token_);
 		insert_increment();

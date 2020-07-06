@@ -60,7 +60,11 @@
 		<ol>
 			<li><a href=signup.html>가입한다.</a></li>
 			<li>로그인한 후, My Profile 클릭.</li>
-			<li>자신의 컨텐츠를 광고할 4종의 배너를 만들어 업로드한다. 도박, 주류 등의 성인용 컨텐츠는 광고가 제한됩니다.</li>
+			<li>자신의 컨텐츠를 광고할 4종의 배너를 만들어 업로드한다.
+				AdNET은 배너의 질에 대해 까다롭지는 않지만,
+				배너의 질이 너무 조악한 경우 웹사이트 방문자의 사용경험을 고려해 배너 질을 조금 더 올리도록 권고하고,
+				배너가 업그레이드될 때까지 그 배너는 표시되지 않습니다. 
+				또한, 도박, 주류 등의 성인용 컨텐츠는 광고가 제한됩니다. </li>
 			<li>배너 클릭시 이동할 웹페이지 주소를 넣는다.</li>
 			<li>나의 컨텐츠에 https://adnet.zeta2374.com/ID(내 아이디가 myid일 경우 https://adnet.zeta2374.com/myid)를 광고하거나 웹사이트에 배너를 삽입한다.</li>
 		</ol>
@@ -70,7 +74,7 @@
 		
 		&lt;script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js">&lt;/script><br>
 		&lt;script src=https://ad.zeta2374.com/adnet.js>&lt;/script><br>
-		&lt;img id=adnet myid='가입할 때 적었던 아이디' adtype=square width=100% target=_blank><br>
+		&lt;img id=adnet myid='가입할 때 적었던 아이디' adtype=square width=100%><br>
 
 		adtype은 다음의 네 가지가 있습니다.
 		<ul>
@@ -80,7 +84,7 @@
 			<li>sky : 160 x 600</li>
 		</ul>
 		img 태그의 id, myid, adtype은 정해진 것이지만,
-		width 혹은 target 요소는 마음대로 정할 수 있습니다.
+		width 혹은 height 요소는 마음대로 정할 수 있습니다.
 		웹페이지에 적절한 범위를 광고가 점유하게 잘 조절하십시오.
 		그러나, 광고를 보여주는 것이 아니라, 광고를 클릭한 횟수가 중요하다는 것을 잊지 마십시오.
 		AdNET은 JQuery를 사용합니다. 
