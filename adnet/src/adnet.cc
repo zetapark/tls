@@ -18,7 +18,6 @@ void Adnet::process()
 void Adnet::db_ip(string ip)
 {
 	db_ip_ = ip;
-	sq.connect(db_ip_, "adnet", "adnetadnet", "adnet");
 }
 
 void Adnet::banner()

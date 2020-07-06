@@ -8,11 +8,6 @@ using namespace std::chrono;
 std::string base64_encode(std::vector<unsigned char> v);
 std::vector<unsigned char> base64_decode(std::string s);
 
-Ad::Ad()
-{
-	sq.connect("localhost", "adnet", "adnetadnet", "adnet");
-}
-
 void Ad::process(sockaddr_in &&ip)
 {
 	char client_ip[INET_ADDRSTRLEN];
