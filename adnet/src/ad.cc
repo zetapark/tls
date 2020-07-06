@@ -77,7 +77,7 @@ string Ad::new_token()
 bool Ad::check_token(string token)
 {
 	if(auto it = token_.find(token); it != token_.end()) token_.erase(it);
-	else if(it = prev_token_.find(token); it != token_.end()) prev_token_.erase(it);
+	else if(it = prev_token_.find(token); it != prev_token_.end()) prev_token_.erase(it);
 	else return false;
 	return true;
 }
