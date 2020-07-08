@@ -13,6 +13,7 @@ void Adnet::process()
 	else if(requested_document_ == "banner.html") banner();
 	else if(requested_document_ == "forgot.php") content_ = forgot();
 	else if(requested_document_ == "emailcheck.php") content_ = email_check();
+	else if(requested_document_ == "recommend.php") content_ = recommend();
 	else if(requested_document_.find('.') == string::npos) id_hit();//adnet.zeta2374.com/techlead
 }
 
@@ -59,11 +60,19 @@ string Adnet::signup()
 	if(stoi(nameNvalue_["num"]) != verify_code_) return "verification code not match";
 	if(sq.select("Users", "where id = '" + nameNvalue_["id"] + "'"))
 		return "id already exist";
-	if(nameNvalue_["remember"] == "on") id_ = nameNvalue_["id"];
+
+	if(nameNvalue_["remember"] == "on") id_ = nameNvalue_["id"];//signup pass
 	SHA2 sha;
 	auto a = sha.hash(nameNvalue_["psw"].cbegin(), nameNvalue_["psw"].cend());
 	string enc = base64_encode({a.begin(), a.end()});
 	sq.insert(nameNvalue_["id"], nameNvalue_["email"], enc, "", 0, 1, 0, 0, 0,0,0,0,0);
+
+	if(sq.select("Users", "where id = '" + nameNvalue_["recommender"] + "'")) {//recommend bonus
+		sq.query("update Users set click_induce = click_induce + 20 where id = '" +
+				nameNvalue_["recommender"] + "'");
+		sq.query("update Users set click_induce = click_induce + 30 where id = '" +
+				nameNvalue_["id"] + "'");
+	}
 	return "you are registered";
 }
 
@@ -130,4 +139,10 @@ string Adnet::email_check()
 	verify_code_ = di(rd);
 	return mailx("adnet@zeta2374.com", nameNvalue_["email"], "email verification", 
 			"type next 5 digits to verify email\n" + to_string(verify_code_));
+}
+
+string Adnet::recommend()
+{
+	if(sq.select("Users", "where id = '" + nameNvalue_["id"] + "'")) return "id exist";
+	else return "id does not exist";
 }

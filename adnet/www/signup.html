@@ -16,8 +16,12 @@
 			});
 
 			$('#check').click(function() {
-				$.get('emailcheck.php', {email : $("[name='email']").val()},
+				$.post('emailcheck.php', {email : $("[name='email']").val()},
 					function(data) { alert('check your email to verify your account');});
+			});
+			$('#recommend').click(function() {
+				$.post('recommend.php', {id : $("[name='recommender']").val()},
+					function(data) { alert(data); });
 			});
 		});
 	</script>
@@ -51,6 +55,10 @@
 
     <label for="psw-repeat"><b>Repeat Password</b></label>
 		<input type="password" placeholder="Repeat Password" name="psw-repeat" required><br>
+
+		<label for=recommend><b>Recommender ID</b></label>
+		<input type=text placeholder='Enter recommender ID' name=recommender>
+		<input type=button value='check recommender' id=recommend><br>
     
     <label>
       <input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px"> Remember me
