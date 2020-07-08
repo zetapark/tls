@@ -42,20 +42,13 @@
 					alert('empty');
 					return;
 				}
-				$.post('forgot.php', {pwd : $('#pwd-text').val(), id_change : $('#id-text').val()},
-					function(data) {
-						$.post('https://misc.zeta2374.com/leave_message', 
-							{
-								dest : $('b').html(),
-								content : 'type next 5 digit number to activate the new password\n' + data,
-								email : 'adnet@zeta2374.com',
-								title : 'change password from AdNET'
-							},
-							function(d) {
-								alert(d + 'check your email to get the verification code');
-							}
-						);
-					}
+				$.post('forgot.php', 
+					{
+						pwd : $('#pwd-text').val(),
+						id_change : $('#id-text').val(),
+						dest : $('b').html()
+					},
+					function() { alert('check your email to get the verification code');} 
 				);
 			});
 		});

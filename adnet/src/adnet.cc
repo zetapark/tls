@@ -12,6 +12,7 @@ void Adnet::process()
 	else if(requested_document_ == "index.html") index();//from login button
 	else if(requested_document_ == "banner.html") banner();
 	else if(requested_document_ == "forgot.php") content_ = forgot();
+	else if(requested_document_ == "emailcheck.php") content_ = email_check();
 	else if(requested_document_.find('.') == string::npos) id_hit();//adnet.zeta2374.com/techlead
 }
 
@@ -55,6 +56,7 @@ void Adnet::banner()
 string Adnet::signup()
 {
 	if(nameNvalue_["psw"] != nameNvalue_["psw-repeat"]) return "password not match";
+	if(stoi(nameNvalue_["num"]) != verify_code_) return "verification code not match";
 	if(sq.select("Users", "where id = '" + nameNvalue_["id"] + "'"))
 		return "id already exist";
 	if(nameNvalue_["remember"] == "on") id_ = nameNvalue_["id"];
@@ -90,6 +92,14 @@ void Adnet::id_hit()
 	sq.query("update Users set click_induce = click_induce + 1 where id = '" + id + "'");
 }
 
+static string mailx(string src, string dst, string title, string content)
+{
+	string cmd = "mailx " + dst + " -r " + src + " -s '" + title + "' <<HERE_CONTENT\n"
+		+ content + "\nHERE_CONTENT";
+	system(cmd.data());
+	return "mail sent";
+}
+
 string Adnet::forgot()
 {
 	if(string s = nameNvalue_["id"]; s != "") {
@@ -102,11 +112,22 @@ string Adnet::forgot()
 		key_ = di(rd);
 		pwd_ = s;
 		change_id_ = nameNvalue_["id_change"];
-		return std::to_string(key_);
+		return mailx("adnet@zeta2374.com", nameNvalue_["dest"], "change password from AdNET",
+				"type next 5 digit number to activate the new password\n" + to_string(key_));
 	} else if(s = nameNvalue_["num"]; s != "" && key_ > 9999 && key_ == stoi(s)) {
 		SHA2 sha;
 		auto a = sha.hash(pwd_.begin(), pwd_.end());
 		sq.query("update Users set password = '" + base64_encode({a.begin(), a.end()})
 				+ "' where id = '" + change_id_ + "'");
 	}
+	return "";
+}
+
+string Adnet::email_check()
+{
+	uniform_int_distribution<> di{10000, 99999};
+	random_device rd;
+	verify_code_ = di(rd);
+	return mailx("adnet@zeta2374.com", nameNvalue_["email"], "email verification", 
+			"type next 5 digits to verify email\n" + to_string(key_));
 }

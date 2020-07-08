@@ -2,6 +2,14 @@
 #include"misc.h"
 using namespace std;
 
+string mailx(string src, string dst, string title, string content)
+{
+	string cmd = "mailx " + dst + " -r " + src + " -s '" + title + "' <<HERE_CONTENT\n"
+		+ content + "\nHERE_CONTENT";
+	system(cmd.data());
+	return "mail sent";
+}
+
 void Misc::process(sockaddr_in&&) {
 	if(requested_document_ == "leave_message") {
 		cout << nameNvalue_["email"] << endl;
