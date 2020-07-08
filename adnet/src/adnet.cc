@@ -129,5 +129,5 @@ string Adnet::email_check()
 	random_device rd;
 	verify_code_ = di(rd);
 	return mailx("adnet@zeta2374.com", nameNvalue_["email"], "email verification", 
-			"type next 5 digits to verify email\n" + to_string(key_));
+			"type next 5 digits to verify email\n" + to_string(verify_code_));
 }
