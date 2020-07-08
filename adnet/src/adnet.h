@@ -15,6 +15,6 @@ private:
 	std::string id_, db_ip_, pwd_, change_id_;
 	int key_ = 10000, verify_code_ = 10000;
 	void index(), id_hit(), banner();
-	std::string signup(), forgot();
+	std::string signup(), forgot(), email_check();
 };
 
