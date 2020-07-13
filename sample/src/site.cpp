@@ -6,8 +6,8 @@ struct MyWebsite : WebSite
 {
 protected:
 	void process() {
-		if(requested_document_ == "index.html" && !nameNvalue_.empty())
-			swap("입력 테스트", nameNvalue_["text"] + " 입력 했음");
+		if(requested_document_ == "index.html")
+			append("<body>", "Hello this is from Server");
 	}
 };
 

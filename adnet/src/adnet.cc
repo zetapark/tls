@@ -14,7 +14,7 @@ void Adnet::process()
 	else if(requested_document_ == "forgot.php") content_ = forgot();
 	else if(requested_document_ == "emailcheck.php") content_ = email_check();
 	else if(requested_document_ == "recommend.php") content_ = recommend();
-	else if(requested_document_.find('.') == string::npos) id_hit();//adnet.zeta2374.com/techlead
+//	else if(requested_document_.find('.') == string::npos) id_hit();//adnet.zeta2374.com/techlead
 }
 
 void Adnet::db_ip(string ip)
