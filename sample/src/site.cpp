@@ -15,6 +15,6 @@ int main(int ac, char** av)
 {
 	MyWebsite f;
 	f.init("www");//template directory
-	Server sv{2001};//opening port
+	Server sv{2004};//opening port
 	sv.start(f);
 }
