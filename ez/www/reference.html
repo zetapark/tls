@@ -16,10 +16,10 @@
 			<div class="w3-rest w3-container">
 				<div class = 'w3-panel w3-card w3-light-grey'>
 					<h4 class=kor>eZ 프레임워크 최대의 강점은 채 한 페이지도 되지 않는 레퍼런스입니다.</h4>
-					<h4 class=eng>The strongest point of eZ Framework is that all the reference is less than a page</h4>
+					<h4 class=eng>The strongest point of eZ Framework is that the whole reference is less than a page</h4>
 					<p class=kor>
 					서버 사이드 웹 프로그래밍을 하기 위해서, 개발자는 단지 
-					eZ 프레임워크는 단 두개의 클래스와 3개의 변수 7개의 함수만 알면 됩니다.
+					단 두개의 클래스와 3개의 변수, 7개의 함수만 알면 됩니다.
 					</p>
 					<p class=eng>
 					eZ Framework is made of just two classes and 3 variables and 7 functions.
@@ -38,20 +38,24 @@
 					WebSite class offer 3 utility functions. swap, append, prepend.
 					These functions are used to change the content_ variable.
 					</p>
-					<ul class=kor>
-						<li>static void init(string dir) : 디렉토리 dir에서 템플릿 파일들을 로드한다.</li>
-						<li>static void add_header(string document, string header) : document의 HTML response에 헤더를 붙인다. CORS등에 사용.</li>
-						<li>bool swap(string a, string b) : content_에서 a를 찾아서 b로 바꿉니다. 바꾸었으면 true 리턴</li>
-						<li>bool append(string a, string b) : content_에서 a를 찾아서 그 바로 뒤에 b를 붙인다.</li>
-						<li>bool prepend(string a, string b) : content_에서 a를 찾아서 그 바로 앞에 b를 붙인다.</li>
-					</ul>
-					<ul class=eng>
-						<li>static void init(string dir) : Load template files from directory dir</li>
-						<li>static void add_header(string document, string header) : attach header to HTML response</li>
-						<li>bool swap(string a, string b) : find a in content_ and change it to b, return true if swap succeded.</li>
-						<li>bool append(string a, string b) : find a in content_ and append b after a</li>
-						<li>bool prepend(string a, string b) : find a in content_ and prepend b before a</li>
-					</ul>
+					<dl class=kor>
+						<dt>public :</dd>
+						<dd>static void init(string dir) : 디렉토리 dir에서 템플릿 파일들을 로드한다.</dd>
+						<dd>static void add_header(string document, string header) : document의 HTML response에 헤더를 붙인다. CORS등에 사용.</dd>
+						<dt>protected :</dt>
+						<dd>bool swap(string a, string b) : content_에서 a를 찾아서 b로 바꿉니다. 바꾸었으면 true 리턴</dd>
+						<dd>bool append(string a, string b) : content_에서 a를 찾아서 그 바로 뒤에 b를 붙인다.</dd>
+						<dd>bool prepend(string a, string b) : content_에서 a를 찾아서 그 바로 앞에 b를 붙인다.</dd>
+					</dl>
+					<dl class=eng>
+						<dt>public :</dt>
+						<dd>static void init(string dir) : Load template files from directory dir</dd>
+						<dd>static void add_header(string document, string header) : attach header to HTML response</dd>
+						<dt>protected :</dt> 
+						<dd>bool swap(string a, string b) : find a in content_ and change it to b, return true if swap succeded.</dd>
+						<dd>bool append(string a, string b) : find a in content_ and append b after a</dd>
+						<dd>bool prepend(string a, string b) : find a in content_ and prepend b before a</dd>
+					</dl>
 				</div>
 
 				<div class = 'w3-panel w3-card w3-light-grey'>
@@ -75,29 +79,33 @@
 					Server class specify the port number in constructor, and run the WebSite class or a class inherited from WebSite class with start function.
 					There are three member variables you should know in WebSite class.
 					</p>
-					<ul class=kor>
-						<li>string requested_document_ : 요청된 페이지 이름</li>
-						<li>string content_ : 요청된 페이지의 템플릿 값에 따라 초기화된 문자열</li>
-						<li>map&lt;string, string> nameNvalue_ : post, get, 혹은 multifile-form data 에서 온 파라미터와 그 값들</li>
-					</ul>
-					<ul class=eng>
-						<li>string requested_document_ : requested document by the browser</li>
-						<li>string content_ : initialized with template of requested document</li>
-						<li>map&lt;string, string> nameNvalue_ : parameters and the values of post, get or multiform data</li>
-					</ul>
+					<dl class=kor>
+						<dt>protected :</dt>
+						<dd>string requested_document_ : 요청된 페이지 이름</dd>
+						<dd>string content_ : 요청된 페이지의 템플릿 값에 따라 초기화된 문자열</dd>
+						<dd>map&lt;string, string> nameNvalue_ : post, get, 혹은 multifile-form data 에서 온 파라미터와 그 값들</dd>
+					</dl>
+					<dl class=eng>
+						<dt>protected :</dt>
+						<dd>string requested_document_ : requested document by the browser</dd>
+						<dd>string content_ : initialized with template of requested document</dd>
+						<dd>map&lt;string, string> nameNvalue_ : parameters and the values of post, get or multiform data</dd>
+					</dl>
 				</div>
 
 				<div class = 'w3-panel w3-card w3-light-grey'>
 					<h4 class=kor>Server class의 함수</h4>
 					<h4 class=eng>Functions of Server class</h4>
-					<ul class=kor>
-						<li>Server(int port) : port번호를 지정하는 생성자</li>
-						<li>start(functionali&lt;string(string)> website) : website 클래스나 이 클래스의 자식 클래스를 실행시켜 웹 서버를 기동시킨다.</li>
-					</ul>
-					<ul class=eng>
-						<li>Server(int port) : constructor using port number port</li>
-						<li>start(functional&lt;string(string)> website) : start a website</li>
-					</ul>
+					<dl class=kor>
+						<dt>public :</dt>
+						<dd>Server(int port) : port번호를 지정하는 생성자</dd>
+						<dd>start(functionali&lt;string(string)> website) : website 클래스나 이 클래스의 자식 클래스를 실행시켜 웹 서버를 기동시킨다.</dd>
+					</dl>
+					<dl class=eng>
+						public :
+						<dd>Server(int port) : constructor using port number port</dd>
+						<dd>start(functional&lt;string(string)> website) : start a website</dd>
+					</dl>
 				</div>
 
 			</div>
