@@ -13,6 +13,7 @@ void DnDD::process()
 //		requested_document_ = "index.html";
 //		content_ = fileNhtml_[requested_document_];
 //	}
+	if(db != "" && !sq.reconnect()) sq.connect("192.168.0.3", "dndd", "dndddndd", db);
 	cout << requested_document_ << endl;
 	for(auto& a : nameNvalue_) cout << a.first << ':' << a.second.substr(0, 20) << endl;
 	if(requested_document_ == "index.html") index();
@@ -166,9 +167,10 @@ string DnDD::search(string s)
 
 void DnDD::mn()
 {//main.html
-	if(nameNvalue_["db"] != "" && nameNvalue_["db"] != db)//if first connection -> set database
+	if(nameNvalue_["db"] != "" && nameNvalue_["db"] != db) {//if first connection -> set database
 		db = nameNvalue_["db"], id = name = "", level="0";
-	if(!sq.reconnect()) sq.connect("192.168.0.3", "dndd", "dndddndd", db);
+		sq.connect("192.168.0.3", "dndd", "dndddndd", db);
+	}
 	
 	vector<string> v = tables();//navbar setting
 	string t;
