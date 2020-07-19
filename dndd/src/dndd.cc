@@ -166,10 +166,9 @@ string DnDD::search(string s)
 
 void DnDD::mn()
 {//main.html
-	if(nameNvalue_["db"] != "") {//if first connection -> set database
-		sq.connect("192.168.0.3", "dndd", "dndddndd", nameNvalue_["db"]);
-		if(nameNvalue_["db"] != db) db = nameNvalue_["db"], id = name = "", level="0";
-	}
+	if(nameNvalue_["db"] != "" && nameNvalue_["db"] != db)//if first connection -> set database
+		db = nameNvalue_["db"], id = name = "", level="0";
+	if(!sq.reconnect()) sq.connect("192.168.0.3", "dndd", "dndddndd", db);
 	
 	vector<string> v = tables();//navbar setting
 	string t;
