@@ -47,6 +47,7 @@ void Adnet::banner()
 		sq.query("update Users set description = '" + s + "' where id = '" + id_ + "'");
 
 	if(id_ != "" && sq.select("Users", "where id = '" + id_ + "'")) {
+		prepend("<ul>", sq[0]["description"].asString());
 		swap(":</li>", ": " + sq[0]["click_induce"].asString() + "</li>");
 		swap(":</li>", ": " + sq[0]["show_induce"].asString() + "</li>");
 		swap(":</li>", ": " + sq[0]["my_banner_show"].asString() + "</li>");
