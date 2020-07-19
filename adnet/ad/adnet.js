@@ -28,6 +28,9 @@ $(function() {
 		});
 	});
 
+	$('#adnet').wrap('<div></div>');
+	$('#adnet').append("<a href='https://adnet.zeta2374.com'><button style='position: absolute; top: 0px; right: 0px; z-index: 1;'>&#xf05a;</button></a>");
+
 	request_ad();
 	setInterval(request_ad, 10000);
 	$('#adnet').css('cursor', 'pointer');
