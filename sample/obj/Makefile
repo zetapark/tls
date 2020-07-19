@@ -2,11 +2,11 @@ CXX = g++
 OBJ = $(wildcard *.src.o)
 EXE = $(patsubst %.x, ../%.x, $(wildcard *.x))
 LDFLAGS = -L../../ -Wl,-rpath=../
-LDLIBS = -lzeta -ljsoncpp -lstdc++fs -lrt -lmysqlcppconn
+LDLIBS = -lzeta -lzetatls -ljsoncpp -lstdc++fs -lrt -lmysqlcppconn
 
-all : ../site.src.x
+all : $(EXE)
 
-../site.src.x : site.src.x
+../%.x : %.x
 	$(CXX) $(LDFLAGS) -o $@ $^ $(LDLIBS)
 
 #    $@ |현재 목표 파일의 이름

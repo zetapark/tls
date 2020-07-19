@@ -43,6 +43,8 @@ void Adnet::banner()
 	}
 	if(string s = nameNvalue_["link"]; s != "")
 		sq.query("update Users set link = '" + s + "' where id = '" + id_ + "'");
+	if(string s = nameNvalue_["desc"]; s != "")
+		sq.query("update Users set description = '" + s + "' where id = '" + id_ + "'");
 
 	if(id_ != "" && sq.select("Users", "where id = '" + id_ + "'")) {
 		swap(":</li>", ": " + sq[0]["click_induce"].asString() + "</li>");
@@ -65,7 +67,7 @@ string Adnet::signup()
 	SHA2 sha;
 	auto a = sha.hash(nameNvalue_["psw"].cbegin(), nameNvalue_["psw"].cend());
 	string enc = base64_encode({a.begin(), a.end()});
-	sq.insert(nameNvalue_["id"], nameNvalue_["email"], enc, "", 0, 1, 0, 0, 0,0,0,0,0);
+	sq.insert(nameNvalue_["id"], nameNvalue_["email"], enc, "", "", 0, 1, 0, 0, 0,0,0,0,0);
 
 	if(sq.select("Users", "where id = '" + nameNvalue_["recommender"] + "'")) {//recommend bonus
 		sq.query("update Users set click_induce = click_induce + 20 where id = '" +

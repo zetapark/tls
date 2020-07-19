@@ -1,6 +1,5 @@
 #include<arpa/inet.h>
 #include<util/log.h>
-#include<iostream>
 #include"ad.h"
 using namespace std;
 using namespace std::chrono;
@@ -29,7 +28,6 @@ string Ad::request_ad()
 		if(sq.query("select id, link from Users where click_induce <> 0 order by"
 					" (my_banner_show / click_induce) limit " + to_string(user_count))) 
 			user_count = sq.fetch(-1);//real fetched lines
-		cout << sq << endl;
 		uniform_int_distribution<> di{0, user_count - 1};
 		di_.param(di.param());
 	}
