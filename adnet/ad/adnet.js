@@ -29,7 +29,7 @@ $(function() {
 	});
 
 	$('#adnet').wrap('<div></div>');
-	$('#adnet').append("<a href='https://adnet.zeta2374.com'><button style='position: absolute; top: 0px; left: 0px; z-index: 1;'>adnet&#xf05a;</button></a>");
+	$('#adnet').append("<a href='https://adnet.zeta2374.com' target=_blank><button style='position: absolute; top: 0px; left: 0px; z-index: 1;'>adnet&#xf05a;</button></a>");
 
 	request_ad();
 	setInterval(request_ad, 10000);
