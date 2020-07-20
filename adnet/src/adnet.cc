@@ -61,14 +61,14 @@ string Adnet::signup()
 {
 	if(nameNvalue_["psw"] != nameNvalue_["psw-repeat"]) return "password not match";
 	if(stoi(nameNvalue_["num"]) != verify_code_) return "verification code not match";
-	if(sq.select("Users", "where id = '" + nameNvalue_["id"] + "'"))
-		return "id already exist";
+	if(nameNvalue_["email"] != email_) return "email changed";
+	if(sq.select("Users", "where id = '" + nameNvalue_["id"] + "'")) return "id already exist";
 
 	if(nameNvalue_["remember"] == "on") id_ = nameNvalue_["id"];//signup pass
 	SHA2 sha;
 	auto a = sha.hash(nameNvalue_["psw"].cbegin(), nameNvalue_["psw"].cend());
 	string enc = base64_encode({a.begin(), a.end()});
-	sq.insert(nameNvalue_["id"], nameNvalue_["email"], enc, "", "", 0, 1, 0, 0, 0,0,0,0,0);
+	sq.insert(nameNvalue_["id"], email_, enc, "", "", 0, 1, 0, 0, 0,0,0,0,0);
 
 	if(sq.select("Users", "where id = '" + nameNvalue_["recommender"] + "'")) {//recommend bonus
 		sq.query("update Users set click_induce = click_induce + 20 where id = '" +
@@ -140,7 +140,8 @@ string Adnet::email_check()
 	uniform_int_distribution<> di{10000, 99999};
 	random_device rd;
 	verify_code_ = di(rd);
-	return mailx("adnet@zeta2374.com", nameNvalue_["email"], "email verification", 
+	email_ = nameNvalue_["email"];
+	return mailx("adnet@zeta2374.com", email_, "email verification", 
 			"type next 5 digits to verify email\n" + to_string(verify_code_));
 }
 
