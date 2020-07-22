@@ -18,6 +18,13 @@ hr { clear: left; }
 				$('#logout').hide();
 				$('#pref').hide();
 			}
+
+			$('.eng').hide();
+			$('#lang').click(function() {
+				$.get('lang.php', function(data) { console.log(data); });
+				$('.eng').toggle();
+				$('.kor').toggle();
+			});
 		});
 	</script>
 	<script src=https://ad.zeta2374.com/adnet.js></script>
@@ -52,6 +59,7 @@ h1 {
 		<a href=forgot.html id=forgot><button>Forgot Password</button></a>
 		<a href=index.html?opt=logout id=logout><button>Logout</button></a>
 		<a href=preference.html id=pref><button>Preference</button></a>
+		<button id=lang>Language</button>
 		<hr>
 
 		<div class='w3-row-padding'>
@@ -1819,10 +1827,11 @@ h1 {
 
 			<div class='w3-col l8 m6 w3-card'>
 				<header class="w3-container w3-blue">
-					<h1>AdNET은 상호부조형 배너 광고 플랫폼입니다.</h1>
+					<h1 class=kor>AdNET은 상호부조형 배너 광고 플랫폼입니다.</h1>
+					<h1 class=eng>AdNET is a mutual aid banner advertisement platform.</h1>
 				</header>
 				<div class=w3-container>
-					<p>
+					<p class=kor>
 					인터넷의 대부분의 광고가 검색 엔진에 의해 독점되고 있는 시대입니다.
 					검색 광고가 효율적이긴 하지만,
 					상위 랭크된 몇 건 이외에는 그다지 광고 효과가 높지 않습니다.
@@ -1832,6 +1841,18 @@ h1 {
 					회원 사이트간의 협조를 통해 상호간의 컨텐츠를 홍보해주고,
 					유료 광고가 있을 경우, 수익의 절반은 회원에게 돌아갑니다.
 					AdNET 회원은 무료로 배너 광고를 게재할 수 있고, 수익도 올릴 수 있습니다.
+					</p>
+					<p class=eng>
+					Search engines are dictating internet ads market.
+					It is true that search engine advertisement is effective.
+					But, it is only true to a little portion of high ranked advertisements.
+					If you want to make your ad at first page of search engines,
+					it will cost much.
+					For a small business owner, the cost to run a web site is not mitigatable.
+					AdNET is a mutual aid advertisement platform.
+					Member sites will cooperate to advertise other member's contents.
+					When there is a non-free ad, half of the profit will be distributed to members.
+					AdNET members can advertise his own banner with free cost and even get profits.
 					</p>
 				</div>
 			</div>
