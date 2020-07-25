@@ -6,56 +6,77 @@
 		<script src="https://code.jquery.com/jquery-3.5.0.min.js"
 					integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ="
 		 crossorigin="anonymous"></script>
+		<script src=lang.js></script>
 	</head>
 	<body>
 		<form action=pref.php method=post>
 			<h2>Preference</h2>
-			<h4>Please select categories that express your site best</h4>
-			<label for=distance><b>I want to show more banners that is related to my Category</b></label>
-			<input type=checkbox name=category><br>
+			<h4 class=eng>Please select categories that express your site or contents best. Multiple choices possible.</h4>
+			<h4 class=kor>당신의 웹사이트 혹은 컨텐츠를 가장 잘 묘사하는 목록을 고르세요. 여러 개 가능.</h4>
 			<hr>
-			<label for=computer><b>Computer</b></label>
+			<label for=computer><b>computer</b></label>
 			<input type=checkbox name=computer><br>
-			<label for=computer><b>Programming</b></label>
-			<input type=checkbox name=Programming><br>
-			<label for=computer><b>Game</b></label>
-			<input type=checkbox name=Game><br>
-			<label for=computer><b>Gadgets</b></label>
-			<input type=checkbox name=Gadgets><br>
-			<label for=computer><b>Education</b></label>
-			<input type=checkbox name=Education><br>
+			<label for=computer><b>programming</b></label>
+			<input type=checkbox name=programming><br>
+			<label for=computer><b>game</b></label>
+			<input type=checkbox name=game><br>
+			<label for=computer><b>gadgets</b></label>
+			<input type=checkbox name=gadgets><br>
+			<label for=computer><b>education</b></label>
+			<input type=checkbox name=education><br>
 			<hr>
 
-			<label for=computer><b>Shopping</b></label>
-			<input type=checkbox name=Shopping><br>
-			<label for=computer><b>Travel/Leisure</b></label>
-			<input type=checkbox name=Travel/Leisure><br>
-			<label for=computer><b>Food</b></label>
-			<input type=checkbox name=Food><br>
-			<label for=computer><b>Entertainment</b></label>
-			<input type=checkbox name=Entertainment><br>
+			<label for=computer><b>shopping</b></label>
+			<input type=checkbox name=shopping><br>
+			<label for=computer><b>travel/Leisure</b></label>
+			<input type=checkbox name=travel><br>
+			<label for=computer><b>food</b></label>
+			<input type=checkbox name=food><br>
+			<label for=computer><b>entertainment</b></label>
+			<input type=checkbox name=entertainment><br>
 			<hr>
 
-			<label for=computer><b>Social/Politics</b></label>
-			<input type=checkbox name=Social/Politics><br>
-			<label for=computer><b>Fashion</b></label>
-			<input type=checkbox name=Fashion><br>
-			<label for=computer><b>Health</b></label>
-			<input type=checkbox name=Health><br>
-			<label for=computer><b>Finance</b></label>
-			<input type=checkbox name=Finance><br>
-			<label for=computer><b>Others</b></label>
-			<input type=checkbox name=Others><br>
+			<label for=computer><b>society</b></label>
+			<input type=checkbox name=society><br>
+			<label for=computer><b>fashion</b></label>
+			<input type=checkbox name=fashion><br>
+			<label for=computer><b>health</b></label>
+			<input type=checkbox name=health><br>
+			<label for=computer><b>finance</b></label>
+			<input type=checkbox name=finance><br>
+			<label for=computer><b>others</b></label>
+			<input type=checkbox name=others><br>
 			<hr>
 
-			<h4>You can find your position with google map.</h4>
-			<label for=distance><b>I want my banner to be viewed by Distance from my position</b></label>
-			<input type=checkbox name=Distance><br>
-			<label for=lat><b>My location Latitude</b></label>
+			<h4 class=eng>You can find your latitude, longitude position with map software like google map.</h4>
+			<h4 class=kor>당신의 경위도 위치는 구글맵 등의 지도 소프트웨어로 찾을 수 있습니다.</h4>
+			<label for=country>
+				<b class=kor>내 배너가 나와 같은 국가의 사용자에게 우선적으로 보여지기를 바랍니다.</b>
+				<b class=eng>I want my banner to be viewed more by users in the same country.</b>
+			</label>
+			<input type=checkbox name=country><br>
+
+			<label for=lat>
+				<b class=eng>My location Latitude</b>
+				<b class=kor>내 위치의 경도</b>
+			</label>
+
 			<input type=text name=lat><br>
-			<label for=lng><b>My location Longitude</b></label>
+			<label for=lng>
+				<b class=eng>My location Longitude</b>
+				<b class=kor>내 위치의 위도</b>
+			</label>
 			<input type=text name=lng><br>
-			<label for=limit><b>Distance within</b></label>
+
+			<label for=distance>
+				<b class=eng>I want my banner to be viewed more by users close to my position</b>
+				<b class=kor>내 배너가 내 위치에서 가까운 사용자에게 우선적으로 보여지기를 바랍니다</b>
+			</label>
+			<input type=checkbox name=Distance><br>
+			<label for=limit>
+				<b class=eng>Distance within</b>
+				<b class=kor>거리 제한</b>
+			</label>
 			<input type=text name=limit>km<br>
 			<hr>
 

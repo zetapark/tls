@@ -1,6 +1,7 @@
 function request_ad() {
 	if(document.hasFocus()) {
-		$.post('https://ad.zeta2374.com/request_ad.php', { id : $('#adnet').attr('myid') },
+		$.post('https://ad.zeta2374.com/request_ad.php',
+			{ id : $('#adnet').attr('myid'), category : $('#adnet').attr('category') },
 			function(data) {
 				var split = data.split('\n');
 				$('#adnet').attr('src', 'https://tomcat.zeta2374.com/banner/' + split[0] 

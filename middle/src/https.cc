@@ -11,16 +11,16 @@ using namespace std;
 
 PSK PSKnCLIENT;
 
-pair<string, int> HostNPort::operator[](string host)
-{
+tuple<string, int, bool> HostNPort::operator[](string host)
+{//return a host considering weight
 	if(find_if(cbegin(), cend(), [host](const Host &h) {return h.host == host;}) == cend())
 		host = "default";
 	for(auto &a : *this) if(a.host == host && 0 <= a.hit && a.hit < a.weight) {
 		if(++a.hit == a.weight) a.hit = -1;
-		return {a.ip, a.port};
+		return {a.ip, a.port, a.addr_service};
 	}
 	for(auto &a : *this) if(a.host == host) a.hit = 0;
-	return (*this)[host];
+	return (*this)[host];//recursive when not found
 }
 
 Middle::Middle(int outport, int timeout, int queue, string end)
@@ -37,9 +37,10 @@ int Middle::get_full_length(const string &s)
 void Middle::read_config(string file)
 {
 	ifstream f{file};
-	string subdomain, ip; int port, weight;
-	while(f >> subdomain >> ip >> port >> weight)
-		hostNport_.push_back({subdomain, ip, port, weight, 0});
+	string subdomain, ip, tmp; int port, weight; bool addr_service;
+	getline(f, tmp);
+	while(f >> subdomain >> ip >> port >> weight >> addr_service)
+		hostNport_.push_back({subdomain, ip, port, weight, 0, addr_service});
 }
 
 int Middle::start()
@@ -71,7 +72,7 @@ static pair<string, string> get_hostncookie(string s)
 void Middle::connected(int fd)
 {//will be used in parallel
 	TLS13<SERVER> t;//TLS is decoupled from file descriptor
-	if(auto cl = t.handshake(bind(&Middle::recv, this, fd),//shared pointer
+	if(auto cl = t.handshake(bind(&Middle::recv, this, fd),//optional shared pointer
 			bind(&Middle::send, this, placeholders::_1, fd))) {//handshake complete
 		while(1) {
 			if(auto a = recv(fd)) {//optional<string> a
@@ -83,14 +84,15 @@ void Middle::connected(int fd)
 						if(!*cl) { //first connection
 							stringstream ss; ss << host;
 							getline(ss, host, '.');
-							auto [ip, port] = hostNport_[host];
-							tie(cookie, *cl) = t.new_session(ip, port);//cookie:base64 encoded id
+							auto [ip, port, addr_service] = hostNport_[host];
+							tie(cookie, *cl) = t.new_session(ip, port,//cookie:base64 encoded id
+									addr_service ? client_addr.sin_addr.s_addr : 0);//real client ip addr
 						}
 					}
 					LOGT << *a << endl;
 					if((*cl)->accumulate(*a)) {//multiple packets constitute one message
 						if((*cl)->try_lock_for(7s)) {
-							(*cl)->send();//to inner server
+							(*cl)->send();//to inner server. client_addr -> http header ip address
 							a = (*cl)->recv();
 							(*cl)->unlock();
 						} else break;

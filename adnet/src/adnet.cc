@@ -14,6 +14,7 @@ void Adnet::process()
 	else if(requested_document_ == "forgot.php") content_ = forgot();
 	else if(requested_document_ == "emailcheck.php") content_ = email_check();
 	else if(requested_document_ == "recommend.php") content_ = recommend();
+	else if(requested_document_ == "pref.php") content_ = pref();
 	else if(requested_document_ == "lang.php") lang_++;
 	else if(requested_document_ == "lang.js") content_ = langjs[lang_ % 2];
 //	else if(requested_document_.find('.') == string::npos) id_hit();//adnet.zeta2374.com/techlead
@@ -151,4 +152,25 @@ string Adnet::recommend()
 {
 	if(sq.select("Users", "where id = '" + nameNvalue_["id"] + "'")) return "id exist";
 	else return "id does not exist";
+}
+
+string Adnet::pref()
+{
+	
+//			nameNvalue_["computer"]
+//			nameNvalue_["programming"]
+//			nameNvalue_["game"]
+//			nameNvalue_["gadgets"]
+//			nameNvalue_["education"]
+//			nameNvalue_["shopping"]
+//			nameNvalue_["travel"]
+//			nameNvalue_["food"]
+//			nameNvalue_["entertainment"]
+//
+//			nameNvalue_["social/Politics"]
+//			nameNvalue_["fashion"]
+//			nameNvalue_["health"]
+//			nameNvalue_["finance"]
+//			nameNvalue_["others"]
+
 }

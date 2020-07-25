@@ -3277,17 +3277,41 @@ h1 {
 				<p class=container>
 				&lt;script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js">&lt;/script><br>
 				&lt;script src=https://ad.zeta2374.com/adnet.js>&lt;/script><br>
-				&lt;img id=adnet myid='your id' adtype=square width=100%><br>
+				&lt;img id=adnet myid='your id' adtype=square category='computer programming' width=100%><br>
 				</p>
 			</div>
-			<p class=kor> adtype은 다음의 네 가지가 있습니다.  </p>
-			<p class=eng> There are 4 adtypes.</p>
+			<p class=kor> adtype은 다음의 네 가지가 있습니다. 4종의 배너 중 지정된 배너가 보여질 것입니다.</p>
+			<p class=eng> There are 4 adtypes. Designated banner among 4 types will be displayed.</p>
 			<ul>
 				<li>leader : 728 x 90</li>
 				<li>square : 300 x 250</li>
 				<li>mobile : 320 x 50</li>
 				<li>sky : 160 x 600</li>
 			</ul>
+
+			<p class=kor>category에 해당되는 배너가 더 자주 표시될 것입니다.
+			category를 지정하지 않으면, 모든 배너가 차별없이 표시됩니다.
+			category는 다음의 타입이 있습니다.</p>
+			<p class=eng>Those banners that match designated category will be displayed more.
+			If you do not designate the category, then banner category will be ignored.
+			There are category types as follows.</p>
+			<ul>
+			<li>computer</li>
+			<li>programming</li>
+			<li>game</li>
+			<li>gadgets</li>
+			<li>education</li>
+			<li>shopping</li>
+			<li>travel</li>
+			<li>food</li>
+			<li>entertainment</li>
+			<li>society</li>
+			<li>fashion</li>
+			<li>health</li>
+			<li>finance</li>
+			<li>others</li>
+			</ul>
+
 			<p class=kor>
 			img 태그의 id, myid, adtype은 정해진 것이지만,
 			width 혹은 height 요소는 마음대로 정할 수 있습니다.
@@ -3297,78 +3321,48 @@ h1 {
 			AdNET의 자바스크립트를 인용하기 전에 JQuery를 참조해야 합니다.
 			그리고 원하는 위치에 img 태그를 id를 adnet으로 하여 삽입하세요.
 			이 이미지가 들어가는 곳에 광고가 표시될 것입니다.
-			광고는 한 페이지에 여러개가 들어가도 상관없습니다.
 			어떤 페이지에 어떤 위치에 삽입할 것인지, 크기를 어떻게 할 것인지 스스로 정하면 됩니다.
+			이 이미지는 패널 속에 넣을수도 있고,
+			모바일 혹은 데스크탑에서 화면 크기에 따라 다르게 표현되도록 할 수도 있습니다.
 			</p>
 			<p class=eng>
-			id, myid, adtype of img tag are all determined forehand.
-			But, you can arbitrarily decide width or height.
-
+			You should specify id, myid, adtype of img tag.
+			You can arbitrarily decide width or height just as you did with your images.
+			Control these to make your banner occupy proper portion.
+			But we remind you that click induce matters not the view induce.
+			AdNET uses JQuery.
+			So you should reference JQuery before including adnet.js.
+			And finally include img tag with id=adnet.
+			Banner will be displayed where this img is placed.
+			When and where your image will be displayed is all upon your command.
+			This image can be displayed inside a panel or can be displayed differently according to
+			screen size with responsive libraries like bootstrap.
 			</p>
 		</div>
+
 		<div class='w3-col l6 w3-padding w3-card'>
 			<header class='w3-container w3-blue'>
-				<h1>컨텐츠에 AdNET광고를 삽입하는 법</h1>
+				<h1 class=kor>컨텐츠에 AdNET광고를 삽입하는 법</h1>
+				<h1 class=eng>How to add AdNET ad in my contents</h1>
 			</header>
-			<p class=w3-container>
+			<p class=kor>
 			자신의 유튜브 등의 컨텐츠에 adnet.zeta2374.com를 액세스하도록 
 			권유하면 됩니다.
-			가입시 추천인의 아이디를 입력하면 가입자와 추천인이 보너스를 받게 됩니다.
+			가입시 추천인의 아이디를 입력하면 가입자와 추천인이 보너스를 받게 됩니다.(20, 30)
+			그러므로, 당신의 아이디를 같이 알릴 필요가 있습니다.
 			</p>
+			<p class=eng>
+			You can encourage people to access adnet.zeta2374.com in your contents like youtube.
+			When the new member designate a recommender when he sign up,
+			you and the new member will get bonus click induce(20, 30).
+			So you need to inform your id to viewers.
+			</p>
+		<footer class='w3-container w3-blue'>
+			<h3 class=kor>문제가 있을 때는 상단의 contact를 클릭하여 메시지를 남기세요.</h3>
+		<h3 class=eng>When you have problems, pleases leave a message by clicking contact button at the head of this page.</h3>
+		</footer>
 		</div>
 
-		</div>
-
-		<h1>문제가 있을 때는 상단의 contact를 클릭하여 메시지를 남기세요.</h1>
-
-		<p>
-		Members can take part in AdNET by including banner image on their websites,
-		or by making people access adnet with your ID(i.e. https://adnet.zeta2374.com/ID)
-		via your contents like youtube videos.
-		</p>
-		<p>
-		The more clicks your website induces, the more your own banners will be displayed.
-		Webpage id hit will also count as one click.
-		If your website made 10 people click banners, and other website made 5 people click,
-		your own banner will be displayed two times more than the banner of the other.
-		View count of your own banner / induced click of other banners will be the index for 
-		showing your banner.
-		</p>
-		<p>
-		Your click induce can be sold to other members if you have much higher click induce than 
-		your own banner show and you don't want to advertise your contents so much.
-		But this only happens when AdNET houses non-free ads.
-		You will earn points per sold clicks.
-		When it amounts to certain point you will be paid with cryptocurrency.
-
-		We will share those profits with members,
-		<b title='This rate can change according to financial status of AdNET. 
-		If this happens we will notice you properly.
-		We try our best to share not just ads but also profit.'>50 : 50</b>.
-	If there was non-free ad banner among those clicks your webpage made,
-	you will get profit according to your contribution to all the clicks.
-		</p>
-		<p>
-		All the banner display will be shared among the members.
-		But, AdNET will use some portion of banner display, and charged ad will also consume 
-		some display, the rest will be shared among members.
-		</p>
-		<p>
-		Anyone can advertise on AdNET at some cost per view.
-		10 korean won per display as of now.
-		There is no price per click, only price per display is offered.
-		Your ad will be randomly distributed among member sites.
-		Members can also buy additional display on adnet with the same cost as above.
-		Therefore non-free commercial ads will be charged by cost per view.
-		Whereas the profit will be distributed to members of AdNET according to cost per clicks.
-		This policy will encourage the ads to be attractive and AdNET banner position 
-		to be noticeable.
-		</p>
-		<p>
-		A Member can include AdNET banner at any place with any size in your webpage.
-		But please just mind that clicks will be counted, not the display.
-		You can also add banners in multiple places.
-		</p>
 	</body>
 </html>
 

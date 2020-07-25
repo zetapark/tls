@@ -7,7 +7,11 @@
 
 struct MClient : Client, std::timed_mutex
 {
-	MClient(std::string ip = "localhost", int port = 2001);
+	MClient(std::string ip = "localhost", int port = 2001, uint32_t real_ip = 0);
+	union {
+		uint32_t real_ip;
+		uint8_t a[4];
+	} u;
 	bool accumulate(std::string s);
 	static thread_local std::string to_send;
 	void send();

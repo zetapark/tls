@@ -17,6 +17,7 @@
 		<script src=lang.js></script>
 	</head>
 	<body>
+		<a href=index.html>AdNET HOME</a>
 		<ul>
 			<li>광고 클릭 유발(click induce) :</li>
 			<li>광고 보여주기 유발(view induce) :</li>
@@ -62,22 +63,22 @@
 	<figure>
 		<img src='https://tomcat.zeta2374.com/banner/@ID-leader.jpg' width=728 height=90
 		onerror="this.src='https://tomcat.zeta2374.com/banner/adnet-leader.jpg'">
-		<figcaption>728x90 banner leader</figcaption>
+		<figcaption>728x90 leader</figcaption>
 	</figure>
 	<figure style=float:left>
 		<img src='https://tomcat.zeta2374.com/banner/@ID-sky.jpg' width=160 height=600
 		onerror="this.src='https://tomcat.zeta2374.com/banner/adnet-sky.jpg'">
-		<figcaption>160x600 banner sky</figcaption>
+		<figcaption>160x600 sky</figcaption>
 	</figure>
 	<figure>
 		<img src='https://tomcat.zeta2374.com/banner/@ID-square.jpg' width=300 height=250
 		onerror="this.src='https://tomcat.zeta2374.com/banner/adnet-square.jpg'">
-		<figcaption>300x250 banner square</figcaption>
+		<figcaption>300x250 square</figcaption>
 	</figure>
 	<figure>
 		<img src='https://tomcat.zeta2374.com/banner/@ID-mobile.jpg' width=320 height=50
 		onerror="this.src='https://tomcat.zeta2374.com/banner/adnet-mobile.jpg'">
-		<figcaption>320x50 banner mobile</figcaption>
+		<figcaption>320x50 mobile</figcaption>
 	</figure>
 	<form action=banner.html method=post enctype=multipart/form-data>
 		<label for=leader><b>728 x 90 file upload</b></label>
@@ -88,11 +89,16 @@
 		<input type=file name=mobile onchange=filecheck(this)><br>
 		<label for=mobile><b>160 x 600 file upload</b></label>
 		<input type=file name=sky onchange=filecheck(this)><br>
-		<label for=link><b>Weppage link to go when banner is clicked</b></label><br>
-		<input type=text name=link size=40><br>
-		<label for=desc><b>Webpage Description</b></label><br>
+		<label for=link><b class=eng>Weppage link to go when banner is clicked</b>
+			<b class=kor>배너 클릭시 이동할 웹 페이지 링크</b>
+		</label><br>
+		<input type=text name=link placeholder='address including http:// or https://' size=40><br>
+		<label for=desc><b class=eng>Webpage Description</b>
+			<b class=kor>웹페이지 설명</b></label><br>
 		<input type=text name=desc size=40><br>
 		<input type=submit name=submit value=submit>
 	</form>
+	<a href=index.html>AdNET HOME</a><br>
+	<a href=bannersnack.com>Bannersnack</a>
 	</body>
 </html>
