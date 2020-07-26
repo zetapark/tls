@@ -6,11 +6,11 @@
 #include<set>
 #define INTERVAL 60
 
-class Ad : public WebSiteIP
+class Ad : public WebSite
 {
 protected:
 	SqlQuery sq;
-	void process(sockaddr_in &&ip);
+	void process();
 
 	void click_ad();
 	std::string request_ad();

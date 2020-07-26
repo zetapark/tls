@@ -7,10 +7,9 @@ using namespace std::chrono;
 std::string base64_encode(std::vector<unsigned char> v);
 std::vector<unsigned char> base64_decode(std::string s);
 
-void Ad::process(sockaddr_in &&ip)
+void Ad::process()
 {
 	char client_ip[INET_ADDRSTRLEN];
-	inet_ntop(AF_INET, &(ip.sin_addr), client_ip, INET_ADDRSTRLEN);
 	//psstm(string{"geoiplookup "} + client_ip);
 	if(requested_document_ == "request_ad.php") content_ = request_ad();
 	else if(requested_document_ == "click_ad.php") click_ad();

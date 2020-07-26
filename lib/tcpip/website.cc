@@ -96,7 +96,7 @@ void WebSite::parse_all(string &&s)
 		nameNvalue_ = parse_post(ss2);
 
 		while(getline(ss, s)) if(auto pos = s.find(": "); pos != string::npos)
-			req_header_[s.substr(0, pos)] = s.substr(pos + 1, s.size() - pos - 3);
+			req_header_[s.substr(0, pos)] = s.substr(pos + 2, s.size() - pos - 3);
 	}
 	if(requested_document_ == "") requested_document_ = "index.html";
 	content_ = fileNhtml_[requested_document_];
