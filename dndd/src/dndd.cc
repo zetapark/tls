@@ -6,7 +6,7 @@
 #include<database/util.h>
 using namespace std;
 
-void DnDD::process()
+void DnDD::process(string)
 {
 //	static int hit = 0;
 //	if(!hit++ && !nameNvalue_.empty()) {

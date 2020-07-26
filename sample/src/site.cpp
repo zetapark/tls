@@ -5,7 +5,7 @@ using namespace std;
 struct MyWebsite : WebSite
 {
 protected:
-	void process() {
+	void process(std::string) {
 		if(requested_document_ == "index.html")
 			append("<body>", "Hello this is from Server");
 	}

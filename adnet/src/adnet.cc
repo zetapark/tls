@@ -5,11 +5,11 @@
 #include"adnet.h"
 using namespace std;
 
-void Adnet::process()
+void Adnet::process(string ip)
 {
 	if(!sq.reconnect()) sq.connect(db_ip_, "adnet", "adnetadnet", "adnet");
 	if(requested_document_ == "signup.php") content_ = signup();
-	else if(requested_document_ == "index.html") index();//from login button
+	else if(requested_document_ == "index.html") index(ip);//from login button
 	else if(requested_document_ == "banner.html") banner();
 	else if(requested_document_ == "forgot.php") content_ = forgot();
 	else if(requested_document_ == "emailcheck.php") content_ = email_check();
@@ -82,7 +82,7 @@ string Adnet::signup()
 	return "you are registered";
 }
 
-void Adnet::index()
+void Adnet::index(string ip)
 {
 	if(string s = nameNvalue_["id"]; s != "") {//login
 		SHA2 sha;
@@ -96,13 +96,14 @@ void Adnet::index()
 
 	swap("@ID", id_);
 	swap("@LOGGED", id_ == "" ? "false" : "true");
+	append("<body>", ip);
 }
 
 void Adnet::id_hit()
 {
 	string id = requested_document_;
 	content_ = fileNhtml_["index.html"];
-	index();
+	index("hello");
 	sq.select("Users", "limit 1");//need this to prevent error
 	sq.query("update Users set click_induce = click_induce + 1 where id = '" + id + "'");
 }

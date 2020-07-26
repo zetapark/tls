@@ -5,7 +5,7 @@
 class Biz : public WebSite
 {
 protected:
-	void process();
+	void process(std::string ip);
 	SqlQuery sq;
 private:
 	void opencv(), insert_bcard(), index(), crop(), google_oauth();

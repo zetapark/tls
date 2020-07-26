@@ -14,13 +14,13 @@ public:
 	static void add_header(std::string re, std::string he);
 
 protected:
-	virtual void process() {}//child should implement this
+	virtual void process(string ip) {}//child should implement this
 	bool swap(std::string, std::string), append(std::string, std::string),
 		 prepend(std::string a, std::string b);
 	std::map<std::string, std::string> nameNvalue_;//parameter
 	std::string content_, requested_document_;//set content_
 	static SharedMem fileNhtml_;
-	void parse_all(string &&s);
+	std::string parse_all(string &&s);
 	std::string return_content();
 
 private:
