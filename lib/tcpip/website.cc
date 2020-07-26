@@ -110,17 +110,6 @@ string WebSite::return_content()
 	return header_ + s + "Content-Length: " + to_string(content_.size()) + "\r\n\r\n" + content_;
 }
 
-string WebSiteIP::operator()(string s, sockaddr_in ip)
-{
-	parse_all(move(s));
-	try {
-		process(move(ip));//derived class should implement this -> set content_ & cookie
-	} catch(const exception& e) {
-		cerr << e.what() << endl;
-	}
-	return return_content();
-}
-
 istream& WebSite::parse_one(istream& is, string boundary)
 {
 	regex e1{R"raw(name="(\w+)")raw"}, e2{R"raw(filename="(\S+)")raw"};

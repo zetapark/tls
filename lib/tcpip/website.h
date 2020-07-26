@@ -36,10 +36,3 @@ private:
 
 std::string carousel(std::vector<std::string> img, std::vector<std::string> desc, std::vector<std::string> href);
 
-class WebSiteIP : public WebSite
-{
-public:
-	std::string operator()(std::string s, sockaddr_in ip);
-protected:
-	virtual void process(sockaddr_in &&ip) {}
-};
