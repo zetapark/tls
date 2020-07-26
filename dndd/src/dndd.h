@@ -5,7 +5,7 @@ class DnDD : public WebSite
 {
 protected:
 	SqlQuery sq;
-	void process(std::string);
+	void process();
 
 private:
 	void signin(), index(), search(), mn(), pg(), edit(), new_book(), comment(),result(), google();

@@ -67,7 +67,7 @@ public:
 		while(true) {
 			client_fd = accept(server_fd, (sockaddr*)&client_addr, (socklen_t*)&cl_size);
 			if(client_fd != -1) {//connection established
-				v.emplace_back(std::thread{lambda, client_fd, client_addr});
+				v.emplace_back(std::thread{lambda, client_fd, client_addr});//this is not the real ip, 
 				v.back().detach();
 			}
 		}

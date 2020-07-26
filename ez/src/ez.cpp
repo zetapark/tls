@@ -10,7 +10,7 @@ string car;
 class MySite : public WebSite
 {
 protected:
-	void process(string ip) {
+	void process() {
 		if(requested_document_ == "result_view") {
 			content_ = "<html><h2>";
 			for(auto [a, b] : nameNvalue_) content_ += a + ':' + b + "<br>";
