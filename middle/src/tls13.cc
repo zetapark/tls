@@ -306,9 +306,9 @@ template<bool SV> string TLS13<SV>::finished(string &&s)
 }
 
 template<bool SV> tuple<string, shared_ptr<MClient>>
-TLS13<SV>::new_session(string ip, int port, uint32_t real_ip)
+TLS13<SV>::new_session(string ip, int port, int fd)
 {//change this to know ip location
-	sclient_.sp_client = make_shared<MClient>(ip, port, real_ip);//create client here!!
+	sclient_.sp_client = make_shared<MClient>(ip, port, fd);//create client here!!
 	sclient_.issue_time = chrono::system_clock::now();
 	vector<uint8_t> v{this->session_id_.begin(), this->session_id_.end()};
 	if(is_tls13()) {

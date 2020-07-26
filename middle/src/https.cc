@@ -11,13 +11,13 @@ using namespace std;
 
 PSK PSKnCLIENT;
 
-tuple<string, int, bool> HostNPort::operator[](string host)
+tuple<string, int> HostNPort::operator[](string host)
 {//return a host considering weight
 	if(find_if(cbegin(), cend(), [host](const Host &h) {return h.host == host;}) == cend())
 		host = "default";
 	for(auto &a : *this) if(a.host == host && 0 <= a.hit && a.hit < a.weight) {
 		if(++a.hit == a.weight) a.hit = -1;
-		return {a.ip, a.port, a.addr_service};
+		return {a.ip, a.port};
 	}
 	for(auto &a : *this) if(a.host == host) a.hit = 0;
 	return (*this)[host];//recursive when not found
@@ -38,9 +38,8 @@ void Middle::read_config(string file)
 {
 	ifstream f{file};
 	string subdomain, ip, tmp; int port, weight; bool addr_service;
-	getline(f, tmp);
-	while(f >> subdomain >> ip >> port >> weight >> addr_service)
-		hostNport_.push_back({subdomain, ip, port, weight, 0, addr_service});
+	while(f >> subdomain >> ip >> port >> weight)
+		hostNport_.push_back({subdomain, ip, port, weight, 0});
 }
 
 int Middle::start()
@@ -84,9 +83,8 @@ void Middle::connected(int fd)
 						if(!*cl) { //first connection
 							stringstream ss; ss << host;
 							getline(ss, host, '.');
-							auto [ip, port, addr_service] = hostNport_[host];
-							tie(cookie, *cl) = t.new_session(ip, port,//cookie:base64 encoded id
-									addr_service ? client_addr.sin_addr.s_addr : 0);//real client ip addr
+							auto [ip, port] = hostNport_[host];
+							tie(cookie, *cl) = t.new_session(ip, port, fd);//cookie:base64 encoded id, fd for real ip
 						}
 					}
 					LOGT << *a << endl;

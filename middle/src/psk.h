@@ -7,7 +7,7 @@
 
 struct MClient : Client, std::timed_mutex
 {
-	MClient(std::string ip = "localhost", int port = 2001, uint32_t real_ip = 0);
+	MClient(std::string ip = "localhost", int port = 2001, int fd = 0);
 	union {
 		uint32_t real_ip;
 		uint8_t a[4];

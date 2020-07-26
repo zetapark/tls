@@ -9,12 +9,11 @@ struct Host {
 	int port;
 	int weight;
 	int hit;
-	bool addr_service;
 };
 
 struct HostNPort : std::vector<Host>
 {
-	std::tuple<std::string, int, bool> operator[](std::string host);
+	std::tuple<std::string, int> operator[](std::string host);
 };
 
 class Middle : public Server

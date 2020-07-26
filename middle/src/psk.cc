@@ -2,9 +2,13 @@
 #define DUR (60 * 60s)
 using namespace std;
 
-MClient::MClient(string ip, int port, uint32_t real_ip) : Client{ip, port}
+MClient::MClient(string ip, int port, int fd) : Client{ip, port}
 {
-	u.real_ip = real_ip;
+	sockaddr_in addr;
+	socklen_t sz = sizeof(sockaddr);
+
+	getpeername(fd, (sockaddr*)&addr, &sz);
+	u.real_ip = addr.sin_addr.s_addr;
 }
 
 bool MClient::accumulate(string s)
@@ -16,12 +20,10 @@ bool MClient::accumulate(string s)
 void MClient::send()
 {
 	int full_sz = this->get_full_length(to_send);
-	if(u.real_ip) {
-		string s = to_send.substr(0, full_sz);
-		s.insert(s.find("\r\n\r\n"), "\r\nIP-Addr:" + to_string(u.a[0]) + '.' + to_string(u.a[1])
-				+ '.' + to_string(u.a[2]) + '.' + to_string(u.a[3]));
-		Client::send(s);
-	} else Client::send(to_send.substr(0, full_sz));
+	string s = to_send.substr(0, full_sz);
+	s.insert(s.find("\r\n\r\n"), "\r\nIP-Addr:" + to_string(u.a[0]) + '.' + to_string(u.a[1])
+			+ '.' + to_string(u.a[2]) + '.' + to_string(u.a[3]));
+	Client::send(s);
 	to_send = to_send.substr(full_sz);
 }
 
