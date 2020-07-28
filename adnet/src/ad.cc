@@ -9,6 +9,7 @@ std::vector<unsigned char> base64_decode(std::string s);
 
 void Ad::process()
 {
+	if(th_.joinable()) th_.join();//from request ad function
 	char client_ip[INET_ADDRSTRLEN];
 	//psstm(string{"geoiplookup "} + client_ip);
 	if(requested_document_ == "request_ad.php") content_ = request_ad();
@@ -17,20 +18,22 @@ void Ad::process()
 
 string Ad::request_ad() 
 {//do not use LOG with sq : LOGD << sq -> error
-	if(last_save_ < system_clock::now() - INTERVAL * 1s) {
+	if(pool_.empty()) {
 		if(!sq.reconnect()) sq.connect("localhost", "adnet", "adnetadnet", "adnet");
-		last_save_ = system_clock::now();
 		prev_token_ = move(token_);
-		insert_increment();
 		if(sq.query("select count(*) from Users")) sq.fetch(-1);
 		int user_count = sq[0][""].asInt() / 3 + 100;//when service is new and people low
 		if(sq.query("select id, link from Users where click_induce <> 0 order by"
 					" (my_banner_show / click_induce) limit " + to_string(user_count))) 
 			user_count = sq.fetch(-1);//real fetched lines
 		uniform_int_distribution<> di{0, user_count - 1};
-		di_.param(di.param());
+		auto it = pool_.before_begin();
+		for(int i=0; i<user_count; i++) it = pool_.insert_after(it, di(rd_));
+		th_ = thread{&Ad::insert_increment, this};
 	}
-	int pick = di_(rd_);
+	nameNvalue_["category"];
+	string result = psstm("geoiplookup " + req_header_["IP-Addr"]);
+	int pick = (rd_);
 	view_induce_[nameNvalue_["id"]]++;
 	view_increase_[sq[pick]["id"].asString()]++;
 	return sq[pick]["id"].asString() + '\n' + sq[pick]["link"].asString() + '\n' + new_token();
@@ -65,7 +68,8 @@ void Ad::insert_increment()
 string Ad::new_token()
 {
 	vector<unsigned char> v;
-	for(int i=0; i<15; i++) v.push_back(token_di_(rd_) % 0x100);
+	uniform_int_distribution<> di{0, 255};
+	for(int i=0; i<15; i++) v.push_back(di(rd_) % 0x100);
 	string r = base64_encode(v);
 	token_.insert(r);
 	return r;

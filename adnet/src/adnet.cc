@@ -14,7 +14,7 @@ void Adnet::process()
 	else if(requested_document_ == "forgot.php") content_ = forgot();
 	else if(requested_document_ == "emailcheck.php") content_ = email_check();
 	else if(requested_document_ == "recommend.php") content_ = recommend();
-	else if(requested_document_ == "pref.php") content_ = pref();
+	else if(requested_document_ == "pref.php") pref();
 	else if(requested_document_ == "lang.php") lang_++;
 	else if(requested_document_ == "lang.js") content_ = langjs[lang_ % 2];
 //	else if(requested_document_.find('.') == string::npos) id_hit();//adnet.zeta2374.com/techlead
@@ -155,23 +155,27 @@ string Adnet::recommend()
 	else return "id does not exist";
 }
 
-string Adnet::pref()
-{
-	
-//			nameNvalue_["computer"]
-//			nameNvalue_["programming"]
-//			nameNvalue_["game"]
-//			nameNvalue_["gadgets"]
-//			nameNvalue_["education"]
-//			nameNvalue_["shopping"]
-//			nameNvalue_["travel"]
-//			nameNvalue_["food"]
-//			nameNvalue_["entertainment"]
-//
-//			nameNvalue_["social/Politics"]
-//			nameNvalue_["fashion"]
-//			nameNvalue_["health"]
-//			nameNvalue_["finance"]
-//			nameNvalue_["others"]
+static const string category[] = {"computer", "programming", "game", "gadgets",
+	"education", "shopping", "travel", "food", "entertainment", "society",
+	"fashion", "health", "finance", "other", "distance", "country"};
 
+void Adnet::pref()
+{//php
+	sq.query("delete from Pref where id = '" + id_ + "'");
+	string command = "insert into Pref values ('" + id_ + "'";
+	for(const string s : category) command += nameNvalue_[s] == "" ? ",0" : ",1";
+	sq.query(command + ')');
+	sq.query("update Users set lat = " + nameNvalue_["lat"] + ", lng = " + nameNvalue_["lng"]
+			+ ", country = '" + nameNvalue_["nation"] + "' where id = '" + id_ + "'");
+}
+
+void Adnet::preference()
+{
+	if(sq.select("Pref", "where id = '" + id_ + "'"))
+		for(string s : category) if(sq[0][s].asInt()) append("name=" + s, " checked");
+	if(sq.select("Users", "where id='" + id_ + "'")) {
+		if(sq[0]["lat"].asFloat()) append("name=lat", " value=" + sq[0]["lat"].asString());
+		if(sq[0]["lng"].asFloat()) append("name=lng", " value=" + sq[0]["lng"].asString());
+		if(sq[0]["country"].asString() != "") append("name=" + sq[0]["country"].asString(), " checked");
+	}
 }
