@@ -1,3 +1,12 @@
+adnet/src/ad.cc
+adnet/src/ad.cpp
+adnet/src/ad.h
+adnet/src/adnet.cc
+adnet/src/adnet.cpp
+adnet/src/adnet.h
+adnet/src/misc.cc
+adnet/src/misc.cpp
+adnet/src/misc.h
 biz/src/base64.cc
 biz/src/biz.cpp
 biz/src/biz.h
@@ -22,8 +31,6 @@ lib/database/mysqlquery.cc
 lib/database/mysqlquery.h
 lib/database/util.cc
 lib/database/util.h
-lib/tcpip/bootstrap.cc
-lib/tcpip/bootstrap.h
 lib/tcpip/server.cc
 lib/tcpip/server.h
 lib/tcpip/shared_files.cc
@@ -84,5 +91,7 @@ middle/tst/test.cc
 middle/tst/tls.cc
 middle/tst/tvec.cc
 middle/tst/x25519.cc
+sample/src/base64.cpp
+sample/src/jsoncpp.cpp
 sample/src/site.cpp
 suwon/src/suwon.cpp

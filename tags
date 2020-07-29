@@ -10,6 +10,8 @@ AND_THEN	middle/tst/catch.hpp	11587;"	d
 AND_WHEN	middle/tst/catch.hpp	11585;"	d
 APPLICATION	middle/src/der.h	39;"	e	enum:ber::Class
 APPLICATION_DATA	middle/src/tls.h	58;"	v
+Ad	adnet/src/ad.h	10;"	c	inherits:WebSite
+Adnet	adnet/src/adnet.h	5;"	c	inherits:WebSite
 AllOf	middle/tst/catch.hpp	1169;"	f	namespace:Catch::Matchers
 AllOf	middle/tst/catch.hpp	1173;"	f	namespace:Catch::Matchers
 AnyOf	middle/tst/catch.hpp	1177;"	f	namespace:Catch::Matchers
@@ -24,10 +26,8 @@ BIT_STRING	middle/src/der.h	8;"	e	enum:ber::Tag
 BLUR	biz/src/cvmatrix.h	87;"	v
 BMP_STRING	middle/src/der.h	35;"	e	enum:ber::Tag
 BOOLEAN	middle/src/der.h	6;"	e	enum:ber::Tag
-BUF_SIZE	lib/tcpip/tcpip.h	6;"	d
+BUF_SIZE	lib/tcpip/tcpip.h	7;"	d
 Biz	biz/src/biz.h	5;"	c	inherits:WebSite
-BootStrapSite	lib/tcpip/bootstrap.cc	5;"	f	class:BootStrapSite
-BootStrapSite	lib/tcpip/bootstrap.h	7;"	c	inherits:WebSite
 BorgType	middle/tst/catch.hpp	1533;"	s	namespace:Catch::Detail
 CATCH_AND_THEN	middle/tst/catch.hpp	11501;"	d
 CATCH_AND_WHEN	middle/tst/catch.hpp	11499;"	d
@@ -219,8 +219,8 @@ ChatServer	dndd/src/chatserver.h	31;"	c
 Choice	middle/tst/catch.hpp	389;"	g	struct:Catch::CaseSensitive
 CipherMode	middle/src/aes.h	103;"	c
 Class	middle/src/der.h	38;"	g	namespace:ber
-Client	lib/tcpip/server.cc	56;"	f	class:Client
-Client	lib/tcpip/server.h	34;"	c	inherits:Http
+Client	lib/tcpip/server.cc	55;"	f	class:Client
+Client	lib/tcpip/server.h	36;"	c	inherits:Http
 Column	lib/database/mysqldata.h	45;"	s	class:SqlQuery
 Combination	biz/src/combi.cc	5;"	f	class:Combination
 Combination	biz/src/combi.h	12;"	c
@@ -237,8 +237,7 @@ Detail	middle/tst/catch.hpp	1528;"	n	namespace:Catch
 Detail	middle/tst/catch.hpp	1644;"	n	namespace:Catch
 DidntThrowException	middle/tst/catch.hpp	875;"	e	enum:Catch::ResultWas::OfType
 DiffieHellman	middle/src/diffie.h	5;"	s
-DnDD	dndd/src/dndd.cc	9;"	f	class:DnDD
-DnDD	dndd/src/dndd.h	4;"	c	inherits:BootStrapSite
+DnDD	dndd/src/dndd.h	4;"	c	inherits:WebSite
 ECDSA	middle/src/ecdsa.cc	5;"	f	class:ECDSA
 ECDSA	middle/src/ecdsa.h	4;"	c	inherits:EC_Point
 EC_Field	middle/src/diffie.cc	98;"	f	class:EC_Field
@@ -291,10 +290,12 @@ HELLO_REQUEST	middle/src/tls.h	60;"	v
 HKDF	middle/src/hkdf.h	4;"	s	inherits:HMAC
 HMAC	middle/src/hmac.h	5;"	c
 HMAC	middle/src/hmac.h	8;"	f	class:HMAC
-Handshake_header	middle/src/tls.cc	142;"	s	file:
-Hello_header	middle/src/tls.cc	153;"	s	file:
-Http	lib/tcpip/server.cc	36;"	f	class:Http
-Http	lib/tcpip/server.h	16;"	c	inherits:Vrecv
+Handshake_header	middle/src/tls.cc	143;"	s	file:
+Hello_header	middle/src/tls.cc	154;"	s	file:
+Host	middle/src/https.h	6;"	s
+HostNPort	middle/src/https.h	14;"	s	inherits:std::vector
+Http	lib/tcpip/server.cc	35;"	f	class:Http
+Http	lib/tcpip/server.h	18;"	c	inherits:Vrecv
 IA5_STRING	middle/src/der.h	27;"	e	enum:ber::Tag
 IContext	middle/tst/catch.hpp	643;"	s	namespace:Catch
 IGeneratorInfo	middle/tst/catch.hpp	534;"	s	namespace:Catch
@@ -335,6 +336,7 @@ INTERNAL_CATCH_UNIQUE_NAME_LINE	middle/tst/catch.hpp	372;"	d
 INTERNAL_CATCH_UNIQUE_NAME_LINE2	middle/tst/catch.hpp	371;"	d
 INTERNAL_CHECK_THAT	middle/tst/catch.hpp	2249;"	d
 INTERNAL_CHECK_THAT_NO_TRY	middle/tst/catch.hpp	2128;"	d
+INTERVAL	adnet/src/ad.h	8;"	d
 IShared	middle/tst/catch.hpp	606;"	s	namespace:Catch	inherits:NonCopyable
 ITestCase	middle/tst/catch.hpp	681;"	s	namespace:Catch	inherits:IShared
 ITestCaseRegistry	middle/tst/catch.hpp	690;"	s	namespace:Catch
@@ -375,10 +377,11 @@ MatcherUntypedBase	middle/tst/catch.hpp	1038;"	c	namespace:Catch::Matchers::Impl
 Matchers	middle/tst/catch.hpp	1031;"	n	namespace:Catch
 MethodTestCase	middle/tst/catch.hpp	705;"	c	namespace:Catch	inherits:SharedImpl
 MethodTestCase	middle/tst/catch.hpp	708;"	f	class:Catch::MethodTestCase
-Middle	middle/src/https.cc	14;"	f	class:Middle
-Middle	middle/src/https.h	6;"	c	inherits:Server
-MySite	ez/src/ez.cpp	7;"	c	file:	inherits:BootStrapSite
-MyWeb	suwon/src/suwon.cpp	6;"	c	file:	inherits:WebSite
+Middle	middle/src/https.cc	26;"	f	class:Middle
+Middle	middle/src/https.h	19;"	c	inherits:Server
+Misc	adnet/src/misc.h	3;"	c	inherits:WebSiteIP
+MySite	ez/src/ez.cpp	10;"	c	file:	inherits:WebSite
+MyWeb	suwon/src/suwon.cpp	9;"	c	file:	inherits:WebSite
 MyWebsite	sample/src/site.cpp	5;"	s	file:	inherits:WebSite
 Mysqlquery	lib/database/mysqlquery.h	7;"	c
 N	middle/src/aes.h	16;"	m	class:AES
@@ -415,8 +418,8 @@ PRF	middle/src/prf.h	5;"	c
 PRIMITIVE	middle/src/der.h	43;"	e	enum:ber::PC
 PRINTABLE_STRING	middle/src/der.h	24;"	e	enum:ber::Tag
 PRIVATE	middle/src/der.h	39;"	e	enum:ber::Class
-PSK	middle/src/psk.cc	23;"	f	class:PSK
-PSK	middle/src/psk.h	23;"	c	inherits:ThreadSafeMap
+PSK	middle/src/psk.cc	33;"	f	class:PSK
+PSK	middle/src/psk.h	28;"	c	inherits:ThreadSafeMap
 PYBIND11_MODULE	middle/pybind/pybind.cc	12;"	f
 Ptr	middle/tst/catch.hpp	565;"	c	namespace:Catch
 Ptr	middle/tst/catch.hpp	567;"	f	class:Catch::Ptr
@@ -446,7 +449,7 @@ ResultDisposition	middle/tst/catch.hpp	889;"	s	namespace:Catch
 ResultWas	middle/tst/catch.hpp	861;"	s	namespace:Catch
 SCENARIO	middle/tst/catch.hpp	11577;"	d
 SCENARIO_METHOD	middle/tst/catch.hpp	11578;"	d
-SClient	middle/src/psk.h	16;"	s
+SClient	middle/src/psk.h	21;"	s
 SEQUENCE	middle/src/der.h	21;"	e	enum:ber::Tag
 SERVER	middle/src/tls.h	72;"	v
 SERVER_DONE	middle/src/tls.h	66;"	v
@@ -471,8 +474,8 @@ STITCH_CLARA_OPEN_NAMESPACE	middle/tst/catch.hpp	5063;"	d
 STITCH_TBC_TEXT_FORMAT_OPEN_NAMESPACE	middle/tst/catch.hpp	4058;"	d
 STITCH_TBC_TEXT_FORMAT_OPEN_NAMESPACE	middle/tst/catch.hpp	4209;"	d
 SafeBool	middle/tst/catch.hpp	410;"	c	namespace:Catch
-Server	lib/tcpip/server.cc	80;"	f	class:Server
-Server	lib/tcpip/server.h	42;"	c	inherits:Http
+Server	lib/tcpip/server.cc	79;"	f	class:Server
+Server	lib/tcpip/server.h	44;"	c	inherits:Http
 Server2	dndd/src/chatserver.h	3;"	c	inherits:Server
 SharedImpl	middle/tst/catch.hpp	613;"	s	namespace:Catch	inherits:T
 SharedImpl	middle/tst/catch.hpp	615;"	f	struct:Catch::SharedImpl
@@ -492,10 +495,10 @@ TBC_TEXT_FORMAT_CONSOLE_WIDTH	middle/tst/catch.hpp	5305;"	d
 TBC_TEXT_FORMAT_H_INCLUDED	middle/tst/catch.hpp	4065;"	d
 THEN	middle/tst/catch.hpp	11586;"	d
 TLS	middle/src/tls.h	9;"	c
-TLS13	middle/src/tls13.cc	37;"	f	class:TLS13
+TLS13	middle/src/tls13.cc	38;"	f	class:TLS13
 TLS13	middle/src/tls13.h	11;"	c	inherits:TLS
-TLS_header	middle/src/tls.cc	134;"	s	file:
-TLS_header	middle/src/tls13.cc	582;"	s	file:
+TLS_header	middle/src/tls.cc	135;"	s	file:
+TLS_header	middle/src/tls13.cc	588;"	s	file:
 TRACE	lib/util/log.h	30;"	e	enum:Log::LogLevel
 TWOBLUECUBES_CATCH_APPROX_HPP_INCLUDED	middle/tst/catch.hpp	2711;"	d
 TWOBLUECUBES_CATCH_ASSERTIONRESULT_HPP_INCLUDED	middle/tst/catch.hpp	8082;"	d
@@ -594,14 +597,14 @@ TWOBLUECUBES_SINGLE_INCLUDE_CATCH_HPP_INCLUDED	middle/tst/catch.hpp	12;"	d
 TWOBLUECUBES_TEXT_FORMAT_H_ALREADY_INCLUDED	middle/tst/catch.hpp	5313;"	d
 Tag	middle/src/der.h	4;"	g	namespace:ber
 Tcpip	lib/tcpip/tcpip.cc	11;"	f	class:Tcpip
-Tcpip	lib/tcpip/tcpip.h	8;"	c
+Tcpip	lib/tcpip/tcpip.h	9;"	c
 TestFailureException	middle/tst/catch.hpp	1194;"	s	namespace:Catch
 TestFunction	middle/tst/catch.hpp	721;"	t	namespace:Catch
 ThreadSafeMap	middle/src/tvec.h	41;"	c	inherits:ThreadSafeVector
 ThreadSafeVector	middle/src/tvec.h	5;"	c
 ThrewException	middle/tst/catch.hpp	874;"	e	enum:Catch::ResultWas::OfType
-TlsLayer	lib/tcpip/server.cc	47;"	f	class:TlsLayer
-TlsLayer	lib/tcpip/server.h	25;"	c	inherits:Vrecv
+TlsLayer	lib/tcpip/server.cc	46;"	f	class:TlsLayer
+TlsLayer	lib/tcpip/server.h	27;"	c	inherits:Vrecv
 TrueType	middle/tst/catch.hpp	1537;"	s	namespace:Catch::Detail
 TupleDetail	middle/tst/catch.hpp	1664;"	n	namespace:Catch
 Type	middle/src/der.h	46;"	s	namespace:ber
@@ -612,14 +615,14 @@ UTF8STRING	middle/src/der.h	17;"	e	enum:ber::Tag
 Unknown	middle/tst/catch.hpp	862;"	e	enum:Catch::ResultWas::OfType
 VIDEOTEX_STRING	middle/src/der.h	26;"	e	enum:ber::Tag
 VISIBLE_STRING	middle/src/der.h	31;"	e	enum:ber::Tag
-Vrecv	lib/tcpip/server.cc	12;"	f	class:Vrecv
-Vrecv	lib/tcpip/server.h	6;"	c	inherits:Tcpip
+Vrecv	lib/tcpip/server.cc	11;"	f	class:Vrecv
+Vrecv	lib/tcpip/server.h	8;"	c	inherits:Tcpip
 WARNING	lib/util/log.h	30;"	e	enum:Log::LogLevel
 WHEN	middle/tst/catch.hpp	11584;"	d
 WIN32_LEAN_AND_MEAN	middle/tst/catch.hpp	6343;"	d
 WIN32_LEAN_AND_MEAN	middle/tst/catch.hpp	6356;"	d
 Warning	middle/tst/catch.hpp	865;"	e	enum:Catch::ResultWas::OfType
-WebSite	lib/tcpip/website.h	7;"	c
+WebSite	lib/tcpip/website.h	9;"	c
 X25519	middle/src/diffie.cc	31;"	f	class:X25519
 X25519	middle/src/diffie.h	13;"	s
 Yes	middle/tst/catch.hpp	390;"	e	enum:Catch::CaseSensitive::Choice
@@ -627,25 +630,30 @@ _BSD_SOURCE	middle/tst/catch.hpp	159;"	d
 a	middle/src/diffie.cc	29;"	m	class:X25519	file:
 a	middle/src/diffie.h	22;"	m	struct:X25519
 a	middle/src/diffie.h	34;"	m	class:EC_Field
+a	middle/src/psk.h	13;"	m	union:MClient::__anon1
 aad	middle/pybind/wrapper.cc	42;"	f	class:PyAES
 aad	middle/src/aes.cc	259;"	f	class:GCM
 aad	middle/src/naes.cc	86;"	f	class:NettleAes128
 aad_	middle/src/aes.h	131;"	m	class:GCM
 aad_	middle/src/naes.h	65;"	m	class:NettleAes128
-accumulate	middle/src/psk.cc	8;"	f	class:MClient
-accumulate	middle/src/tls.cc	160;"	f	class:TLS
+accumulate	middle/src/psk.cc	15;"	f	class:MClient
+accumulate	middle/src/tls.cc	161;"	f	class:TLS
 accumulated_handshakes_	middle/src/tls.h	44;"	m	class:TLS
 addRef	middle/tst/catch.hpp	617;"	f	struct:Catch::SharedImpl
+add_header	lib/tcpip/website.cc	57;"	f	class:WebSite
 add_round_key	middle/src/aes.cc	137;"	f	class:AES
+added_header_	lib/tcpip/website.cc	14;"	m	class:WebSite	file:
+added_header_	lib/tcpip/website.h	29;"	m	class:WebSite
 aes_	middle/src/naes.h	47;"	m	class:nAES
 aes_	middle/src/tls.h	30;"	m	class:TLS
-alert	middle/src/tls.cc	454;"	f	class:TLS
-alert	middle/src/tls.cc	467;"	f	class:TLS
-allow	dndd/src/dndd.h	22;"	m	class:DnDD
+alert	middle/src/tls.cc	455;"	f	class:TLS
+alert	middle/src/tls.cc	468;"	f	class:TLS
+all_the_database_job	adnet/src/ad.cc	59;"	f	class:Ad
+allow	dndd/src/dndd.h	18;"	m	class:DnDD
 allowlevel	dndd/src/dnddsub.cc	16;"	f	class:DnDD
 alwaysFalse	middle/tst/catch.hpp	478;"	f	namespace:Catch
 alwaysTrue	middle/tst/catch.hpp	477;"	f	namespace:Catch
-append	lib/tcpip/website.cc	42;"	f	class:WebSite
+append	lib/tcpip/website.cc	43;"	f	class:WebSite
 ar	biz/src/combi.h	23;"	m	class:Combination
 ar_	middle/src/tvec.h	37;"	m	class:ThreadSafeVector
 arcSafeRelease	middle/tst/catch.hpp	1451;"	f
@@ -656,6 +664,7 @@ b2c	biz/src/base64.cc	5;"	f	file:
 b2c	middle/src/base64.cc	5;"	f	file:
 back_img_	biz/src/biz.h	12;"	m	class:Biz
 background	biz/src/cvmatrix.cc	216;"	f	class:CVMat
+banner	adnet/src/adnet.cc	28;"	f	class:Adnet
 base64_decode	biz/src/base64.cc	36;"	f
 base64_decode	middle/src/base64.cc	36;"	f
 base64_encode	biz/src/base64.cc	21;"	f
@@ -668,40 +677,48 @@ block_size	biz/src/sha256.h	12;"	m	class:SHA2
 block_size	middle/src/sha1.h	9;"	m	class:SHA1
 block_size	middle/src/sha256.h	9;"	m	class:SHA2
 bnd2mpz	middle/src/mpz.h	19;"	f
-book	dndd/src/dndd.h	20;"	m	class:DnDD
-buffer	lib/tcpip/tcpip.h	21;"	m	class:Tcpip
+book	dndd/src/dndd.h	16;"	m	class:DnDD
+buffer	lib/tcpip/tcpip.h	22;"	m	class:Tcpip
 c2b	biz/src/base64.cc	13;"	f	file:
 c2b	middle/src/base64.cc	13;"	f	file:
 capturedExpression	middle/tst/catch.hpp	949;"	m	struct:Catch::AssertionInfo
-carousel	lib/tcpip/bootstrap.cc	10;"	f	class:BootStrapSite
-certificate13	middle/src/tls13.cc	34;"	v	file:
-certificate_	middle/src/tls.cc	49;"	m	class:TLS	file:
+carousel	lib/tcpip/website.cc	163;"	f
+category	adnet/src/adnet.cc	158;"	v	file:
+certificate13_	middle/src/tls13.cc	35;"	m	class:TLS13	file:
+certificate13_	middle/src/tls13.h	37;"	m	class:TLS13
+certificate_	middle/src/tls.cc	50;"	m	class:TLS	file:
 certificate_	middle/src/tls.h	45;"	m	class:TLS
-certificate_verify	middle/src/tls13.cc	452;"	f	class:TLS13
-change_cipher_spec	middle/src/tls.cc	328;"	f	class:TLS
+certificate_verify	middle/src/tls13.cc	457;"	f	class:TLS13
+change_cipher_spec	middle/src/tls.cc	329;"	f	class:TLS
+change_id_	adnet/src/adnet.h	15;"	m	class:Adnet
+check_token	adnet/src/ad.cc	101;"	f	class:Ad
 cipher_	middle/src/aes.h	109;"	m	class:CipherMode
 circles_	biz/src/cvmatrix.h	75;"	m	class:CVMat
 clear	biz/src/cvmatrix.cc	477;"	f	class:CVMat
-client_addr	lib/tcpip/tcpip.h	20;"	m	class:Tcpip	typeref:struct:Tcpip::
-client_ext	middle/src/tls13.cc	183;"	f	class:TLS13
-client_ext	middle/src/tls13.cc	42;"	f	class:TLS13
-client_fd	lib/tcpip/tcpip.h	19;"	m	class:Tcpip
-client_hello	middle/src/tls.cc	166;"	f	class:TLS
-client_hello	middle/src/tls13.cc	395;"	f	class:TLS13
-client_key_exchange	middle/src/tls.cc	340;"	f	class:TLS
+click_ad	adnet/src/ad.cc	51;"	f	class:Ad
+click_increase_	adnet/src/ad.h	25;"	m	class:Ad
+click_induce_	adnet/src/ad.h	25;"	m	class:Ad
+client_addr	lib/tcpip/tcpip.h	21;"	m	class:Tcpip	typeref:struct:Tcpip::
+client_ext	middle/src/tls13.cc	184;"	f	class:TLS13
+client_ext	middle/src/tls13.cc	43;"	f	class:TLS13
+client_fd	lib/tcpip/tcpip.h	20;"	m	class:Tcpip
+client_hello	middle/src/tls.cc	167;"	f	class:TLS
+client_hello	middle/src/tls13.cc	400;"	f	class:TLS13
+client_key_exchange	middle/src/tls.cc	341;"	f	class:TLS
 client_random_	middle/src/tls.h	42;"	m	class:TLS
-close	dndd/src/dndd.cc	56;"	f	class:DnDD
+close	dndd/src/dndd.cc	52;"	f	class:DnDD
 cls	middle/src/der.h	48;"	m	struct:ber::Type
 column_count_	lib/database/mysqldata.h	52;"	m	class:SqlQuery
 columns	lib/database/mysqldata.h	51;"	m	class:SqlQuery
-comment	dndd/src/dndd.cc	104;"	f	class:DnDD
+comment	dndd/src/dndd.cc	100;"	f	class:DnDD
 con	lib/database/mysqlquery.h	11;"	m	class:Mysqlquery
 connect	lib/database/mysqlquery.cc	31;"	f	class:Mysqlquery
-connect	lib/database/mysqlquery.cc	51;"	f	class:Mysqlquery
-connected	middle/src/https.cc	58;"	f	class:Middle
-content_	lib/tcpip/website.h	18;"	m	class:WebSite
-content_type	middle/src/tls.cc	135;"	m	struct:TLS_header	file:
-content_type	middle/src/tls13.cc	583;"	m	struct:TLS_header	file:
+connect	lib/database/mysqlquery.cc	56;"	f	class:Mysqlquery
+connected	middle/src/https.cc	71;"	f	class:Middle
+content_	lib/tcpip/website.h	21;"	m	class:WebSite
+content_	sample/src/base64.cpp	6;"	v
+content_type	middle/src/tls.cc	136;"	m	struct:TLS_header	file:
+content_type	middle/src/tls13.cc	589;"	m	struct:TLS_header	file:
 contours_	biz/src/cvmatrix.h	77;"	m	class:CVMat
 convert	middle/tst/catch.hpp	1572;"	f	struct:Catch::Detail::EnumStringMaker
 convert	middle/tst/catch.hpp	1578;"	f	struct:Catch::Detail::EnumStringMaker
@@ -718,13 +735,15 @@ crop	biz/src/opencv.cc	117;"	f	class:Biz
 ctx_	middle/src/naes.h	64;"	m	class:NettleAes128
 d	middle/src/rsa.h	10;"	m	class:RSA
 d_	middle/src/ecdsa.h	15;"	m	class:ECDSA
-db	dndd/src/dndd.h	20;"	m	class:DnDD
-debug_	middle/src/https.h	15;"	m	class:Middle
+db	dndd/src/dndd.h	16;"	m	class:DnDD
+db_ip	adnet/src/adnet.cc	23;"	f	class:Adnet
+db_ip_	adnet/src/adnet.h	15;"	m	class:Adnet
+debug_	middle/src/https.h	28;"	m	class:Middle
 dec_seq_num_	middle/src/tls.h	31;"	m	class:TLS
 decode	middle/src/rsa.cc	27;"	f	class:RSA
-decode	middle/src/tls.cc	368;"	f	class:TLS
-decode	middle/src/tls13.cc	596;"	f	class:TLS13
-decode13	middle/src/tls13.cc	625;"	f	class:TLS13
+decode	middle/src/tls.cc	369;"	f	class:TLS
+decode	middle/src/tls13.cc	602;"	f	class:TLS13
+decode13	middle/src/tls13.cc	631;"	f	class:TLS13
 decomposedExpression	middle/tst/catch.hpp	985;"	m	struct:Catch::AssertionResultData
 decrypt	middle/pybind/wrapper.cc	58;"	f	class:PyAES
 decrypt	middle/src/aes.cc	163;"	f	class:CBC
@@ -735,8 +754,8 @@ decrypt	middle/src/naes.h	35;"	f	class:nAES
 deleteAll	middle/tst/catch.hpp	422;"	f	namespace:Catch
 deleteAllValues	middle/tst/catch.hpp	429;"	f	namespace:Catch
 der2json	middle/src/der.cc	90;"	f
-derive_from_master	middle/src/tls.cc	114;"	f	class:TLS
-derive_keys	middle/src/tls.cc	84;"	f	class:TLS
+derive_from_master	middle/src/tls.cc	115;"	f	class:TLS
+derive_keys	middle/src/tls.cc	85;"	f	class:TLS
 derive_secret	middle/pybind/wrapper.cc	89;"	f	class:PyHKDF
 derive_secret	middle/src/hkdf.h	17;"	f	struct:HKDF
 dertojson	middle/pybind/wrapper.cc	20;"	f
@@ -744,7 +763,7 @@ description	middle/tst/catch.hpp	729;"	m	struct:Catch::NameAndDesc
 descriptor_	biz/src/cvmatrix.h	72;"	m	class:CVMat
 deserialize	lib/database/util.cc	14;"	f
 destroy	lib/tcpip/shared_files.cc	39;"	f	class:SharedMem
-destroy_shared_mem	lib/tcpip/website.cc	15;"	f
+destroy_shared_mem	lib/tcpip/website.cc	16;"	f
 detect_circle	biz/src/cvmatrix.cc	430;"	f	class:CVMat
 detect_contours	biz/src/cvmatrix.cc	62;"	f	class:CVMat
 detect_face	biz/src/cvmatrix.cc	224;"	f	class:CVMat
@@ -762,15 +781,17 @@ draw_detected_line	biz/src/cvmatrix.cc	446;"	f	class:CVMat
 draw_feature	biz/src/cvmatrix.cc	187;"	f	class:CVMat
 driver	lib/database/mysqlquery.h	10;"	m	class:Mysqlquery
 e	middle/src/rsa.h	10;"	m	class:RSA
-ecdsa_certificate_	middle/src/tls13.h	39;"	m	class:TLS13
-echo_id_	middle/src/tls13.h	38;"	m	class:TLS13
+ecdsa_certificate_	middle/src/tls13.h	42;"	m	class:TLS13
+echo_id_	middle/src/tls13.h	41;"	m	class:TLS13
 edge	biz/src/cvmatrix.cc	441;"	f	class:CVMat
-edit	dndd/src/dndd.cc	117;"	f	class:DnDD
+edit	dndd/src/dndd.cc	113;"	f	class:DnDD
+email_	adnet/src/adnet.h	15;"	m	class:Adnet
+email_check	adnet/src/adnet.cc	142;"	f	class:Adnet
 enc_seq_num_	middle/src/tls.h	31;"	m	class:TLS
 encode	middle/src/rsa.cc	22;"	f	class:RSA
-encode	middle/src/tls.cc	399;"	f	class:TLS
-encode	middle/src/tls13.cc	590;"	f	class:TLS13
-encode13	middle/src/tls13.cc	602;"	f	class:TLS13
+encode	middle/src/tls.cc	400;"	f	class:TLS
+encode	middle/src/tls13.cc	596;"	f	class:TLS13
+encode13	middle/src/tls13.cc	608;"	f	class:TLS13
 encrypt	lib/database/mysqldata.cc	89;"	f	class:SqlQuery
 encrypt	middle/pybind/wrapper.cc	52;"	f	class:PyAES
 encrypt	middle/src/aes.cc	152;"	f	class:CBC
@@ -778,11 +799,11 @@ encrypt	middle/src/aes.cc	204;"	f	class:GCM
 encrypt	middle/src/aes.cc	44;"	f	class:AES
 encrypt	middle/src/naes.cc	60;"	f	class:NettleAes128
 encrypt	middle/src/naes.h	23;"	f	class:nAES
-encrypted_extension	middle/src/tls13.cc	252;"	f	class:TLS13
+encrypted_extension	middle/src/tls13.cc	253;"	f	class:TLS13
 end	lib/util/option.h	34;"	f	class:FileExpansion
-end_string	lib/tcpip/server.h	51;"	m	class:Server
+end_string	lib/tcpip/server.h	78;"	m	class:Server
 erase	middle/src/tvec.h	24;"	f	class:ThreadSafeVector
-escape_string	dndd/src/dndd.cc	134;"	f	file:
+escape_string	dndd/src/dndd.cc	130;"	f	file:
 evaluate	middle/tst/catch.hpp	1333;"	f	struct:Catch::Internal::Evaluator
 evaluate	middle/tst/catch.hpp	1339;"	f	struct:Catch::Internal::Evaluator
 evaluate	middle/tst/catch.hpp	1345;"	f	struct:Catch::Internal::Evaluator
@@ -808,22 +829,23 @@ feature	biz/src/cvmatrix.cc	178;"	f	class:CVMat
 fetch	lib/database/mysqldata.cc	25;"	f	class:SqlQuery
 field	dndd/src/dnddsub.cc	34;"	f	class:DnDD
 file	middle/tst/catch.hpp	469;"	m	struct:Catch::SourceLineInfo
-fileNhtml_	lib/tcpip/website.h	19;"	m	class:WebSite
+fileNhtml_	lib/tcpip/website.h	22;"	m	class:WebSite
 fileNoffset_	lib/tcpip/shared_files.h	14;"	m	class:SharedMem
 filter	biz/src/cvmatrix.cc	451;"	f	class:CVMat
 find_continuous_digits	biz/src/opencv.cc	22;"	f	file:
 find_if	middle/src/tvec.h	19;"	f	class:ThreadSafeVector
-finished	middle/src/tls.cc	431;"	f	class:TLS
-finished	middle/src/tls13.cc	287;"	f	class:TLS13
-finished_key_	middle/src/tls13.h	43;"	m	class:TLS13
-follow	dndd/src/dndd.cc	76;"	f	class:DnDD
+finished	middle/src/tls.cc	432;"	f	class:TLS
+finished	middle/src/tls13.cc	288;"	f	class:TLS13
+finished_key_	middle/src/tls13.h	46;"	m	class:TLS13
+follow	dndd/src/dndd.cc	72;"	f	class:DnDD
+forgot	adnet/src/adnet.cc	119;"	f	class:Adnet
 fourier	biz/src/cvmatrix.cc	268;"	f	class:CVMat
 front_img_	biz/src/biz.h	12;"	m	class:Biz
 g	middle/src/diffie.h	9;"	m	struct:DiffieHellman
-garbage_collect	middle/src/psk.cc	32;"	f	class:PSK
+garbage_collect	middle/src/psk.cc	42;"	f	class:PSK
 garbage_int_to_execute_init	middle/src/aes.cc	27;"	v	file:
 generate_auth	middle/src/aes.cc	211;"	f	class:GCM
-generate_signature	middle/src/tls.cc	61;"	f	class:TLS
+generate_signature	middle/src/tls.cc	62;"	f	class:TLS
 get	lib/util/option.h	13;"	f	class:CMDoption
 get	middle/tst/catch.hpp	596;"	f	class:Catch::Ptr
 getName	middle/tst/catch.hpp	1312;"	f	struct:Catch::Internal::OperatorTraits
@@ -834,42 +856,43 @@ getName	middle/tst/catch.hpp	1316;"	f	struct:Catch::Internal::OperatorTraits
 getName	middle/tst/catch.hpp	1317;"	f	struct:Catch::Internal::OperatorTraits
 getName	middle/tst/catch.hpp	1318;"	f	struct:Catch::Internal::OperatorTraits
 get_addr	biz/src/opencv.cc	68;"	f	file:
-get_addr	lib/tcpip/server.cc	69;"	f	class:Client
+get_addr	lib/tcpip/server.cc	68;"	f	class:Client
 get_b	biz/src/opencv.cc	135;"	f	file:
 get_businesscard	biz/src/cvmatrix.cc	104;"	f	class:CVMat
 get_certificate_core	middle/src/cert.cc	8;"	f
-get_content_type	middle/src/tls.cc	54;"	f	class:TLS
-get_full_length	lib/tcpip/server.cc	31;"	f	class:Vrecv
-get_full_length	lib/tcpip/server.cc	39;"	f	class:Http
-get_full_length	lib/tcpip/server.cc	50;"	f	class:TlsLayer
+get_content_type	middle/src/tls.cc	55;"	f	class:TLS
+get_full_length	lib/tcpip/server.cc	30;"	f	class:Vrecv
+get_full_length	lib/tcpip/server.cc	38;"	f	class:Http
+get_full_length	lib/tcpip/server.cc	49;"	f	class:TlsLayer
 get_full_length	middle/pybind/wrapper.cc	175;"	f	class:PyTLSClient
-get_full_length	middle/src/https.cc	18;"	f	class:Middle
-get_hostncookie	middle/src/https.cc	48;"	f	file:
+get_full_length	middle/src/https.cc	30;"	f	class:Middle
+get_hostncookie	middle/src/https.cc	61;"	f	file:
 get_instance	lib/util/log.cc	9;"	f	class:Log
-get_length	middle/src/tls.cc	139;"	f	struct:TLS_header
-get_length	middle/src/tls.cc	150;"	f	struct:Handshake_header
-get_length	middle/src/tls13.cc	587;"	f	struct:TLS_header
+get_length	middle/src/tls.cc	140;"	f	struct:TLS_header
+get_length	middle/src/tls.cc	151;"	f	struct:Handshake_header
+get_length	middle/src/tls13.cc	593;"	f	struct:TLS_header
 get_n_byte	middle/src/prf.h	19;"	f	class:PRF
 get_n_byte2	middle/src/prf.h	36;"	f	class:PRF
 get_name	biz/src/opencv.cc	77;"	f	file:
 get_points	biz/src/cvmatrix.cc	79;"	f	class:CVMat
+get_position	adnet/src/ad.cc	19;"	f
 get_rect	biz/src/cvmatrix.cc	390;"	f	class:CVMat
 get_tel	biz/src/opencv.cc	40;"	f	file:
 get_with_wordvec	biz/src/opencv.cc	106;"	f	file:
 getdir	lib/database/ls.cc	6;"	f
 gf_mul	middle/src/aes.cc	190;"	f
-google	dndd/src/dndd.cc	39;"	f	class:DnDD
+google	dndd/src/dndd.cc	35;"	f	class:DnDD
 google_oauth	biz/src/opencv.cc	256;"	f	class:Biz
 gray	biz/src/cvmatrix.cc	466;"	f	class:CVMat
-group	dndd/src/dndd.h	20;"	m	class:DnDD
+group	dndd/src/dndd.h	16;"	m	class:DnDD
 group_by	lib/database/mysqldata.cc	124;"	f	class:SqlQuery
-group_desc	dndd/src/dndd.h	20;"	m	class:DnDD
+group_desc	dndd/src/dndd.h	16;"	m	class:DnDD
 h	middle/src/sha1.h	27;"	m	class:SHA1
 h_stored_value	middle/src/sha1.h	28;"	m	class:SHA1
 haar_cascade	biz/src/cvmatrix.cc	14;"	v	file:
 haar_dir	biz/src/cvmatrix.cc	12;"	v	file:
-handshake	middle/src/tls13.cc	484;"	f	class:TLS13
-handshake_type	middle/src/tls.cc	143;"	m	struct:Handshake_header	file:
+handshake	middle/src/tls13.cc	489;"	f	class:TLS13
+handshake_type	middle/src/tls.cc	144;"	m	struct:Handshake_header	file:
 harris_	biz/src/cvmatrix.h	72;"	m	class:CVMat
 hash	biz/src/sha256.h	18;"	f	class:SHA2
 hash	middle/pybind/wrapper.cc	79;"	f	class:PyHKDF
@@ -879,23 +902,28 @@ hash	middle/pybind/wrapper.h	47;"	f	struct:PyHMAC
 hash	middle/src/hmac.h	24;"	f	class:HMAC
 hash	middle/src/sha1.h	12;"	f	class:SHA1
 hash	middle/src/sha256.h	15;"	f	class:SHA2
-header_	lib/tcpip/website.h	22;"	m	class:WebSite
+header_	lib/tcpip/website.h	27;"	m	class:WebSite
 hexprint	middle/src/mpz.h	26;"	f
 hierachy_	biz/src/cvmatrix.h	74;"	m	class:CVMat
 histo	biz/src/cvmatrix.cc	245;"	f	class:CVMat
-hkdf_	middle/src/tls13.h	28;"	m	class:TLS13
+hit	middle/src/https.h	11;"	m	struct:Host
+hkdf_	middle/src/tls13.h	30;"	m	class:TLS13
 hmac_	middle/src/prf.h	52;"	m	class:PRF
-hostNport_	middle/src/https.h	14;"	m	class:Middle
+host	middle/src/https.h	7;"	m	struct:Host
+hostNport_	middle/src/https.h	27;"	m	class:Middle
 i_key_pad_	middle/src/hmac.h	37;"	m	class:HMAC
-id	dndd/src/dndd.h	20;"	m	class:DnDD
+id	dndd/src/dndd.h	16;"	m	class:DnDD
+id_	adnet/src/adnet.h	15;"	m	class:Adnet
 id_	biz/src/biz.h	12;"	m	class:Biz
-iframe_content_	dndd/src/dndd.h	23;"	m	class:DnDD
+id_hit	adnet/src/adnet.cc	102;"	f	class:Adnet
+iframe_content_	dndd/src/dndd.h	19;"	m	class:DnDD
 inc_ar	biz/src/combi.cc	120;"	f	class:nPr
+index	adnet/src/adnet.cc	85;"	f	class:Adnet
 index	biz/src/opencv.cc	266;"	f	class:Biz
-index	dndd/src/dndd.cc	140;"	f	class:DnDD
-init	lib/tcpip/website.cc	22;"	f	class:WebSite
-init_certificate	middle/src/tls.cc	16;"	f	class:TLS
-init_certificate	middle/src/tls13.cc	16;"	f	file:
+index	dndd/src/dndd.cc	136;"	f	class:DnDD
+init	lib/tcpip/website.cc	23;"	f	class:WebSite
+init_certificate	middle/src/tls.cc	15;"	f	class:TLS
+init_certificate	middle/src/tls13.cc	16;"	f	class:TLS13
 init_mod	middle/src/diffie.cc	20;"	f	file:
 initialize_precomputed	middle/src/aes.cc	17;"	f
 insert	lib/database/mysqldata.cc	38;"	f	class:SqlQuery
@@ -905,6 +933,7 @@ insert	lib/database/mysqldata.h	24;"	f	class:SqlQuery
 insert	lib/database/mysqldata.h	30;"	f	class:SqlQuery
 insert	middle/src/tvec.h	51;"	f	class:ThreadSafeMap
 insert_bcard	biz/src/opencv.cc	229;"	f	class:Biz
+insert_increment	adnet/src/ad.cc	73;"	f	class:Ad
 insert_nth_row	lib/database/mysqldata.cc	72;"	f	class:SqlQuery
 intersect	biz/src/cvmatrix.cc	357;"	f	file:
 intersect	biz/src/cvmatrix.cc	370;"	f	file:
@@ -913,6 +942,7 @@ inv_sbox	middle/src/aes.h	67;"	m	class:AES
 inv_shift_row	middle/src/aes.cc	90;"	f	class:AES
 inv_substitute	middle/src/aes.cc	77;"	f	class:AES
 invoke	middle/tst/catch.hpp	710;"	f	class:Catch::MethodTestCase
+ip	middle/src/https.h	8;"	m	struct:Host
 isBinaryExpression	middle/tst/catch.hpp	919;"	f	struct:Catch::DecomposedExpression
 isFalseTest	middle/tst/catch.hpp	902;"	f	namespace:Catch
 isJustInfo	middle/tst/catch.hpp	884;"	f	namespace:Catch
@@ -921,8 +951,8 @@ isTrue	middle/tst/catch.hpp	476;"	f	namespace:Catch
 is_int	lib/database/mysqldata.cc	48;"	f	class:SqlQuery
 is_real	lib/database/mysqldata.cc	53;"	f	class:SqlQuery
 is_similar_angle	biz/src/cvmatrix.cc	385;"	f
-is_tls13	middle/src/tls13.cc	478;"	f	class:TLS13
-issue_time	middle/src/psk.h	18;"	m	struct:SClient
+is_tls13	middle/src/tls13.cc	483;"	f	class:TLS13
+issue_time	middle/src/psk.h	23;"	m	struct:SClient
 iv	middle/pybind/wrapper.cc	35;"	f	class:PyAES
 iv	middle/src/aes.cc	147;"	f	class:CBC
 iv	middle/src/aes.cc	173;"	f	class:GCM
@@ -934,6 +964,7 @@ iv	middle/src/naes.cc	55;"	f	class:NettleAes128
 iv_	middle/src/aes.h	110;"	m	class:CipherMode
 iv_	middle/src/naes.h	48;"	m	class:nAES
 iv_	middle/src/naes.h	66;"	m	class:NettleAes128
+keep_start	lib/tcpip/server.h	52;"	f	class:Server
 key	middle/pybind/wrapper.cc	28;"	f	class:PyAES
 key	middle/pybind/wrapper.h	44;"	f	struct:PyHMAC
 key	middle/src/aes.cc	142;"	f	class:CipherMode
@@ -943,22 +974,24 @@ key	middle/src/naes.cc	11;"	f	class:nAES
 key	middle/src/naes.cc	17;"	f	class:nAES
 key	middle/src/naes.cc	23;"	f	class:nAES
 key	middle/src/naes.cc	50;"	f	class:NettleAes128
+key_	adnet/src/adnet.h	16;"	m	class:Adnet
 key_	middle/src/naes.h	48;"	m	class:nAES
-key_share	middle/src/tls13.cc	143;"	f	class:TLS13
+key_share	middle/src/tls13.cc	144;"	f	class:TLS13
 keypoints_	biz/src/cvmatrix.h	80;"	m	class:CVMat
-kill_zombie	lib/tcpip/server.cc	75;"	f	file:
+kill_zombie	lib/tcpip/server.cc	74;"	f	file:
 label	middle/src/prf.h	11;"	f	class:PRF
 label_	middle/src/prf.h	53;"	m	class:PRF
-language	dndd/src/dndd.h	20;"	m	class:DnDD
-language	ez/src/ez.cpp	29;"	m	class:MySite	file:
+lang_	adnet/src/adnet.h	16;"	m	class:Adnet
+langjs	adnet/src/adnet.h	19;"	m	class:Adnet
+language	ez/src/ez.cpp	23;"	m	class:MySite	file:
 lbp_cascade	biz/src/cvmatrix.cc	38;"	v	file:
 lbp_dir	biz/src/cvmatrix.cc	13;"	v	file:
 left_rotate	middle/src/sha1.cc	6;"	f	file:
 lenAC_	middle/src/aes.h	132;"	m	class:GCM
-length	middle/src/tls.cc	137;"	m	struct:TLS_header	file:
-length	middle/src/tls.cc	144;"	m	struct:Handshake_header	file:
-length	middle/src/tls13.cc	585;"	m	struct:TLS_header	file:
-level	dndd/src/dndd.h	20;"	m	class:DnDD
+length	middle/src/tls.cc	138;"	m	struct:TLS_header	file:
+length	middle/src/tls.cc	145;"	m	struct:Handshake_header	file:
+length	middle/src/tls13.cc	591;"	m	struct:TLS_header	file:
+level	dndd/src/dndd.h	16;"	m	class:DnDD
 level2txt	dndd/src/page.cc	7;"	f	file:
 line	middle/tst/catch.hpp	470;"	m	struct:Catch::SourceLineInfo
 lineInfo	middle/tst/catch.hpp	948;"	m	struct:Catch::AssertionInfo
@@ -969,7 +1002,7 @@ log_file_	lib/util/log.h	35;"	m	class:Log
 log_level	lib/util/log.cc	29;"	f	class:Log
 log_level_	lib/util/log.h	30;"	m	class:Log	typeref:enum:Log::LogLevel
 log_on_	lib/util/log.h	38;"	m	class:Log
-logo	dndd/src/dndd.h	20;"	m	class:DnDD
+logo	dndd/src/dndd.h	16;"	m	class:DnDD
 m_assertionInfo	middle/tst/catch.hpp	1257;"	m	class:Catch::ResultBuilder
 m_cachedToString	middle/tst/catch.hpp	1049;"	m	class:Catch::Matchers::Impl::MatcherUntypedBase
 m_count	middle/tst/catch.hpp	451;"	m	struct:Catch::pluralise
@@ -991,13 +1024,20 @@ m_underlyingMatcher	middle/tst/catch.hpp	1143;"	m	struct:Catch::Matchers::Impl::
 m_usedStream	middle/tst/catch.hpp	1279;"	m	class:Catch::ResultBuilder
 m_what	middle/tst/catch.hpp	515;"	m	class:Catch::NotImplementedException
 macroName	middle/tst/catch.hpp	947;"	m	struct:Catch::AssertionInfo
+mailx	adnet/src/adnet.cc	111;"	f	file:
+mailx	adnet/src/misc.cc	5;"	f
+main	adnet/src/ad.cpp	9;"	f
+main	adnet/src/adnet.cpp	6;"	f
+main	adnet/src/misc.cpp	6;"	f
 main	biz/src/biz.cpp	7;"	f
-main	dndd/src/dndd.cpp	6;"	f
-main	ez/src/ez.cpp	32;"	f
+main	dndd/src/dndd.cpp	7;"	f
+main	ez/src/ez.cpp	26;"	f
 main	lib/database/insert.cpp	7;"	f
 main	middle/src/middle.cpp	7;"	f
+main	sample/src/base64.cpp	14;"	f
+main	sample/src/jsoncpp.cpp	5;"	f
 main	sample/src/site.cpp	14;"	f
-main	suwon/src/suwon.cpp	24;"	f
+main	suwon/src/suwon.cpp	29;"	f
 makeSafe	middle/tst/catch.hpp	414;"	f	class:Catch::SafeBool
 manipulators	lib/util/log.cc	18;"	f	class:Log
 master_secret_	middle/src/tls.h	43;"	m	class:TLS
@@ -1007,7 +1047,7 @@ median	biz/src/cvmatrix.cc	461;"	f	class:CVMat
 message	middle/tst/catch.hpp	987;"	m	struct:Catch::AssertionResultData
 mgf1	middle/src/pss.cc	10;"	f
 mix_column	middle/src/aes.cc	98;"	f	class:AES
-mn	dndd/src/dndd.cc	172;"	f	class:DnDD
+mn	dndd/src/dndd.cc	168;"	f	class:DnDD
 mod	middle/src/diffie.cc	28;"	m	class:X25519	file:
 mod	middle/src/diffie.h	22;"	m	struct:X25519
 mod	middle/src/diffie.h	34;"	m	class:EC_Field
@@ -1034,36 +1074,37 @@ nPr	biz/src/combi.h	51;"	c	inherits:Combination
 nTr	biz/src/combi.cc	45;"	f	class:nTr
 nTr	biz/src/combi.h	35;"	c	inherits:Combination
 n_	middle/src/ecdsa.h	12;"	m	class:ECDSA
-name	dndd/src/dndd.h	20;"	m	class:DnDD
+name	dndd/src/dndd.h	16;"	m	class:DnDD
 name	lib/database/mysqldata.h	46;"	m	struct:SqlQuery::Column
 name	middle/tst/catch.hpp	728;"	m	struct:Catch::NameAndDesc
-nameNvalue_	lib/tcpip/website.h	17;"	m	class:WebSite
+nameNvalue_	lib/tcpip/website.h	20;"	m	class:WebSite
 name_	lib/tcpip/shared_files.h	19;"	m	class:SharedMem
 namecard_	biz/src/biz.h	12;"	m	class:Biz
 negate	middle/tst/catch.hpp	961;"	f	struct:Catch::AssertionResultData
 negated	middle/tst/catch.hpp	989;"	m	struct:Catch::AssertionResultData
-new_book	dndd/src/dndd.cc	111;"	f	class:DnDD
-new_session	middle/src/tls13.cc	308;"	f	class:TLS13
-new_session_ticket	middle/src/tls13.cc	319;"	f	class:TLS13
-new_session_ticket	middle/src/tls13.cc	348;"	f	class:TLS13
+new_book	dndd/src/dndd.cc	107;"	f	class:DnDD
+new_session	middle/src/tls13.cc	309;"	f	class:TLS13
+new_session_ticket	middle/src/tls13.cc	324;"	f	class:TLS13
+new_session_ticket	middle/src/tls13.cc	353;"	f	class:TLS13
+new_token	adnet/src/ad.cc	91;"	f	class:Ad
 next	biz/src/combi.cc	104;"	f	class:nPr
 next	biz/src/combi.cc	51;"	f	class:nCr
 next	biz/src/combi.cc	60;"	f	class:nTr
 next	biz/src/combi.cc	72;"	f	class:nHr
 nextprime	middle/src/mpz.cc	6;"	f
 noise	biz/src/cvmatrix.cc	316;"	f	class:CVMat
-nokeep_start	lib/tcpip/server.cc	130;"	f	class:Server
+nokeep_start	lib/tcpip/server.cc	129;"	f	class:Server
 normalize	biz/src/cvmatrix.cc	336;"	f	class:CVMat
 now	lib/database/mysqldata.cc	82;"	f	class:SqlQuery
 o_key_pad_	middle/src/hmac.h	37;"	m	class:HMAC
-ok_	lib/tcpip/server.h	53;"	m	class:Server
+ok_	lib/tcpip/server.h	80;"	m	class:Server
 on	biz/src/combi.h	61;"	m	class:nPr
 opencv	biz/src/opencv.cc	147;"	f	class:Biz
 operator !	middle/tst/catch.hpp	1155;"	f	class:Catch::Matchers::Impl::MatcherBase
 operator !	middle/tst/catch.hpp	599;"	f	class:Catch::Ptr
 operator &&	middle/tst/catch.hpp	1093;"	f	struct:Catch::Matchers::Impl::MatchAllOf
 operator &&	middle/tst/catch.hpp	1147;"	f	class:Catch::Matchers::Impl::MatcherBase
-operator ()	lib/tcpip/website.cc	56;"	f	class:WebSite
+operator ()	lib/tcpip/website.cc	62;"	f	class:WebSite
 operator *	middle/src/diffie.cc	139;"	f	class:EC_Point
 operator *	middle/src/diffie.cc	151;"	f
 operator *	middle/src/diffie.cc	61;"	f	class:X25519
@@ -1088,7 +1129,8 @@ operator ==	middle/src/diffie.cc	82;"	f	class:X25519
 operator SafeBool::type	middle/tst/catch.hpp	600;"	f	class:Catch::Ptr
 operator []	biz/src/combi.h	17;"	f	class:Combination
 operator []	lib/tcpip/shared_files.cc	33;"	f	class:SharedMem
-operator []	middle/src/psk.cc	51;"	f	class:PSK
+operator []	middle/src/https.cc	14;"	f	class:HostNPort
+operator []	middle/src/psk.cc	61;"	f	class:PSK
 operator []	middle/src/tvec.h	45;"	f	class:ThreadSafeMap
 operator []	middle/src/tvec.h	8;"	f	class:ThreadSafeVector
 operator cv::Mat	biz/src/cvmatrix.cc	238;"	f	class:CVMat
@@ -1102,12 +1144,13 @@ output_size	biz/src/sha256.h	13;"	m	class:SHA2
 output_size	middle/src/sha1.h	10;"	m	class:SHA1
 output_size	middle/src/sha256.h	10;"	m	class:SHA2
 p	middle/src/rsa.h	12;"	m	class:RSA
-page	dndd/src/dndd.h	20;"	m	class:DnDD
+page	dndd/src/dndd.h	16;"	m	class:DnDD
 param	lib/database/util.cc	47;"	f
 parenthesized	middle/tst/catch.hpp	990;"	m	struct:Catch::AssertionResultData
-parse_multi	lib/tcpip/website.cc	112;"	f	class:WebSite
-parse_one	lib/tcpip/website.cc	90;"	f	class:WebSite
-parse_post	lib/tcpip/website.cc	119;"	f	class:WebSite
+parse_all	lib/tcpip/website.cc	73;"	f	class:WebSite
+parse_multi	lib/tcpip/website.cc	135;"	f	class:WebSite
+parse_one	lib/tcpip/website.cc	113;"	f	class:WebSite
+parse_post	lib/tcpip/website.cc	142;"	f	class:WebSite
 pc	middle/src/der.h	49;"	m	struct:ber::Type
 pem2json	middle/src/cert.cc	23;"	f
 pemtojson	middle/pybind/wrapper.cc	12;"	f
@@ -1117,77 +1160,93 @@ pg	dndd/src/page.cc	20;"	f	class:DnDD
 phi	middle/src/rsa.h	12;"	m	class:RSA
 plog_	lib/util/log.h	41;"	m	class:Log
 pluralise	middle/tst/catch.hpp	446;"	s	namespace:Catch
-point_format	middle/src/tls13.cc	122;"	f	class:TLS13
+point_format	middle/src/tls13.cc	123;"	f	class:TLS13
 polyline	biz/src/cvmatrix.h	28;"	f	class:CVMat
+port	middle/src/https.h	9;"	m	struct:Host
+port	middle/src/psk.h	15;"	m	struct:MClient
 powm	middle/src/mpz.cc	25;"	f
 precomputed	middle/src/aes.cc	26;"	m	class:AES	file:
 precomputed	middle/src/aes.h	30;"	m	class:AES
-premaster_secret_	middle/src/tls13.h	29;"	m	class:TLS13
-prepend	lib/tcpip/website.cc	49;"	f	class:WebSite
+pref	adnet/src/adnet.cc	162;"	f	class:Adnet
+preference	adnet/src/adnet.cc	173;"	f	class:Adnet
+premaster_secret_	middle/src/tls13.h	31;"	m	class:TLS13
+prepend	lib/tcpip/website.cc	50;"	f	class:WebSite
 preprocess	middle/src/sha1.cc	17;"	f	class:SHA1
+prev_token_	adnet/src/ad.h	24;"	m	class:Ad
 print_help	lib/util/option.cc	42;"	f	class:CMDoption
 private	middle/tst/aes.cc	11;"	d	file:
 private	middle/tst/aes.cc	8;"	d	file:
 private	middle/tst/tls.cc	3;"	d	file:
 private	middle/tst/tls.cc	9;"	d	file:
+process	adnet/src/ad.cc	10;"	f	class:Ad
+process	adnet/src/adnet.cc	8;"	f	class:Adnet
+process	adnet/src/misc.cc	13;"	f	class:Misc
 process	biz/src/opencv.cc	10;"	f	class:Biz
-process	dndd/src/dndd.cc	14;"	f	class:DnDD
-process	ez/src/ez.cpp	10;"	f	class:MySite
-process	lib/tcpip/website.h	14;"	f	class:WebSite
+process	dndd/src/dndd.cc	9;"	f	class:DnDD
+process	ez/src/ez.cpp	13;"	f	class:MySite
+process	lib/tcpip/website.h	17;"	f	class:WebSite
 process	sample/src/site.cpp	8;"	f	struct:MyWebsite
-process	suwon/src/suwon.cpp	9;"	f	class:MyWeb
+process	suwon/src/suwon.cpp	12;"	f	class:MyWeb
 process_chunk	middle/src/sha1.cc	26;"	f	class:SHA1
-protect_handshake	middle/src/tls13.cc	267;"	f	class:TLS13
+protect_handshake	middle/src/tls13.cc	268;"	f	class:TLS13
 protected	middle/tst/aes.cc	12;"	d	file:
 protected	middle/tst/aes.cc	9;"	d	file:
 protected	middle/tst/tls.cc	10;"	d	file:
 protected	middle/tst/tls.cc	4;"	d	file:
-prv_	middle/src/tls13.h	38;"	m	class:TLS13
+prv_	middle/src/tls13.h	41;"	m	class:TLS13
 prv_key_	middle/src/tls.h	31;"	m	class:TLS
-psk	middle/src/psk.h	20;"	m	struct:SClient
-psk	middle/src/tls13.cc	157;"	f	class:TLS13
-psk_	middle/src/tls13.h	44;"	m	class:TLS13
+psk	middle/src/psk.h	25;"	m	struct:SClient
+psk	middle/src/tls13.cc	158;"	f	class:TLS13
+psk_	middle/src/tls13.h	47;"	m	class:TLS13
 pss_encode	middle/src/pss.cc	24;"	f
 pss_verify	middle/src/pss.cc	48;"	f
 psstm	lib/database/util.cc	36;"	f
 ptr_	lib/tcpip/shared_files.h	15;"	m	class:SharedMem
 push_back	middle/src/tvec.h	12;"	f	class:ThreadSafeVector
+pwd_	adnet/src/adnet.h	15;"	m	class:Adnet
 q	middle/src/rsa.h	12;"	m	class:RSA
 query	lib/database/mysqldata.cc	14;"	f	class:SqlQuery
 r	biz/src/combi.h	24;"	m	class:Combination
-random	middle/src/tls.cc	155;"	m	struct:Hello_header	file:
+random	middle/src/tls.cc	156;"	m	struct:Hello_header	file:
 random_prime	middle/src/mpz.cc	13;"	f
 rawMemoryToString	middle/tst/catch.hpp	1613;"	f	namespace:Catch::Detail
 rcon	middle/src/aes.h	31;"	m	class:AES
-read_config	middle/src/https.cc	25;"	f	class:Middle
+rd_	adnet/src/ad.h	26;"	m	class:Ad
+read_config	middle/src/https.cc	37;"	f	class:Middle
 read_constructed	middle/src/der.cc	76;"	f	file:
 read_length	middle/src/der.cc	20;"	f	file:
 read_type	middle/src/der.cc	11;"	f	file:
 read_value	middle/src/der.cc	34;"	f	file:
+real_ip	middle/src/psk.h	12;"	m	union:MClient::__anon1
+recommend	adnet/src/adnet.cc	152;"	f	class:Adnet
+reconnect	lib/database/mysqlquery.cc	51;"	f	class:Mysqlquery
 reconstructExpression	middle/tst/catch.hpp	970;"	f	class:Catch::AssertionResultData::std
 reconstructedExpression	middle/tst/catch.hpp	986;"	m	struct:Catch::AssertionResultData
-recv	lib/tcpip/server.cc	16;"	f	class:Vrecv
+recv	lib/tcpip/server.cc	15;"	f	class:Vrecv
 recv	lib/tcpip/tcpip.cc	37;"	f	class:Tcpip
 recv	middle/pybind/wrapper.cc	167;"	f	class:PyClient
 release	middle/tst/catch.hpp	620;"	f	struct:Catch::SharedImpl
-remove	middle/src/psk.cc	44;"	f	class:PSK
+remove	middle/src/psk.cc	54;"	f	class:PSK
 removeConst	middle/tst/catch.hpp	1321;"	f	namespace:Catch::Internal
 removeConst	middle/tst/catch.hpp	1323;"	f	namespace:Catch::Internal
 remove_colon	middle/src/cert.cc	30;"	f
 remove_if	middle/src/tvec.h	29;"	f	class:ThreadSafeVector
-requested_document_	lib/tcpip/website.h	18;"	m	class:WebSite
+req_header_	lib/tcpip/website.h	20;"	m	class:WebSite
+request_ad	adnet/src/ad.cc	30;"	f	class:Ad
+requested_document_	lib/tcpip/website.h	21;"	m	class:WebSite
 res	lib/database/mysqlquery.h	15;"	m	class:Mysqlquery
 reset	middle/tst/catch.hpp	580;"	f	class:Catch::Ptr
 restore	biz/src/cvmatrix.cc	341;"	f	class:CVMat
-result	dndd/src/dndd.cc	69;"	f	class:DnDD
+result	dndd/src/dndd.cc	65;"	f	class:DnDD
 resultDisposition	middle/tst/catch.hpp	950;"	m	struct:Catch::AssertionInfo
 resultType	middle/tst/catch.hpp	988;"	m	struct:Catch::AssertionResultData
-resumption_master_secret_	middle/src/tls13.h	44;"	m	class:TLS13
+resumption_master_secret_	middle/src/tls13.h	47;"	m	class:TLS13
+return_content	lib/tcpip/website.cc	105;"	f	class:WebSite
 rewind	biz/src/combi.cc	95;"	f	class:nPr
 rooms_	dndd/src/chatserver.h	37;"	m	class:ChatServer
 rotate	biz/src/cvmatrix.cc	54;"	f	class:CVMat
 rsa_	middle/src/tls.h	48;"	m	class:TLS
-run_	middle/src/psk.h	32;"	m	class:PSK
+run_	middle/src/psk.h	37;"	m	class:PSK
 s	middle/tst/catch.hpp	1547;"	m	struct:Catch::Detail::IsStreamInsertable
 salt	middle/pybind/wrapper.cc	84;"	f	class:PyHKDF
 salt	middle/src/hkdf.h	10;"	f	struct:HKDF
@@ -1197,8 +1256,8 @@ sbox	middle/src/aes.h	33;"	m	class:AES
 scale	biz/src/cvmatrix.cc	50;"	f	class:CVMat
 schedule	middle/tst/aes.cc	16;"	v
 schedule_	middle/src/aes.h	18;"	m	class:AES
-sclient_	middle/src/tls13.h	36;"	m	class:TLS13
-search	dndd/src/dndd.cc	152;"	f	class:DnDD
+sclient_	middle/src/tls13.h	39;"	m	class:TLS13
+search	dndd/src/dndd.cc	148;"	f	class:DnDD
 secondArg	middle/tst/catch.hpp	951;"	m	struct:Catch::AssertionInfo
 secret	middle/pybind/wrapper.cc	64;"	f	class:PyPRF
 secret	middle/src/prf.h	8;"	f	class:PRF
@@ -1206,29 +1265,29 @@ seed	middle/pybind/wrapper.cc	69;"	f	class:PyPRF
 seed	middle/src/prf.h	15;"	f	class:PRF
 seed_	middle/src/prf.h	53;"	m	class:PRF
 select	lib/database/mysqldata.cc	96;"	f	class:SqlQuery
-selected_psk_	middle/src/tls13.h	37;"	m	class:TLS13
+selected_psk_	middle/src/tls13.h	40;"	m	class:TLS13
 send	lib/tcpip/tcpip.cc	27;"	f	class:Tcpip
 send	middle/pybind/wrapper.cc	163;"	f	class:PyClient
-send	middle/src/psk.cc	14;"	f	class:MClient
+send	middle/src/psk.cc	21;"	f	class:MClient
 serialize	lib/database/util.cc	6;"	f
-server_addr	lib/tcpip/tcpip.h	20;"	m	class:Tcpip	typeref:struct:Tcpip::sockaddr_in
-server_certificate	middle/src/tls.cc	228;"	f	class:TLS
-server_certificate13	middle/src/tls13.cc	446;"	f	class:TLS13
-server_ext	middle/src/tls13.cc	205;"	f	class:TLS13
-server_ext	middle/src/tls13.cc	383;"	f	class:TLS13
-server_fd	lib/tcpip/tcpip.h	18;"	m	class:Tcpip
-server_hello	middle/src/tls.cc	197;"	f	class:TLS
-server_hello	middle/src/tls13.cc	418;"	f	class:TLS13
-server_hello_done	middle/src/tls.cc	312;"	f	class:TLS
-server_key_exchange	middle/src/tls.cc	266;"	f	class:TLS
+server_addr	lib/tcpip/tcpip.h	21;"	m	class:Tcpip	typeref:struct:Tcpip::sockaddr_in
+server_certificate	middle/src/tls.cc	229;"	f	class:TLS
+server_certificate13	middle/src/tls13.cc	451;"	f	class:TLS13
+server_ext	middle/src/tls13.cc	206;"	f	class:TLS13
+server_ext	middle/src/tls13.cc	388;"	f	class:TLS13
+server_fd	lib/tcpip/tcpip.h	19;"	m	class:Tcpip
+server_hello	middle/src/tls.cc	198;"	f	class:TLS
+server_hello	middle/src/tls13.cc	423;"	f	class:TLS13
+server_hello_done	middle/src/tls.cc	313;"	f	class:TLS
+server_key_exchange	middle/src/tls.cc	267;"	f	class:TLS
 server_random_	middle/src/tls.h	42;"	m	class:TLS
-session_id	middle/src/tls.cc	157;"	m	struct:Hello_header	file:
+session_id	middle/src/tls.cc	158;"	m	struct:Hello_header	file:
 session_id_	middle/src/tls.h	42;"	m	class:TLS
-session_id_length	middle/src/tls.cc	156;"	m	struct:Hello_header	file:
-set_aes	middle/src/tls13.cc	362;"	f	class:TLS13
-set_length	middle/src/tls.cc	138;"	f	struct:TLS_header
-set_length	middle/src/tls.cc	145;"	f	struct:Handshake_header
-set_length	middle/src/tls13.cc	586;"	f	struct:TLS_header
+session_id_length	middle/src/tls.cc	157;"	m	struct:Hello_header	file:
+set_aes	middle/src/tls13.cc	367;"	f	class:TLS13
+set_length	middle/src/tls.cc	139;"	f	struct:TLS_header
+set_length	middle/src/tls.cc	146;"	f	struct:Handshake_header
+set_length	middle/src/tls13.cc	592;"	f	struct:TLS_header
 set_log_filter	lib/util/log.cc	51;"	f	class:Log
 set_log_level	lib/util/log.cc	46;"	f	class:Log
 set_peer_pubkey	middle/src/diffie.cc	14;"	f	class:DiffieHellman
@@ -1243,62 +1302,73 @@ show	biz/src/cvmatrix.cc	456;"	f	class:CVMat
 show_tables	lib/database/mysqldata.cc	116;"	f	class:SqlQuery
 sign	middle/src/ecdsa.cc	18;"	f	class:ECDSA
 sign	middle/src/rsa.cc	32;"	f	class:RSA
-signin	dndd/src/dndd.cc	206;"	f	class:DnDD
+signin	dndd/src/dndd.cc	195;"	f	class:DnDD
+signup	adnet/src/adnet.cc	63;"	f	class:Adnet
 size	biz/src/combi.h	19;"	f	class:Combination
 size	lib/database/mysqldata.h	47;"	m	struct:SqlQuery::Column
 size	middle/src/tvec.h	16;"	f	class:ThreadSafeVector
 size_	lib/tcpip/shared_files.h	16;"	m	class:SharedMem
 sizer	middle/tst/catch.hpp	1537;"	m	struct:Catch::Detail::TrueType
 sizer	middle/tst/catch.hpp	1538;"	m	struct:Catch::Detail::FalseType
-sp_client	middle/src/psk.h	19;"	m	struct:SClient
+sp_client	middle/src/psk.h	24;"	m	struct:SClient
+sq	adnet/src/ad.h	13;"	m	class:Ad
+sq	adnet/src/adnet.h	11;"	m	class:Adnet
 sq	biz/src/biz.h	9;"	m	class:Biz
-sq	dndd/src/dndd.h	10;"	m	class:DnDD
-sq	suwon/src/suwon.cpp	21;"	m	class:MyWeb	file:
+sq	dndd/src/dndd.h	7;"	m	class:DnDD
+sq	suwon/src/suwon.cpp	26;"	m	class:MyWeb	file:
 start	dndd/src/chatserver.h	6;"	f	class:Server2
-start	lib/tcpip/server.cc	104;"	f	class:Server
-start	middle/src/https.cc	32;"	f	class:Middle
+start	lib/tcpip/server.cc	103;"	f	class:Server
+start	middle/src/https.cc	45;"	f	class:Middle
 stmt	lib/database/mysqlquery.h	12;"	m	class:Mysqlquery
 str2mpz	middle/src/cert.cc	16;"	f
 stream	middle/tst/catch.hpp	1260;"	f	class:Catch::ResultBuilder
 struct2str	middle/src/tls.h	74;"	f
-sub_key_share	middle/src/tls13.cc	128;"	f	class:TLS13
+sub_key_share	middle/src/tls13.cc	129;"	f	class:TLS13
 substitute	middle/src/aes.cc	72;"	f	class:AES
-supported_group	middle/src/tls13.cc	116;"	f	class:TLS13
-supported_version	middle/src/tls13.cc	151;"	f	class:TLS13
-swap	lib/tcpip/website.cc	35;"	f	class:WebSite
+supported_group	middle/src/tls13.cc	117;"	f	class:TLS13
+supported_version	middle/src/tls13.cc	152;"	f	class:TLS13
+swap	lib/tcpip/website.cc	36;"	f	class:WebSite
 swap	middle/tst/catch.hpp	595;"	f	class:Catch::Ptr
+swap	sample/src/base64.cpp	7;"	f
 t	middle/tst/catch.hpp	1548;"	m	struct:Catch::Detail::IsStreamInsertable
-table	dndd/src/dndd.h	20;"	m	class:DnDD
+table	dndd/src/dndd.h	16;"	m	class:DnDD
 table_name	lib/database/mysqldata.h	50;"	m	class:SqlQuery
 tables	dndd/src/dnddsub.cc	8;"	f	class:DnDD
 tag	middle/src/der.h	47;"	m	struct:ber::Type
 template_init	biz/src/cvmatrix.cc	471;"	f	class:CVMat
 text	biz/src/cvmatrix.cc	208;"	f	class:CVMat
-th_	middle/src/psk.h	31;"	m	class:PSK
-ticket_id_	middle/src/tls13.h	44;"	m	class:TLS13
+th_	adnet/src/ad.h	27;"	m	class:Ad
+th_	middle/src/psk.h	36;"	m	class:PSK
+ticket_id_	middle/src/tls13.h	48;"	m	class:TLS13
 time	lib/util/log.cc	35;"	f	class:Log
-time_out	lib/tcpip/server.h	52;"	m	class:Server
-tmp	dndd/src/dndd.h	21;"	m	class:DnDD
+time_out	lib/tcpip/server.h	79;"	m	class:Server
+tmp	dndd/src/dndd.h	17;"	m	class:DnDD
 toString	middle/tst/catch.hpp	1040;"	f	class:Catch::Matchers::Impl::MatcherUntypedBase
 toString	middle/tst/catch.hpp	1657;"	f	namespace:Catch
-to_send	middle/src/psk.cc	21;"	m	class:MClient	file:
-to_send	middle/src/psk.h	12;"	m	struct:MClient
+to_send	middle/src/psk.cc	31;"	m	class:MClient	file:
+to_send	middle/src/psk.h	17;"	m	struct:MClient
+token_	adnet/src/ad.h	24;"	m	class:Ad
 transform3	biz/src/cvmatrix.cc	59;"	f	class:CVMat
 transform4	biz/src/cvmatrix.cc	74;"	f	class:CVMat
 trueValue	middle/tst/catch.hpp	418;"	f	class:Catch::SafeBool
 type	lib/database/mysqldata.h	48;"	m	struct:SqlQuery::Column
 type_change	middle/src/der.cc	44;"	f	file:
+u	middle/src/psk.h	14;"	m	struct:MClient	typeref:union:MClient::__anon1
 use_mutex_	lib/util/log.h	37;"	m	class:Log
 v	lib/util/option.h	36;"	m	class:FileExpansion
-value	middle/tst/catch.hpp	1549;"	e	enum:Catch::Detail::IsStreamInsertable::__anon1
+value	middle/tst/catch.hpp	1549;"	e	enum:Catch::Detail::IsStreamInsertable::__anon2
 value	middle/tst/catch.hpp	1562;"	m	class:Catch::Detail::IsStreamInsertable
 values_	lib/database/mysqldata.h	57;"	m	class:SqlQuery
 verify	middle/src/ecdsa.cc	38;"	f	class:ECDSA
-version	middle/src/tls.cc	136;"	m	struct:TLS_header	file:
-version	middle/src/tls.cc	154;"	m	struct:Hello_header	file:
-version	middle/src/tls13.cc	584;"	m	struct:TLS_header	file:
-vote	dndd/src/dndd.cc	91;"	f	class:DnDD
+verify_code_	adnet/src/adnet.h	16;"	m	class:Adnet
+version	middle/src/tls.cc	137;"	m	struct:TLS_header	file:
+version	middle/src/tls.cc	155;"	m	struct:Hello_header	file:
+version	middle/src/tls13.cc	590;"	m	struct:TLS_header	file:
+view_increase_	adnet/src/ad.h	25;"	m	class:Ad
+view_induce_	adnet/src/ad.h	25;"	m	class:Ad
+vote	dndd/src/dndd.cc	87;"	f	class:DnDD
 w	middle/src/sha1.h	27;"	m	class:SHA1
+weight	middle/src/https.h	10;"	m	struct:Host
 what	biz/src/combi.h	7;"	f	class:NRexception
 wordvec	biz/src/opencv.cc	86;"	f	file:
 x	middle/src/diffie.h	21;"	m	struct:X25519
@@ -1311,15 +1381,12 @@ xor_with_iv	middle/src/naes.cc	80;"	f	class:NettleAes128
 y	middle/src/diffie.h	21;"	m	struct:X25519
 y	middle/src/diffie.h	41;"	m	struct:EC_Point
 y	middle/src/diffie.h	9;"	m	struct:DiffieHellman
-zK	middle/src/tls.cc	14;"	v	file:
-zd	middle/src/tls.cc	14;"	v	file:
-ze	middle/src/tls.cc	14;"	v	file:
 zero_salt	middle/src/hkdf.h	6;"	f	struct:HKDF
 ~Combination	biz/src/combi.h	16;"	f	class:Combination
 ~DecomposedExpression	middle/tst/catch.hpp	918;"	f	struct:Catch::DecomposedExpression
 ~MethodTestCase	middle/tst/catch.hpp	716;"	f	class:Catch::MethodTestCase
-~Mysqlquery	lib/database/mysqlquery.cc	59;"	f	class:Mysqlquery
-~PSK	middle/src/psk.cc	26;"	f	class:PSK
+~Mysqlquery	lib/database/mysqlquery.cc	64;"	f	class:Mysqlquery
+~PSK	middle/src/psk.cc	36;"	f	class:PSK
 ~Ptr	middle/tst/catch.hpp	576;"	f	class:Catch::Ptr
 ~Tcpip	lib/tcpip/tcpip.cc	21;"	f	class:Tcpip
 ~nPr	biz/src/combi.h	55;"	f	class:nPr

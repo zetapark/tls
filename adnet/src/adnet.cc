@@ -165,8 +165,9 @@ void Adnet::pref()
 	string command = "insert into Pref values ('" + id_ + "'";
 	for(const string s : category) command += nameNvalue_[s] == "" ? ",0" : ",1";
 	sq.query(command + ')');
-	sq.query("update Users set lat = " + nameNvalue_["lat"] + ", lng = " + nameNvalue_["lng"]
-			+ ", country = '" + nameNvalue_["nation"] + "' where id = '" + id_ + "'");
+	sq.query("update Users set lat = " + nameNvalue_["lat"] + ", lng = "
+			+ nameNvalue_["lng"] + ", nation = '" + nameNvalue_["nation"] + "', km = "
+			+ nameNvalue_["km"] + " where id = '" + id_ + "'");
 }
 
 void Adnet::preference()
@@ -176,6 +177,6 @@ void Adnet::preference()
 	if(sq.select("Users", "where id='" + id_ + "'")) {
 		if(sq[0]["lat"].asFloat()) append("name=lat", " value=" + sq[0]["lat"].asString());
 		if(sq[0]["lng"].asFloat()) append("name=lng", " value=" + sq[0]["lng"].asString());
-		if(sq[0]["country"].asString() != "") append("name=" + sq[0]["country"].asString(), " checked");
+		if(string s = sq[0]["nation"].asString(); s != "") append("value=" + s, " checked");
 	}
 }

@@ -9,6 +9,7 @@ MClient::MClient(string ip, int port, int fd) : Client{ip, port}
 
 	getpeername(fd, (sockaddr*)&addr, &sz);
 	u.real_ip = addr.sin_addr.s_addr;
+	port = addr.sin_port;
 }
 
 bool MClient::accumulate(string s)
@@ -22,7 +23,7 @@ void MClient::send()
 	int full_sz = this->get_full_length(to_send);
 	string s = to_send.substr(0, full_sz);
 	s.insert(s.find("\r\n\r\n"), "\r\nIP-Addr: " + to_string(u.a[0]) + '.' + to_string(u.a[1])
-			+ '.' + to_string(u.a[2]) + '.' + to_string(u.a[3]));
+			+ '.' + to_string(u.a[2]) + '.' + to_string(u.a[3]) + ':' + to_string(port));
 	Client::send(s);
 	to_send = to_send.substr(full_sz);
 }
