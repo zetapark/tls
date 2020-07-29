@@ -166,9 +166,9 @@ void Adnet::pref()
 	string command = "insert into Pref values ('" + id_ + "'";
 	for(const string s : category) command += nameNvalue_[s] == "" ? ",0" : ",1";
 	sq.query(command + ')');
-	if(nameNvalue_["lat"] == "") nameNvalue_["lat"] = 0;
-	if(nameNvalue_["lng"] == "") nameNvalue_["lng"] = 0;
-	if(nameNvalue_["km"] == "") nameNvalue_["km"] = 0;
+	if(nameNvalue_["lat"] == "") nameNvalue_["lat"] = "0";
+	if(nameNvalue_["lng"] == "") nameNvalue_["lng"] = "0";
+	if(nameNvalue_["km"] == "") nameNvalue_["km"] = "0";
 	sq.query("update Users set lat = " + nameNvalue_["lat"] + ", lng = "
 			+ nameNvalue_["lng"] + ", nation = '" + nameNvalue_["nation"] + "', km = "
 			+ nameNvalue_["km"] + " where id = '" + id_ + "'");
