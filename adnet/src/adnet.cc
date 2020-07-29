@@ -166,6 +166,9 @@ void Adnet::pref()
 	string command = "insert into Pref values ('" + id_ + "'";
 	for(const string s : category) command += nameNvalue_[s] == "" ? ",0" : ",1";
 	sq.query(command + ')');
+	if(nameNvalue_["lat"] == "") nameNvalue_["lat"] = 0;
+	if(nameNvalue_["lng"] == "") nameNvalue_["lng"] = 0;
+	if(nameNvalue_["km"] == "") nameNvalue_["km"] = 0;
 	sq.query("update Users set lat = " + nameNvalue_["lat"] + ", lng = "
 			+ nameNvalue_["lng"] + ", nation = '" + nameNvalue_["nation"] + "', km = "
 			+ nameNvalue_["km"] + " where id = '" + id_ + "'");
@@ -177,8 +180,9 @@ void Adnet::preference()
 	if(sq.select("Pref", "where id = '" + id_ + "'"))
 		for(string s : category) if(sq[0][s].asBool()) append("name=" + s, " checked");
 	if(sq.select("Users", "where id = '" + id_ + "'")) {
-		if(sq[0]["lat"].asFloat()) append("name=lat", " value=" + sq[0]["lat"].asString());
-		if(sq[0]["lng"].asFloat()) append("name=lng", " value=" + sq[0]["lng"].asString());
+		append("name=lat", " value=" + sq[0]["lat"].asString());
+		append("name=lng", " value=" + sq[0]["lng"].asString());
 		if(string s = sq[0]["nation"].asString(); s != "") append("value=" + s, " checked");
+		append("name=km", " value=" + sq[0]["km"].asString());
 	}
 }
