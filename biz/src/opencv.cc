@@ -7,7 +7,7 @@
 #include"sha256.h"
 using namespace std;
 
-void Biz::process(string ip) 
+void Biz::process() 
 {
 	if(requested_document_ == "index.html") index();
 	else if(requested_document_ == "opencv.html") opencv();
