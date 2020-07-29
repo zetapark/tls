@@ -83,6 +83,7 @@ string Ad::request_ad()
 	view_induce_[nameNvalue_["id"]]++;
 	view_increase_[sq[pick]["id"].asString()]++;
 	sq.removeIndex(pick, &sq[pick]);
+	cout << sq.size() << endl;
 	if(sq.empty()) th_ = thread{&Ad::all_the_database_job, this};
 	return sq[pick]["id"].asString() + '\n' + sq[pick]["link"].asString() + '\n' + new_token();
 }
