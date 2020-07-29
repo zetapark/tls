@@ -68,7 +68,7 @@ string Ad::request_ad()
 	tie(nation, lat, lng) = get_position(req_header_["IP-Addr"]);
 
 	int pick = 0;//category have priority : 3 point
-	for(int i=0, current_best_point=0, point=0; i<sq.size(); i++) {
+	for(int i=0, current_best_point=0, point=0; i<sq.size(); i++, point=0) {
 		if(!sq[i]["country"].asBool() || sq[i]["nation"].asString() == nation) point += 2;
 		if(!sq[i]["distance"].asBool() || distance(lat, lng, sq[i]["lat"].asFloat(),
 					sq[i]["lng"].asFloat()) < sq[i]["km"].asInt()) point += 2;
