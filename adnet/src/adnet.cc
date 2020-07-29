@@ -71,7 +71,7 @@ string Adnet::signup()
 	SHA2 sha;
 	auto a = sha.hash(nameNvalue_["psw"].cbegin(), nameNvalue_["psw"].cend());
 	string enc = base64_encode({a.begin(), a.end()});
-	sq.insert(nameNvalue_["id"], email_, enc, "", "", 0, 1, 0, 0, 0,0,0,0,0);
+	sq.insert(nameNvalue_["id"], email_, enc, "", "", 0, 1, 0, 0, 0, "", 0, 0, 0, 0);
 
 	if(sq.select("Users", "where id = '" + nameNvalue_["recommender"] + "'")) {//recommend bonus
 		sq.query("update Users set click_induce = click_induce + 20 where id = '" +
