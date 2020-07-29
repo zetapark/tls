@@ -168,6 +168,7 @@ void Adnet::pref()
 	sq.query("update Users set lat = " + nameNvalue_["lat"] + ", lng = "
 			+ nameNvalue_["lng"] + ", nation = '" + nameNvalue_["nation"] + "', km = "
 			+ nameNvalue_["km"] + " where id = '" + id_ + "'");
+	content_ = "<meta http-equiv=refresh content='0; url = https://adnet.zeta2374.com' />";
 }
 
 void Adnet::preference()

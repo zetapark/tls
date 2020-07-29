@@ -9,6 +9,9 @@
 
 class Ad : public WebSite
 {
+public:
+	Ad();
+
 protected:
 	SqlQuery sq;
 	void process();

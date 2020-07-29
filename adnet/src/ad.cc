@@ -9,6 +9,11 @@ using namespace std::chrono;
 std::string base64_encode(std::vector<unsigned char> v);
 std::vector<unsigned char> base64_decode(std::string s);
 
+Ad::Ad()
+{
+	all_the_database_job();
+}
+
 void Ad::process()
 {
 	if(th_.joinable()) th_.join();//from request ad function

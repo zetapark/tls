@@ -4,6 +4,25 @@
 !_TAG_PROGRAM_NAME	Exuberant Ctags	//
 !_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
 !_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+$delete	dndd/www/vue.js	4923;"	m	class:Vue
+$destroy	dndd/www/vue.js	3968;"	m	class:Vue
+$emit	dndd/www/vue.js	3863;"	m	class:Vue
+$forceUpdate	dndd/www/vue.js	3961;"	m	class:Vue
+$mount	dndd/www/vue.js	11857;"	m	class:Vue
+$mount	dndd/www/vue.js	9033;"	m	class:Vue
+$nextTick	dndd/www/vue.js	3517;"	m	class:Vue
+$off	dndd/www/vue.js	3827;"	m	class:Vue
+$on	dndd/www/vue.js	3799;"	m	class:isFalse.Vue
+$once	dndd/www/vue.js	3816;"	m	class:Vue
+$set	dndd/www/vue.js	4922;"	m	class:Vue
+$watch	dndd/www/vue.js	4925;"	m	class:Vue
+&#10;	dndd/www/vue.js	9263;"	p	class:decodingMap
+&#39;	dndd/www/vue.js	9265;"	p	class:decodingMap
+&#9;	dndd/www/vue.js	9264;"	p	class:decodingMap
+&amp;	dndd/www/vue.js	9262;"	p	class:decodingMap
+&gt;	dndd/www/vue.js	9260;"	p	class:decodingMap
+&lt;	dndd/www/vue.js	9259;"	p	class:decodingMap
+&quot;	dndd/www/vue.js	9261;"	p	class:decodingMap
 AES	middle/src/aes.h	8;"	c
 ALERT	middle/src/tls.h	56;"	v
 AND_THEN	middle/tst/catch.hpp	11587;"	d
@@ -221,6 +240,8 @@ CipherMode	middle/src/aes.h	103;"	c
 Class	middle/src/der.h	38;"	g	namespace:ber
 Client	lib/tcpip/server.cc	55;"	f	class:Client
 Client	lib/tcpip/server.h	36;"	c	inherits:Http
+CodegenState	dndd/www/vue.js	10915;"	c
+CodegenState	dndd/www/vue.js	10915;"	f
 Column	lib/database/mysqldata.h	45;"	s	class:SqlQuery
 Combination	biz/src/combi.cc	5;"	f	class:Combination
 Combination	biz/src/combi.h	12;"	c
@@ -233,6 +254,9 @@ DIM1	biz/src/cvmatrix.h	93;"	v
 DUR	middle/src/psk.cc	2;"	d	file:
 DecomposedExpression	middle/tst/catch.hpp	916;"	s	namespace:Catch
 Decryption	middle/src/naes.h	12;"	d
+Dep	dndd/www/vue.js	716;"	c	class:isNative
+Dep	dndd/www/vue.js	716;"	f	function:isNative
+Dep	dndd/www/vue.js	719;"	c
 Detail	middle/tst/catch.hpp	1528;"	n	namespace:Catch
 Detail	middle/tst/catch.hpp	1644;"	n	namespace:Catch
 DidntThrowException	middle/tst/catch.hpp	875;"	e	enum:Catch::ResultWas::OfType
@@ -278,6 +302,7 @@ FalseType	middle/tst/catch.hpp	1538;"	s	namespace:Catch::Detail
 FatalErrorCondition	middle/tst/catch.hpp	877;"	e	enum:Catch::ResultWas::OfType
 FileExpansion	lib/util/option.h	26;"	c
 Flags	middle/tst/catch.hpp	889;"	g	struct:Catch::ResultDisposition
+FunctionalRenderContext	dndd/www/vue.js	2962;"	c	class:prependModifier
 GAUSSIAN	biz/src/cvmatrix.h	88;"	v
 GCM	middle/src/aes.h	120;"	c	inherits:CipherMode
 GENERALIZED_TIME	middle/src/der.h	29;"	e	enum:ber::Tag
@@ -353,6 +378,7 @@ IsStreamInsertable	middle/tst/catch.hpp	1546;"	s	namespace:Catch::Detail
 IsStreamInsertable	middle/tst/catch.hpp	1553;"	c	namespace:Catch::Detail
 K	middle/src/diffie.h	9;"	m	struct:DiffieHellman
 K	middle/src/rsa.h	10;"	m	class:RSA
+KeepAlive	dndd/www/vue.js	5366;"	p	class:builtInComponents
 LOG	lib/util/log.h	6;"	d
 LOGD	lib/util/log.h	8;"	d
 LOGE	lib/util/log.h	11;"	d
@@ -403,6 +429,9 @@ OBJECT_DESCRIPTOR	middle/src/der.h	12;"	e	enum:ber::Tag
 OBJECT_IDENTIFIER	middle/src/der.h	11;"	e	enum:ber::Tag
 OCTET_STRING	middle/src/der.h	9;"	e	enum:ber::Tag
 OC_TEST_CASE	middle/tst/catch.hpp	3426;"	d
+Observer	dndd/www/vue.js	922;"	c	class:isRegExp
+Observer	dndd/www/vue.js	922;"	f	function:isRegExp
+Observer	dndd/www/vue.js	937;"	c
 OfType	middle/tst/catch.hpp	861;"	g	struct:Catch::ResultWas
 Ok	middle/tst/catch.hpp	863;"	e	enum:Catch::ResultWas::OfType
 Operator	middle/tst/catch.hpp	1303;"	g	namespace:Catch::Internal
@@ -489,6 +518,8 @@ StringMaker	middle/tst/catch.hpp	1624;"	s	namespace:Catch
 StringMaker	middle/tst/catch.hpp	1635;"	s	namespace:Catch
 StringMakerBase	middle/tst/catch.hpp	1587;"	s	namespace:Catch::Detail
 StringMakerBase	middle/tst/catch.hpp	1601;"	s	namespace:Catch::Detail
+Sub	dndd/www/vue.js	5140;"	c	class:Vue.extend
+Sub	dndd/www/vue.js	5142;"	c
 SuppressFail	middle/tst/catch.hpp	894;"	e	enum:Catch::ResultDisposition::Flags
 T61_STRING	middle/src/der.h	25;"	e	enum:ber::Tag
 TBC_TEXT_FORMAT_CONSOLE_WIDTH	middle/tst/catch.hpp	5305;"	d
@@ -605,6 +636,8 @@ ThreadSafeVector	middle/src/tvec.h	5;"	c
 ThrewException	middle/tst/catch.hpp	874;"	e	enum:Catch::ResultWas::OfType
 TlsLayer	lib/tcpip/server.cc	46;"	f	class:TlsLayer
 TlsLayer	lib/tcpip/server.h	27;"	c	inherits:Vrecv
+Transition	dndd/www/vue.js	9011;"	p	class:platformComponents
+TransitionGroup	dndd/www/vue.js	9012;"	p	class:platformComponents
 TrueType	middle/tst/catch.hpp	1537;"	s	namespace:Catch::Detail
 TupleDetail	middle/tst/catch.hpp	1664;"	n	namespace:Catch
 Type	middle/src/der.h	46;"	s	namespace:ber
@@ -615,53 +648,121 @@ UTF8STRING	middle/src/der.h	17;"	e	enum:ber::Tag
 Unknown	middle/tst/catch.hpp	862;"	e	enum:Catch::ResultWas::OfType
 VIDEOTEX_STRING	middle/src/der.h	26;"	e	enum:ber::Tag
 VISIBLE_STRING	middle/src/der.h	31;"	e	enum:ber::Tag
+VNode	dndd/www/vue.js	767;"	c	class:isNative
+VNode	dndd/www/vue.js	767;"	f	function:isNative
 Vrecv	lib/tcpip/server.cc	11;"	f	class:Vrecv
 Vrecv	lib/tcpip/server.h	8;"	c	inherits:Tcpip
+Vue	dndd/www/vue.js	3515;"	c
+Vue	dndd/www/vue.js	3798;"	c	class:isFalse
+Vue	dndd/www/vue.js	3929;"	c	class:isTrue
+Vue.extend	dndd/www/vue.js	5121;"	f
+Vue.mixin	dndd/www/vue.js	5105;"	c
+Vue.observable	dndd/www/vue.js	5397;"	f
+Vue.use	dndd/www/vue.js	5083;"	f
+VueComponent	dndd/www/vue.js	5140;"	f	function:Vue.extend
 WARNING	lib/util/log.h	30;"	e	enum:Log::LogLevel
 WHEN	middle/tst/catch.hpp	11584;"	d
 WIN32_LEAN_AND_MEAN	middle/tst/catch.hpp	6343;"	d
 WIN32_LEAN_AND_MEAN	middle/tst/catch.hpp	6356;"	d
 Warning	middle/tst/catch.hpp	865;"	e	enum:Catch::ResultWas::OfType
+Watcher	dndd/www/vue.js	4413;"	c	class:isTrue
+Watcher	dndd/www/vue.js	4413;"	f	function:isTrue
+Watcher	dndd/www/vue.js	4462;"	c
 WebSite	lib/tcpip/website.h	9;"	c
 X25519	middle/src/diffie.cc	31;"	f	class:X25519
 X25519	middle/src/diffie.h	13;"	s
 Yes	middle/tst/catch.hpp	390;"	e	enum:Catch::CaseSensitive::Choice
 _BSD_SOURCE	middle/tst/catch.hpp	159;"	d
+__patch__	dndd/www/vue.js	9030;"	m	class:Vue
+_c	dndd/www/vue.js	3023;"	m	class:this
+_c	dndd/www/vue.js	3032;"	m	class:this
+_createElement	dndd/www/vue.js	3363;"	f	function:isObject
+_enter	dndd/www/vue.js	8409;"	f	function:isValidDuration
+_init	dndd/www/vue.js	4955;"	m	class:Vue
+_isComponent	dndd/www/vue.js	3279;"	p	class:isObject.createComponentInstanceForVnode.options
+_loop_1	dndd/www/goo.js	30;"	f	function:var
+_parentVnode	dndd/www/vue.js	3280;"	p	class:isObject.createComponentInstanceForVnode.options
+_render	dndd/www/vue.js	3521;"	m	class:Vue
+_traverse	dndd/www/vue.js	2136;"	f	function:isObject
+_update	dndd/www/vue.js	3930;"	m	class:isTrue.Vue
+_update	dndd/www/vue.js	6573;"	f
+_update	dndd/www/vue.js	8858;"	m	class:this
 a	middle/src/diffie.cc	29;"	m	class:X25519	file:
 a	middle/src/diffie.h	22;"	m	struct:X25519
 a	middle/src/diffie.h	34;"	m	class:EC_Field
-a	middle/src/psk.h	13;"	m	union:MClient::__anon1
+a	middle/src/psk.h	13;"	m	union:MClient::__anon2
+a.fn.emulateTransitionEnd	dndd/www/bootstrap.min.js	6;"	f
 aad	middle/pybind/wrapper.cc	42;"	f	class:PyAES
 aad	middle/src/aes.cc	259;"	f	class:GCM
 aad	middle/src/naes.cc	86;"	f	class:NettleAes128
 aad_	middle/src/aes.h	131;"	m	class:GCM
 aad_	middle/src/naes.h	65;"	m	class:NettleAes128
+abstract	dndd/www/vue.js	5288;"	p	class:KeepAlive
+abstract	dndd/www/vue.js	8726;"	p	class:isSameChild.Transition
+acceptValue	dndd/www/vue.js	5449;"	v
 accumulate	middle/src/psk.cc	15;"	f	class:MClient
 accumulate	middle/src/tls.cc	161;"	f	class:TLS
 accumulated_handshakes_	middle/src/tls.h	44;"	m	class:TLS
+activate	dndd/www/bootstrap.min.js	7;"	m	class:c.
+activateChildComponent	dndd/www/vue.js	4173;"	f	function:isTrue
+actuallySetSelected	dndd/www/vue.js	8524;"	f
+add	dndd/www/vue.js	3769;"	f	function:isObject
+add$1	dndd/www/vue.js	7509;"	f	function:eof
+addAriaAndCollapsedClass	dndd/www/bootstrap.min.js	6;"	m
+addAttr	dndd/www/vue.js	6941;"	f
+addClass	dndd/www/vue.js	7867;"	f	function:function
+addDep	dndd/www/vue.js	4494;"	m	class:Watcher
+addDirective	dndd/www/vue.js	6955;"	f
+addHandler	dndd/www/vue.js	6982;"	f
+addProp	dndd/www/vue.js	6936;"	f
+addRawAttr	dndd/www/vue.js	6950;"	f
 addRef	middle/tst/catch.hpp	617;"	f	struct:Catch::SharedImpl
+addSub	dndd/www/vue.js	721;"	m	class:Dep
+addTransitionClass	dndd/www/vue.js	7991;"	f	function:function
+addVnodes	dndd/www/vue.js	6093;"	f	function:createPatchFunction
 add_header	lib/tcpip/website.cc	57;"	f	class:WebSite
 add_round_key	middle/src/aes.cc	137;"	f	class:AES
 added_header_	lib/tcpip/website.cc	14;"	m	class:WebSite	file:
 added_header_	lib/tcpip/website.h	29;"	m	class:WebSite
+administrative_area_level_1	dndd/www/goo.js	8;"	p	class:componentForm
+administrative_area_level_1	dndd/www/googleapi.js	8;"	p	class:componentForm
+advance	dndd/www/vue.js	9408;"	f	function:parseHTML
 aes_	middle/src/naes.h	47;"	m	class:nAES
 aes_	middle/src/tls.h	30;"	m	class:TLS
 alert	middle/src/tls.cc	455;"	f	class:TLS
 alert	middle/src/tls.cc	468;"	f	class:TLS
-all_the_database_job	adnet/src/ad.cc	59;"	f	class:Ad
+all_the_database_job	adnet/src/ad.cc	90;"	f	class:Ad
 allow	dndd/src/dndd.h	18;"	m	class:DnDD
 allowlevel	dndd/src/dnddsub.cc	16;"	f	class:DnDD
 alwaysFalse	middle/tst/catch.hpp	478;"	f	namespace:Catch
 alwaysTrue	middle/tst/catch.hpp	477;"	f	namespace:Catch
+appear	dndd/www/vue.js	8656;"	p	class:transitionProps
+appearActiveClass	dndd/www/vue.js	8667;"	p	class:transitionProps
+appearClass	dndd/www/vue.js	8666;"	p	class:transitionProps
+appearToClass	dndd/www/vue.js	8668;"	p	class:transitionProps
 append	lib/tcpip/website.cc	43;"	f	class:WebSite
+appendChild	dndd/www/vue.js	5705;"	f	function:isXlink
+applyNS	dndd/www/vue.js	3447;"	f	function:isObject
+applyTranslation	dndd/www/vue.js	8998;"	f
 ar	biz/src/combi.h	23;"	m	class:Combination
 ar_	middle/src/tvec.h	37;"	m	class:ThreadSafeVector
 arcSafeRelease	middle/tst/catch.hpp	1451;"	f
 arcSafeRelease	middle/tst/catch.hpp	1462;"	f
+argRE	dndd/www/vue.js	9542;"	v
 args	lib/util/option.cc	11;"	f	class:CMDoption
+arrow	dndd/www/bootstrap.min.js	6;"	m
+assertNodeMatch	dndd/www/vue.js	6441;"	f	function:createPatchFunction
+assertObjectType	dndd/www/vue.js	1507;"	f	function:defaultStrat
+assertProp	dndd/www/vue.js	1682;"	f	function:getPropDefaultValue
+assertType	dndd/www/vue.js	1733;"	f	function:getPropDefaultValue
+attribute	dndd/www/vue.js	9243;"	v
+b	dndd/www/bootstrap.min.js	6;"	f
+b	dndd/www/bootstrap.min.js	6;"	f	function:function
 b	middle/src/diffie.h	34;"	m	class:EC_Field
 b2c	biz/src/base64.cc	5;"	f	file:
 b2c	middle/src/base64.cc	5;"	f	file:
+b64d	dndd/www/edit.js	4;"	f
+b64e	dndd/www/edit.js	1;"	f
 back_img_	biz/src/biz.h	12;"	m	class:Biz
 background	biz/src/cvmatrix.cc	216;"	f	class:CVMat
 banner	adnet/src/adnet.cc	28;"	f	class:Adnet
@@ -669,18 +770,46 @@ base64_decode	biz/src/base64.cc	36;"	f
 base64_decode	middle/src/base64.cc	36;"	f
 base64_encode	biz/src/base64.cc	21;"	f
 base64_encode	middle/src/base64.cc	21;"	f
+baseModules	dndd/www/vue.js	6674;"	v
+baseSetAttr	dndd/www/vue.js	6751;"	f
+baseWarn	dndd/www/vue.js	6922;"	f
 begin	lib/util/option.h	33;"	f	class:FileExpansion
 ber	middle/src/der.h	3;"	n
 bgr_	biz/src/cvmatrix.h	73;"	m	class:CVMat
 big_endian_	middle/src/sha1.h	26;"	m	class:SHA1
+bind	dndd/www/vue.js	10904;"	p	class:baseDirectives
+bind	dndd/www/vue.js	1501;"	p	class:defaultStrat.dirs
+bind$1	dndd/www/vue.js	10895;"	f
+bindDynamicKeys	dndd/www/vue.js	2915;"	f	function:checkKeyCodes
+bindObjectListeners	dndd/www/vue.js	2866;"	f	function:checkKeyCodes
+bindObjectProps	dndd/www/vue.js	2752;"	f	function:checkKeyCodes
+bindRE	dndd/www/vue.js	9543;"	v
 block_size	biz/src/sha256.h	12;"	m	class:SHA2
 block_size	middle/src/sha1.h	9;"	m	class:SHA1
 block_size	middle/src/sha256.h	9;"	m	class:SHA2
+blocker	dndd/www/vue.js	6764;"	f	function:var
 bnd2mpz	middle/src/mpz.h	19;"	f
 book	dndd/src/dndd.h	16;"	m	class:DnDD
+book_	dndd/www/dndd.js	2;"	v
+boundFn	dndd/www/vue.js	205;"	f	function:isRegExp.polyfillBind
+bounds	dndd/www/goo.js	21;"	p	class:myclick.request
+bounds	dndd/www/googleapi.js	29;"	p	class:$
 buffer	lib/tcpip/tcpip.h	22;"	m	class:Tcpip
+buildRegex	dndd/www/vue.js	9072;"	v
+c	dndd/www/bootstrap.min.js	6;"	f	function:function
+c	dndd/www/bootstrap.min.js	6;"	f	function:function.b
+c	dndd/www/bootstrap.min.js	6;"	m	class:var
 c2b	biz/src/base64.cc	13;"	f	file:
 c2b	middle/src/base64.cc	13;"	f	file:
+cached	dndd/www/vue.js	164;"	f	function:isRegExp
+callActivatedHooks	dndd/www/vue.js	4362;"	f	function:isTrue
+callHook	dndd/www/vue.js	4207;"	f	function:isTrue
+callHook$1	dndd/www/vue.js	6663;"	f
+callInsert	dndd/www/vue.js	6604;"	f	function:var
+callPendingCbs	dndd/www/vue.js	8983;"	f
+callUpdatedHooks	dndd/www/vue.js	4340;"	f	function:isTrue
+callback	dndd/www/goo.js	27;"	f
+canBeLeftOpenTag	dndd/www/vue.js	9224;"	v
 capturedExpression	middle/tst/catch.hpp	949;"	m	struct:Catch::AssertionInfo
 carousel	lib/tcpip/website.cc	163;"	f
 category	adnet/src/adnet.cc	158;"	v	file:
@@ -691,11 +820,22 @@ certificate_	middle/src/tls.h	45;"	m	class:TLS
 certificate_verify	middle/src/tls13.cc	457;"	f	class:TLS13
 change_cipher_spec	middle/src/tls.cc	329;"	f	class:TLS
 change_id_	adnet/src/adnet.h	15;"	m	class:Adnet
-check_token	adnet/src/ad.cc	101;"	f	class:Ad
+checkComponents	dndd/www/vue.js	1406;"	f	function:defaultStrat
+checkDuplicateKeys	dndd/www/vue.js	6228;"	f	function:createPatchFunction
+checkDuration	dndd/www/vue.js	8366;"	f	function:function
+checkKeyCodes	dndd/www/vue.js	2730;"	f	function:function
+checkPosition	dndd/www/bootstrap.min.js	7;"	m
+checkProp	dndd/www/vue.js	2312;"	f	function:isObject
+check_token	adnet/src/ad.cc	132;"	f	class:Ad
+child	dndd/www/vue.js	802;"	p	class:isNative.prototypeAccessors
+children	dndd/www/vue.js	3608;"	p	class:node.asyncMeta
 cipher_	middle/src/aes.h	109;"	m	class:CipherMode
 circles_	biz/src/cvmatrix.h	75;"	m	class:CVMat
+classify	dndd/www/vue.js	624;"	f	function:isNative
+cleanupDeps	dndd/www/vue.js	4508;"	m	class:Watcher
 clear	biz/src/cvmatrix.cc	477;"	f	class:CVMat
-click_ad	adnet/src/ad.cc	51;"	f	class:Ad
+clear	dndd/www/bootstrap.min.js	7;"	m
+click_ad	adnet/src/ad.cc	82;"	f	class:Ad
 click_increase_	adnet/src/ad.h	25;"	m	class:Ad
 click_induce_	adnet/src/ad.h	25;"	m	class:Ad
 client_addr	lib/tcpip/tcpip.h	21;"	m	class:Tcpip	typeref:struct:Tcpip::
@@ -706,19 +846,35 @@ client_hello	middle/src/tls.cc	167;"	f	class:TLS
 client_hello	middle/src/tls13.cc	400;"	f	class:TLS13
 client_key_exchange	middle/src/tls.cc	341;"	f	class:TLS
 client_random_	middle/src/tls.h	42;"	m	class:TLS
+cloak	dndd/www/vue.js	10905;"	p	class:baseDirectives
+clone	dndd/www/vue.js	8969;"	v
+cloneAndMarkFunctionalResult	dndd/www/vue.js	3079;"	f	function:prependModifier
+cloneVNode	dndd/www/vue.js	829;"	f	function:isRegExp
 close	dndd/src/dndd.cc	52;"	f	class:DnDD
 cls	middle/src/der.h	48;"	m	struct:ber::Type
 column_count_	lib/database/mysqldata.h	52;"	m	class:SqlQuery
 columns	lib/database/mysqldata.h	51;"	m	class:SqlQuery
 comment	dndd/src/dndd.cc	100;"	f	class:DnDD
+comment	dndd/www/vue.js	9252;"	v
+componentOptions	dndd/www/vue.js	5322;"	v
 con	lib/database/mysqlquery.h	11;"	m	class:Mysqlquery
+concat	dndd/www/vue.js	2354;"	m	class:isObject.return
+concat	dndd/www/vue.js	5535;"	f	function:isXlink
+conditionalComment	dndd/www/vue.js	9253;"	v
+conf	dndd/www/page.html	29;"	f
+configDef.get	dndd/www/vue.js	5374;"	f
+configDef.set	dndd/www/vue.js	5376;"	f
+configurable	dndd/www/vue.js	4613;"	p	class:isTrue.sharedPropertyDefinition
 connect	lib/database/mysqlquery.cc	31;"	f	class:Mysqlquery
 connect	lib/database/mysqlquery.cc	56;"	f	class:Mysqlquery
 connected	middle/src/https.cc	71;"	f	class:Middle
+constructor	dndd/www/vue.js	5144;"	m	class:Sub
+containsSlotChild	dndd/www/vue.js	11279;"	f
 content_	lib/tcpip/website.h	21;"	m	class:WebSite
 content_	sample/src/base64.cpp	6;"	v
 content_type	middle/src/tls.cc	136;"	m	struct:TLS_header	file:
 content_type	middle/src/tls13.cc	589;"	m	struct:TLS_header	file:
+context	dndd/www/vue.js	3608;"	p	class:node.asyncMeta
 contours_	biz/src/cvmatrix.h	77;"	m	class:CVMat
 convert	middle/tst/catch.hpp	1572;"	f	struct:Catch::Detail::EnumStringMaker
 convert	middle/tst/catch.hpp	1578;"	f	struct:Catch::Detail::EnumStringMaker
@@ -726,24 +882,67 @@ convert	middle/tst/catch.hpp	1590;"	f	struct:Catch::Detail::StringMakerBase
 convert	middle/tst/catch.hpp	1603;"	f	struct:Catch::Detail::StringMakerBase
 convert	middle/tst/catch.hpp	1626;"	f	struct:Catch::StringMaker
 convert	middle/tst/catch.hpp	1636;"	f	struct:Catch::StringMaker
+convertEnumeratedValue	dndd/www/vue.js	5463;"	f
+copyAugment	dndd/www/vue.js	977;"	f	function:isRegExp
 corner	biz/src/cvmatrix.cc	192;"	f	class:CVMat
 count	biz/src/combi.cc	18;"	f	class:nPr
 count	biz/src/combi.cc	23;"	f	class:nCr
 count	biz/src/combi.cc	28;"	f	class:nTr
 count	biz/src/combi.cc	33;"	f	class:nHr
+country	dndd/www/goo.js	9;"	p	class:componentForm
+country	dndd/www/googleapi.js	9;"	p	class:componentForm
+create	dndd/www/vue.js	6559;"	p	class:directives
+create	dndd/www/vue.js	6776;"	p	class:attrs
+create	dndd/www/vue.js	6814;"	p	class:klass
+create	dndd/www/vue.js	7579;"	p	class:eof.events
+create	dndd/www/vue.js	7693;"	p	class:var.domProps
+create	dndd/www/vue.js	7854;"	p	class:var.style
+createAsyncPlaceholder	dndd/www/vue.js	3599;"	f	function:isObject
+createChildren	dndd/www/vue.js	6036;"	f	function:createPatchFunction
+createComment	dndd/www/vue.js	5693;"	f	function:isXlink
+createComponent	dndd/www/vue.js	3176;"	f	function:isObject
+createComponent	dndd/www/vue.js	5962;"	f	function:createPatchFunction
+createComponentInstanceForVnode	dndd/www/vue.js	3275;"	f	function:isObject
+createComputedGetter	dndd/www/vue.js	4821;"	f	function:isDef
+createElement	dndd/www/vue.js	3344;"	f	function:isObject
+createElement$1	dndd/www/vue.js	5673;"	f	function:isXlink
+createElementNS	dndd/www/vue.js	5685;"	f	function:isXlink
+createElm	dndd/www/vue.js	5895;"	f	function:createPatchFunction
+createEmptyVNode	dndd/www/vue.js	812;"	f	function:isRegExp
+createFnInvoker	dndd/www/vue.js	2176;"	f	function:isObject
+createFunctionalComponent	dndd/www/vue.js	3038;"	f	function:prependModifier
+createGetterInvoker	dndd/www/vue.js	4836;"	f	function:isUndef
+createKeyToOldIdx	dndd/www/vue.js	5829;"	f	function:sameInputType
+createOnceHandler	dndd/www/vue.js	3777;"	f	function:isObject
+createOnceHandler$1	dndd/www/vue.js	7494;"	f	function:isStringStart
+createPatchFunction	dndd/www/vue.js	5839;"	f	function:sameInputType
+createRmCb	dndd/www/vue.js	5859;"	f	function:createPatchFunction
+createTextNode	dndd/www/vue.js	5689;"	f	function:isXlink
+createTextVNode	dndd/www/vue.js	821;"	f	function:isRegExp
+createWatcher	dndd/www/vue.js	4883;"	f
 crop	biz/src/opencv.cc	117;"	f	class:Biz
+css	dndd/www/vue.js	8657;"	p	class:transitionProps
 ctx_	middle/src/naes.h	64;"	m	class:NettleAes128
+cycle	dndd/www/bootstrap.min.js	6;"	m
+d	dndd/www/bootstrap.min.js	6;"	f	function:c
+d	dndd/www/bootstrap.min.js	6;"	f	function:function
 d	middle/src/rsa.h	10;"	m	class:RSA
 d_	middle/src/ecdsa.h	15;"	m	class:ECDSA
+data	dndd/www/vue.js	3608;"	p	class:node.asyncMeta
+dataDef.get	dndd/www/vue.js	4903;"	f
+dataDef.set	dndd/www/vue.js	4907;"	f
 db	dndd/src/dndd.h	16;"	m	class:DnDD
 db_ip	adnet/src/adnet.cc	23;"	f	class:Adnet
 db_ip_	adnet/src/adnet.h	15;"	m	class:Adnet
+deactivateChildComponent	dndd/www/vue.js	4191;"	f	function:isTrue
 debug_	middle/src/https.h	28;"	m	class:Middle
 dec_seq_num_	middle/src/tls.h	31;"	m	class:TLS
 decode	middle/src/rsa.cc	27;"	f	class:RSA
 decode	middle/src/tls.cc	369;"	f	class:TLS
 decode	middle/src/tls13.cc	602;"	f	class:TLS13
 decode13	middle/src/tls13.cc	631;"	f	class:TLS13
+decodeAttr	dndd/www/vue.js	9275;"	f
+decoder	dndd/www/vue.js	9205;"	v
 decomposedExpression	middle/tst/catch.hpp	985;"	m	struct:Catch::AssertionResultData
 decrypt	middle/pybind/wrapper.cc	58;"	f	class:PyAES
 decrypt	middle/src/aes.cc	163;"	f	class:CBC
@@ -751,8 +950,20 @@ decrypt	middle/src/aes.cc	246;"	f	class:GCM
 decrypt	middle/src/aes.cc	58;"	f	class:AES
 decrypt	middle/src/naes.cc	70;"	f	class:NettleAes128
 decrypt	middle/src/naes.h	35;"	f	class:nAES
+dedupeHooks	dndd/www/vue.js	1295;"	f	function:isObject
+def	dndd/www/vue.js	497;"	f	function:isReserved
+default	dndd/www/vue.js	3402;"	p	class:data.scopedSlots
+defaultStrat	dndd/www/vue.js	1397;"	f	function:isObject
+defineComputed	dndd/www/vue.js	4791;"	f	function:isDef
+defineReactive	dndd/www/vue.js	5391;"	p	class:Vue.util
+defineReactive$$1	dndd/www/vue.js	1014;"	f	function:isRegExp
+del	dndd/www/vue.js	1114;"	f	function:isRegExp
+delete	dndd/www/vue.js	10736;"	p	class:keyCodes
 deleteAll	middle/tst/catch.hpp	422;"	f	namespace:Catch
 deleteAllValues	middle/tst/catch.hpp	429;"	f	namespace:Catch
+depend	dndd/www/vue.js	4584;"	m	class:Watcher
+depend	dndd/www/vue.js	729;"	m	class:Dep
+dependArray	dndd/www/vue.js	1145;"	f	function:isRegExp
 der2json	middle/src/der.cc	90;"	f
 derive_from_master	middle/src/tls.cc	115;"	f	class:TLS
 derive_keys	middle/src/tls.cc	85;"	f	class:TLS
@@ -762,6 +973,9 @@ dertojson	middle/pybind/wrapper.cc	20;"	f
 description	middle/tst/catch.hpp	729;"	m	struct:Catch::NameAndDesc
 descriptor_	biz/src/cvmatrix.h	72;"	m	class:CVMat
 deserialize	lib/database/util.cc	14;"	f
+destination	dndd/www/goo.js	98;"	p	class:find.request
+destination	dndd/www/googleapi.js	106;"	p	class:find.request
+destroy	dndd/www/bootstrap.min.js	6;"	m
 destroy	lib/tcpip/shared_files.cc	39;"	f	class:SharedMem
 destroy_shared_mem	lib/tcpip/website.cc	16;"	f
 detect_circle	biz/src/cvmatrix.cc	430;"	f	class:CVMat
@@ -770,28 +984,51 @@ detect_face	biz/src/cvmatrix.cc	224;"	f	class:CVMat
 detect_line	biz/src/cvmatrix.cc	351;"	f	class:CVMat
 diffx	biz/src/cvmatrix.cc	323;"	f	class:CVMat
 diffy	biz/src/cvmatrix.cc	329;"	f	class:CVMat
+dimension	dndd/www/bootstrap.min.js	6;"	m
+dirRE	dndd/www/vue.js	9536;"	v
+display	dndd/www/googleapi.js	142;"	f
+displayObject	dndd/www/w3.js	299;"	f
+distance	adnet/src/ad.cc	33;"	f	namespace:__anon1
 distance	biz/src/cvmatrix.cc	376;"	f	file:
+divide_category	adnet/src/ad.cc	51;"	f	namespace:__anon1
+doctype	dndd/www/vue.js	9250;"	v
 doub	middle/src/aes.cc	183;"	f
 doub	middle/src/aes.cc	9;"	f	file:
+down	dndd/www/vue.js	10735;"	p	class:keyCodes
 draw_detected_circle	biz/src/cvmatrix.cc	436;"	f	class:CVMat
 draw_detected_contours	biz/src/cvmatrix.cc	66;"	f	class:CVMat
 draw_detected_corner	biz/src/cvmatrix.cc	197;"	f	class:CVMat
 draw_detected_face	biz/src/cvmatrix.cc	233;"	f	class:CVMat
 draw_detected_line	biz/src/cvmatrix.cc	446;"	f	class:CVMat
 draw_feature	biz/src/cvmatrix.cc	187;"	f	class:CVMat
+draw_rect	biz/www/crop.html	76;"	f
 driver	lib/database/mysqlquery.h	10;"	m	class:Mysqlquery
+duration	dndd/www/vue.js	8669;"	p	class:transitionProps
+dynamicArgAttribute	dndd/www/vue.js	9244;"	v
+dynamicArgRE	dndd/www/vue.js	9540;"	v
+e	dndd/www/bootstrap.min.js	6;"	f	function:a.fn.emulateTransitionEnd
+e	dndd/www/bootstrap.min.js	6;"	f	function:var
+e	dndd/www/bootstrap.min.js	6;"	m	class:var
+e	dndd/www/bootstrap.min.js	6;"	v
 e	middle/src/rsa.h	10;"	m	class:RSA
 ecdsa_certificate_	middle/src/tls13.h	42;"	m	class:TLS13
 echo_id_	middle/src/tls13.h	41;"	m	class:TLS13
 edge	biz/src/cvmatrix.cc	441;"	f	class:CVMat
 edit	dndd/src/dndd.cc	113;"	f	class:DnDD
+el.wrapData	dndd/www/vue.js	10895;"	f
+el.wrapListeners	dndd/www/vue.js	10889;"	f
 email_	adnet/src/adnet.h	15;"	m	class:Adnet
+email_	dndd/www/dndd.js	5;"	v
 email_check	adnet/src/adnet.cc	142;"	f	class:Adnet
+emptyNodeAt	dndd/www/vue.js	5855;"	f	function:createPatchFunction
 enc_seq_num_	middle/src/tls.h	31;"	m	class:TLS
 encode	middle/src/rsa.cc	22;"	f	class:RSA
 encode	middle/src/tls.cc	400;"	f	class:TLS
 encode	middle/src/tls13.cc	596;"	f	class:TLS13
 encode13	middle/src/tls13.cc	608;"	f	class:TLS13
+encode_before_submit	dndd/www/edit.js	7;"	f
+encodedAttr	dndd/www/vue.js	9268;"	v
+encodedAttrWithNewLines	dndd/www/vue.js	9269;"	v
 encrypt	lib/database/mysqldata.cc	89;"	f	class:SqlQuery
 encrypt	middle/pybind/wrapper.cc	52;"	f	class:PyAES
 encrypt	middle/src/aes.cc	152;"	f	class:CBC
@@ -800,10 +1037,26 @@ encrypt	middle/src/aes.cc	44;"	f	class:AES
 encrypt	middle/src/naes.cc	60;"	f	class:NettleAes128
 encrypt	middle/src/naes.h	23;"	f	class:nAES
 encrypted_extension	middle/src/tls13.cc	253;"	f	class:TLS13
+end	dndd/www/goo.js	85;"	f
+end	dndd/www/googleapi.js	93;"	f
+end	dndd/www/vue.js	8018;"	f	function:whenTransitionEnds
 end	lib/util/option.h	34;"	f	class:FileExpansion
 end_string	lib/tcpip/server.h	78;"	m	class:Server
+ensureCtor	dndd/www/vue.js	3587;"	f	function:isObject
+enter	dndd/www/bootstrap.min.js	6;"	m
+enter	dndd/www/vue.js	10730;"	p	class:keyCodes
+enter	dndd/www/vue.js	8110;"	f	function:function
+enterActiveClass	dndd/www/vue.js	8664;"	p	class:transitionProps
+enterClass	dndd/www/vue.js	8660;"	p	class:transitionProps
+enterToClass	dndd/www/vue.js	8662;"	p	class:transitionProps
+enumerable	dndd/www/vue.js	4612;"	p	class:isTrue.sharedPropertyDefinition
+eof	dndd/www/vue.js	7258;"	f
 erase	middle/src/tvec.h	24;"	f	class:ThreadSafeVector
+esc	dndd/www/vue.js	10728;"	p	class:keyCodes
+esc	dndd/www/vue.js	10741;"	p	class:keyNames
+escape	dndd/www/bootstrap.min.js	6;"	m
 escape_string	dndd/src/dndd.cc	130;"	f	file:
+evaluate	dndd/www/vue.js	4576;"	m	class:Watcher
 evaluate	middle/tst/catch.hpp	1333;"	f	struct:Catch::Internal::Evaluator
 evaluate	middle/tst/catch.hpp	1339;"	f	struct:Catch::Internal::Evaluator
 evaluate	middle/tst/catch.hpp	1345;"	f	struct:Catch::Internal::Evaluator
@@ -818,10 +1071,18 @@ evaluate	middle/tst/catch.hpp	1396;"	f	struct:Catch::Internal::Evaluator
 evaluate	middle/tst/catch.hpp	1402;"	f	struct:Catch::Internal::Evaluator
 evaluate	middle/tst/catch.hpp	1408;"	f	struct:Catch::Internal::Evaluator
 evaluate	middle/tst/catch.hpp	1414;"	f	struct:Catch::Internal::Evaluator
+eventsMixin	dndd/www/vue.js	3797;"	f	function:isFalse
 expand	middle/src/hkdf.h	21;"	f	struct:HKDF
 expand_label	middle/src/hkdf.h	38;"	f	struct:HKDF
+extend	dndd/www/vue.js	242;"	f	function:isRegExp
+extend	dndd/www/vue.js	5389;"	p	class:Vue.util
 extract	middle/pybind/wrapper.cc	74;"	f	class:PyHKDF
 extract	middle/src/hkdf.h	13;"	f	struct:HKDF
+extractPropsFromVNodeData	dndd/www/vue.js	2271;"	f	function:isObject
+extractTransitionData	dndd/www/vue.js	8684;"	f
+f	dndd/www/bootstrap.min.js	7;"	f	function:c..function
+f	dndd/www/g.js	1;"	f
+f	dndd/www/main.html	13;"	f
 faces_	biz/src/cvmatrix.h	76;"	m	class:CVMat
 factorial	biz/src/combi.cc	13;"	f	class:Combination
 false_type	middle/tst/catch.hpp	1559;"	m	class:Catch::Detail::IsStreamInsertable::std
@@ -831,23 +1092,91 @@ field	dndd/src/dnddsub.cc	34;"	f	class:DnDD
 file	middle/tst/catch.hpp	469;"	m	struct:Catch::SourceLineInfo
 fileNhtml_	lib/tcpip/website.h	22;"	m	class:WebSite
 fileNoffset_	lib/tcpip/shared_files.h	14;"	m	class:SharedMem
+filecheck	adnet/www/banner.html	10;"	f
+filecheck	biz/www/index.html	25;"	f
+fillInAddress	dndd/www/goo.js	45;"	f
+fillInAddress	dndd/www/googleapi.js	49;"	f
 filter	biz/src/cvmatrix.cc	451;"	f	class:CVMat
+find	dndd/www/goo.js	94;"	f
+find	dndd/www/googleapi.js	105;"	f
+findIdxInOld	dndd/www/vue.js	6246;"	f	function:createPatchFunction
 find_continuous_digits	biz/src/opencv.cc	22;"	f	file:
 find_if	middle/src/tvec.h	19;"	f	class:ThreadSafeVector
 finished	middle/src/tls.cc	432;"	f	class:TLS
 finished	middle/src/tls13.cc	288;"	f	class:TLS13
 finished_key_	middle/src/tls13.h	46;"	m	class:TLS13
+flushCallbacks	dndd/www/vue.js	1910;"	f	function:isSameType
+flushSchedulerQueue	dndd/www/vue.js	4281;"	f	function:isTrue
 follow	dndd/src/dndd.cc	72;"	f	class:DnDD
+follow	dndd/www/page.html	22;"	f
+forAliasRE	dndd/www/vue.js	9537;"	v
+forIteratorRE	dndd/www/vue.js	9538;"	v
+forceRender	dndd/www/vue.js	3642;"	f	function:var
 forgot	adnet/src/adnet.cc	119;"	f	class:Adnet
+formatComponentName	dndd/www/vue.js	644;"	f
 fourier	biz/src/cvmatrix.cc	268;"	f	class:CVMat
+from	dndd/www/vue.js	1474;"	p	class:normalized
 front_img_	biz/src/biz.h	12;"	m	class:Biz
+g	dndd/www/bootstrap.min.js	6;"	m	class:var
 g	middle/src/diffie.h	9;"	m	struct:DiffieHellman
 garbage_collect	middle/src/psk.cc	42;"	f	class:PSK
 garbage_int_to_execute_init	middle/src/aes.cc	27;"	v	file:
+genAssignmentCode	dndd/www/vue.js	7183;"	f
+genCheckboxModel	dndd/www/vue.js	7356;"	f	function:isStringStart
+genChildren	dndd/www/vue.js	11314;"	f
+genClassForVnode	dndd/www/vue.js	5497;"	f	function:isFalsyAttrValue
+genComment	dndd/www/vue.js	11390;"	f	function:needsNormalization
+genComponent	dndd/www/vue.js	11420;"	f	function:needsNormalization
+genComponentModel	dndd/www/vue.js	7151;"	f
+genData	dndd/www/vue.js	9141;"	f
+genData$1	dndd/www/vue.js	9186;"	f
+genData$2	dndd/www/vue.js	11093;"	f
+genDefaultModel	dndd/www/vue.js	7416;"	f	function:isStringStart
+genDirectives	dndd/www/vue.js	11177;"	f
+genElement	dndd/www/vue.js	10942;"	f
+genFilterCode	dndd/www/vue.js	10867;"	f
+genFor	dndd/www/vue.js	11061;"	f
+genGuard	dndd/www/vue.js	10760;"	f
+genHandler	dndd/www/vue.js	10798;"	f
+genHandlers	dndd/www/vue.js	10775;"	f
+genIf	dndd/www/vue.js	11024;"	f
+genIfConditions	dndd/www/vue.js	11034;"	f
+genInlineTemplate	dndd/www/vue.js	11202;"	f
+genKeyFilter	dndd/www/vue.js	10857;"	f
+genNode	dndd/www/vue.js	11374;"	f	function:needsNormalization
+genOnce	dndd/www/vue.js	10997;"	f
+genProps	dndd/www/vue.js	11429;"	f	function:needsNormalization
+genRadioModel	dndd/www/vue.js	7387;"	f	function:isStringStart
+genScopedSlot	dndd/www/vue.js	11289;"	f
+genScopedSlots	dndd/www/vue.js	11216;"	f
+genSelect	dndd/www/vue.js	7399;"	f	function:isStringStart
+genSlot	dndd/www/vue.js	11394;"	f	function:needsNormalization
+genStatic	dndd/www/vue.js	10982;"	f
+genStaticKeys	dndd/www/vue.js	286;"	f	function:isRegExp
+genTernaryExp	dndd/www/vue.js	11052;"	f	function:genIfConditions
+genText	dndd/www/vue.js	11384;"	f	function:needsNormalization
+generate	dndd/www/vue.js	10930;"	f
+generateComponentTrace	dndd/www/vue.js	676;"	f
 generate_auth	middle/src/aes.cc	211;"	f	class:GCM
 generate_signature	middle/src/tls.cc	62;"	f	class:TLS
+geolocate	dndd/www/goo.js	64;"	f
+geolocate	dndd/www/googleapi.js	70;"	f
+get	dndd/www/vue.js	4467;"	m	class:Watcher
+get	dndd/www/vue.js	4614;"	p	class:isTrue.sharedPropertyDefinition
 get	lib/util/option.h	13;"	f	class:CMDoption
 get	middle/tst/catch.hpp	596;"	f	class:Catch::Ptr
+getAndRemoveAttr	dndd/www/vue.js	7096;"	f
+getAndRemoveAttrByRegex	dndd/www/vue.js	7117;"	f
+getBindingAttr	dndd/www/vue.js	7074;"	f
+getCalculatedOffset	dndd/www/bootstrap.min.js	6;"	m
+getComponentName	dndd/www/vue.js	5240;"	f
+getContent	dndd/www/bootstrap.min.js	6;"	m
+getData	dndd/www/vue.js	4735;"	f	function:isTrue
+getDistance	dndd/www/googleapi.js	130;"	f
+getFirstComponentChild	dndd/www/vue.js	3742;"	f	function:isObject
+getHookArgumentsLength	dndd/www/vue.js	8392;"	f	function:isValidDuration
+getInvalidTypeMessage	dndd/www/vue.js	1782;"	f	function:isSameType
+getItemIndex	dndd/www/bootstrap.min.js	6;"	m
 getName	middle/tst/catch.hpp	1312;"	f	struct:Catch::Internal::OperatorTraits
 getName	middle/tst/catch.hpp	1313;"	f	struct:Catch::Internal::OperatorTraits
 getName	middle/tst/catch.hpp	1314;"	f	struct:Catch::Internal::OperatorTraits
@@ -855,6 +1184,25 @@ getName	middle/tst/catch.hpp	1315;"	f	struct:Catch::Internal::OperatorTraits
 getName	middle/tst/catch.hpp	1316;"	f	struct:Catch::Internal::OperatorTraits
 getName	middle/tst/catch.hpp	1317;"	f	struct:Catch::Internal::OperatorTraits
 getName	middle/tst/catch.hpp	1318;"	f	struct:Catch::Internal::OperatorTraits
+getNormalizationType	dndd/www/vue.js	11347;"	f
+getNow	dndd/www/vue.js	4269;"	f
+getOptions	dndd/www/bootstrap.min.js	6;"	m
+getOuterHTML	dndd/www/vue.js	11930;"	f	function:needsNormalization
+getPosition	dndd/www/bootstrap.min.js	6;"	m
+getPropDefaultValue	dndd/www/vue.js	1649;"	f	function:defaultStrat
+getRawBindingAttr	dndd/www/vue.js	7065;"	f
+getRawDirName	dndd/www/vue.js	6659;"	f
+getRealChild	dndd/www/vue.js	8675;"	f
+getState	dndd/www/bootstrap.min.js	7;"	m
+getStyle	dndd/www/vue.js	7738;"	f	function:function
+getTagNamespace	dndd/www/vue.js	5612;"	f	function:isXlink
+getTimeout	dndd/www/vue.js	8089;"	f	function:function
+getTransitionInfo	dndd/www/vue.js	8039;"	f	function:function
+getType	dndd/www/vue.js	1761;"	f	function:defaultStrat
+getTypeIndex	dndd/www/vue.js	1770;"	f	function:isSameType
+getValue	dndd/www/vue.js	8561;"	f
+getViewportAdjustedDelta	dndd/www/bootstrap.min.js	6;"	m
+getXlinkProp	dndd/www/vue.js	5487;"	f	function:isXlink
 get_addr	biz/src/opencv.cc	68;"	f	file:
 get_addr	lib/tcpip/server.cc	68;"	f	class:Client
 get_b	biz/src/opencv.cc	135;"	f	file:
@@ -875,26 +1223,37 @@ get_n_byte	middle/src/prf.h	19;"	f	class:PRF
 get_n_byte2	middle/src/prf.h	36;"	f	class:PRF
 get_name	biz/src/opencv.cc	77;"	f	file:
 get_points	biz/src/cvmatrix.cc	79;"	f	class:CVMat
-get_position	adnet/src/ad.cc	19;"	f
+get_position	adnet/src/ad.cc	22;"	f	namespace:__anon1
 get_rect	biz/src/cvmatrix.cc	390;"	f	class:CVMat
 get_tel	biz/src/opencv.cc	40;"	f	file:
 get_with_wordvec	biz/src/opencv.cc	106;"	f	file:
 getdir	lib/database/ls.cc	6;"	f
 gf_mul	middle/src/aes.cc	190;"	f
+globalHandleError	dndd/www/vue.js	1876;"	f	function:isSameType
 google	dndd/src/dndd.cc	35;"	f	class:DnDD
 google_oauth	biz/src/opencv.cc	256;"	f	class:Biz
 gray	biz/src/cvmatrix.cc	466;"	f	class:CVMat
 group	dndd/src/dndd.h	16;"	m	class:DnDD
+group_	dndd/www/dndd.js	4;"	v
 group_by	lib/database/mysqldata.cc	124;"	f	class:SqlQuery
 group_desc	dndd/src/dndd.h	16;"	m	class:DnDD
+h	dndd/www/bootstrap.min.js	6;"	m	class:var
 h	middle/src/sha1.h	27;"	m	class:SHA1
 h_stored_value	middle/src/sha1.h	28;"	m	class:SHA1
 haar_cascade	biz/src/cvmatrix.cc	14;"	v	file:
 haar_dir	biz/src/cvmatrix.cc	12;"	v	file:
+handleError	dndd/www/vue.js	1827;"	f	function:isSameType
+handleStartTag	dndd/www/vue.js	9438;"	f	function:parseHTML
+handleUpdate	dndd/www/bootstrap.min.js	6;"	m
 handshake	middle/src/tls13.cc	489;"	f	class:TLS13
 handshake_type	middle/src/tls.cc	144;"	m	struct:Handshake_header	file:
 harris_	biz/src/cvmatrix.h	72;"	m	class:CVMat
+hasContent	dndd/www/bootstrap.min.js	6;"	m
+hasNoMatchingOption	dndd/www/vue.js	8557;"	f
+hasOwn	dndd/www/vue.js	157;"	f	function:isRegExp
+hasParentTransition	dndd/www/vue.js	8708;"	f
 hash	biz/src/sha256.h	18;"	f	class:SHA2
+hash	dndd/www/vue.js	11270;"	f
 hash	middle/pybind/wrapper.cc	79;"	f	class:PyHKDF
 hash	middle/pybind/wrapper.h	30;"	f	struct:PySHA1
 hash	middle/pybind/wrapper.h	37;"	f	struct:PySHA256
@@ -904,37 +1263,77 @@ hash	middle/src/sha1.h	12;"	f	class:SHA1
 hash	middle/src/sha256.h	15;"	f	class:SHA2
 header_	lib/tcpip/website.h	27;"	m	class:WebSite
 hexprint	middle/src/mpz.h	26;"	f
+hide	dndd/www/bootstrap.min.js	6;"	m
 hierachy_	biz/src/cvmatrix.h	74;"	m	class:CVMat
 histo	biz/src/cvmatrix.cc	245;"	f	class:CVMat
 hit	middle/src/https.h	11;"	m	struct:Host
 hkdf_	middle/src/tls13.h	30;"	m	class:TLS13
 hmac_	middle/src/prf.h	52;"	m	class:PRF
+hooks	dndd/www/vue.js	5802;"	v
 host	middle/src/https.h	7;"	m	struct:Host
 hostNport_	middle/src/https.h	27;"	m	class:Middle
+hydrate	dndd/www/vue.js	6348;"	f	function:createPatchFunction
 i_key_pad_	middle/src/hmac.h	37;"	m	class:HMAC
 id	dndd/src/dndd.h	16;"	m	class:DnDD
+id	dndd/www/dndd.js	52;"	p	class:login.json
 id_	adnet/src/adnet.h	15;"	m	class:Adnet
 id_	biz/src/biz.h	12;"	m	class:Biz
 id_hit	adnet/src/adnet.cc	102;"	f	class:Adnet
+identity	dndd/www/vue.js	281;"	f	function:isRegExp
 iframe_content_	dndd/src/dndd.h	19;"	m	class:DnDD
 inc_ar	biz/src/combi.cc	120;"	f	class:nPr
 index	adnet/src/adnet.cc	85;"	f	class:Adnet
 index	biz/src/opencv.cc	266;"	f	class:Biz
 index	dndd/src/dndd.cc	136;"	f	class:DnDD
+info	dndd/www/goo.js	26;"	v
+info	dndd/www/vue.js	8976;"	v
+infowindow	dndd/www/goo.js	3;"	v
+infowindow	dndd/www/googleapi.js	3;"	v
+init	biz/www/index.html	20;"	f
+init	dndd/www/bootstrap.min.js	6;"	m
 init	lib/tcpip/website.cc	23;"	f	class:WebSite
+initAssetRegisters	dndd/www/vue.js	5206;"	f
+initAutocomplete	dndd/www/goo.js	41;"	f
+initComponent	dndd/www/vue.js	5984;"	f	function:createPatchFunction
+initComputed	dndd/www/vue.js	4750;"	f	function:isDef
+initComputed$1	dndd/www/vue.js	5197;"	f
+initData	dndd/www/vue.js	4693;"	f	function:isTrue
+initEvents	dndd/www/vue.js	3757;"	f	function:isObject
+initExtend	dndd/www/vue.js	5114;"	f
+initGlobalAPI	dndd/www/vue.js	5372;"	f
+initInjections	dndd/www/vue.js	2435;"	f	function:simpleNormalizeChildren
+initInternalComponent	dndd/www/vue.js	5011;"	f
+initLifecycle	dndd/www/vue.js	3903;"	f	function:isTrue
+initMethods	dndd/www/vue.js	4842;"	f
+initMixin	dndd/www/vue.js	4954;"	f
+initMixin$1	dndd/www/vue.js	5105;"	f
+initProps	dndd/www/vue.js	4645;"	f	function:isTrue
+initProps$1	dndd/www/vue.js	5190;"	f
+initProvide	dndd/www/vue.js	2426;"	f	function:simpleNormalizeChildren
+initProxy	dndd/www/vue.js	2106;"	f
+initRender	dndd/www/vue.js	3479;"	f	function:isObject
+initState	dndd/www/vue.js	4629;"	f	function:isTrue
+initUse	dndd/www/vue.js	5083;"	f
+initWatch	dndd/www/vue.js	4870;"	f
 init_certificate	middle/src/tls.cc	15;"	f	class:TLS
 init_certificate	middle/src/tls13.cc	16;"	f	class:TLS13
 init_mod	middle/src/diffie.cc	20;"	f	file:
+init_template	dndd/www/w3.js	336;"	f	function:displayObject
+initialize	dndd/www/goo.js	13;"	f
 initialize_precomputed	middle/src/aes.cc	17;"	f
+insert	dndd/www/vue.js	6024;"	f	function:createPatchFunction
 insert	lib/database/mysqldata.cc	38;"	f	class:SqlQuery
 insert	lib/database/mysqldata.cc	59;"	f	class:SqlQuery
 insert	lib/database/mysqldata.h	19;"	f	class:SqlQuery
 insert	lib/database/mysqldata.h	24;"	f	class:SqlQuery
 insert	lib/database/mysqldata.h	30;"	f	class:SqlQuery
 insert	middle/src/tvec.h	51;"	f	class:ThreadSafeMap
+insertBefore	dndd/www/vue.js	5697;"	f	function:isXlink
 insert_bcard	biz/src/opencv.cc	229;"	f	class:Biz
-insert_increment	adnet/src/ad.cc	73;"	f	class:Ad
+insert_increment	adnet/src/ad.cc	104;"	f	class:Ad
 insert_nth_row	lib/database/mysqldata.cc	72;"	f	class:SqlQuery
+installComponentHooks	dndd/www/vue.js	3293;"	f	function:isObject
+installRenderHelpers	dndd/www/vue.js	2940;"	f	function:prependModifier
 intersect	biz/src/cvmatrix.cc	357;"	f	file:
 intersect	biz/src/cvmatrix.cc	370;"	f	file:
 inv_mix_column	middle/src/aes.cc	118;"	f	class:AES
@@ -942,12 +1341,59 @@ inv_sbox	middle/src/aes.h	67;"	m	class:AES
 inv_shift_row	middle/src/aes.cc	90;"	f	class:AES
 inv_substitute	middle/src/aes.cc	77;"	f	class:AES
 invoke	middle/tst/catch.hpp	710;"	f	class:Catch::MethodTestCase
+invokeCreateHooks	dndd/www/vue.js	6056;"	f	function:createPatchFunction
+invokeDestroyHook	dndd/www/vue.js	6099;"	f	function:createPatchFunction
+invokeInsertHook	dndd/www/vue.js	6328;"	f	function:createPatchFunction
+invokeWithErrorHandling	dndd/www/vue.js	1854;"	f	function:isSameType
+invoker	dndd/www/vue.js	2177;"	f	function:isObject.createFnInvoker
 ip	middle/src/https.h	8;"	m	struct:Host
+isAsyncPlaceholder	dndd/www/vue.js	3736;"	f	function:isObject
 isBinaryExpression	middle/tst/catch.hpp	919;"	f	struct:Catch::DecomposedExpression
+isBoolean	dndd/www/vue.js	1818;"	f	function:isSameType
+isDef	dndd/www/vue.js	22;"	f	function:isUndef
+isDirtyWithModifiers	dndd/www/vue.js	7679;"	f	function:isNotInFocusAndDirty
+isEnumeratedAttr	dndd/www/vue.js	5459;"	v
+isExplicable	dndd/www/vue.js	1813;"	f	function:isSameType
+isFalse	dndd/www/vue.js	30;"	f	function:isTrue
 isFalseTest	middle/tst/catch.hpp	902;"	f	namespace:Catch
+isFalsyAttrValue	dndd/www/vue.js	5491;"	f	function:isXlink
+isIgnoreNewlineTag	dndd/www/vue.js	9272;"	v
+isInInactiveTree	dndd/www/vue.js	4166;"	f	function:isTrue
 isJustInfo	middle/tst/catch.hpp	884;"	f	namespace:Catch
+isKeyNotMatch	dndd/www/vue.js	2717;"	f	function:isObject
+isNative	dndd/www/vue.js	581;"	f	function:isRegExp
+isNonPhrasingTag	dndd/www/vue.js	9230;"	v
+isNotInFocusAndDirty	dndd/www/vue.js	7669;"	f	function:eof
+isNotTextNode	dndd/www/vue.js	8720;"	f	function:isSameChild
+isObject	dndd/www/vue.js	52;"	f	function:isFalse
 isOk	middle/tst/catch.hpp	881;"	f	namespace:Catch
+isPatchable	dndd/www/vue.js	6049;"	f	function:createPatchFunction
+isPlainObject	dndd/www/vue.js	69;"	f	function:isObject
+isPlainTextElement	dndd/www/vue.js	9256;"	v
+isPreTag	dndd/www/vue.js	5606;"	f	function:isXlink
+isPrimitive	dndd/www/vue.js	37;"	f	function:isFalse
+isPromise	dndd/www/vue.js	85;"	f	function:isValidArrayIndex
+isRegExp	dndd/www/vue.js	73;"	f	function:isPlainObject
+isReserved	dndd/www/vue.js	489;"	f	function:function
+isReservedAttr	dndd/www/vue.js	5446;"	v
+isReservedTag	dndd/www/vue.js	5608;"	f	function:isXlink
+isSameChild	dndd/www/vue.js	8716;"	f
+isSameType	dndd/www/vue.js	1766;"	f	function:defaultStrat
+isServerRendering	dndd/www/vue.js	563;"	f	function:isRegExp
+isStringStart	dndd/www/vue.js	7262;"	f	function:eof
+isTextNode	dndd/www/vue.js	2372;"	f	function:simpleNormalizeChildren
+isTrue	dndd/www/vue.js	26;"	f	function:isDef
 isTrue	middle/tst/catch.hpp	476;"	f	namespace:Catch
+isUnaryTag	dndd/www/vue.js	9217;"	v
+isUndef	dndd/www/vue.js	18;"	f
+isUnknownElement	dndd/www/vue.js	5624;"	f	function:isXlink
+isUnknownElement$$1	dndd/www/vue.js	5877;"	f	function:createPatchFunction
+isVShowDirective	dndd/www/vue.js	8722;"	f	function:isSameChild
+isValidArrayIndex	dndd/www/vue.js	80;"	f	function:isRegExp
+isValidContentEditableValue	dndd/www/vue.js	5461;"	v
+isValidDuration	dndd/www/vue.js	8382;"	f	function:function
+isWhitespace	dndd/www/vue.js	2539;"	f	function:isObject
+isXlink	dndd/www/vue.js	5483;"	f	function:convertEnumeratedValue
 is_int	lib/database/mysqldata.cc	48;"	f	class:SqlQuery
 is_real	lib/database/mysqldata.cc	53;"	f	class:SqlQuery
 is_similar_angle	biz/src/cvmatrix.cc	385;"	f
@@ -977,6 +1423,7 @@ key	middle/src/naes.cc	50;"	f	class:NettleAes128
 key_	adnet/src/adnet.h	16;"	m	class:Adnet
 key_	middle/src/naes.h	48;"	m	class:nAES
 key_share	middle/src/tls13.cc	144;"	f	class:TLS13
+keydown	dndd/www/bootstrap.min.js	6;"	m
 keypoints_	biz/src/cvmatrix.h	80;"	m	class:CVMat
 kill_zombie	lib/tcpip/server.cc	74;"	f	file:
 label	middle/src/prf.h	11;"	f	class:PRF
@@ -984,25 +1431,46 @@ label_	middle/src/prf.h	53;"	m	class:PRF
 lang_	adnet/src/adnet.h	16;"	m	class:Adnet
 langjs	adnet/src/adnet.h	19;"	m	class:Adnet
 language	ez/src/ez.cpp	23;"	m	class:MySite	file:
+lazy	dndd/www/vue.js	4748;"	p	class:isDef.computedWatcherOptions
 lbp_cascade	biz/src/cvmatrix.cc	38;"	v	file:
 lbp_dir	biz/src/cvmatrix.cc	13;"	v	file:
+leave	dndd/www/bootstrap.min.js	6;"	m
+leave	dndd/www/vue.js	8261;"	f	function:function
+leaveActiveClass	dndd/www/vue.js	8665;"	p	class:transitionProps
+leaveClass	dndd/www/vue.js	8661;"	p	class:transitionProps
+leaveToClass	dndd/www/vue.js	8663;"	p	class:transitionProps
+left	dndd/www/bootstrap.min.js	6;"	p	class:var.e
+left	dndd/www/vue.js	10733;"	p	class:keyCodes
 left_rotate	middle/src/sha1.cc	6;"	f	file:
+len	dndd/www/vue.js	7210;"	v
 lenAC_	middle/src/aes.h	132;"	m	class:GCM
 length	middle/src/tls.cc	138;"	m	struct:TLS_header	file:
 length	middle/src/tls.cc	145;"	m	struct:Handshake_header	file:
 length	middle/src/tls13.cc	591;"	m	struct:TLS_header	file:
 level	dndd/src/dndd.h	16;"	m	class:DnDD
 level2txt	dndd/src/page.cc	7;"	f	file:
+level_	dndd/www/dndd.js	7;"	v
+lifecycleMixin	dndd/www/vue.js	3929;"	f	function:isTrue
 line	middle/tst/catch.hpp	470;"	m	struct:Catch::SourceLineInfo
+lineBreakRE	dndd/www/vue.js	9548;"	v
 lineInfo	middle/tst/catch.hpp	948;"	m	struct:Catch::AssertionInfo
 lines_	biz/src/cvmatrix.h	74;"	m	class:CVMat
 lnd2mpz	middle/tst/x25519.cc	13;"	f	file:
 load	lib/tcpip/shared_files.cc	11;"	f	class:SharedMem
+locality	dndd/www/goo.js	7;"	p	class:componentForm
+locality	dndd/www/googleapi.js	7;"	p	class:componentForm
+locateNode	dndd/www/vue.js	8587;"	f
+logError	dndd/www/vue.js	1891;"	f	function:isSameType
 log_file_	lib/util/log.h	35;"	m	class:Log
 log_level	lib/util/log.cc	29;"	f	class:Log
 log_level_	lib/util/log.h	30;"	m	class:Log	typeref:enum:Log::LogLevel
 log_on_	lib/util/log.h	38;"	m	class:Log
+login	dndd/www/dndd.js	51;"	f
 logo	dndd/src/dndd.h	16;"	m	class:DnDD
+loop	dndd/www/vue.js	2770;"	f	function:var
+loop	dndd/www/vue.js	4656;"	f	function:initProps
+looseEqual	dndd/www/vue.js	296;"	f	function:isRegExp
+looseIndexOf	dndd/www/vue.js	336;"	f	function:function
 m_assertionInfo	middle/tst/catch.hpp	1257;"	m	class:Catch::ResultBuilder
 m_cachedToString	middle/tst/catch.hpp	1049;"	m	class:Catch::Matchers::Impl::MatcherUntypedBase
 m_count	middle/tst/catch.hpp	451;"	m	struct:Catch::pluralise
@@ -1038,12 +1506,36 @@ main	sample/src/base64.cpp	14;"	f
 main	sample/src/jsoncpp.cpp	5;"	f
 main	sample/src/site.cpp	14;"	f
 main	suwon/src/suwon.cpp	29;"	f
+makeMap	dndd/www/vue.js	117;"	f	function:toString
 makeSafe	middle/tst/catch.hpp	414;"	f	class:Catch::SafeBool
 manipulators	lib/util/log.cc	18;"	f	class:Log
+map	dndd/www/goo.js	1;"	v
+map	dndd/www/googleapi.js	1;"	v
+mark	dndd/www/vue.js	2023;"	f
+markOnce	dndd/www/vue.js	2833;"	f	function:checkKeyCodes
+markStatic	dndd/www/vue.js	2842;"	f	function:checkKeyCodes
+markStaticNode	dndd/www/vue.js	2858;"	f	function:checkKeyCodes
+marker	dndd/www/goo.js	25;"	v
 master_secret_	middle/src/tls.h	43;"	m	class:TLS
 match	biz/src/cvmatrix.cc	118;"	f	class:CVMat
+matches	dndd/www/vue.js	5244;"	f
+math	dndd/www/vue.js	5579;"	p	class:isXlink.namespaceMap
 maxpage	dndd/src/dnddsub.cc	28;"	f	class:DnDD
+maybeComponent	dndd/www/vue.js	10922;"	m	class:CodegenState
+measure	dndd/www/vue.js	2024;"	f
 median	biz/src/cvmatrix.cc	461;"	f	class:CVMat
+mergeAssets	dndd/www/vue.js	1316;"	f	function:isObject
+mergeClassData	dndd/www/vue.js	5515;"	f	function:isFalsyAttrValue
+mergeData	dndd/www/vue.js	1182;"	f	function:isRegExp
+mergeDataOrFn	dndd/www/vue.js	1212;"	f	function:isRegExp
+mergeField	dndd/www/vue.js	1563;"	f	function:mergeOptions
+mergeHook	dndd/www/vue.js	1279;"	f	function:isObject
+mergeHook$1	dndd/www/vue.js	3305;"	f	function:isObject
+mergeOptions	dndd/www/vue.js	1521;"	f	function:defaultStrat
+mergeOptions	dndd/www/vue.js	5390;"	p	class:Vue.util
+mergeProps	dndd/www/vue.js	3095;"	f	function:prependModifier
+mergeVNodeHook	dndd/www/vue.js	2236;"	f	function:isObject
+merged	dndd/www/vue.js	3306;"	f	function:isObject.mergeHook$1
 message	middle/tst/catch.hpp	987;"	m	struct:Catch::AssertionResultData
 mgf1	middle/src/pss.cc	10;"	f
 mix_column	middle/src/aes.cc	98;"	f	class:AES
@@ -1054,6 +1546,11 @@ mod	middle/src/diffie.h	34;"	m	class:EC_Field
 mod_inv	middle/src/diffie.cc	154;"	f	class:EC_Field
 mod_inv	middle/src/diffie.cc	42;"	f	class:X25519
 mod_inv	middle/src/ecdsa.cc	11;"	f	class:ECDSA
+mode	dndd/www/vue.js	8658;"	p	class:transitionProps
+model	dndd/www/vue.js	7303;"	f	function:isStringStart
+model	dndd/www/vue.js	8648;"	p	class:platformDirectives
+modifierRE	dndd/www/vue.js	9544;"	v
+mountComponent	dndd/www/vue.js	4012;"	f	function:isTrue
 mpz2bnd	middle/src/mpz.h	14;"	f
 mpz2bnd	middle/src/mpz.h	9;"	f
 mpz2lnd	middle/tst/x25519.cc	6;"	f	file:
@@ -1061,7 +1558,9 @@ mtx_	lib/util/log.h	36;"	m	class:Log
 mtx_	middle/src/tvec.h	38;"	m	class:ThreadSafeVector
 mul	middle/pybind/wrapper.cc	103;"	f	class:PyX25519
 mul_g	middle/pybind/wrapper.cc	94;"	f	class:PyX25519
+mustUseProp	dndd/www/vue.js	5450;"	f
 myQuery	lib/database/mysqlquery.cc	10;"	f	class:Mysqlquery
+myclick	dndd/www/goo.js	20;"	f
 n	biz/src/combi.h	24;"	m	class:Combination
 nAES	middle/src/naes.h	15;"	c
 nBit_	middle/src/ecdsa.h	14;"	m	class:ECDSA
@@ -1075,30 +1574,74 @@ nTr	biz/src/combi.cc	45;"	f	class:nTr
 nTr	biz/src/combi.h	35;"	c	inherits:Combination
 n_	middle/src/ecdsa.h	12;"	m	class:ECDSA
 name	dndd/src/dndd.h	16;"	m	class:DnDD
+name	dndd/www/vue.js	5287;"	p	class:KeepAlive
+name	dndd/www/vue.js	8655;"	p	class:transitionProps
+name	dndd/www/vue.js	8724;"	p	class:isSameChild.Transition
+name	dndd/www/vue.js	9461;"	p	class:attrs
 name	lib/database/mysqldata.h	46;"	m	struct:SqlQuery::Column
 name	middle/tst/catch.hpp	728;"	m	struct:Catch::NameAndDesc
 nameNvalue_	lib/tcpip/website.h	20;"	m	class:WebSite
+name_	dndd/www/dndd.js	6;"	v
 name_	lib/tcpip/shared_files.h	19;"	m	class:SharedMem
 namecard_	biz/src/biz.h	12;"	m	class:Biz
+nativeBind	dndd/www/vue.js	218;"	f	function:isRegExp
+ncname	dndd/www/vue.js	9245;"	v
+needsNormalization	dndd/www/vue.js	11370;"	f
 negate	middle/tst/catch.hpp	961;"	f	struct:Catch::AssertionResultData
 negated	middle/tst/catch.hpp	989;"	m	struct:Catch::AssertionResultData
 new_book	dndd/src/dndd.cc	107;"	f	class:DnDD
 new_session	middle/src/tls13.cc	309;"	f	class:TLS13
 new_session_ticket	middle/src/tls13.cc	324;"	f	class:TLS13
 new_session_ticket	middle/src/tls13.cc	353;"	f	class:TLS13
-new_token	adnet/src/ad.cc	91;"	f	class:Ad
+new_token	adnet/src/ad.cc	122;"	f	class:Ad
 next	biz/src/combi.cc	104;"	f	class:nPr
 next	biz/src/combi.cc	51;"	f	class:nCr
 next	biz/src/combi.cc	60;"	f	class:nTr
 next	biz/src/combi.cc	72;"	f	class:nHr
+next	dndd/www/vue.js	7254;"	f
+nextFrame	dndd/www/vue.js	7985;"	f	function:function
+nextSibling	dndd/www/vue.js	5713;"	f	function:isXlink
+nextTick	dndd/www/vue.js	1984;"	f	function:isSameType
 nextprime	middle/src/mpz.cc	6;"	f
+no	dndd/www/vue.js	274;"	f	function:isRegExp
 noise	biz/src/cvmatrix.cc	316;"	f	class:CVMat
 nokeep_start	lib/tcpip/server.cc	129;"	f	class:Server
+noop	dndd/www/vue.js	269;"	f	function:isRegExp
 normalize	biz/src/cvmatrix.cc	336;"	f	class:CVMat
+normalizeArrayChildren	dndd/www/vue.js	2376;"	f	function:simpleNormalizeChildren
+normalizeChildren	dndd/www/vue.js	2364;"	f	function:simpleNormalizeChildren
+normalizeDirectives	dndd/www/vue.js	1495;"	f	function:defaultStrat
+normalizeDirectives$1	dndd/www/vue.js	6636;"	f
+normalizeEvents	dndd/www/vue.js	7475;"	f	function:isStringStart
+normalizeInject	dndd/www/vue.js	1468;"	f	function:defaultStrat
+normalizeProps	dndd/www/vue.js	1431;"	f	function:defaultStrat
+normalizeScopedSlot	dndd/www/vue.js	2595;"	f	function:isWhitespace
+normalizeScopedSlots	dndd/www/vue.js	2545;"	f	function:isWhitespace
+normalizeStyleBinding	dndd/www/vue.js	7724;"	f	function:function
+normalizeStyleData	dndd/www/vue.js	7714;"	f	function:function
+normalized	dndd/www/vue.js	2596;"	f	function:isWhitespace.normalizeScopedSlot
+notify	dndd/www/vue.js	735;"	m	class:Dep
 now	lib/database/mysqldata.cc	82;"	f	class:SqlQuery
 o_key_pad_	middle/src/hmac.h	37;"	m	class:HMAC
+observe	dndd/www/vue.js	989;"	f	function:isRegExp
+observeArray	dndd/www/vue.js	954;"	m	class:Observer
 ok_	lib/tcpip/server.h	80;"	m	class:Server
 on	biz/src/combi.h	61;"	m	class:nPr
+on	dndd/www/vue.js	10903;"	p	class:baseDirectives
+on	dndd/www/vue.js	2789;"	f
+on	dndd/www/vue.js	3818;"	f	function:Vue.function
+onCompositionEnd	dndd/www/vue.js	8571;"	f
+onCompositionStart	dndd/www/vue.js	8567;"	f
+onEnd	dndd/www/vue.js	8022;"	f	function:whenTransitionEnds
+onRE	dndd/www/vue.js	9535;"	v
+onSignIn	biz/www/index.html	11;"	f
+on_click	ez/www/tutorial4.html	40;"	f
+on_mouse_down	biz/www/crop.html	58;"	f
+on_mouse_move	biz/www/crop.html	92;"	f
+on_mouse_up	biz/www/crop.html	88;"	f
+on_touch_down	biz/www/crop.html	67;"	f
+on_touch_move	biz/www/crop.html	103;"	f
+once	dndd/www/vue.js	346;"	f	function:function
 opencv	biz/src/opencv.cc	147;"	f	class:Biz
 operator !	middle/tst/catch.hpp	1155;"	f	class:Catch::Matchers::Impl::MatcherBase
 operator !	middle/tst/catch.hpp	599;"	f	class:Catch::Ptr
@@ -1137,33 +1680,66 @@ operator cv::Mat	biz/src/cvmatrix.cc	238;"	f	class:CVMat
 operator |	middle/tst/catch.hpp	897;"	f	namespace:Catch
 operator ||	middle/tst/catch.hpp	1123;"	f	struct:Catch::Matchers::Impl::MatchAnyOf
 operator ||	middle/tst/catch.hpp	1151;"	f	class:Catch::Matchers::Impl::MatcherBase
+optimize	dndd/www/googleapi.js	111;"	f
+optimizeWaypoints	dndd/www/goo.js	99;"	p	class:find.request
+optimizeWaypoints	dndd/www/googleapi.js	107;"	p	class:find.request
 options_	lib/util/option.h	19;"	m	class:CMDoption
+origin	dndd/www/goo.js	79;"	v
+origin	dndd/www/goo.js	98;"	p	class:find.request
+origin	dndd/www/googleapi.js	106;"	p	class:find.request
+origin	dndd/www/googleapi.js	87;"	v
 oss	middle/tst/catch.hpp	1208;"	m	struct:Catch::CopyableStream
 other	middle/tst/catch.hpp	460;"	m	struct:Catch::SourceLineInfo
 output_size	biz/src/sha256.h	13;"	m	class:SHA2
 output_size	middle/src/sha1.h	10;"	m	class:SHA1
 output_size	middle/src/sha256.h	10;"	m	class:SHA2
+p	dndd/www/jquery.min.js	2;"	f	function:function
 p	middle/src/rsa.h	12;"	m	class:RSA
 page	dndd/src/dndd.h	16;"	m	class:DnDD
+page_	dndd/www/dndd.js	3;"	v
 param	lib/database/util.cc	47;"	f
+parent	dndd/www/vue.js	3281;"	p	class:isObject.createComponentInstanceForVnode.options
+parentNode	dndd/www/vue.js	5709;"	f	function:isXlink
 parenthesized	middle/tst/catch.hpp	990;"	m	struct:Catch::AssertionResultData
+parseBracket	dndd/www/vue.js	7266;"	f	function:isStringStart
+parseEndTag	dndd/www/vue.js	9481;"	f	function:parseHTML
+parseFilters	dndd/www/vue.js	6823;"	f
+parseHTML	dndd/www/vue.js	9280;"	f
+parseModel	dndd/www/vue.js	7214;"	f
+parsePath	dndd/www/vue.js	510;"	f	function:isReserved
+parseStartTag	dndd/www/vue.js	9413;"	f	function:parseHTML
+parseString	dndd/www/vue.js	7284;"	f	function:isStringStart
+parseText	dndd/www/vue.js	9080;"	f
 parse_all	lib/tcpip/website.cc	73;"	f	class:WebSite
 parse_multi	lib/tcpip/website.cc	135;"	f	class:WebSite
 parse_one	lib/tcpip/website.cc	113;"	f	class:WebSite
 parse_post	lib/tcpip/website.cc	142;"	f	class:WebSite
+patchVnode	dndd/www/vue.js	6253;"	f	function:createPatchFunction
+patternTypes	dndd/www/vue.js	5285;"	v
+pause	dndd/www/bootstrap.min.js	6;"	m
 pc	middle/src/der.h	49;"	m	struct:ber::Type
 pem2json	middle/src/cert.cc	23;"	f
 pemtojson	middle/pybind/wrapper.cc	12;"	f
+performLeave	dndd/www/vue.js	8331;"	f	function:leave
+performLeave	dndd/www/vue.js	8831;"	f	function:var
 performOptionalSelector	middle/tst/catch.hpp	1454;"	f
 performOptionalSelector	middle/tst/catch.hpp	1463;"	f
 pg	dndd/src/page.cc	20;"	f	class:DnDD
 phi	middle/src/rsa.h	12;"	m	class:RSA
+placeSearch	dndd/www/goo.js	4;"	v
+placeSearch	dndd/www/googleapi.js	4;"	v
+placeholder	dndd/www/vue.js	8700;"	f
 plog_	lib/util/log.h	41;"	m	class:Log
+pluckModuleFunction	dndd/www/vue.js	6927;"	f
 pluralise	middle/tst/catch.hpp	446;"	s	namespace:Catch
 point_format	middle/src/tls13.cc	123;"	f	class:TLS13
+polyfillBind	dndd/www/vue.js	204;"	f	function:isRegExp
 polyline	biz/src/cvmatrix.h	28;"	f	class:CVMat
+popTarget	dndd/www/vue.js	760;"	f	function:isNative
 port	middle/src/https.h	9;"	m	struct:Host
 port	middle/src/psk.h	15;"	m	struct:MClient
+postal_code	dndd/www/goo.js	10;"	p	class:componentForm
+postal_code	dndd/www/googleapi.js	10;"	p	class:componentForm
 powm	middle/src/mpz.cc	25;"	f
 precomputed	middle/src/aes.cc	26;"	m	class:AES	file:
 precomputed	middle/src/aes.h	30;"	m	class:AES
@@ -1171,14 +1747,18 @@ pref	adnet/src/adnet.cc	162;"	f	class:Adnet
 preference	adnet/src/adnet.cc	173;"	f	class:Adnet
 premaster_secret_	middle/src/tls13.h	31;"	m	class:TLS13
 prepend	lib/tcpip/website.cc	50;"	f	class:WebSite
+prependModifier	dndd/www/vue.js	2934;"	f	function:checkKeyCodes
+prependModifierMarker	dndd/www/vue.js	6976;"	f
 preprocess	middle/src/sha1.cc	17;"	f	class:SHA1
+prev	dndd/www/bootstrap.min.js	6;"	m
 prev_token_	adnet/src/ad.h	24;"	m	class:Ad
+prevent	dndd/www/vue.js	10763;"	p	class:modifierCode
 print_help	lib/util/option.cc	42;"	f	class:CMDoption
 private	middle/tst/aes.cc	11;"	d	file:
 private	middle/tst/aes.cc	8;"	d	file:
 private	middle/tst/tls.cc	3;"	d	file:
 private	middle/tst/tls.cc	9;"	d	file:
-process	adnet/src/ad.cc	10;"	f	class:Ad
+process	adnet/src/ad.cc	12;"	f	class:Ad
 process	adnet/src/adnet.cc	8;"	f	class:Adnet
 process	adnet/src/misc.cc	13;"	f	class:Misc
 process	biz/src/opencv.cc	10;"	f	class:Biz
@@ -1188,11 +1768,25 @@ process	lib/tcpip/website.h	17;"	f	class:WebSite
 process	sample/src/site.cpp	8;"	f	struct:MyWebsite
 process	suwon/src/suwon.cpp	12;"	f	class:MyWeb
 process_chunk	middle/src/sha1.cc	26;"	f	class:SHA1
+props	dndd/www/vue.js	5289;"	p	class:KeepAlive
+props	dndd/www/vue.js	8725;"	p	class:isSameChild.Transition
+props	dndd/www/vue.js	8844;"	v
+props	dndd/www/vue.js	8851;"	p	class:TransitionGroup
+propsDef.get	dndd/www/vue.js	4905;"	f
+propsDef.set	dndd/www/vue.js	4914;"	f
 protect_handshake	middle/src/tls13.cc	268;"	f	class:TLS13
 protected	middle/tst/aes.cc	12;"	d	file:
 protected	middle/tst/aes.cc	9;"	d	file:
 protected	middle/tst/tls.cc	10;"	d	file:
 protected	middle/tst/tls.cc	4;"	d	file:
+protoAugment	dndd/www/vue.js	966;"	f	function:isRegExp
+prototypeAccessors.child.get	dndd/www/vue.js	802;"	f
+proxy	dndd/www/vue.js	4619;"	f	function:isTrue
+proxyGetter	dndd/www/vue.js	4620;"	f	function:isTrue
+proxyNormalSlot	dndd/www/vue.js	2620;"	f	function:isWhitespace
+proxySetter	dndd/www/vue.js	4623;"	f
+pruneCache	dndd/www/vue.js	5256;"	f
+pruneCacheEntry	dndd/www/vue.js	5271;"	f
 prv_	middle/src/tls13.h	41;"	m	class:TLS13
 prv_key_	middle/src/tls.h	31;"	m	class:TLS
 psk	middle/src/psk.h	25;"	m	struct:SClient
@@ -1202,61 +1796,116 @@ pss_encode	middle/src/pss.cc	24;"	f
 pss_verify	middle/src/pss.cc	48;"	f
 psstm	lib/database/util.cc	36;"	f
 ptr_	lib/tcpip/shared_files.h	15;"	m	class:SharedMem
+pushFilter	dndd/www/vue.js	6891;"	f	function:parseFilters
+pushTarget	dndd/www/vue.js	755;"	f	function:isNative
 push_back	middle/src/tvec.h	12;"	f	class:ThreadSafeVector
 pwd_	adnet/src/adnet.h	15;"	m	class:Adnet
+q	dndd/www/bootstrap.min.js	6;"	m	class:var
 q	middle/src/rsa.h	12;"	m	class:RSA
+qnameCapture	dndd/www/vue.js	9246;"	v
+query	dndd/www/vue.js	5656;"	f	function:isXlink
 query	lib/database/mysqldata.cc	14;"	f	class:SqlQuery
+queueActivatedComponent	dndd/www/vue.js	4355;"	f	function:isTrue
+queueWatcher	dndd/www/vue.js	4374;"	f	function:isTrue
 r	biz/src/combi.h	24;"	m	class:Combination
+rad	dndd/www/googleapi.js	129;"	f
 random	middle/src/tls.cc	156;"	m	struct:Hello_header	file:
 random_prime	middle/src/mpz.cc	13;"	f
+rangeSetItem	dndd/www/vue.js	7131;"	f
 rawMemoryToString	middle/tst/catch.hpp	1613;"	f	namespace:Catch::Detail
 rcon	middle/src/aes.h	31;"	m	class:AES
 rd_	adnet/src/ad.h	26;"	m	class:Ad
+reCache	dndd/www/vue.js	9257;"	v
+reactivateComponent	dndd/www/vue.js	6002;"	f	function:createPatchFunction
 read_config	middle/src/https.cc	37;"	f	class:Middle
 read_constructed	middle/src/der.cc	76;"	f	file:
 read_length	middle/src/der.cc	20;"	f	file:
 read_type	middle/src/der.cc	11;"	f	file:
 read_value	middle/src/der.cc	34;"	f	file:
-real_ip	middle/src/psk.h	12;"	m	union:MClient::__anon1
+real_ip	middle/src/psk.h	12;"	m	union:MClient::__anon2
 recommend	adnet/src/adnet.cc	152;"	f	class:Adnet
 reconnect	lib/database/mysqlquery.cc	51;"	f	class:Mysqlquery
 reconstructExpression	middle/tst/catch.hpp	970;"	f	class:Catch::AssertionResultData::std
 reconstructedExpression	middle/tst/catch.hpp	986;"	m	struct:Catch::AssertionResultData
+recordPosition	dndd/www/vue.js	8994;"	f
 recv	lib/tcpip/server.cc	15;"	f	class:Vrecv
 recv	lib/tcpip/tcpip.cc	37;"	f	class:Tcpip
 recv	middle/pybind/wrapper.cc	167;"	f	class:PyClient
+refresh	dndd/www/bootstrap.min.js	6;"	m	class:function.
+registerDeepBindings	dndd/www/vue.js	3468;"	f	function:isObject
+registerRef	dndd/www/vue.js	5761;"	f
+relatedTarget	dndd/www/bootstrap.min.js	6;"	p	class:var.h
 release	middle/tst/catch.hpp	620;"	f	struct:Catch::SharedImpl
+remove	dndd/www/vue.js	144;"	f	function:isRegExp
 remove	middle/src/psk.cc	54;"	f	class:PSK
+remove$$1	dndd/www/vue.js	5860;"	f	function:createPatchFunction.createRmCb
+remove$1	dndd/www/vue.js	3773;"	f	function:isObject
+remove$2	dndd/www/vue.js	7554;"	f	function:eof
+removeAndInvokeRemoveHook	dndd/www/vue.js	6127;"	f	function:createPatchFunction
+removeChild	dndd/www/vue.js	5701;"	f	function:isXlink
+removeClass	dndd/www/vue.js	7892;"	f	function:function
 removeConst	middle/tst/catch.hpp	1321;"	f	namespace:Catch::Internal
 removeConst	middle/tst/catch.hpp	1323;"	f	namespace:Catch::Internal
+removeNode	dndd/www/vue.js	5869;"	f	function:createPatchFunction
+removeSub	dndd/www/vue.js	725;"	m	class:Dep
+removeTransitionClass	dndd/www/vue.js	7999;"	f	function:function
+removeVnodes	dndd/www/vue.js	6113;"	f	function:createPatchFunction
 remove_colon	middle/src/cert.cc	30;"	f
 remove_if	middle/src/tvec.h	29;"	f	class:ThreadSafeVector
+renderClass	dndd/www/vue.js	5524;"	f	function:isXlink
+renderList	dndd/www/vue.js	2629;"	f	function:isObject
+renderMixin	dndd/www/vue.js	3513;"	f	function:isObject
+renderSlot	dndd/www/vue.js	2674;"	f	function:isObject
+renderStatic	dndd/www/vue.js	2808;"	f	function:checkKeyCodes
+repeat	dndd/www/vue.js	668;"	f	function:isNative
+replaceArrow	dndd/www/bootstrap.min.js	6;"	m
 req_header_	lib/tcpip/website.h	20;"	m	class:WebSite
-request_ad	adnet/src/ad.cc	30;"	f	class:Ad
+request_ad	adnet/ad/adnet.js	1;"	f
+request_ad	adnet/src/ad.cc	60;"	f	class:Ad
 requested_document_	lib/tcpip/website.h	21;"	m	class:WebSite
 res	lib/database/mysqlquery.h	15;"	m	class:Mysqlquery
 reset	middle/tst/catch.hpp	580;"	f	class:Catch::Ptr
+resetSchedulerState	dndd/www/vue.js	4238;"	f	function:isTrue
+resizeIframe	dndd/www/page.html	17;"	f
+resolveAsset	dndd/www/vue.js	1575;"	f	function:defaultStrat
+resolveAsyncComponent	dndd/www/vue.js	3612;"	f	function:isObject
+resolveConstructorOptions	dndd/www/vue.js	5030;"	f
+resolveFilter	dndd/www/vue.js	2711;"	f	function:isObject
+resolveInject	dndd/www/vue.js	2456;"	f	function:simpleNormalizeChildren
+resolveModifiedOptions	dndd/www/vue.js	5054;"	f
+resolveScopedSlots	dndd/www/vue.js	2887;"	f	function:checkKeyCodes
+resolveSlots	dndd/www/vue.js	2499;"	f	function:simpleNormalizeChildren
+resolveTransition	dndd/www/vue.js	7925;"	f	function:function
 restore	biz/src/cvmatrix.cc	341;"	f	class:CVMat
 result	dndd/src/dndd.cc	65;"	f	class:DnDD
 resultDisposition	middle/tst/catch.hpp	950;"	m	struct:Catch::AssertionInfo
 resultType	middle/tst/catch.hpp	988;"	m	struct:Catch::AssertionResultData
 resumption_master_secret_	middle/src/tls13.h	47;"	m	class:TLS13
+return	dndd/www/vue.js	2353;"	c	class:isObject
 return_content	lib/tcpip/website.cc	105;"	f	class:WebSite
 rewind	biz/src/combi.cc	95;"	f	class:nPr
+right	dndd/www/vue.js	10734;"	p	class:keyCodes
 rooms_	dndd/src/chatserver.h	37;"	m	class:ChatServer
 rotate	biz/src/cvmatrix.cc	54;"	f	class:CVMat
+route	dndd/www/goo.js	6;"	p	class:componentForm
+route	dndd/www/googleapi.js	6;"	p	class:componentForm
 rsa_	middle/src/tls.h	48;"	m	class:TLS
+run	dndd/www/vue.js	4545;"	m	class:Watcher
 run_	middle/src/psk.h	37;"	m	class:PSK
 s	middle/tst/catch.hpp	1547;"	m	struct:Catch::Detail::IsStreamInsertable
 salt	middle/pybind/wrapper.cc	84;"	f	class:PyHKDF
 salt	middle/src/hkdf.h	10;"	f	struct:HKDF
+sameInputType	dndd/www/vue.js	5821;"	f
+sameVnode	dndd/www/vue.js	5804;"	f
 save	biz/src/cvmatrix.cc	346;"	f	class:CVMat
+save	dndd/www/googleapi.js	150;"	f
 save_	biz/src/cvmatrix.h	72;"	m	class:CVMat
 sbox	middle/src/aes.h	33;"	m	class:AES
 scale	biz/src/cvmatrix.cc	50;"	f	class:CVMat
 schedule	middle/tst/aes.cc	16;"	v
 schedule_	middle/src/aes.h	18;"	m	class:AES
 sclient_	middle/src/tls13.h	39;"	m	class:TLS13
+scroll	dndd/www/bootstrap.min.js	6;"	p	class:offset
 search	dndd/src/dndd.cc	148;"	f	class:DnDD
 secondArg	middle/tst/catch.hpp	951;"	m	struct:Catch::AssertionInfo
 secret	middle/pybind/wrapper.cc	64;"	f	class:PyPRF
@@ -1266,6 +1915,7 @@ seed	middle/src/prf.h	15;"	f	class:PRF
 seed_	middle/src/prf.h	53;"	m	class:PRF
 select	lib/database/mysqldata.cc	96;"	f	class:SqlQuery
 selected_psk_	middle/src/tls13.h	40;"	m	class:TLS13
+self	dndd/www/vue.js	10764;"	p	class:modifierCode
 send	lib/tcpip/tcpip.cc	27;"	f	class:Tcpip
 send	middle/pybind/wrapper.cc	163;"	f	class:PyClient
 send	middle/src/psk.cc	21;"	f	class:MClient
@@ -1281,9 +1931,22 @@ server_hello	middle/src/tls13.cc	423;"	f	class:TLS13
 server_hello_done	middle/src/tls.cc	313;"	f	class:TLS
 server_key_exchange	middle/src/tls.cc	267;"	f	class:TLS
 server_random_	middle/src/tls.h	42;"	m	class:TLS
+service	dndd/www/goo.js	2;"	v
+service	dndd/www/googleapi.js	2;"	v
 session_id	middle/src/tls.cc	158;"	m	struct:Hello_header	file:
 session_id_	middle/src/tls.h	42;"	m	class:TLS
 session_id_length	middle/src/tls.cc	157;"	m	struct:Hello_header	file:
+set	dndd/www/vue.js	1080;"	f	function:isRegExp
+set	dndd/www/vue.js	4615;"	p	class:isTrue.sharedPropertyDefinition
+setActiveInstance	dndd/www/vue.js	3895;"	f	function:isFalse
+setAttr	dndd/www/vue.js	6722;"	f
+setContent	dndd/www/bootstrap.min.js	6;"	m
+setProp	dndd/www/vue.js	7772;"	f	function:var
+setScope	dndd/www/vue.js	6070;"	f	function:createPatchFunction
+setSelected	dndd/www/vue.js	8514;"	f
+setState	dndd/www/bootstrap.min.js	6;"	m
+setStyleScope	dndd/www/vue.js	5725;"	f	function:isXlink
+setTextContent	dndd/www/vue.js	5721;"	f	function:isXlink
 set_aes	middle/src/tls13.cc	367;"	f	class:TLS13
 set_length	middle/src/tls.cc	139;"	f	struct:TLS_header
 set_length	middle/src/tls.cc	146;"	f	struct:Handshake_header
@@ -1294,47 +1957,86 @@ set_peer_pubkey	middle/src/diffie.cc	14;"	f	class:DiffieHellman
 sha_	biz/src/sha256.h	25;"	m	class:SHA2
 sha_	middle/src/hmac.h	36;"	m	class:HMAC
 sha_	middle/src/sha256.h	22;"	m	class:SHA2
+sharedPropertyDefinition.get	dndd/www/vue.js	4619;"	f	function:isTrue
+sharedPropertyDefinition.set	dndd/www/vue.js	4622;"	c
+sharedPropertyDefinition.set	dndd/www/vue.js	4810;"	f
 shift_row	middle/src/aes.cc	82;"	f	class:AES
 shm_fd_	lib/tcpip/shared_files.h	16;"	m	class:SharedMem
 shouldContinueOnFailure	middle/tst/catch.hpp	901;"	f	namespace:Catch
+shouldIgnoreFirstNewline	dndd/www/vue.js	9273;"	f
 shouldSuppressFailure	middle/tst/catch.hpp	903;"	f	namespace:Catch
+shouldUpdateValue	dndd/www/vue.js	7661;"	f	function:eof
 show	biz/src/cvmatrix.cc	456;"	f	class:CVMat
+show	dndd/www/bootstrap.min.js	6;"	m
+show	dndd/www/vue.js	8649;"	p	class:platformDirectives
 show_tables	lib/database/mysqldata.cc	116;"	f	class:SqlQuery
 sign	middle/src/ecdsa.cc	18;"	f	class:ECDSA
 sign	middle/src/rsa.cc	32;"	f	class:RSA
 signin	dndd/src/dndd.cc	195;"	f	class:DnDD
 signup	adnet/src/adnet.cc	63;"	f	class:Adnet
+simpleNormalizeChildren	dndd/www/vue.js	2351;"	f	function:isObject
 size	biz/src/combi.h	19;"	f	class:Combination
 size	lib/database/mysqldata.h	47;"	m	struct:SqlQuery::Column
 size	middle/src/tvec.h	16;"	f	class:ThreadSafeVector
 size_	lib/tcpip/shared_files.h	16;"	m	class:SharedMem
 sizer	middle/tst/catch.hpp	1537;"	m	struct:Catch::Detail::TrueType
 sizer	middle/tst/catch.hpp	1538;"	m	struct:Catch::Detail::FalseType
+slide	dndd/www/bootstrap.min.js	6;"	m
+slotRE	dndd/www/vue.js	9546;"	v
+slots	dndd/www/vue.js	2996;"	m	class:FunctionalRenderContext
 sp_client	middle/src/psk.h	24;"	m	struct:SClient
+space	dndd/www/vue.js	10731;"	p	class:keyCodes
 sq	adnet/src/ad.h	13;"	m	class:Ad
 sq	adnet/src/adnet.h	11;"	m	class:Adnet
 sq	biz/src/biz.h	9;"	m	class:Biz
 sq	dndd/src/dndd.h	7;"	m	class:DnDD
 sq	suwon/src/suwon.cpp	26;"	m	class:MyWeb	file:
+ss.display	dndd/www/w3.js	224;"	f
+ss.next	dndd/www/w3.js	214;"	f
+ss.previous	dndd/www/w3.js	219;"	f
+ss.start	dndd/www/w3.js	206;"	f
 start	dndd/src/chatserver.h	6;"	f	class:Server2
+start	dndd/www/goo.js	81;"	f
+start	dndd/www/googleapi.js	89;"	f
 start	lib/tcpip/server.cc	103;"	f	class:Server
 start	middle/src/https.cc	45;"	f	class:Middle
+startTagClose	dndd/www/vue.js	9248;"	v
+stateMixin	dndd/www/vue.js	4899;"	f
+staticKeys	dndd/www/vue.js	9152;"	p	class:klass$1
+staticKeys	dndd/www/vue.js	9197;"	p	class:style$1
 stmt	lib/database/mysqlquery.h	12;"	m	class:Mysqlquery
+stop	dndd/www/vue.js	10762;"	p	class:modifierCode
 str2mpz	middle/src/cert.cc	16;"	f
+strats.data	dndd/www/vue.js	1252;"	f
+strats.watch	dndd/www/vue.js	1333;"	f
 stream	middle/tst/catch.hpp	1260;"	f	class:Catch::ResultBuilder
+street_number	dndd/www/goo.js	5;"	p	class:componentForm
+street_number	dndd/www/googleapi.js	5;"	p	class:componentForm
+stringifyArray	dndd/www/vue.js	5553;"	f	function:isXlink
+stringifyClass	dndd/www/vue.js	5539;"	f	function:isXlink
+stringifyObject	dndd/www/vue.js	5565;"	f	function:isXlink
+stripParensRE	dndd/www/vue.js	9539;"	v
 struct2str	middle/src/tls.h	74;"	f
+styleValue	dndd/www/vue.js	1803;"	f	function:isSameType
 sub_key_share	middle/src/tls13.cc	129;"	f	class:TLS13
 substitute	middle/src/aes.cc	72;"	f	class:AES
 supported_group	middle/src/tls13.cc	117;"	f	class:TLS13
 supported_version	middle/src/tls13.cc	152;"	f	class:TLS13
+svg	dndd/www/vue.js	5578;"	p	class:isXlink.namespaceMap
 swap	lib/tcpip/website.cc	36;"	f	class:WebSite
 swap	middle/tst/catch.hpp	595;"	f	class:Catch::Ptr
 swap	sample/src/base64.cpp	7;"	f
 t	middle/tst/catch.hpp	1548;"	m	struct:Catch::Detail::IsStreamInsertable
+tab	dndd/www/vue.js	10729;"	p	class:keyCodes
 table	dndd/src/dndd.h	16;"	m	class:DnDD
+table_	dndd/www/dndd.js	1;"	v
 table_name	lib/database/mysqldata.h	50;"	m	class:SqlQuery
 tables	dndd/src/dnddsub.cc	8;"	f	class:DnDD
+tag	dndd/www/vue.js	3608;"	p	class:node.asyncMeta
 tag	middle/src/der.h	47;"	m	struct:ber::Type
+tagName	dndd/www/vue.js	5717;"	f	function:isXlink
+tagName	dndd/www/vue.js	9416;"	p	class:parseHTML.var.match
+teardown	dndd/www/vue.js	4594;"	m	class:Watcher
 template_init	biz/src/cvmatrix.cc	471;"	f	class:CVMat
 text	biz/src/cvmatrix.cc	208;"	f	class:CVMat
 th_	adnet/src/ad.h	27;"	m	class:Ad
@@ -1342,21 +2044,68 @@ th_	middle/src/psk.h	36;"	m	class:PSK
 ticket_id_	middle/src/tls13.h	48;"	m	class:TLS13
 time	lib/util/log.cc	35;"	f	class:Log
 time_out	lib/tcpip/server.h	79;"	m	class:Server
+timerFunc	dndd/www/vue.js	1940;"	f
+tip	dndd/www/bootstrap.min.js	6;"	m
+tip	dndd/www/vue.js	636;"	f
 tmp	dndd/src/dndd.h	17;"	m	class:DnDD
+to	dndd/www/bootstrap.min.js	6;"	m
+toArray	dndd/www/vue.js	229;"	f	function:isRegExp
+toMs	dndd/www/vue.js	8104;"	f	function:function
+toNumber	dndd/www/vue.js	108;"	f	function:toString
+toObject	dndd/www/vue.js	252;"	f	function:isRegExp
+toRawType	dndd/www/vue.js	61;"	f	function:isObject
+toString	dndd/www/vue.js	96;"	f	function:isValidArrayIndex
 toString	middle/tst/catch.hpp	1040;"	f	class:Catch::Matchers::Impl::MatcherUntypedBase
 toString	middle/tst/catch.hpp	1657;"	f	namespace:Catch
 to_send	middle/src/psk.cc	31;"	m	class:MClient	file:
 to_send	middle/src/psk.h	17;"	m	struct:MClient
+toggleObserving	dndd/www/vue.js	912;"	f	function:isRegExp
 token_	adnet/src/ad.h	24;"	m	class:Ad
+top	dndd/www/bootstrap.min.js	6;"	p	class:var.e
 transform3	biz/src/cvmatrix.cc	59;"	f	class:CVMat
 transform4	biz/src/cvmatrix.cc	74;"	f	class:CVMat
+transformModel	dndd/www/vue.js	3317;"	f	function:isObject
+transformNode	dndd/www/vue.js	9117;"	f
+transformNode$1	dndd/www/vue.js	9160;"	f
+transformSpecialNewlines	dndd/www/vue.js	11450;"	f	function:needsNormalization
+travelMode	dndd/www/goo.js	98;"	p	class:find.request
+travelMode	dndd/www/googleapi.js	106;"	p	class:find.request
+traverse	dndd/www/vue.js	2131;"	f	function:isObject
+trigger	dndd/www/vue.js	8578;"	f
 trueValue	middle/tst/catch.hpp	418;"	f	class:Catch::SafeBool
+type	dndd/www/vue.js	1442;"	p	class:res
+type	dndd/www/vue.js	8659;"	p	class:transitionProps
 type	lib/database/mysqldata.h	48;"	m	struct:SqlQuery::Column
 type_change	middle/src/der.cc	44;"	f	file:
-u	middle/src/psk.h	14;"	m	struct:MClient	typeref:union:MClient::__anon1
+u	middle/src/psk.h	14;"	m	struct:MClient	typeref:union:MClient::__anon2
+uid$3	dndd/www/vue.js	4952;"	v
+up	dndd/www/vue.js	10732;"	p	class:keyCodes
+update	dndd/www/vue.js	1501;"	p	class:defaultStrat.dirs
+update	dndd/www/vue.js	4530;"	m	class:Watcher
+update	dndd/www/vue.js	6560;"	p	class:directives
+update	dndd/www/vue.js	6777;"	p	class:attrs
+update	dndd/www/vue.js	6815;"	p	class:klass
+update	dndd/www/vue.js	7580;"	p	class:eof.events
+update	dndd/www/vue.js	7694;"	p	class:var.domProps
+update	dndd/www/vue.js	7855;"	p	class:var.style
+updateAttrs	dndd/www/vue.js	6681;"	f
+updateChildComponent	dndd/www/vue.js	4086;"	f	function:isTrue
+updateChildren	dndd/www/vue.js	6156;"	f	function:createPatchFunction
+updateClass	dndd/www/vue.js	6783;"	f
+updateComponent	dndd/www/vue.js	4042;"	f
+updateComponentListeners	dndd/www/vue.js	3787;"	f	function:isFalse
+updateDOMListeners	dndd/www/vue.js	7567;"	f	function:eof
+updateDOMProps	dndd/www/vue.js	7588;"	f	function:eof
+updateDirectives	dndd/www/vue.js	6567;"	f
+updateListeners	dndd/www/vue.js	2195;"	f	function:isObject
+updateStyle	dndd/www/vue.js	7811;"	f	function:function
 use_mutex_	lib/util/log.h	37;"	m	class:Log
 v	lib/util/option.h	36;"	m	class:FileExpansion
-value	middle/tst/catch.hpp	1549;"	e	enum:Catch::Detail::IsStreamInsertable::__anon2
+validDivisionCharRE	dndd/www/vue.js	6821;"	v
+validateComponentName	dndd/www/vue.js	1412;"	f	function:defaultStrat
+validateProp	dndd/www/vue.js	1607;"	f	function:defaultStrat
+value	dndd/www/vue.js	7173;"	p	class:el.model
+value	middle/tst/catch.hpp	1549;"	e	enum:Catch::Detail::IsStreamInsertable::__anon3
 value	middle/tst/catch.hpp	1562;"	m	class:Catch::Detail::IsStreamInsertable
 values_	lib/database/mysqldata.h	57;"	m	class:SqlQuery
 verify	middle/src/ecdsa.cc	38;"	f	class:ECDSA
@@ -1366,14 +2115,66 @@ version	middle/src/tls.cc	155;"	m	struct:Hello_header	file:
 version	middle/src/tls13.cc	590;"	m	struct:TLS_header	file:
 view_increase_	adnet/src/ad.h	25;"	m	class:Ad
 view_induce_	adnet/src/ad.h	25;"	m	class:Ad
+vm.$createElement	dndd/www/vue.js	3491;"	f
+vm._c	dndd/www/vue.js	3486;"	f
+vnode	dndd/www/vue.js	5321;"	v
 vote	dndd/src/dndd.cc	87;"	f	class:DnDD
+vote	dndd/www/page.html	37;"	f
 w	middle/src/sha1.h	27;"	m	class:SHA1
+w3	dndd/www/w3.js	3;"	v
+w3.addClass	dndd/www/w3.js	51;"	f
+w3.addClassElement	dndd/www/w3.js	60;"	f
+w3.addClassElements	dndd/www/w3.js	54;"	f
+w3.addStyle	dndd/www/w3.js	29;"	f
+w3.displayHttp	dndd/www/w3.js	268;"	f
+w3.filterHTML	dndd/www/w3.js	135;"	f
+w3.getElements	dndd/www/w3.js	128;"	f
+w3.getElementsByAttribute	dndd/www/w3.js	289;"	f
+w3.getHttpData	dndd/www/w3.js	254;"	f
+w3.getHttpObject	dndd/www/w3.js	261;"	f
+w3.hide	dndd/www/w3.js	3;"	f
+w3.hideElement	dndd/www/w3.js	12;"	f
+w3.hideElements	dndd/www/w3.js	6;"	f
+w3.http	dndd/www/w3.js	275;"	f
+w3.includeHTML	dndd/www/w3.js	231;"	f
+w3.removeClass	dndd/www/w3.js	68;"	f
+w3.removeClassElement	dndd/www/w3.js	77;"	f
+w3.removeClassElements	dndd/www/w3.js	71;"	f
+w3.show	dndd/www/w3.js	15;"	f
+w3.showElement	dndd/www/w3.js	26;"	f
+w3.showElements	dndd/www/w3.js	20;"	f
+w3.slideshow	dndd/www/w3.js	195;"	f
+w3.sortHTML	dndd/www/w3.js	159;"	f
+w3.styleElement	dndd/www/w3.js	38;"	f
+w3.styleElements	dndd/www/w3.js	32;"	f
+w3.toggleClass	dndd/www/w3.js	88;"	f
+w3.toggleClassElement	dndd/www/w3.js	97;"	f
+w3.toggleClassElements	dndd/www/w3.js	91;"	f
+w3.toggleShow	dndd/www/w3.js	41;"	f
+w3_replace_curly	dndd/www/w3.js	343;"	f	function:displayObject
+w3_replace_html	dndd/www/w3.js	387;"	f	function:displayObject
+walk	dndd/www/vue.js	944;"	m	class:Observer
+warn	dndd/www/vue.js	5388;"	p	class:Vue.util
+warn	dndd/www/vue.js	626;"	f
+warnNonPresent	dndd/www/vue.js	2046;"	f	function:isSameType
+warnReservedPrefix	dndd/www/vue.js	2057;"	f	function:isSameType
+waypoint	dndd/www/goo.js	89;"	f
+waypoint	dndd/www/googleapi.js	97;"	f
+waypoints	dndd/www/goo.js	98;"	p	class:find.request
+waypoints	dndd/www/googleapi.js	106;"	p	class:find.request
+ways	dndd/www/goo.js	80;"	v
+ways	dndd/www/googleapi.js	88;"	v
 weight	middle/src/https.h	10;"	m	struct:Host
 what	biz/src/combi.h	7;"	f	class:NRexception
+whenTransitionEnds	dndd/www/vue.js	8006;"	f	function:function
+whitespaceRE$1	dndd/www/vue.js	9549;"	v
 wordvec	biz/src/opencv.cc	86;"	f	file:
+wrapFilter	dndd/www/vue.js	6905;"	f
+wrappedHook	dndd/www/vue.js	2243;"	f	function:mergeVNodeHook
 x	middle/src/diffie.h	21;"	m	struct:X25519
 x	middle/src/diffie.h	41;"	m	struct:EC_Point
 x	middle/src/diffie.h	9;"	m	struct:DiffieHellman
+xhttp.onreadystatechange	dndd/www/w3.js	239;"	f
 xor_with_enc_ivNcounter	middle/src/aes.cc	236;"	f	class:GCM
 xor_with_iv	middle/pybind/wrapper.cc	47;"	f	class:PyAES
 xor_with_iv	middle/src/aes.cc	253;"	f	class:GCM
