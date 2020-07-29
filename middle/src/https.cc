@@ -88,6 +88,8 @@ void Middle::connected(int fd)
 						}
 					}
 					LOGT << *a << endl;
+					try { (*cl)->test(); }//test if web server is available
+					catch(...) { PSKnCLIENT.remove(*cl); break; }
 					if((*cl)->accumulate(*a)) {//multiple packets constitute one message
 						if((*cl)->try_lock_for(7s)) {
 							(*cl)->send();//to inner server. client_addr -> http header ip address

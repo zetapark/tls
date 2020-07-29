@@ -118,10 +118,8 @@ void Ad::insert_increment()
 		ids.pop_back();//remove ,
 		sq.query(string{"update Users set "} + col_name[i] + " = case " + cases +
 				" end where id in (" + ids + ")");
+		p[i]->clear();
 	}
-
-	view_increase_.clear(); click_increase_.clear();
-	view_induce_.clear(); click_induce_.clear();
 }
 
 string Ad::new_token()
