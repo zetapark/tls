@@ -11,6 +11,7 @@ void Adnet::process()
 	if(requested_document_ == "signup.php") content_ = signup();
 	else if(requested_document_ == "index.html") index();//from login button
 	else if(requested_document_ == "banner.html") banner();
+	else if(requested_document_ == "preference.html") preference();
 	else if(requested_document_ == "forgot.php") content_ = forgot();
 	else if(requested_document_ == "emailcheck.php") content_ = email_check();
 	else if(requested_document_ == "recommend.php") content_ = recommend();
@@ -174,8 +175,8 @@ void Adnet::pref()
 void Adnet::preference()
 {
 	if(sq.select("Pref", "where id = '" + id_ + "'"))
-		for(string s : category) if(sq[0][s].asInt()) append("name=" + s, " checked");
-	if(sq.select("Users", "where id='" + id_ + "'")) {
+		for(string s : category) if(sq[0][s].asBool()) append("name=" + s, " checked");
+	if(sq.select("Users", "where id = '" + id_ + "'")) {
 		if(sq[0]["lat"].asFloat()) append("name=lat", " value=" + sq[0]["lat"].asString());
 		if(sq[0]["lng"].asFloat()) append("name=lng", " value=" + sq[0]["lng"].asString());
 		if(string s = sq[0]["nation"].asString(); s != "") append("value=" + s, " checked");
