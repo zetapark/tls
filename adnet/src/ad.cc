@@ -65,7 +65,7 @@ vector<string> divide_category(string cat)
 string Ad::request_ad() 
 {//do not use LOG with sq : LOGD << sq -> error
 	float lat, lng; string nation;
-	tie(nation, lat, lng) = get_position(nameNvalue_["IP-Addr"]);
+	tie(nation, lat, lng) = get_position(req_header_["IP-Addr"]);
 
 	int pick = 0;//category have priority : 3 point
 	for(int i=0, current_best_point=0, point=0; i<sq.size(); i++) {
