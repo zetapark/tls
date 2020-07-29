@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+		<meta charset="utf-8" />
+		<script src="https://code.jquery.com/jquery-3.5.0.min.js"
+					integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ="
+		 crossorigin="anonymous"></script>
+<style>
+p { display : table-row; }
+label { display : table-cell; width : 170px; }
+input { display : table-cell; }
+</style>
+	<script>
+		$(function() {
+			$('form').submit(function(event) {
+				event.preventDefault();
+				$.post('signup.php', $('form').serialize(), function(data) {
+					alert(data);
+					if(data.localeCompare('you are registered') == 0) window.location.href='index.html';
+				});
+			});
+
+			$('#check').click(function() {
+				$.post('emailcheck.php', {email : $("[name='email']").val()},
+					function(data) { alert('check your email to verify your account');});
+			});
+			$('#recommend').click(function() {
+				$.post('recommend.php', {id : $("[name='recommender']").val()},
+					function(data) { alert(data); });
+			});
+		});
+	</script>
+</head>
+<body>
+
+<form action="index.html" style="border:1px solid #ccc">
+  <div class="container">
+    <h1>Sign Up</h1>
+    <p>
+		Please fill in this form to create an account.
+		Email and ID cannot be changed later.
+		ID will be used as a webpage url like https://adnet.zeta2374.com/your-id.
+		Make it simple and easy to remember and represent your identity.
+		It should be unique in AdNET.
+		</p>
+    <hr>
+
+		<p>
+		<label for=id><b>ID</b></label>
+		<input type=text placeholder='Enter your id, do not use dot(.)' name=id required><br>
+		</p>
+
+		<p>
+    <label for="email"><b>Email</b></label>
+		<input type="email" placeholder="Enter Email" name="email" required>
+		<input type=button value='check email' id=check><br>
+		</p>
+
+		<p>
+		<label for=num><b>Verification Code</b></label>
+		<input type=text placeholder='Enter 5 digit number' name=num required><br>
+		</p>
+
+		<p>
+    <label for="psw"><b>Password</b></label>
+		<input type="password" placeholder="Enter Password" name="psw" required><br>
+		</p>
+
+		<p>
+    <label for="psw-repeat"><b>Repeat Password</b></label>
+		<input type="password" placeholder="Repeat Password" name="psw-repeat" required><br>
+		</p>
+
+		<p>
+		<label for=recommend><b>Recommender ID</b></label>
+		<input type=text placeholder='Enter recommender ID' name=recommender>
+		<input type=button value='check recommender' id=recommend><br>
+		</p>
+    
+		<p>
+    <label>Remember me</label>
+		<input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px"> 
+		</p>
+		<a href=service.html>이용약관 및 개인정보취급방침</a>에 동의합니다. 
+    
+    <div class="clearfix">
+      <button type="button" class="cancelbtn">Cancel</button>
+      <button type="submit" class="signupbtn">Sign Up</button>
+    </div>
+  </div>
+</form>
+
+</body>
+</html>
+

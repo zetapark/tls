@@ -1,25 +1,31 @@
 SHELL := /bin/bash
-OPTION = -j 3
+CPU ?= 3
+OPTION = CPU=$(CPU)
 
 all : 
-	make $(OPTION) -C util/
-	./incltouch.x
-	make $(OPTION) -C tcpip/
-	make $(OPTION) -C database/
-	make $(OPTION) -C src/
-	make $(OPTION) -C pybind/
-	make $(OPTION) -C site_src/
+	make $(OPTION) -C incltouch/
+	make $(OPTION) -C lib/
+	if [ ! -f libzeta.so ]; then ln -s lib/libzeta.so libzeta.so; fi
+	make $(OPTION) -C middle/
+	if [ ! -f libzetatls.so ]; then ln -s middle/libzetatls.so libzetatls.so; fi
+	if [ ! -f zeta.so ]; then ln -s middle/zeta.so zeta.so; fi
+	make $(OPTION) -C biz/
+	if [ ! -f libbiz.so ]; then ln -s biz/libbiz.so libbiz.so; fi
 	make $(OPTION) -C dndd/
-	make $(OPTION) -C biz_src/
-	make $(OPTION) -C kk_src/
-	make $(OPTION) -C tst/
-	make $(OPTION) -C obj/
-	./catch.tst.x
+	make $(OPTION) -C suwon/
+	make $(OPTION) -C ez/
+	make $(OPTION) -C sample/
+	make $(OPTION) -C adnet/
+
+safe :
+	make -C lib/
+	if [ ! -f libzeta.so ]; then ln -s lib/libzeta.so libzeta.so; fi
+	cd middle/src/ && make && cd ../obj/ && make
+	if [ ! -f libzetatls.so ]; then ln -s middle/libzetatls.so libzetatls.so; fi
+	make -C sample/
 
 clean :
-	mv obj/catch.tst.x obj/catch.tst
-	rm *.x obj/*.?
-	mv obj/catch.tst obj/catch.tst.x
+	for i in $(shell ls -d */); do cd $$i; make clean; cd ..; done
 
 # incltouch will touch source files, according to inclusion of header files.
 # incltouch generate tree of header inclusion.

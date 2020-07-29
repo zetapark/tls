@@ -1,0 +1,115 @@
+<html>
+	<head>
+		<meta charset=utf-8>
+		<meta name="viewport" content="width=device-width, initial-scale=1"> 
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+		<link rel='stylesheet' href='tutorial.css'>
+		<script src=tutorial.js></script>
+	</head>
+
+	<body>
+		<h1 class="w3-center w3-panel w3-green">Reference</h1>
+		<div class="w3-row w3-border">
+			<div class="w3-hide-small w3-col m2 l2">
+			</div>
+			<div class="w3-rest w3-container">
+				<div class = 'w3-panel w3-card w3-light-grey'>
+					<h4 class=kor>eZ 프레임워크 최대의 강점은 채 한 페이지도 되지 않는 레퍼런스입니다.</h4>
+					<h4 class=eng>The strongest point of eZ Framework is that the whole reference is less than a page</h4>
+					<p class=kor>
+					서버 사이드 웹 프로그래밍을 하기 위해서, 개발자는 단지 
+					단 두개의 클래스와 3개의 변수, 7개의 함수만 알면 됩니다.
+					</p>
+					<p class=eng>
+					eZ Framework is made of just two classes and 3 variables and 7 functions.
+					Developer need to know just these to make a web site.
+					</p>
+				</div>
+
+				<div class = 'w3-panel w3-card w3-light-grey'>
+					<h4 class=kor>WebSite 클래스 함수</h4>
+					<h4 class=eng>WebSite Class Functions</h4>
+					<p class=kor>
+					WebSite 클래스는 단 세 개의 편의 함수를 제공합니다. 
+					이 함수는 content_값을 변화시키는 데에 사용합니다.
+					</p>
+					<p class=eng>
+					WebSite class offer 3 utility functions. swap, append, prepend.
+					These functions are used to change the content_ variable.
+					</p>
+					<dl class=kor>
+						<dt>public :</dd>
+						<dd>static void init(string dir) : 디렉토리 dir에서 템플릿 파일들을 로드한다.</dd>
+						<dd>static void add_header(string document, string header) : document의 HTML response에 헤더를 붙인다. CORS등에 사용.</dd>
+						<dt>protected :</dt>
+						<dd>bool swap(string a, string b) : content_에서 a를 찾아서 b로 바꿉니다. 바꾸었으면 true 리턴</dd>
+						<dd>bool append(string a, string b) : content_에서 a를 찾아서 그 바로 뒤에 b를 붙인다.</dd>
+						<dd>bool prepend(string a, string b) : content_에서 a를 찾아서 그 바로 앞에 b를 붙인다.</dd>
+					</dl>
+					<dl class=eng>
+						<dt>public :</dt>
+						<dd>static void init(string dir) : Load template files from directory dir</dd>
+						<dd>static void add_header(string document, string header) : attach header to HTML response</dd>
+						<dt>protected :</dt> 
+						<dd>bool swap(string a, string b) : find a in content_ and change it to b, return true if swap succeded.</dd>
+						<dd>bool append(string a, string b) : find a in content_ and append b after a</dd>
+						<dd>bool prepend(string a, string b) : find a in content_ and prepend b before a</dd>
+					</dl>
+				</div>
+
+				<div class = 'w3-panel w3-card w3-light-grey'>
+					<h4 class=kor>WebSite 클래스 멤버 변수</h4>
+					<h4 class=eng>Member variables of WebSite class</h4>
+					<p class=kor>
+					eZ 프레임워크는 사용하기 위해 외워야 할 것이 거의 없습니다.
+					MySql 데이터베이스를 위한 SqlQuery 클래스, 원격 접속을 담당하는 Server 클래스,
+					웹사이트의 서버측 로직을 담당하는 WebSite 클래스가 다입니다.
+
+					Server 클래스는 생성자에서 포트번호를 정해주고, start함수로 WebSite 클래스 혹은
+					WebSite 클래스에서 파생된 자식 클래스를 실행하면 됩니다.
+					WebSite 클래스는 내부적으로 사용하며 프로그래머가 알아야 하는 세개의 멤버 변수가 있습니다.
+					</p>
+					<p class=eng>
+					eZ Frammework does not have much to memorize to develop.
+					SqlQeury class for MySql input and output, Server class for networking,
+					WebSite class for server side logic.
+					These are all you should know.
+
+					Server class specify the port number in constructor, and run the WebSite class or a class inherited from WebSite class with start function.
+					There are three member variables you should know in WebSite class.
+					</p>
+					<dl class=kor>
+						<dt>protected :</dt>
+						<dd>string requested_document_ : 요청된 페이지 이름</dd>
+						<dd>string content_ : 요청된 페이지의 템플릿 값에 따라 초기화된 문자열</dd>
+						<dd>map&lt;string, string> nameNvalue_ : post, get, 혹은 multifile-form data 에서 온 파라미터와 그 값들</dd>
+					</dl>
+					<dl class=eng>
+						<dt>protected :</dt>
+						<dd>string requested_document_ : requested document by the browser</dd>
+						<dd>string content_ : initialized with template of requested document</dd>
+						<dd>map&lt;string, string> nameNvalue_ : parameters and the values of post, get or multiform data</dd>
+					</dl>
+				</div>
+
+				<div class = 'w3-panel w3-card w3-light-grey'>
+					<h4 class=kor>Server class의 함수</h4>
+					<h4 class=eng>Functions of Server class</h4>
+					<dl class=kor>
+						<dt>public :</dt>
+						<dd>Server(int port) : port번호를 지정하는 생성자</dd>
+						<dd>start(functionali&lt;string(string)> website) : website 클래스나 이 클래스의 자식 클래스를 실행시켜 웹 서버를 기동시킨다.</dd>
+					</dl>
+					<dl class=eng>
+						public :
+						<dd>Server(int port) : constructor using port number port</dd>
+						<dd>start(functional&lt;string(string)> website) : start a website</dd>
+					</dl>
+				</div>
+
+			</div>
+		</div>
+	</body>
+</html>
+

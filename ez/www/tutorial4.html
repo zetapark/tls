@@ -1,0 +1,80 @@
+<html>
+	<head>
+		<meta charset=utf-8>
+		<meta name="viewport" content="width=device-width, initial-scale=1"> 
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+		<link rel='stylesheet' href='tutorial.css'>
+		<script src="tutorial.js"></script>
+		<script>
+			$(function() {
+				$('button').click(function() {
+					$.post("result_view", {num : 123, name : 'abc'}, 
+						function(data, status) { alert("Data : " + data + "\nStatus : " + status); });
+				});
+			});
+		</script>
+	</head>
+
+	<body>
+		<h1 class="w3-center w3-panel w3-green">Tutorial 4. Handling Post with Jquery</h1>
+		<div class="w3-row w3-border">
+			<div class="w3-hide-small w3-col m2 l2">
+			</div>
+			<div class="w3-rest w3-container">
+				<div class = 'w3-panel w3-card w3-light-grey'>
+					<h4>Result</h4>
+					<div class='w3-code notranslate'>
+						<button>post with jquery</button><br>
+					</div>
+					If we click the button, it will show alert message from server.
+				</div>
+
+				<div class = 'w3-panel w3-card w3-light-grey'>
+					<h4>index.html</h4>
+					<div class='w3-code notranslate'>
+						<pre>&lt;html>
+	&lt;head>
+		&lt;script src="jquery.js">&lt;/script>
+		&lt;script>
+			function on_click() {
+				$.post('result', {name : 'abc', num : 123}, 
+					function(data, status) { alert(data); }
+				);
+			}
+		&lt;/script>
+	&lt;/head>
+	&lt;body>
+	&lt;button onclick='on_click()'>post with jquery&lt;/button>&lt;br>
+	&lt;/body>
+&lt;/html> </pre>
+					</div>
+				</div>
+				<p class=eng>
+				Yes, we don't have jquery_post file in our web directory.
+				So content_ is empty this time.
+				If there is any file in our html directory, the eZ Framework library will fill the
+				content_ variable with it. If it cannot find one, it will leave content_ empty.
+				And, requested document_ can be anything. Not like jsp, asp, it can be html file
+				or sometimes non-existing file.
+				We can use this just as a variable.
+				In this case, to verify a jquery request.
+				</p>
+				<p class=kor>
+				우리는 jquery_post란 템플릿 파일이 우리의 템플릿 디렉토리에 없다.
+				그러므로, content_ 는 텅 비어 있을 것이다.
+				requested_document_는 어떤 것이든 될 수 있다. 
+				다른 서버측 프레임워크들에서는 jsp 혹은 asp로 서버측 처리를 위한 페이지는 따로 정해져 있었지만, eZ 프레임워크는 그렇지 않다.
+				eZ 프레임워크는 평범한 html 파일이나 존재하지 않는 문서도 요청될 수 있다.
+				content_의 내용이 어떤 내용으로 채워질 것인지, 비어 있을 것인지만 정할 뿐이다.
+				</p>
+			</div>
+		</div></div>
+		<div class="w3-bar w3-border w3-round w3-center">
+			<a href="tutorial3.html" class="w3-button">&#10094; Previous</a>
+			<a href="index.html" class="w3-button w3-center">Home</a>
+			<a href="tutorial5.html" class="w3-button">Next &#10095;</a>
+		</div> 
+	</body>
+</html>
+

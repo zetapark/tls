@@ -1,0 +1,145 @@
+<html>
+	<head>
+		<meta charset=utf-8>
+		<meta name="viewport" content="width=device-width, initial-scale=1"> 
+		<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+		<link rel='stylesheet' href='tutorial.css'>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		<script src=tutorial.js></script>
+	</head>
+	<body>
+		<h1 class="w3-center w3-green">Performance</h1>
+		<div class="w3-row w3-border">
+			<div class="w3-hide-small w3-col m2 l2">
+			</div>
+
+			<div class="w3-rest w3-container">
+				<div class = 'w3-panel w3-card w3-light-grey'>
+				<h3>LAN status</h3>
+				<img src=lan.png width=700>
+				<p class=kor>
+				현재 공유기를 맥 미니와 라즈베리파이에 연결하여, 웹 서버를 구현하였다.
+				맥 미니에 데이터 베이스 서버와 eZ 프레임워크의 미들 서버를 올리고,
+				대부분의 웹 서버는 라즈베리 파이에 올렸다.
+				미들 서버는 매 접속마다 쓰레드를 생성하기에 메모리의 증가는 없다.
+				웹 서버는 접속마다 fork로 프로세스를 복사하기에 메모리 사용량이 증가한다.
+				시스템 관리와 서버의 안정성 면에서 
+				사용자당 개별적인 프로세스를 생성하는 것이 나으리라고 생각된다.
+				라이브러리뿐만 아니라 템플릿으로 사용되는 
+				HTML, JS, 이미지 파일도 공유 메모리에서 서비스하여,
+				메모리 사용량을 줄였다.
+				또한, 내부적인 기전에 의해 동일한 브라우저가 생성하는 여러 개의 접속은
+				하나의 웹서버에서 처리하도록 되어 있어서, 
+				여러 병렬적인 페이지 요청이 따로 따로 메모리를 잡아 먹지 않는다.
+				현재 읽고 있는 이 웹 페이지는 ez.src.x 실행 파일이 서비스 한다.
+				</p>
+				<p class=eng>
+				I connected a Mac mini and a Raspberry pi to a router to service web apps.
+				Mac mini houses a mariadb database server, and middle server.
+				Raspberry pi houses web servers.
+				Middle server creates threads per every connection, so no memory increases.
+				Web server forks new process per every connection, so memory consumption increases.
+				For system stability and system management, I prefer forking a new process.
+				Not only libraries but also HTML, JS, image files used as templates are 
+				served from shared memory to reduce memory consumption.
+				And, parallel connctions made by one browser is handled by one web server 
+				via internal eZ Framework mechanism.
+				Therefore, many parallel requests of one web browser just consumes 
+				the amount of memory which one connection would consume.
+				This page you are reading is served by ez.src.x web server executable.
+				</p>
+				</div>
+				<div class = 'w3-panel w3-card w3-light-grey'>
+					<h3>Raspberry pi 2 Model B --- Ubuntu Server 20.04</h3>
+					<img src=raspp.jpg width=800><br>
+					<p class=kor>
+라스베리파이 2 모델 B는 900MHz quad-core ARM Cortex-A7 CPU에 1GB RAM을 탑재했다.
+웹 서버의 접속당 메모리 사용량은 ez.src.x 의 경우 4.5메가 정도이지만,
+그 중 3.5메가 정도는 공유 메모리 영역이기에,
+접속이 하나 늘 때마다 실제 메모리 사용량은 1메가가 늘어난다.
+CPU 사용량은 특별히 CPU 과부하가 많이 걸리는 프로그램을 서버측에서 돌리는 것이 아니라면,
+일반적인 한 페이지를 로드하는 데에,
+약 라스베리 파이 하나의 코어에 대하여 htop에서 피크시에 약 5%의 부하가 걸리는 것으로 나타났다.
+한 페이지의 이미지가 많은 경우는 피크시에 20%까지도 사용량이 늘어났다.
+라스베리파이 CPU 성능을 고려하고 이 부하가 0.3 ~ 0.4 초 정도 지속 된다는 것을 감안한다면,
+만족할 만한 수치이다.
+코어당 1초에 약 60회 가량의 페이지 요청을 처리할 수 있는 셈이다.
+라스베리 파이는 4코어이므로 약 240회의 페이지 요청을 처리할 수 있고, 
+일반적으로 페이지 요청이 10초에 한 번씩이라고 가정하면, 2400개의 접속을 감당할 수 있다.
+라스베리 파이는 비디오 메모리를 시스템 메모리와 공유하므로, 
+실제 사용가능한 메모리는 htop에서 850M으로 잡히었다
+이 중 시스템 리소스로 사용하는 용량이 약 150메가 정도 되므로, 650 ~ 700의 동시 접속을
+처리할 수 있으리라 예상된다.
+아마도, 메모리가 최대 동시 접속자를 가르는 병목 구간이 될 것 같다.
+만약 라스베리파이 2를 최신의 라스베리파이 4로 업그레이드한다면,
+4GB의 늘어난 메모리로 2500명 가량의 동시 접속이 가능할 것이다.
+하나의 라스베리 파이가 아니라 여러개의 라스베리파이를 라우터에 물린다면,
+동시 접속자를 획기적으로 늘릴 수 있을 것이다.
+					</p>
+					<p class=eng>
+Raspberry Pi 2 model B is loaded with 900MHz quad core ARM Cortex-A7 CPU and 1GB ram.
+Memory usage per connection of web server ez.src.x is about 4.5M bytes,
+but around 3.5M is via shared memory.
+So real memory consumption per connection is estimated 1M bytes.
+CPU usage is around 5% of 1 core on peak to send a page contents,
+if it is not processing cpu intensive server side work.
+But when lots of images are included in the page, it rises up to 20%.
+If we consider Raspberry Pi cpu performance, and the peak only lasts for a fragment of second,
+it is a satisfactory result.
+This means that a core can process approximately 60 page requests per second.
+Raspberry Pi's 4 core can process 240 requests.
+If we assume that normal page requests per connection is once every 10 seconds,
+Raspberry Pi can handle 2400 connections.
+Raspberry Pi shares memory with video memory.
+Usable memory was seen as 850M in htop.
+Among those memories, the os system used 150M bytes.
+So memory wise, Raspberry Pi can handle 650 ~ 700 simultaneous connections.
+It is more likely that memory consumption will be the bottle neck.
+If we upgrade Raspberry pi 2 to newest Raspberry pi 4, we can extend memory upto 4 GB.
+Thus enabling simultaneous connections upto 2500.
+If we use many Raspberry Pi and connect it to router, we can increase this even further.
+					</p>
+				</div>
+				<div class = 'w3-panel w3-card w3-light-grey'>
+					<h3>Mac Mini A1347 core 2 duo --- Ubuntu Desktop 18.04</h3>
+					<img src=macminip.jpg width=800><br>
+					<p class=kor>
+Mac Mini는 2.4 GHz dual core CPU, 2G Ram을 탑재했다.
+쓰레드 가상화를 통하여 4 코어처럼 작동하는 것 같다.
+미들 서버는 일반적인 문자열을 주고 받고, 암호화와 복호화를 수행하는 데에, 
+하나의 페이지에 대해 약 0.7 ~ 1% 정도의 CPU 부하가 걸렸다.
+biz.src.x는 명함 관리 앱인데, 
+opencv 라이브러리를 사용하기에 서버측에서 해야 할 일이 많다.
+그래서, 메모리를 20메가 가까이 잡아먹지만, 
+대부분 공유메모리를 최대한 활용하기에 접속당 늘어나는 분량은 2메가 정도이다.
+물론, 서버측에서 이미지 처리를 opencv를 이용해서 하는 경우에는 많은 메모리를 사용한다.
+(수십에서 수백 메가 바이트 정도)
+그러므로, 이런 작업은 작업 종료시에 즉시 메모리를 반환하도록 해야 한다.<br>
+미들 서버는 CPU 사용에 병목 구간이 발생한다.
+일반적인 초당 페이지 요청건수를 위의 예와 같이 상정한다면,
+하나의 맥미니 미들 서버는 12000개의 동시 접속을 처리할 수 있다.
+이는 라스베리파이 4(4GB 램 X 5 = 20GB)를 5개까지 병렬로 연결하여 제공하는 서비스를 감당할 수 있는 수준이다.
+만약 맥미니를 최신 CPU 머신으로 바꾼다면 성능은 드라마틱하게 상승할 것이다.
+					</p><p class=eng>
+Mac Mini is loaded with 2.4 GHx dual core CPU and 2G ram.
+It works like 4 core CPU with virtual thread generation.
+Middle server burdened 0.7 ~ 1% of one core.
+biz.src.x is a business card organizing app.
+This app uses huge opencv library for server side processing.
+It used up almost 20M, but 18M of this is shared memory.
+Consequently memory usage per connection is around 2M.
+Of course if server process image with opencv it consumes lots of memory.
+(a few tens or hundreds Mbyte)
+Therefore, these kind of job should return memory right after it finishes.<br>
+Middle server has its bottle neck in CPU usage.
+If we assume page request the same as above, 
+one Mac Mini middler server can handle 12000 simultaneous connections.
+It can service requests generated by 5 Raspberry Pi 4(5 X 4GB ram = 20GB) web servers.
+If we change this mac mini into a latest CPU machine, the performance will dramatically improve.
+					</p>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
+

@@ -1,0 +1,104 @@
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport" />
+		<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+		<script src="https://code.jquery.com/jquery-3.5.0.min.js"
+					integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ="
+		 crossorigin="anonymous"></script>
+		<script>
+			function filecheck(file) {
+				if(file.files[0].size / 1024 / 1024 / 10 > 1) {
+					alert('file size limit 100k');
+					file.value = '';
+				}
+			}
+		</script>
+		<script src=lang.js></script>
+	</head>
+	<body>
+		<a href=index.html>AdNET HOME</a>
+		<ul>
+			<li>광고 클릭 유발(click induce) :</li>
+			<li>광고 보여주기 유발(view induce) :</li>
+			<li>내 배너가 보여진 횟수(my banner show) :</li>
+			<li>내 배너가 클릭된 횟수(my banner click) :</li>
+			<li>내 배너 클릭시 이동할 링크(link) :</li>
+			<li>포인트(point) :</li>
+		</ul>
+		<p class=eng>
+		You should upload 4 types of your own banner.
+		Your banner will be shown randomly on member websites.
+		If you do not upload all 4 banners, you will get significant disadvantage in displaying your banner.
+		</p>
+		<p class=kor>
+		4가지 종류의 배너를 업로드해야 합니다.
+		당신의 배너는 멤버 사이트에서 적절한 것으로 선택되어 보여질 것입니다.
+		4종의 배너를 모두 업로드하지 않았을 경우에는 당신의 배너를 보여주는 데에 불이익이 있습니다.
+		</p>
+		<p class=eng>
+		You can only upload JPG files. File size must be less than 100k.
+		Width-height ratio should be maintained.
+		In example, for 300x250 size banner you can upload a 600x500 or 360x300 file.
+		6 : 5 ratio must be maintained. 
+		</p>
+		<p class=kor>
+		JPG 파일만을 업로드해야 합니다. 파일 사이즈는 100k 바이트 이하이어야 합니다.
+		가로 세로 비율은 반드시 지켜져야 합니다.
+		예를 들면, 300x250 크기의 배너로 600x500 혹은 360x300 사이즈의 파일을 올릴 수 있습니다.
+		6:5의 비율은 반드시 유지되어야 합니다.
+		</p>
+
+		<p class=eng>
+	Sample files.
+	Default images will change to your own banner if it is uploaded.
+	If your uploaded file is not updated, refresh this page.
+		</p>
+		<p class=kor>
+		샘플 파일들.
+		디폴트 이미지는 당신의 배너가 업로드되면 그것으로 변경될 것입니다.
+		만약 업로드했는데도 당신의 배너가 보여지지 않는다면, 이 페이지를 다시 로드하거나 
+		캐시를 삭제하십시오.
+		</p>
+	<figure>
+		<img src='https://tomcat.zeta2374.com/banner/@ID-leader.jpg' width=728 height=90
+		onerror="this.src='https://tomcat.zeta2374.com/banner/adnet-leader.jpg'">
+		<figcaption>728x90 leader</figcaption>
+	</figure>
+	<figure style=float:left>
+		<img src='https://tomcat.zeta2374.com/banner/@ID-sky.jpg' width=160 height=600
+		onerror="this.src='https://tomcat.zeta2374.com/banner/adnet-sky.jpg'">
+		<figcaption>160x600 sky</figcaption>
+	</figure>
+	<figure>
+		<img src='https://tomcat.zeta2374.com/banner/@ID-square.jpg' width=300 height=250
+		onerror="this.src='https://tomcat.zeta2374.com/banner/adnet-square.jpg'">
+		<figcaption>300x250 square</figcaption>
+	</figure>
+	<figure>
+		<img src='https://tomcat.zeta2374.com/banner/@ID-mobile.jpg' width=320 height=50
+		onerror="this.src='https://tomcat.zeta2374.com/banner/adnet-mobile.jpg'">
+		<figcaption>320x50 mobile</figcaption>
+	</figure>
+	<form action=banner.html method=post enctype=multipart/form-data>
+		<label for=leader><b>728 x 90 file upload</b></label>
+		<input type=file name=leader onchange=filecheck(this)><br>
+		<label for=square><b>300 x 250 file upload</b></label>
+		<input type=file name=square onchange=filecheck(this)><br>
+		<label for=mobile><b>320 x 50 file upload</b></label>
+		<input type=file name=mobile onchange=filecheck(this)><br>
+		<label for=mobile><b>160 x 600 file upload</b></label>
+		<input type=file name=sky onchange=filecheck(this)><br>
+		<label for=link><b class=eng>Weppage link to go when banner is clicked</b>
+			<b class=kor>배너 클릭시 이동할 웹 페이지 링크</b>
+		</label><br>
+		<input type=text name=link placeholder='address including http:// or https://' size=40><br>
+		<label for=desc><b class=eng>Webpage Description</b>
+			<b class=kor>웹페이지 설명</b></label><br>
+		<input type=text name=desc size=40><br>
+		<input type=submit name=submit value=submit>
+	</form>
+	<a href=index.html>AdNET HOME</a><br>
+	<a href=bannersnack.com>Bannersnack</a>
+	</body>
+</html>

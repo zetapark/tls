@@ -1,0 +1,27 @@
+<div class=container>
+<div class='w3-panel w3-border-top w3-border-bottom w3-border-green w3-pale-green'>
+<a href=index.html class='w3-bar-item w3-button'>HOME</a><br>
+</div>
+<div class='w3-panel w3-border-bottom w3-border-top w3-border-green w3-pale-green'>
+	<h4>eZ Framework</h4>
+<a href="introduction.html" class="w3-bar-item w3-button">Introduction</a><br>
+<a href="install.html" class="w3-bar-item w3-button">Install</a><br>
+<a href="tutorial.html" class="w3-bar-item w3-button">Tutorial</a><br>
+<a href="tutorial1.html" class="w3-bar-item w3-button">Tutorial1</a><br>
+<a href="tutorial2.html" class="w3-bar-item w3-button">Tutorial2</a><br>
+<a href="tutorial3.html" class="w3-bar-item w3-button">Tutorial3</a><br>
+<a href="tutorial4.html" class="w3-bar-item w3-button">Tutorial4</a><br>
+<a href="tutorial5.html" class="w3-bar-item w3-button">Tutorial5</a><br>
+<a href="tutorial6.html" class="w3-bar-item w3-button">Tutorial6</a><br>
+<a href="database.html" class="w3-bar-item w3-button">Database</a><br>
+<a href="reference.html" class="w3-bar-item w3-button">Reference</a><br>
+<a href="benchmark.html" class="w3-bar-item w3-button">Benchmark</a><br>
+<a href=advanced.html class="w3-bar-item w3-button">Advanced</a><br>
+</div>
+<div class='w3-panel w3-border-top w3-border-bottom w3-border-green w3-pale-green'>
+	<h4>DnDD</h4>
+<a href="dndd.html" class="w3-bar-item w3-button">Introduction</a><br>
+<a href=video.html class='w3-bar-item w3-button'>Vote System</a><br>
+</div>
+</div> 
+

@@ -1,0 +1,72 @@
+<html>
+	<head>
+		<meta charset=utf-8>
+		<meta name="viewport" content="width=device-width, initial-scale=1"> 
+		<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+		<link rel='stylesheet' href='tutorial.css'>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		<script src=https://ez.zeta2374.com/tutorial.js></script>
+	</head>
+	<body>
+		<h1 class="w3-center w3-green">Tutorial 1. Minimal static web page</h1>
+		<div class="w3-row w3-border">
+			<div class="w3-hide-small w3-col m2 l2">
+			</div>
+			<div class="w3-rest w3-container">
+				<div class = 'w3-panel w3-card w3-light-grey'>
+					<h4>index.html</h4>
+					<div class='w3-code notranslate'>
+						&lt;html><br>
+						&lt;h1>It works eZ Framework!!&lt;/h1><br>
+						&lt;/html>
+						</pre>
+					</div>
+				</div>
+
+				<div class="w3-panel w3-card w3-light-grey">
+					<h4>C++ side Programming</h4>
+					<div class="w3-code ">
+						<pre tab=4>
+#include"tcpip/server.h"
+#include"tcpip/website.h"
+
+int main(int ac, char** av) {
+	WebSite my_site;
+	my_site.init("site_html");//html template directory
+	Server sv{2000};//port number
+	sv.start(my_site);//go infinite loop
+}
+</pre>
+					</div>
+					<p class=eng>
+					compile using make.<br>
+					'site_html' is relative directory name to our executable.<br>
+					Go to the directory where our executable is.<br>
+					Make directory named site_html.<br>
+					Locate index.html file there.<br>
+					run the executable.<br>
+					Now, if we access localhost:2000 with any webbrowser,
+					</p>
+					<p class=kor>
+					make을 사용해 컴파일 하세요.<br>
+					'site_html'은 현재 실행 파일에 대한 상대 경로명입니다.<br>
+					실행 파일이 있는 디렉토리로 가세요.<br>
+					'site_html' 디렉토리를 생성하세요.<br>
+					index.html 파일을 그 디렉토리에 위치시킵니다.<br>
+					실행 파일을 실행시킵니다.<br>
+					이제, localhost:2000 을 웹 브라우저로 접근하면 결과물을 볼 수 있습니다.<br>
+				</div>
+				<div class='w3-pannel w3-card w3-light-grey'>
+					<h4>Result</h4>
+					<div class='w3-code'>
+						<h1>It works eZ Framework!!</h1></div>
+				</div>
+			</div>
+			</div>
+			<div class="w3-bar w3-border w3-round w3-center">
+				<a href="index.html" class="w3-button w3-center">Home</a>
+				<a href="tutorial2.html" class="w3-button">Next &#10095;</a>
+			</div>
+	</body>
+</html>
+

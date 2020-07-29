@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport" />
+  <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+		<script src="https://code.jquery.com/jquery-3.5.0.min.js"
+					integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ="
+		 crossorigin="anonymous"> </script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" /></script>
+	<script>
+		function resizeIframe() {
+			setTimeout(()=> {
+				$('iframe').height($('iframe').contents().height());
+			}, 1000);
+		};
+function follow() {
+	$.post("follow", {follow : $('#usrname').val(), secret : $('#secret').prop('checked')},
+		function(data, status) {
+			alert(data);
+		}
+	)
+}
+function conf() {
+	if(confirm("Closing this discussion.\nYou will not be able to write or vote any more.\n Are you sure?")) {
+		$.get("close", function(data, status) {
+			alert(data);
+		});
+	}
+}
+
+function vote() {
+	$.post("vote", {option : $("input[name=option]:checked").val(), 
+		secret : $("#votesecret:checked").val()}, function(data) {
+			alert(data);
+		});
+}
+	</script>
+
+	<style>
+iframe {
+	resize:auto;
+}
+	</style>
+ </head>
+ 
+ <body>
+	 <div class="container">
+		 <div class="row">
+			 <h1 style="display:inline">TITLE</h2>
+			 <h5 style="float:right;display:inline">WHO</h5>
+		 </div>
+		 <div class="row">
+			 <a href="main.html?field=@UP" class="btn btn-primary">
+				 <span class="glyphicon glyphicon-arrow-up"></span></a>
+			 <a href="page.html?table=FIRST" class="btn btn-primary">
+				 <span class="glyphicon glyphicon-fast-backward"></span></a>
+			 <a href="page.html?table=PREV" class="btn btn-primary">
+				 <span class="glyphicon glyphicon-arrow-left"></span></a>
+			 <a href="page.html?table=NEXT" class="btn btn-primary">
+				 <span class="glyphicon glyphicon-arrow-right"></span></a>
+			 <a href="page.html?table=LAST" class="btn btn-primary">
+				 <span class="glyphicon glyphicon-fast-forward"></span></a>
+			 <a href="page.html?add=true" class="btn btn-success">add page</a>
+			 <a href="edit.html" class="btn btn-success">edit</a>
+			 <a href="comment.html" class="btn btn-success">comment</a>
+			 <button type="button" class="btn btn-info" onclick="$('#vote').modal()">vote</button>
+			 <a href="result.html?table=RESULT" class="btn btn-info">vote result</a>
+			 <button type="button" class="btn btn-info" onclick="$('#myModal').modal()">follow</button>
+			 <button class="btn btn-danger" onclick="conf()">close</button>
+		 </div>
+		
+		 <div class="row">
+			 <iframe onload='resizeIframe()' width=100%  id="iframe" src='iframe-content.html'></iframe>
+		 </div>
+
+		 <div class="row">
+			 <br>
+			 <div class="panel panel-default">
+				 ATTACHMENT
+			 </div>
+		 </div>
+	 </div>
+
+	 <div class="container">
+
+		 <!-- Modal -->
+		 <div class="modal fade" id="myModal" role="dialog">
+			 <div class="modal-dialog">
+
+				 <!-- Modal content-->
+				 <div class="modal-content">
+					 <div class="modal-header" style="padding:35px 50px;">
+						 <button type="button" class="close" data-dismiss="modal">&times;</button>
+						 <h4><span class="glyphicons glyphicons-flag"></span> Follow</h4>
+					 </div>
+					 <div class="modal-body" style="padding:40px 50px;">
+						 <div class="form-group">
+							 <label for="usrname"><span class="glyphicon glyphicon-user"></span> email to follow</label>
+							 <input type="text" class="form-control" name="follow" id="usrname" value="FOLLOW">
+						 </div>
+						 <div class="checkbox">
+							 <label><input type="checkbox" id="secret"> secret</label>
+						 </div>
+						 <button class="btn btn-success btn-block" data-dismiss="modal"  onclick="follow()">ok<span class="glyphicon glyphicon-off"></span></button>
+					 </div>
+				 </div>
+
+			 </div>
+		 </div> 
+	 </div>
+	 <div class="container">
+		 <div class="modal fade" id="vote" role="dialog">
+			 <div class="modal-dialog">
+				 <div class="modal-content">
+					 <div class="modal-header" style="padding:35px 50px;">
+					 <button type="button" class="close" data-dismiss="modal">&times;</button>
+					 <h4>Vote</h4>
+					 </div>
+					 <div classs="modal-body" style="padding:40px 50px;">
+						 <div class="form-group">
+							 <label for="options">Voting Options</label><br>
+							 OPTIONS
+							 <div class="checkbox">
+								 <label><input type="checkbox" id="votesecret"> secret</label>
+							 </div>
+							 <button class="btn btn-success" data-dismiss="modal" onclick="vote()">ok</button>
+						 </div>
+					 </div>
+				 </div>
+			 </div>
+		 </div>
+	 </div>
+ </body>
+
+</html>
+

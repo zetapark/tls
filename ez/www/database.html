@@ -1,0 +1,87 @@
+<html>
+	<head>
+		<meta charset=utf-8>
+		<meta name="viewport" content="width=device-width, initial-scale=1"> 
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+		<link rel='stylesheet' href='tutorial.css'>
+		<script src="tutorial.js"></script>
+	</head>
+
+	<body>
+		<h1 class="w3-center w3-panel w3-green">Database</h1>
+		<div class="w3-row w3-border">
+			<div class="w3-hide-small w3-col m2 l2">
+			</div>
+			<div class="w3-rest w3-container">
+				<div class = 'w3-panel w3-card w3-light-grey'>
+					<p class=kor>
+					현재는 MySql 데이터 베이스 유틸리티 클래스만이 지원되고 있습니다.
+					이 클래스는 jsoncpp 라이브러리를 이용합니다.
+					쿼리를 실행한 후에 그 결과가 json 형식으로 저장되어 있게 됩니다.
+					개발자는 컬럼명과 행을 이용하여 데이터를 편하게 접근할 수 있습니다.<br>
+					cell의 데이터를 문자열로 접근 : sq[행]["컬럼명"].asString()<br>
+					cell의 데이터를 정수로 접근 : sq[행]["컬럼명"].asInt()<br>
+					자세한 내용은 </p>
+					<p class=eng>
+					Currently, only MySql database utility class is supported.
+					This class uses jsoncpp library.
+					The result after executing a query will be json format.
+					Developer can access the data with column name and row number.<br>
+					access the data as string : sq[row]["column name"].asString()<br>
+					access the data as integer : sq[row]["column name"].asInt()<br>
+					Details are at </p>
+					<a href=https://en.wikibooks.org/wiki/JsonCpp target=_blank>Jsoncpp Wiki</a>
+					<p class=kor>를 참고 하세요.</p>
+
+					<p class=kor>다음과 같은 테이블이 있다고 가정합시다.
+					</p>
+					<p class=eng>Let's say ther is a table like this.</p>
+					<table border="1">
+						<tr><th>name</th><th>email</th><th>id</th></tr>
+						<tr><td>James</td><td>jam@j.com</td><td>2222222</td></tr>
+						<tr><td>Park</td><td>park@park.com</td><td>3123123</td></tr>
+						<tr><td>Kim</td><td>a@b.c</td><td>4535343</td></tr>
+					</table>
+					<br>
+					<p class=kor> 다음과 같이 테이블의 데이터를 받아올 수 있습니다.</p>
+					<p class=eng>You can get the table data like this.</p>
+					<pre>
+SqlQuery sq;
+sq.connect("ip_address", "user", "password", "database_name");
+sq.query("select * from table_name");
+int row = sq.fetch(-1);//fetch all, sq.fetch(3) will fetch only 3 rows
+//fetch returns fetched row count.
+//if fetch(n) returns a number less than n, it means all the records are fetched.
+for(int j=0; j&lt;sq.size(); j++) 
+	cout &lt;&lt; sq[j]["name"].asString() &lt;&lt; sq[j]["id"].asInt();
+
+stringstream ss;
+ss &lt;&lt; sq; // You can just get the whole as json string and organize the screen in client side.
+content_ = ss.str(); // return json string
+
+sq.query("insert into table_name values ('joe', 'joe@joe.com', 0103222222)");
+sq.insert("Joe", "joe@joe.com", 0103222222); // same as above
+					</pre>
+					<p class=kor>
+insert 함수는 이전에 실행한 select문의 테이블에 대하여 입력을 실행합니다.
+그러므로, sq.select("table_name", "limit 1") 으로 테이블을 먼저 설정해 주는 것이 좋습니다.
+					</p>
+					<p class=eng>
+					insert function will execute against a most recently selected table.
+					So, it is better to set the table like sq.select("table_name", "limit 1").
+					</p>
+				</div>
+				<div class = 'w3-panel w3-card w3-light-grey'>
+					<pre>
+Other functions...
+sq.show_table(); // return vector<string> : all the table names of connected database
+sq.now(); // return datetime string
+sq.encrypt(string) // return encrypted password using mysql password() function
+					</pre>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
+
