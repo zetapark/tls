@@ -10,7 +10,7 @@ string mailx(string src, string dst, string title, string content)
 	return "mail sent";
 }
 
-void Misc::process(sockaddr_in&&) {
+void Misc::process() {
 	if(requested_document_ == "leave_message") {
 		cout << nameNvalue_["email"] << endl;
 		if(nameNvalue_["dest"] == "") nameNvalue_["dest"] = "zeta@zeta2374.com";

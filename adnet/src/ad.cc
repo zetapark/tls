@@ -16,10 +16,7 @@ Ad::Ad()
 
 void Ad::process()
 {
-	if(th_.joinable()) {
-		cout << "joining" << endl;
-		th_.join();//from request ad function
-	}
+	if(requested_document_ != "adnet.js" && th_.joinable()) th_.join();//from request ad function
 //	char client_ip[INET_ADDRSTRLEN];
 	//psstm(string{"geoiplookup "} + client_ip);
 	if(requested_document_ == "request_ad.php") content_ = request_ad();
@@ -83,7 +80,6 @@ string Ad::request_ad()
 	view_induce_[nameNvalue_["id"]]++;
 	view_increase_[sq[pick]["id"].asString()]++;
 	string r = sq[pick]["id"].asString() + '\n' + sq[pick]["link"].asString() + '\n' + new_token();
-	cout << sq.size() << endl;
 	if(sq.size() == 1) th_ = thread{&Ad::all_the_database_job, this};
 	else sq.removeIndex(pick, &sq[pick]);
 	return r;

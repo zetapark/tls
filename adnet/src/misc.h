@@ -1,8 +1,8 @@
 #include<tcpip/website.h>
 
-class Misc : public WebSiteIP
+class Misc : public WebSite
 {
 protected:
-	void process(sockaddr_in&&);
+	void process();
 };
 
