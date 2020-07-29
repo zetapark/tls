@@ -16,7 +16,10 @@ Ad::Ad()
 
 void Ad::process()
 {
-	if(th_.joinable()) th_.join();//from request ad function
+	if(th_.joinable()) {
+		cout << "joining" << endl;
+		th_.join();//from request ad function
+	}
 //	char client_ip[INET_ADDRSTRLEN];
 	//psstm(string{"geoiplookup "} + client_ip);
 	if(requested_document_ == "request_ad.php") content_ = request_ad();

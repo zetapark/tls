@@ -14,7 +14,6 @@ struct MClient : Client, std::timed_mutex
 	} u;
 	unsigned short port;
 	bool accumulate(std::string s);
-	void test() {}
 	static thread_local std::string to_send;
 	void send();
 };
