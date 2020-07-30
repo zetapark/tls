@@ -158,7 +158,7 @@ string Adnet::recommend()
 
 static const string category[] = {"computer", "programming", "game", "gadgets",
 	"education", "shopping", "travel", "food", "entertainment", "society",
-	"fashion", "health", "finance", "other", "distance", "country"};
+	"fashion", "health", "finance", "others", "distance", "country"};
 
 void Adnet::pref()
 {//php
