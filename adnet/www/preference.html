@@ -7,295 +7,350 @@
 					integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ="
 		 crossorigin="anonymous"></script>
 		<script src=lang.js></script>
+	<script>
+		$(function() {
+			$('#pos').click(function() {
+				if(navigator.geolocation) {
+					navigator.geolocation.getCurrentPosition(function(position) {
+						$("input[name='lat']").val(position.coords.latitude);
+						$("input[name='lng']").val(position.coords.longitude);
+					});
+				}
+			});
+		});
+	</script>
 	</head>
 	<body>
 		<form action=pref.php method=post>
 			<h2>Preference</h2>
+			<div class='w3-card-4 w3-light-grey w3-panel'>
 			<h4 class=eng>Please select categories that express your site or contents best. Multiple choices possible.</h4>
 			<h4 class=kor>당신의 웹사이트 혹은 컨텐츠를 가장 잘 묘사하는 목록을 고르세요. 여러 개 가능.</h4>
-			<hr>
-			<label for=computer><b>computer</b></label>
-			<input type=checkbox name=computer><br>
-			<label for=computer><b>programming</b></label>
-			<input type=checkbox name=programming><br>
-			<label for=computer><b>game</b></label>
-			<input type=checkbox name=game><br>
-			<label for=computer><b>gadgets</b></label>
-			<input type=checkbox name=gadgets><br>
-			<label for=computer><b>education</b></label>
-			<input type=checkbox name=education><br>
-			<hr>
+			<div class=w3-row-padding>
+			<div class=w3-third>
+			<input type=checkbox class=w3-check name=computer>
+			<label for=computer><b>computer</b></label><br>
+			<input type=checkbox class=w3-check name=programming>
+			<label for=computer><b>programming</b></label><br>
+			<input type=checkbox class=w3-check name=game>
+			<label for=computer><b>game</b></label><br>
+			<input type=checkbox class=w3-check name=gadgets>
+			<label for=computer><b>gadgets</b></label><br>
+			<input type=checkbox class=w3-check name=education>
+			<label for=computer><b>education</b></label><br>
+			</div>
 
-			<label for=computer><b>shopping</b></label>
-			<input type=checkbox name=shopping><br>
-			<label for=computer><b>travel/Leisure</b></label>
-			<input type=checkbox name=travel><br>
-			<label for=computer><b>food</b></label>
-			<input type=checkbox name=food><br>
-			<label for=computer><b>entertainment</b></label>
-			<input type=checkbox name=entertainment><br>
-			<hr>
+			<div class=w3-third>
+			<input type=checkbox class=w3-check name=shopping>
+			<label for=computer><b>shopping</b></label><br>
+			<input type=checkbox class=w3-check name=travel>
+			<label for=computer><b>travel/Leisure</b></label><br>
+			<input type=checkbox class=w3-check name=food>
+			<label for=computer><b>food</b></label><br>
+			<input type=checkbox class=w3-check name=entertainment>
+			<label for=computer><b>entertainment</b></label><br>
+			</div>
 
-			<label for=computer><b>society</b></label>
-			<input type=checkbox name=society><br>
-			<label for=computer><b>fashion</b></label>
-			<input type=checkbox name=fashion><br>
-			<label for=computer><b>health</b></label>
-			<input type=checkbox name=health><br>
-			<label for=computer><b>finance</b></label>
-			<input type=checkbox name=finance><br>
-			<label for=computer><b>others</b></label>
-			<input type=checkbox name=others><br>
-			<hr>
+			<div class=w3-third>
+			<input type=checkbox class=w3-check name=society>
+			<label for=computer><b>society</b></label><br>
+			<input type=checkbox class=w3-check name=fashion>
+			<label for=computer><b>fashion</b></label><br>
+			<input type=checkbox class=w3-check name=health>
+			<label for=computer><b>health</b></label><br>
+			<input type=checkbox class=w3-check name=finance>
+			<label for=computer><b>finance</b></label><br>
+			<input type=checkbox class=w3-check name=others>
+			<label for=computer><b>others</b></label><br>
+			</div>
+			</div>
+			</div>
 
+			<div class='w3-card-4 w3-light-grey w3-panel'>
+			<input type=checkbox style='float:left' class=w3-check name=country>
 			<label for=country>
-				<b class=kor>내 배너가 나와 같은 국가의 사용자에게 우선적으로 보여지기를 바랍니다.</b>
-				<b class=eng>I want my banner to be viewed more by users in the same country.</b>
+				<h4 class=kor>내 배너가 나와 같은 국가의 사용자에게 우선적으로 보여지기를 바랍니다.</h4>
+				<h4 class=eng>I want my banner to be viewed more by users in the same country.</h4>
 			</label>
-			<input type=checkbox name=country><hr>
 			<b class=eng>Select your country</b>
-			<b class=kor>당신의 국가를 선택하세요.</b><hr>
-			<input type=radio name=nation value=AF><label for=AF>AFGHANISTAN</label>
-			<input type=radio name=nation value=AL><label for=AL>ALBANIA</label>
-			<input type=radio name=nation value=DZ><label for=DZ>ALGERIA</label>
-			<input type=radio name=nation value=AS><label for=AS>AMERICAN SAMOA</label>
-			<input type=radio name=nation value=AD><label for=AD>ANDORRA</label>
-			<input type=radio name=nation value=AO><label for=AO>ANGOLA</label>
-			<input type=radio name=nation value=AQ><label for=AQ>ANTARCTICA</label>
-			<input type=radio name=nation value=AG><label for=AG>ANTIGUA AND BARBUDA</label>
-			<input type=radio name=nation value=AR><label for=AR>ARGENTINA</label>
-			<input type=radio name=nation value=AM><label for=AM>ARMENIA</label>
-			<input type=radio name=nation value=AW><label for=AW>ARUBA</label>
-			<input type=radio name=nation value=AU><label for=AU>AUSTRALIA</label>
-			<input type=radio name=nation value=AT><label for=AT>AUSTRIA</label>
-			<input type=radio name=nation value=AZ><label for=AZ>AZERBAIJAN</label><hr>
-			<input type=radio name=nation value=BS><label for=BS>BAHAMAS</label>
-			<input type=radio name=nation value=BH><label for=BH>BAHRAIN</label>
-			<input type=radio name=nation value=BD><label for=BD>BANGLADESH</label>
-			<input type=radio name=nation value=BB><label for=BB>BARBADOS</label>
-			<input type=radio name=nation value=BY><label for=BY>BELARUS</label>
-			<input type=radio name=nation value=BE><label for=BE>BELGIUM</label>
-			<input type=radio name=nation value=BZ><label for=BZ>BELIZE</label>
-			<input type=radio name=nation value=BJ><label for=BJ>BENIN</label>
-			<input type=radio name=nation value=BM><label for=BM>BERMUDA</label>
-			<input type=radio name=nation value=BT><label for=BT>BHUTAN</label>
-			<input type=radio name=nation value=BO><label for=BO>BOLIVIA</label>
-			<input type=radio name=nation value=BA><label for=BA>BOSNIA AND HERZEGOVINA</label>
-			<input type=radio name=nation value=BW><label for=BW>BOTSWANA</label>
-			<input type=radio name=nation value=BV><label for=BV>BOUVET ISLAND</label>
-			<input type=radio name=nation value=BR><label for=BR>BRAZIL</label>
-			<input type=radio name=nation value=IO><label for=IO>BRITISH INDIAN OCEAN TERRITORY</label>
-			<input type=radio name=nation value=BN><label for=BN>BRUNEI DARUSSALAM</label>
-			<input type=radio name=nation value=BG><label for=BG>BULGARIA</label>
-			<input type=radio name=nation value=BF><label for=BF>BURKINA FASO</label>
-			<input type=radio name=nation value=BI><label for=BI>BURUNDI</label><hr>
-			<input type=radio name=nation value=KH><label for=KH>CAMBODIA</label>
-			<input type=radio name=nation value=CM><label for=CM>CAMEROON</label>
-			<input type=radio name=nation value=CA><label for=CA>CANADA</label>
-			<input type=radio name=nation value=CV><label for=CV>CAPE VERDE</label>
-			<input type=radio name=nation value=KY><label for=KY>CAYMAN ISLANDS</label>
-			<input type=radio name=nation value=CF><label for=CF>CENTRAL AFRICAN REPUBLIC</label>
-			<input type=radio name=nation value=TD><label for=TD>CHAD</label>
-			<input type=radio name=nation value=CL><label for=CL>CHILE</label>
-			<input type=radio name=nation value=CN><label for=CN>CHINA</label>
-			<input type=radio name=nation value=CX><label for=CX>CHRISTMAS ISLAND</label>
-			<input type=radio name=nation value=CC><label for=CC>COCOS (KEELING) ISLANDS</label>
-			<input type=radio name=nation value=CO><label for=CO>COLOMBIA</label>
-			<input type=radio name=nation value=KM><label for=KM>COMOROS</label>
-			<input type=radio name=nation value=CG><label for=CG>CONGO</label>
-			<input type=radio name=nation value=CD><label for=CD>CONGO, THE DEMOCRATIC REPUBLIC OF THE</label>
-			<input type=radio name=nation value=CK><label for=CK>COOK ISLANDS</label>
-			<input type=radio name=nation value=CR><label for=CR>COSTA RICA</label>
-			<input type=radio name=nation value=CI><label for=CI>CÔTE D'IVOIRE</label>
-			<input type=radio name=nation value=HR><label for=HR>CROATIA</label>
-			<input type=radio name=nation value=CU><label for=CU>CUBA</label>
-			<input type=radio name=nation value=CY><label for=CY>CYPRUS</label>
-			<input type=radio name=nation value=CZ><label for=CZ>CZECH REPUBLIC</label><hr>
-			<input type=radio name=nation value=DK><label for=DK>DENMARK</label>
-			<input type=radio name=nation value=DJ><label for=DJ>DJIBOUTI</label>
-			<input type=radio name=nation value=DM><label for=DM>DOMINICA</label>
-			<input type=radio name=nation value=DO><label for=DO>DOMINICAN REPUBLIC</label><hr>
-			<input type=radio name=nation value=EC><label for=EC>ECUADOR</label>
-			<input type=radio name=nation value=EG><label for=EG>EGYPT</label>
-			<input type=radio name=nation value=SV><label for=SV>EL SALVADOR</label>
-			<input type=radio name=nation value=GQ><label for=GQ>EQUATORIAL GUINEA</label>
-			<input type=radio name=nation value=ER><label for=ER>ERITREA</label>
-			<input type=radio name=nation value=EE><label for=EE>ESTONIA</label>
-			<input type=radio name=nation value=ET><label for=ET>ETHIOPIA</label><hr>
-			<input type=radio name=nation value=FK><label for=FK>FALKLAND ISLANDS (MALVINAS)</label>
-			<input type=radio name=nation value=FO><label for=FO>FAROE ISLANDS</label>
-			<input type=radio name=nation value=FJ><label for=FJ>FIJI</label>
-			<input type=radio name=nation value=FI><label for=FI>FINLAND</label>
-			<input type=radio name=nation value=FR><label for=FR>FRANCE</label>
-			<input type=radio name=nation value=GF><label for=GF>FRENCH GUIANA</label>
-			<input type=radio name=nation value=PF><label for=PF>FRENCH POLYNESIA</label>
-			<input type=radio name=nation value=TF><label for=TF>FRENCH SOUTHERN TERRITORIES</label><hr>
-			<input type=radio name=nation value=GA><label for=GA>GABON</label>
-			<input type=radio name=nation value=GM><label for=GM>GAMBIA</label>
-			<input type=radio name=nation value=GE><label for=GE>GEORGIA</label>
-			<input type=radio name=nation value=DE><label for=DE>GERMANY</label>
-			<input type=radio name=nation value=GH><label for=GH>GHANA</label>
-			<input type=radio name=nation value=GI><label for=GI>GIBRALTAR</label>
-			<input type=radio name=nation value=GR><label for=GR>GREECE</label>
-			<input type=radio name=nation value=GL><label for=GL>GREENLAND</label>
-			<input type=radio name=nation value=GD><label for=GD>GRENADA</label>
-			<input type=radio name=nation value=GP><label for=GP>GUADELOUPE</label>
-			<input type=radio name=nation value=GU><label for=GU>GUAM</label>
-			<input type=radio name=nation value=GT><label for=GT>GUATEMALA</label>
-			<input type=radio name=nation value=GN><label for=GN>GUINEA</label>
-			<input type=radio name=nation value=GW><label for=GW>GUINEA-BISSAU</label>
-			<input type=radio name=nation value=GY><label for=GY>GUYANA</label><hr>
-			<input type=radio name=nation value=HT><label for=HT>HAITI</label>
-			<input type=radio name=nation value=HM><label for=HM>HEARD ISLAND AND MCDONALD ISLANDS</label>
-			<input type=radio name=nation value=HN><label for=HN>HONDURAS</label>
-			<input type=radio name=nation value=HK><label for=HK>HONG KONG</label>
-			<input type=radio name=nation value=HU><label for=HU>HUNGARY</label><hr>
-			<input type=radio name=nation value=IS><label for=IS>ICELAND</label>
-			<input type=radio name=nation value=IN><label for=IN>INDIA</label>
-			<input type=radio name=nation value=ID><label for=ID>INDONESIA</label>
-			<input type=radio name=nation value=IR><label for=IR>IRAN, ISLAMIC REPUBLIC OF</label>
-			<input type=radio name=nation value=IQ><label for=IQ>IRAQ</label>
-			<input type=radio name=nation value=IE><label for=IE>IRELAND</label>
-			<input type=radio name=nation value=IL><label for=IL>ISRAEL</label>
-			<input type=radio name=nation value=IT><label for=IT>ITALY</label><hr>
-			<input type=radio name=nation value=JM><label for=JM>JAMAICA</label>
-			<input type=radio name=nation value=JP><label for=JP>JAPAN</label>
-			<input type=radio name=nation value=JO><label for=JO>JORDAN</label><hr>
-			<input type=radio name=nation value=KZ><label for=KZ>KAZAKHSTAN</label>
-			<input type=radio name=nation value=KE><label for=KE>KENYA</label>
-			<input type=radio name=nation value=KI><label for=KI>KIRIBATI</label>
-			<input type=radio name=nation value=KP><label for=KP>KOREA, DEMOCRATIC PEOPLE'S REPUBLIC OF</label>
-			<input type=radio name=nation value=KR><label for=KR>KOREA, REPUBLIC OF(대한민국)</label>
-			<input type=radio name=nation value=KW><label for=KW>KUWAIT</label>
-			<input type=radio name=nation value=KG><label for=KG>KYRGYZSTAN</label><hr>
-			<input type=radio name=nation value=LA><label for=LA>LAO PEOPLE'S DEMOCRATIC REPUBLIC (LAOS)</label>
-			<input type=radio name=nation value=LV><label for=LV>LATVIA</label>
-			<input type=radio name=nation value=LB><label for=LB>LEBANON</label>
-			<input type=radio name=nation value=LS><label for=LS>LESOTHO</label>
-			<input type=radio name=nation value=LR><label for=LR>LIBERIA</label>
-			<input type=radio name=nation value=LY><label for=LY>LIBYAN ARAB JAMAHIRIYA</label>
-			<input type=radio name=nation value=LI><label for=LI>LIECHTENSTEIN</label>
-			<input type=radio name=nation value=LT><label for=LT>LITHUANIA</label>
-			<input type=radio name=nation value=LU><label for=LU>LUXEMBOURG</label><hr><hr>
-			<input type=radio name=nation value=MO><label for=MO>MACAO</label>
-			<input type=radio name=nation value=MK><label for=MK>MACEDONIA, THE FORMER YUGOSLAV REPUBLIC OF</label>
-			<input type=radio name=nation value=MG><label for=MG>MADAGASCAR</label>
-			<input type=radio name=nation value=MW><label for=MW>MALAWI</label>
-			<input type=radio name=nation value=MY><label for=MY>MALAYSIA</label>
-			<input type=radio name=nation value=MV><label for=MV>MALDIVES</label>
-			<input type=radio name=nation value=ML><label for=ML>MALI</label>
-			<input type=radio name=nation value=MT><label for=MT>MALTA</label>
-			<input type=radio name=nation value=MH><label for=MH>MARSHALL ISLANDS</label>
-			<input type=radio name=nation value=MQ><label for=MQ>MARTINIQUE</label>
-			<input type=radio name=nation value=MR><label for=MR>MAURITANIA</label>
-			<input type=radio name=nation value=MU><label for=MU>MAURITIUS</label>
-			<input type=radio name=nation value=YT><label for=YT>MAYOTTE</label>
-			<input type=radio name=nation value=MX><label for=MX>MEXICO</label>
-			<input type=radio name=nation value=FM><label for=FM>MICRONESIA, FEDERATED STATES OF</label>
-			<input type=radio name=nation value=MD><label for=MD>MOLDOVA, REPUBLIC OF</label>
-			<input type=radio name=nation value=MC><label for=MC>MONACO</label>
-			<input type=radio name=nation value=MN><label for=MN>MONGOLIA</label>
-			<input type=radio name=nation value=ME><label for=ME>MONTENEGRO</label>
-			<input type=radio name=nation value=MS><label for=MS>MONTSERRAT</label>
-			<input type=radio name=nation value=MA><label for=MA>MOROCCO</label>
-			<input type=radio name=nation value=MZ><label for=MZ>MOZAMBIQUE</label>
-			<input type=radio name=nation value=MM><label for=MM>MYANMAR</label><hr>
-			<input type=radio name=nation value=NA><label for=NA>NAMIBIA</label>
-			<input type=radio name=nation value=NR><label for=NR>NAURU</label>
-			<input type=radio name=nation value=NP><label for=NP>NEPAL</label>
-			<input type=radio name=nation value=NL><label for=NL>NETHERLANDS</label>
-			<input type=radio name=nation value=AN><label for=AN>NETHERLANDS ANTILLES</label>
-			<input type=radio name=nation value=NC><label for=NC>NEW CALEDONIA</label>
-			<input type=radio name=nation value=NZ><label for=NZ>NEW ZEALAND</label>
-			<input type=radio name=nation value=NI><label for=NI>NICARAGUA</label>
-			<input type=radio name=nation value=NE><label for=NE>NIGER</label>
-			<input type=radio name=nation value=NG><label for=NG>NIGERIA</label>
-			<input type=radio name=nation value=NU><label for=NU>NIUE</label>
-			<input type=radio name=nation value=NF><label for=NF>NORFOLK ISLAND</label>
-			<input type=radio name=nation value=MP><label for=MP>NORTHERN MARIANA ISLANDS</label>
-			<input type=radio name=nation value=NO><label for=NO>NORWAY</label><hr>
-			<input type=radio name=nation value=OM><label for=OM>OMAN</label><hr>
-			<input type=radio name=nation value=PK><label for=PK>PAKISTAN</label>
-			<input type=radio name=nation value=PW><label for=PW>PALAU</label>
-			<input type=radio name=nation value=PS><label for=PS>PALESTINIAN TERRITORY, OCCUPIED</label>
-			<input type=radio name=nation value=PA><label for=PA>PANAMA</label>
-			<input type=radio name=nation value=PG><label for=PG>PAPUA NEW GUINEA</label>
-			<input type=radio name=nation value=PY><label for=PY>PARAGUAY</label>
-			<input type=radio name=nation value=PE><label for=PE>PERU</label>
-			<input type=radio name=nation value=PH><label for=PH>PHILIPPINES</label>
-			<input type=radio name=nation value=PN><label for=PN>PITCAIRN</label>
-			<input type=radio name=nation value=PL><label for=PL>POLAND</label>
-			<input type=radio name=nation value=PT><label for=PT>PORTUGAL</label>
-			<input type=radio name=nation value=PR><label for=PR>PUERTO RICO</label><hr>
-			<input type=radio name=nation value=QA><label for=QA>QATAR</label><hr>
-			<input type=radio name=nation value=RE><label for=RE>RÉUNION</label>
-			<input type=radio name=nation value=RO><label for=RO>ROMANIA</label>
-			<input type=radio name=nation value=RU><label for=RU>RUSSIAN FEDERATION</label>
-			<input type=radio name=nation value=RW><label for=RW>RWANDA</label><hr>
-			<input type=radio name=nation value=SH><label for=SH>SAINT HELENA</label>
-			<input type=radio name=nation value=KN><label for=KN>SAINT KITTS AND NEVIS</label>
-			<input type=radio name=nation value=LC><label for=LC>SAINT LUCIA</label>
-			<input type=radio name=nation value=PM><label for=PM>SAINT PIERRE AND MIQUELON</label>
-			<input type=radio name=nation value=VC><label for=VC>SAINT VINCENT AND THE GRENADINES</label>
-			<input type=radio name=nation value=WS><label for=WS>SAMOA</label>
-			<input type=radio name=nation value=SM><label for=SM>SAN MARINO</label>
-			<input type=radio name=nation value=ST><label for=ST>SAO TOME AND PRINCIPE</label>
-			<input type=radio name=nation value=SA><label for=SA>SAUDI ARABIA</label>
-			<input type=radio name=nation value=SN><label for=SN>SENEGAL</label>
-			<input type=radio name=nation value=RS><label for=RS>SERBIA</label>
-			<input type=radio name=nation value=SC><label for=SC>SEYCHELLES</label>
-			<input type=radio name=nation value=SL><label for=SL>SIERRA LEONE</label>
-			<input type=radio name=nation value=SG><label for=SG>SINGAPORE</label>
-			<input type=radio name=nation value=SK><label for=SK>SLOVAKIA</label>
-			<input type=radio name=nation value=SI><label for=SI>SLOVENIA</label>
-			<input type=radio name=nation value=SB><label for=SB>SOLOMON ISLANDS</label>
-			<input type=radio name=nation value=SO><label for=SO>SOMALIA</label>
-			<input type=radio name=nation value=ZA><label for=ZA>SOUTH AFRICA</label>
-			<input type=radio name=nation value=GS><label for=GS>SOUTH GEORGIA AND THE SOUTH SANDWICH ISLANDS</label>
-			<input type=radio name=nation value=ES><label for=ES>SPAIN</label>
-			<input type=radio name=nation value=LK><label for=LK>SRI LANKA</label>
-			<input type=radio name=nation value=SD><label for=SD>SUDAN</label>
-			<input type=radio name=nation value=SR><label for=SR>SURINAME</label>
-			<input type=radio name=nation value=SJ><label for=SJ>SVALBARD AND JAN MAYEN</label>
-			<input type=radio name=nation value=SZ><label for=SZ>SWAZILAND</label>
-			<input type=radio name=nation value=SE><label for=SE>SWEDEN</label>
-			<input type=radio name=nation value=CH><label for=CH>SWITZERLAND</label>
-			<input type=radio name=nation value=SY><label for=SY>SYRIAN ARAB REPUBLIC</label><hr>
-			<input type=radio name=nation value=TW><label for=TW>TAIWAN</label>
-			<input type=radio name=nation value=TJ><label for=TJ>TAJIKISTAN</label>
-			<input type=radio name=nation value=TZ><label for=TZ>TANZANIA, UNITED REPUBLIC OF</label>
-			<input type=radio name=nation value=TH><label for=TH>THAILAND</label>
-			<input type=radio name=nation value=TL><label for=TL>TIMOR-LESTE</label>
-			<input type=radio name=nation value=TG><label for=TG>TOGO</label>
-			<input type=radio name=nation value=TK><label for=TK>TOKELAU</label>
-			<input type=radio name=nation value=TO><label for=TO>TONGA</label>
-			<input type=radio name=nation value=TT><label for=TT>TRINIDAD AND TOBAGO</label>
-			<input type=radio name=nation value=TN><label for=TN>TUNISIA</label>
-			<input type=radio name=nation value=TR><label for=TR>TURKEY</label>
-			<input type=radio name=nation value=TM><label for=TM>TURKMENISTAN</label>
-			<input type=radio name=nation value=TC><label for=TC>TURKS AND CAICOS ISLANDS</label>
-			<input type=radio name=nation value=TV><label for=TV>TUVALU</label><hr>
-			<input type=radio name=nation value=UG><label for=UG>UGANDA</label>
-			<input type=radio name=nation value=UA><label for=UA>UKRAINE</label>
-			<input type=radio name=nation value=AE><label for=AE>UNITED ARAB EMIRATES</label>
-			<input type=radio name=nation value=GB><label for=GB>UNITED KINGDOM</label>
-			<input type=radio name=nation value=US><label for=US>UNITED STATES</label>
-			<input type=radio name=nation value=UM><label for=UM>UNITED STATES MINOR OUTLYING ISLANDS</label>
-			<input type=radio name=nation value=UY><label for=UY>URUGUAY</label>
-			<input type=radio name=nation value=UZ><label for=UZ>UZBEKISTAN</label><hr>
-			<input type=radio name=nation value=VU><label for=VU>VANUATU</label>
-			<input type=radio name=nation value=VE><label for=VE>VENEZUELA</label>
-			<input type=radio name=nation value=VN><label for=VN>VIET NAM</label>
-			<input type=radio name=nation value=VG><label for=VG>VIRGIN ISLANDS, BRITISH</label>
-			<input type=radio name=nation value=VI><label for=VI>VIRGIN ISLANDS, U.S.</label><hr>
-			<input type=radio name=nation value=WF><label for=WF>WALLIS AND FUTUNA</label>
-			<input type=radio name=nation value=EH><label for=EH>WESTERN SAHARA</label><hr>
-			<input type=radio name=nation value=YE><label for=YE>YEMEN</label><hr>
-			<input type=radio name=nation value=ZM><label for=ZM>ZAMBIA</label>
-			<input type=radio name=nation value=ZW><label for=ZW>ZIMBABWE</label><hr>
+			<b class=kor>당신의 국가를 선택하세요.</b>
+			<p>
+			<input class=w3-radio type=radio name=nation value=AF><label for=AF>AFGHANISTAN</label>
+			<input class=w3-radio type=radio name=nation value=AL><label for=AL>ALBANIA</label>
+			<input class=w3-radio type=radio name=nation value=DZ><label for=DZ>ALGERIA</label>
+			<input class=w3-radio type=radio name=nation value=AS><label for=AS>AMERICAN SAMOA</label>
+			<input class=w3-radio type=radio name=nation value=AD><label for=AD>ANDORRA</label>
+			<input class=w3-radio type=radio name=nation value=AO><label for=AO>ANGOLA</label>
+			<input class=w3-radio type=radio name=nation value=AQ><label for=AQ>ANTARCTICA</label>
+			<input class=w3-radio type=radio name=nation value=AG><label for=AG>ANTIGUA AND BARBUDA</label>
+			<input class=w3-radio type=radio name=nation value=AR><label for=AR>ARGENTINA</label>
+			<input class=w3-radio type=radio name=nation value=AM><label for=AM>ARMENIA</label>
+			<input class=w3-radio type=radio name=nation value=AW><label for=AW>ARUBA</label>
+			<input class=w3-radio type=radio name=nation value=AU><label for=AU>AUSTRALIA</label>
+			<input class=w3-radio type=radio name=nation value=AT><label for=AT>AUSTRIA</label>
+			<input class=w3-radio type=radio name=nation value=AZ><label for=AZ>AZERBAIJAN</label>
+			</p><p>
+			<input class=w3-radio type=radio name=nation value=BS><label for=BS>BAHAMAS</label>
+			<input class=w3-radio type=radio name=nation value=BH><label for=BH>BAHRAIN</label>
+			<input class=w3-radio type=radio name=nation value=BD><label for=BD>BANGLADESH</label>
+			<input class=w3-radio type=radio name=nation value=BB><label for=BB>BARBADOS</label>
+			<input class=w3-radio type=radio name=nation value=BY><label for=BY>BELARUS</label>
+			<input class=w3-radio type=radio name=nation value=BE><label for=BE>BELGIUM</label>
+			<input class=w3-radio type=radio name=nation value=BZ><label for=BZ>BELIZE</label>
+			<input class=w3-radio type=radio name=nation value=BJ><label for=BJ>BENIN</label>
+			<input class=w3-radio type=radio name=nation value=BM><label for=BM>BERMUDA</label>
+			<input class=w3-radio type=radio name=nation value=BT><label for=BT>BHUTAN</label>
+			<input class=w3-radio type=radio name=nation value=BO><label for=BO>BOLIVIA</label>
+			<input class=w3-radio type=radio name=nation value=BA><label for=BA>BOSNIA AND HERZEGOVINA</label>
+			<input class=w3-radio type=radio name=nation value=BW><label for=BW>BOTSWANA</label>
+			<input class=w3-radio type=radio name=nation value=BV><label for=BV>BOUVET ISLAND</label>
+			<input class=w3-radio type=radio name=nation value=BR><label for=BR>BRAZIL</label>
+			<input class=w3-radio type=radio name=nation value=IO><label for=IO>BRITISH INDIAN OCEAN TERRITORY</label>
+			<input class=w3-radio type=radio name=nation value=BN><label for=BN>BRUNEI DARUSSALAM</label>
+			<input class=w3-radio type=radio name=nation value=BG><label for=BG>BULGARIA</label>
+			<input class=w3-radio type=radio name=nation value=BF><label for=BF>BURKINA FASO</label>
+			<input class=w3-radio type=radio name=nation value=BI><label for=BI>BURUNDI</label>
+			</p><p>
+			<input class=w3-radio type=radio name=nation value=KH><label for=KH>CAMBODIA</label>
+			<input class=w3-radio type=radio name=nation value=CM><label for=CM>CAMEROON</label>
+			<input class=w3-radio type=radio name=nation value=CA><label for=CA>CANADA</label>
+			<input class=w3-radio type=radio name=nation value=CV><label for=CV>CAPE VERDE</label>
+			<input class=w3-radio type=radio name=nation value=KY><label for=KY>CAYMAN ISLANDS</label>
+			<input class=w3-radio type=radio name=nation value=CF><label for=CF>CENTRAL AFRICAN REPUBLIC</label>
+			<input class=w3-radio type=radio name=nation value=TD><label for=TD>CHAD</label>
+			<input class=w3-radio type=radio name=nation value=CL><label for=CL>CHILE</label>
+			<input class=w3-radio type=radio name=nation value=CN><label for=CN>CHINA</label>
+			<input class=w3-radio type=radio name=nation value=CX><label for=CX>CHRISTMAS ISLAND</label>
+			<input class=w3-radio type=radio name=nation value=CC><label for=CC>COCOS (KEELING) ISLANDS</label>
+			<input class=w3-radio type=radio name=nation value=CO><label for=CO>COLOMBIA</label>
+			<input class=w3-radio type=radio name=nation value=KM><label for=KM>COMOROS</label>
+			<input class=w3-radio type=radio name=nation value=CG><label for=CG>CONGO</label>
+			<input class=w3-radio type=radio name=nation value=CD><label for=CD>CONGO, THE DEMOCRATIC REPUBLIC OF THE</label>
+			<input class=w3-radio type=radio name=nation value=CK><label for=CK>COOK ISLANDS</label>
+			<input class=w3-radio type=radio name=nation value=CR><label for=CR>COSTA RICA</label>
+			<input class=w3-radio type=radio name=nation value=CI><label for=CI>CÔTE D'IVOIRE</label>
+			<input class=w3-radio type=radio name=nation value=HR><label for=HR>CROATIA</label>
+			<input class=w3-radio type=radio name=nation value=CU><label for=CU>CUBA</label>
+			<input class=w3-radio type=radio name=nation value=CY><label for=CY>CYPRUS</label>
+			<input class=w3-radio type=radio name=nation value=CZ><label for=CZ>CZECH REPUBLIC</label>
+			</p><p>
+			<input class=w3-radio type=radio name=nation value=DK><label for=DK>DENMARK</label>
+			<input class=w3-radio type=radio name=nation value=DJ><label for=DJ>DJIBOUTI</label>
+			<input class=w3-radio type=radio name=nation value=DM><label for=DM>DOMINICA</label>
+			<input class=w3-radio type=radio name=nation value=DO><label for=DO>DOMINICAN REPUBLIC</label>
+			</p><p>
+			<input class=w3-radio type=radio name=nation value=EC><label for=EC>ECUADOR</label>
+			<input class=w3-radio type=radio name=nation value=EG><label for=EG>EGYPT</label>
+			<input class=w3-radio type=radio name=nation value=SV><label for=SV>EL SALVADOR</label>
+			<input class=w3-radio type=radio name=nation value=GQ><label for=GQ>EQUATORIAL GUINEA</label>
+			<input class=w3-radio type=radio name=nation value=ER><label for=ER>ERITREA</label>
+			<input class=w3-radio type=radio name=nation value=EE><label for=EE>ESTONIA</label>
+			<input class=w3-radio type=radio name=nation value=ET><label for=ET>ETHIOPIA</label>
+			</p><p>
+			<input class=w3-radio type=radio name=nation value=FK><label for=FK>FALKLAND ISLANDS (MALVINAS)</label>
+			<input class=w3-radio type=radio name=nation value=FO><label for=FO>FAROE ISLANDS</label>
+			<input class=w3-radio type=radio name=nation value=FJ><label for=FJ>FIJI</label>
+			<input class=w3-radio type=radio name=nation value=FI><label for=FI>FINLAND</label>
+			<input class=w3-radio type=radio name=nation value=FR><label for=FR>FRANCE</label>
+			<input class=w3-radio type=radio name=nation value=GF><label for=GF>FRENCH GUIANA</label>
+			<input class=w3-radio type=radio name=nation value=PF><label for=PF>FRENCH POLYNESIA</label>
+			<input class=w3-radio type=radio name=nation value=TF><label for=TF>FRENCH SOUTHERN TERRITORIES</label>
+			</p><p>
+			<input class=w3-radio type=radio name=nation value=GA><label for=GA>GABON</label>
+			<input class=w3-radio type=radio name=nation value=GM><label for=GM>GAMBIA</label>
+			<input class=w3-radio type=radio name=nation value=GE><label for=GE>GEORGIA</label>
+			<input class=w3-radio type=radio name=nation value=DE><label for=DE>GERMANY</label>
+			<input class=w3-radio type=radio name=nation value=GH><label for=GH>GHANA</label>
+			<input class=w3-radio type=radio name=nation value=GI><label for=GI>GIBRALTAR</label>
+			<input class=w3-radio type=radio name=nation value=GR><label for=GR>GREECE</label>
+			<input class=w3-radio type=radio name=nation value=GL><label for=GL>GREENLAND</label>
+			<input class=w3-radio type=radio name=nation value=GD><label for=GD>GRENADA</label>
+			<input class=w3-radio type=radio name=nation value=GP><label for=GP>GUADELOUPE</label>
+			<input class=w3-radio type=radio name=nation value=GU><label for=GU>GUAM</label>
+			<input class=w3-radio type=radio name=nation value=GT><label for=GT>GUATEMALA</label>
+			<input class=w3-radio type=radio name=nation value=GN><label for=GN>GUINEA</label>
+			<input class=w3-radio type=radio name=nation value=GW><label for=GW>GUINEA-BISSAU</label>
+			<input class=w3-radio type=radio name=nation value=GY><label for=GY>GUYANA</label>
+			</p><p>
+			<input class=w3-radio type=radio name=nation value=HT><label for=HT>HAITI</label>
+			<input class=w3-radio type=radio name=nation value=HM><label for=HM>HEARD ISLAND AND MCDONALD ISLANDS</label>
+			<input class=w3-radio type=radio name=nation value=HN><label for=HN>HONDURAS</label>
+			<input class=w3-radio type=radio name=nation value=HK><label for=HK>HONG KONG</label>
+			<input class=w3-radio type=radio name=nation value=HU><label for=HU>HUNGARY</label>
+			</p><p>
+			<input class=w3-radio type=radio name=nation value=IS><label for=IS>ICELAND</label>
+			<input class=w3-radio type=radio name=nation value=IN><label for=IN>INDIA</label>
+			<input class=w3-radio type=radio name=nation value=ID><label for=ID>INDONESIA</label>
+			<input class=w3-radio type=radio name=nation value=IR><label for=IR>IRAN, ISLAMIC REPUBLIC OF</label>
+			<input class=w3-radio type=radio name=nation value=IQ><label for=IQ>IRAQ</label>
+			<input class=w3-radio type=radio name=nation value=IE><label for=IE>IRELAND</label>
+			<input class=w3-radio type=radio name=nation value=IL><label for=IL>ISRAEL</label>
+			<input class=w3-radio type=radio name=nation value=IT><label for=IT>ITALY</label>
+			</p><p>
+			<input class=w3-radio type=radio name=nation value=JM><label for=JM>JAMAICA</label>
+			<input class=w3-radio type=radio name=nation value=JP><label for=JP>JAPAN</label>
+			<input class=w3-radio type=radio name=nation value=JO><label for=JO>JORDAN</label>
+			</p><p>
+			<input class=w3-radio type=radio name=nation value=KZ><label for=KZ>KAZAKHSTAN</label>
+			<input class=w3-radio type=radio name=nation value=KE><label for=KE>KENYA</label>
+			<input class=w3-radio type=radio name=nation value=KI><label for=KI>KIRIBATI</label>
+			<input class=w3-radio type=radio name=nation value=KP><label for=KP>KOREA, DEMOCRATIC PEOPLE'S REPUBLIC OF</label>
+			<input class=w3-radio type=radio name=nation value=KR><label for=KR>KOREA, REPUBLIC OF(대한민국)</label>
+			<input class=w3-radio type=radio name=nation value=KW><label for=KW>KUWAIT</label>
+			<input class=w3-radio type=radio name=nation value=KG><label for=KG>KYRGYZSTAN</label>
+			</p><p>
+			<input class=w3-radio type=radio name=nation value=LA><label for=LA>LAO PEOPLE'S DEMOCRATIC REPUBLIC (LAOS)</label>
+			<input class=w3-radio type=radio name=nation value=LV><label for=LV>LATVIA</label>
+			<input class=w3-radio type=radio name=nation value=LB><label for=LB>LEBANON</label>
+			<input class=w3-radio type=radio name=nation value=LS><label for=LS>LESOTHO</label>
+			<input class=w3-radio type=radio name=nation value=LR><label for=LR>LIBERIA</label>
+			<input class=w3-radio type=radio name=nation value=LY><label for=LY>LIBYAN ARAB JAMAHIRIYA</label>
+			<input class=w3-radio type=radio name=nation value=LI><label for=LI>LIECHTENSTEIN</label>
+			<input class=w3-radio type=radio name=nation value=LT><label for=LT>LITHUANIA</label>
+			<input class=w3-radio type=radio name=nation value=LU><label for=LU>LUXEMBOURG</label>
+			</p><p>
+			<input class=w3-radio type=radio name=nation value=MO><label for=MO>MACAO</label>
+			<input class=w3-radio type=radio name=nation value=MK><label for=MK>MACEDONIA, THE FORMER YUGOSLAV REPUBLIC OF</label>
+			<input class=w3-radio type=radio name=nation value=MG><label for=MG>MADAGASCAR</label>
+			<input class=w3-radio type=radio name=nation value=MW><label for=MW>MALAWI</label>
+			<input class=w3-radio type=radio name=nation value=MY><label for=MY>MALAYSIA</label>
+			<input class=w3-radio type=radio name=nation value=MV><label for=MV>MALDIVES</label>
+			<input class=w3-radio type=radio name=nation value=ML><label for=ML>MALI</label>
+			<input class=w3-radio type=radio name=nation value=MT><label for=MT>MALTA</label>
+			<input class=w3-radio type=radio name=nation value=MH><label for=MH>MARSHALL ISLANDS</label>
+			<input class=w3-radio type=radio name=nation value=MQ><label for=MQ>MARTINIQUE</label>
+			<input class=w3-radio type=radio name=nation value=MR><label for=MR>MAURITANIA</label>
+			<input class=w3-radio type=radio name=nation value=MU><label for=MU>MAURITIUS</label>
+			<input class=w3-radio type=radio name=nation value=YT><label for=YT>MAYOTTE</label>
+			<input class=w3-radio type=radio name=nation value=MX><label for=MX>MEXICO</label>
+			<input class=w3-radio type=radio name=nation value=FM><label for=FM>MICRONESIA, FEDERATED STATES OF</label>
+			<input class=w3-radio type=radio name=nation value=MD><label for=MD>MOLDOVA, REPUBLIC OF</label>
+			<input class=w3-radio type=radio name=nation value=MC><label for=MC>MONACO</label>
+			<input class=w3-radio type=radio name=nation value=MN><label for=MN>MONGOLIA</label>
+			<input class=w3-radio type=radio name=nation value=ME><label for=ME>MONTENEGRO</label>
+			<input class=w3-radio type=radio name=nation value=MS><label for=MS>MONTSERRAT</label>
+			<input class=w3-radio type=radio name=nation value=MA><label for=MA>MOROCCO</label>
+			<input class=w3-radio type=radio name=nation value=MZ><label for=MZ>MOZAMBIQUE</label>
+			<input class=w3-radio type=radio name=nation value=MM><label for=MM>MYANMAR</label>
+			</p><p>
+			<input class=w3-radio type=radio name=nation value=NA><label for=NA>NAMIBIA</label>
+			<input class=w3-radio type=radio name=nation value=NR><label for=NR>NAURU</label>
+			<input class=w3-radio type=radio name=nation value=NP><label for=NP>NEPAL</label>
+			<input class=w3-radio type=radio name=nation value=NL><label for=NL>NETHERLANDS</label>
+			<input class=w3-radio type=radio name=nation value=AN><label for=AN>NETHERLANDS ANTILLES</label>
+			<input class=w3-radio type=radio name=nation value=NC><label for=NC>NEW CALEDONIA</label>
+			<input class=w3-radio type=radio name=nation value=NZ><label for=NZ>NEW ZEALAND</label>
+			<input class=w3-radio type=radio name=nation value=NI><label for=NI>NICARAGUA</label>
+			<input class=w3-radio type=radio name=nation value=NE><label for=NE>NIGER</label>
+			<input class=w3-radio type=radio name=nation value=NG><label for=NG>NIGERIA</label>
+			<input class=w3-radio type=radio name=nation value=NU><label for=NU>NIUE</label>
+			<input class=w3-radio type=radio name=nation value=NF><label for=NF>NORFOLK ISLAND</label>
+			<input class=w3-radio type=radio name=nation value=MP><label for=MP>NORTHERN MARIANA ISLANDS</label>
+			<input class=w3-radio type=radio name=nation value=NO><label for=NO>NORWAY</label>
+			</p><p>
+			<input class=w3-radio type=radio name=nation value=OM><label for=OM>OMAN</label>
+			</p><p>
+			<input class=w3-radio type=radio name=nation value=PK><label for=PK>PAKISTAN</label>
+			<input class=w3-radio type=radio name=nation value=PW><label for=PW>PALAU</label>
+			<input class=w3-radio type=radio name=nation value=PS><label for=PS>PALESTINIAN TERRITORY, OCCUPIED</label>
+			<input class=w3-radio type=radio name=nation value=PA><label for=PA>PANAMA</label>
+			<input class=w3-radio type=radio name=nation value=PG><label for=PG>PAPUA NEW GUINEA</label>
+			<input class=w3-radio type=radio name=nation value=PY><label for=PY>PARAGUAY</label>
+			<input class=w3-radio type=radio name=nation value=PE><label for=PE>PERU</label>
+			<input class=w3-radio type=radio name=nation value=PH><label for=PH>PHILIPPINES</label>
+			<input class=w3-radio type=radio name=nation value=PN><label for=PN>PITCAIRN</label>
+			<input class=w3-radio type=radio name=nation value=PL><label for=PL>POLAND</label>
+			<input class=w3-radio type=radio name=nation value=PT><label for=PT>PORTUGAL</label>
+			<input class=w3-radio type=radio name=nation value=PR><label for=PR>PUERTO RICO</label>
+			</p><p>
+			<input class=w3-radio type=radio name=nation value=QA><label for=QA>QATAR</label>
+			</p><p>
+			<input class=w3-radio type=radio name=nation value=RE><label for=RE>RÉUNION</label>
+			<input class=w3-radio type=radio name=nation value=RO><label for=RO>ROMANIA</label>
+			<input class=w3-radio type=radio name=nation value=RU><label for=RU>RUSSIAN FEDERATION</label>
+			<input class=w3-radio type=radio name=nation value=RW><label for=RW>RWANDA</label>
+			</p><p>
+			<input class=w3-radio type=radio name=nation value=SH><label for=SH>SAINT HELENA</label>
+			<input class=w3-radio type=radio name=nation value=KN><label for=KN>SAINT KITTS AND NEVIS</label>
+			<input class=w3-radio type=radio name=nation value=LC><label for=LC>SAINT LUCIA</label>
+			<input class=w3-radio type=radio name=nation value=PM><label for=PM>SAINT PIERRE AND MIQUELON</label>
+			<input class=w3-radio type=radio name=nation value=VC><label for=VC>SAINT VINCENT AND THE GRENADINES</label>
+			<input class=w3-radio type=radio name=nation value=WS><label for=WS>SAMOA</label>
+			<input class=w3-radio type=radio name=nation value=SM><label for=SM>SAN MARINO</label>
+			<input class=w3-radio type=radio name=nation value=ST><label for=ST>SAO TOME AND PRINCIPE</label>
+			<input class=w3-radio type=radio name=nation value=SA><label for=SA>SAUDI ARABIA</label>
+			<input class=w3-radio type=radio name=nation value=SN><label for=SN>SENEGAL</label>
+			<input class=w3-radio type=radio name=nation value=RS><label for=RS>SERBIA</label>
+			<input class=w3-radio type=radio name=nation value=SC><label for=SC>SEYCHELLES</label>
+			<input class=w3-radio type=radio name=nation value=SL><label for=SL>SIERRA LEONE</label>
+			<input class=w3-radio type=radio name=nation value=SG><label for=SG>SINGAPORE</label>
+			<input class=w3-radio type=radio name=nation value=SK><label for=SK>SLOVAKIA</label>
+			<input class=w3-radio type=radio name=nation value=SI><label for=SI>SLOVENIA</label>
+			<input class=w3-radio type=radio name=nation value=SB><label for=SB>SOLOMON ISLANDS</label>
+			<input class=w3-radio type=radio name=nation value=SO><label for=SO>SOMALIA</label>
+			<input class=w3-radio type=radio name=nation value=ZA><label for=ZA>SOUTH AFRICA</label>
+			<input class=w3-radio type=radio name=nation value=GS><label for=GS>SOUTH GEORGIA AND THE SOUTH SANDWICH ISLANDS</label>
+			<input class=w3-radio type=radio name=nation value=ES><label for=ES>SPAIN</label>
+			<input class=w3-radio type=radio name=nation value=LK><label for=LK>SRI LANKA</label>
+			<input class=w3-radio type=radio name=nation value=SD><label for=SD>SUDAN</label>
+			<input class=w3-radio type=radio name=nation value=SR><label for=SR>SURINAME</label>
+			<input class=w3-radio type=radio name=nation value=SJ><label for=SJ>SVALBARD AND JAN MAYEN</label>
+			<input class=w3-radio type=radio name=nation value=SZ><label for=SZ>SWAZILAND</label>
+			<input class=w3-radio type=radio name=nation value=SE><label for=SE>SWEDEN</label>
+			<input class=w3-radio type=radio name=nation value=CH><label for=CH>SWITZERLAND</label>
+			<input class=w3-radio type=radio name=nation value=SY><label for=SY>SYRIAN ARAB REPUBLIC</label>
+			</p><p>
+			<input class=w3-radio type=radio name=nation value=TW><label for=TW>TAIWAN</label>
+			<input class=w3-radio type=radio name=nation value=TJ><label for=TJ>TAJIKISTAN</label>
+			<input class=w3-radio type=radio name=nation value=TZ><label for=TZ>TANZANIA, UNITED REPUBLIC OF</label>
+			<input class=w3-radio type=radio name=nation value=TH><label for=TH>THAILAND</label>
+			<input class=w3-radio type=radio name=nation value=TL><label for=TL>TIMOR-LESTE</label>
+			<input class=w3-radio type=radio name=nation value=TG><label for=TG>TOGO</label>
+			<input class=w3-radio type=radio name=nation value=TK><label for=TK>TOKELAU</label>
+			<input class=w3-radio type=radio name=nation value=TO><label for=TO>TONGA</label>
+			<input class=w3-radio type=radio name=nation value=TT><label for=TT>TRINIDAD AND TOBAGO</label>
+			<input class=w3-radio type=radio name=nation value=TN><label for=TN>TUNISIA</label>
+			<input class=w3-radio type=radio name=nation value=TR><label for=TR>TURKEY</label>
+			<input class=w3-radio type=radio name=nation value=TM><label for=TM>TURKMENISTAN</label>
+			<input class=w3-radio type=radio name=nation value=TC><label for=TC>TURKS AND CAICOS ISLANDS</label>
+			<input class=w3-radio type=radio name=nation value=TV><label for=TV>TUVALU</label>
+			</p><p>
+			<input class=w3-radio type=radio name=nation value=UG><label for=UG>UGANDA</label>
+			<input class=w3-radio type=radio name=nation value=UA><label for=UA>UKRAINE</label>
+			<input class=w3-radio type=radio name=nation value=AE><label for=AE>UNITED ARAB EMIRATES</label>
+			<input class=w3-radio type=radio name=nation value=GB><label for=GB>UNITED KINGDOM</label>
+			<input class=w3-radio type=radio name=nation value=US><label for=US>UNITED STATES</label>
+			<input class=w3-radio type=radio name=nation value=UM><label for=UM>UNITED STATES MINOR OUTLYING ISLANDS</label>
+			<input class=w3-radio type=radio name=nation value=UY><label for=UY>URUGUAY</label>
+			<input class=w3-radio type=radio name=nation value=UZ><label for=UZ>UZBEKISTAN</label>
+			</p><p>
+			<input class=w3-radio type=radio name=nation value=VU><label for=VU>VANUATU</label>
+			<input class=w3-radio type=radio name=nation value=VE><label for=VE>VENEZUELA</label>
+			<input class=w3-radio type=radio name=nation value=VN><label for=VN>VIET NAM</label>
+			<input class=w3-radio type=radio name=nation value=VG><label for=VG>VIRGIN ISLANDS, BRITISH</label>
+			<input class=w3-radio type=radio name=nation value=VI><label for=VI>VIRGIN ISLANDS, U.S.</label>
+			</p><p>
+			<input class=w3-radio type=radio name=nation value=WF><label for=WF>WALLIS AND FUTUNA</label>
+			<input class=w3-radio type=radio name=nation value=EH><label for=EH>WESTERN SAHARA</label>
+			</p><p>
+			<input class=w3-radio type=radio name=nation value=YE><label for=YE>YEMEN</label>
+			</p><p>
+			<input class=w3-radio type=radio name=nation value=ZM><label for=ZM>ZAMBIA</label>
+			<input class=w3-radio type=radio name=nation value=ZW><label for=ZW>ZIMBABWE</label>
+			</p>
+			</div>
 
-			<h4 class=eng>You can find your latitude, longitude position with map software like google map.</h4>
-			<h4 class=kor>당신의 경위도 위치는 구글맵 등의 지도 소프트웨어로 찾을 수 있습니다.</h4>
+			<div class='w3-light-grey w3-panel w3-card-4'>
+
+				<button id=pos><b class=kor>현재 위치 표시</b><b class=eng>Show current position</b></button>
+			<p>
+			<input type=checkbox class=w3-check style='float:left' name=distance>
+			<label for=distance>
+				<b class=eng>I want my banner to be viewed more by users close to my position</b>
+				<b class=kor>내 배너가 내 위치에서 가까운 사용자에게 우선적으로 보여지기를 바랍니다</b>
+			</label><br>
+			</p>
+
 			<label for=lat>
 				<b class=eng>My location Latitude</b>
 				<b class=kor>내 위치의 경도</b>
@@ -308,12 +363,6 @@
 			</label>
 			<input type=text name=lng><br>
 
-			<label for=distance>
-				<b class=eng>I want my banner to be viewed more by users close to my position</b>
-				<b class=kor>내 배너가 내 위치에서 가까운 사용자에게 우선적으로 보여지기를 바랍니다</b>
-			</label>
-			<input type=checkbox name=distance><br>
-
 			<label for=km>
 				<b class=eng>Distance within</b>
 				<b class=kor>거리 제한</b>
@@ -321,8 +370,9 @@
 			<input type=text name=km>km<br>
 			<b class=kor>이 사용자의 위치는 IP 어드레스를 통해 대략적으로 추측되기 때문에, 최소 50km정도로 거리제한을 두는 것이 좋습니다.</b>
 			<b class=eng>User's postions is approximately calculated from his IP address. So, 50km of minimal distance is recommended.</b>
-			<hr>
+			</div>
 
+			<a href=index.html><button>Cancel</button></a>
 			<input type=submit>
 		</form>
 	</body>
