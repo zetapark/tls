@@ -9,12 +9,10 @@
 		<script src=lang.js></script>
 	<script>
 		function show_pos() {
-			if(navigator.geolocation) {
-				navigator.geolocation.getCurrentPosition(function(position) {
-					$("input[name='lat']").val(position.coords.latitude);
-					$("input[name='lng']").val(position.coords.longitude);
-				});
-			}
+			navigator.geolocation.getCurrentPosition(function(position) {
+				$("input[name='lat']").val(position.coords.latitude);
+				$("input[name='lng']").val(position.coords.longitude);
+			});
 		}
 	</script>
 	</head>
