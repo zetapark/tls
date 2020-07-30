@@ -164,7 +164,7 @@ void Adnet::pref()
 {//php
 	sq.query("delete from Pref where id = '" + id_ + "'");
 	string command = "insert into Pref values ('" + id_ + "'";
-	for(const string s : category) command += nameNvalue_[s] == "" ? ",0" : ",1";
+	for(const string &s : category) command += nameNvalue_[s] == "" ? ",0" : ",1";
 	sq.query(command + ')');
 	if(nameNvalue_["lat"] == "") nameNvalue_["lat"] = "0";
 	if(nameNvalue_["lng"] == "") nameNvalue_["lng"] = "0";
