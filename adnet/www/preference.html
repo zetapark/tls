@@ -10,7 +10,6 @@
 	<script>
 		function show_pos() {
 			navigator.geolocation.getCurrentPosition(function(position) {
-				alert('position : ' + position.coords.latitude);
 				$("input[name='lat']").val(position.coords.latitude);
 				$("input[name='lng']").val(position.coords.longitude);
 			});

@@ -162,10 +162,19 @@ static const string category[] = {"computer", "programming", "game", "gadgets",
 
 void Adnet::pref()
 {//php
-	sq.query("delete from Pref where id = '" + id_ + "'");
-	string command = "insert into Pref values ('" + id_ + "'";
-	for(const string &s : category) command += nameNvalue_[s] == "" ? ",0" : ",1";
-	sq.query(command + ')');
+	string command;
+	if(sq.select("Pref", "where id = '" + id_ + "'")) {
+		command = "update Pref set ";
+		for(const string &s : category) command += s + " = " + (nameNvalue_[s]=="" ? "0," : "1,");
+		command.back() = ' ';
+		command += " where id = '" + id_ + "'";
+	} else {
+		command = "insert into Pref values ('" + id_ + "', ";
+		for(const string &s : category) command += nameNvalue_[s] == "" ? ",0" : ",1";
+		command += ')';
+	}
+	sq.query(command);
+
 	if(nameNvalue_["lat"] == "") nameNvalue_["lat"] = "0";
 	if(nameNvalue_["lng"] == "") nameNvalue_["lng"] = "0";
 	if(nameNvalue_["km"] == "") nameNvalue_["km"] = "0";
