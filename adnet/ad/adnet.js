@@ -1,5 +1,5 @@
 function request_ad() {
-	if(document.hasFocus()) {
+	if(document.hasFocus() && $('#adnet').is(':visible')) {
 		$.post(
 			'https://ad.zeta2374.com/request_ad.php',
 			{ id : $('#adnet').attr('myid'), category : $('#adnet').attr('category'), 
