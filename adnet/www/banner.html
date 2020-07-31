@@ -26,6 +26,21 @@
 			<li>내 배너 클릭시 이동할 링크(link) :</li>
 			<li>포인트(point) :</li>
 		</ul>
+		<span class=kor>포인트를 클릭(이 전환은 단방향입니다. 클릭은 포인트로 전환될 수 없습니다.</span>
+		<span class=eng>Transfer point(This transfer is one way. Click cannot be transferred back to
+			point</span>
+		<form action=banner.html method=post>
+			<label for=point>
+				<span class=kor>전환할 포인트</span>
+				<span class=eng>Point to transfer</span>
+			</label>
+			<input type=range name=point oninput='out.value = this.value' value=0 min=0 max=>
+			<output id=out></output>
+			<span class=eng>transfer to</span>
+			<input type=submit value='click induce' name=submit>
+			<input type=submit value='crypto money' name=submit disabled>
+			<span class=kor>로 전환</span>
+		</form>
 		<p class=eng>
 		You should upload 4 types of your own banner.
 		Your banner will be shown randomly on member websites.

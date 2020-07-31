@@ -26,8 +26,39 @@ void Adnet::db_ip(string ip)
 	db_ip_ = ip;
 }
 
+static string mailx(string src, string dst, string title, string content)
+{
+	string cmd = "mailx " + dst + " -r " + src + " -s '" + title + "' <<HERE_CONTENT\n"
+		+ content + "\nHERE_CONTENT";
+	system(cmd.data());
+	return "mail sent";
+}
+
 void Adnet::banner()
 {
+	if(id_ != "" && sq.select("Users", "where id = '" + id_ + "'")) {
+		int point = sq[0]["point"].asInt(), click_induce = sq[0]["click_induce"].asInt();
+		if(nameNvalue_["submit"] == "crypto money") {
+			if(int amount = stoi(nameNvalue_["point"]); 100 < amount) 
+				mailx(sq[0]["email"].asString(), "adnet@zeta2374.com", "암호 화폐 전환 요청",
+						id_ + "님이 " + to_string(amount) + "의 포인트를 암호화폐로 전환 요청하였습니다.");
+		} else if(nameNvalue_["submit"] == "click induce") {
+			if(int amount = stoi(nameNvalue_["point"]); amount < point) {
+				point -= amount; click_induce += amount;
+				sq.query("update Users set point = " + to_string(point) + ", click_induce = " 
+						+ to_string(click_induce));
+			}
+		}
+		prepend("<ul>", sq[0]["description"].asString());
+		swap(":</li>", ": " + to_string(click_induce) + "</li>");
+		swap(":</li>", ": " + sq[0]["show_induce"].asString() + "</li>");
+		swap(":</li>", ": " + sq[0]["my_banner_show"].asString() + "</li>");
+		swap(":</li>", ": " + sq[0]["my_banner_click"].asString() + "</li>");
+		swap(":</li>", ": " + sq[0]["link"].asString() + "</li>");
+		swap(":</li>", ": " + to_string(point) + "</li>");
+		append("min=0 max=", to_string(point));
+	}
+
 	for(int i=0; i<4; i++) swap("@ID", id_);
 	if(nameNvalue_["leaderfilename"] != "") {
 		ofstream f{"banner/" + id_ + "-leader.jpg"};
@@ -50,15 +81,6 @@ void Adnet::banner()
 	if(string s = nameNvalue_["desc"]; s != "")
 		sq.query("update Users set description = '" + s + "' where id = '" + id_ + "'");
 
-	if(id_ != "" && sq.select("Users", "where id = '" + id_ + "'")) {
-		prepend("<ul>", sq[0]["description"].asString());
-		swap(":</li>", ": " + sq[0]["click_induce"].asString() + "</li>");
-		swap(":</li>", ": " + sq[0]["show_induce"].asString() + "</li>");
-		swap(":</li>", ": " + sq[0]["my_banner_show"].asString() + "</li>");
-		swap(":</li>", ": " + sq[0]["my_banner_click"].asString() + "</li>");
-		swap(":</li>", ": " + sq[0]["link"].asString() + "</li>");
-		swap(":</li>", ": " + sq[0]["point"].asString() + "</li>");
-	}
 }
 
 string Adnet::signup()
@@ -106,14 +128,6 @@ void Adnet::id_hit()
 	index();
 	sq.select("Users", "limit 1");//need this to prevent error
 	sq.query("update Users set click_induce = click_induce + 1 where id = '" + id + "'");
-}
-
-static string mailx(string src, string dst, string title, string content)
-{
-	string cmd = "mailx " + dst + " -r " + src + " -s '" + title + "' <<HERE_CONTENT\n"
-		+ content + "\nHERE_CONTENT";
-	system(cmd.data());
-	return "mail sent";
 }
 
 string Adnet::forgot()
