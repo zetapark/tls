@@ -43,7 +43,7 @@ void Adnet::banner()
 				mailx(sq[0]["email"].asString(), "adnet@zeta2374.com", "암호 화폐 전환 요청",
 						id_ + "님이 " + to_string(amount) + "의 포인트를 암호화폐로 전환 요청하였습니다.");
 		} else if(nameNvalue_["submit"] == "click induce") {
-			if(int amount = stoi(nameNvalue_["point"]); amount < point) {
+			if(int amount = stoi(nameNvalue_["point"]); amount <= point) {
 				point -= amount; click_induce += amount;
 				sq.query("update Users set point = " + to_string(point) + ", click_induce = " 
 						+ to_string(click_induce));
