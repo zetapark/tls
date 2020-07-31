@@ -46,7 +46,7 @@ void Adnet::banner()
 			if(int amount = stoi(nameNvalue_["point"]); amount <= point) {
 				point -= amount; click_induce += amount;
 				sq.query("update Users set point = " + to_string(point) + ", click_induce = " 
-						+ to_string(click_induce));
+						+ to_string(click_induce) + " where id = '" + id_ + "'");
 			}
 		}
 		prepend("<ul>", sq[0]["description"].asString());
