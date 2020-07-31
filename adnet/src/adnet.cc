@@ -97,7 +97,6 @@ void Adnet::index()
 
 	swap("@ID", id_);
 	swap("@LOGGED", id_ == "" ? "false" : "true");
-	append("<body>", req_header_["IP-Addr"]);
 }
 
 void Adnet::id_hit()

@@ -50,13 +50,14 @@ h1 {
 	</head>
 	<body>
 		<img width=100% id=adnet myid=adnet adtype=leader>
-		<form action="index.html" method="post" style='float: left;'>	 
+		<form action="index.html" method="post" class='w3-button' style='float: left;'>	 
 			<label for="id">Your ID:</label>
 			<input type="text" id="id" name="id">
 			<label for="pwd">Password:</label>
 			<input type="password" name="pwd">
 			<input type="submit" name='submit' value='login'>
 		</form> 
+		<div class='w3-button'>
 		<a href=signup.html id=signup><button>signup</button></a>
 		<a href=banner.html id=profile><button>My Profile : @ID</button></a>
 		<a href=email.html id=email><button>Contact</button></a>
@@ -64,6 +65,7 @@ h1 {
 		<a href=index.html?opt=logout id=logout><button>Logout</button></a>
 		<a href=preference.html id=pref><button>Preference</button></a>
 		<button id=lang>Language</button>
+		</div>
 		<hr>
 
 		<div class='w3-row-padding'>
@@ -3233,6 +3235,8 @@ h1 {
 				<li class=eng>Enter webpage link where you banner will point to.</li>
 				<li class=kor>나의 컨텐츠에 adnet.zeta2374.com을 광고하거나 웹사이트에 배너를 삽입한다.</li>
 				<li class=eng>Insert AdNET banner in your web site or Advertise adnet.zeta2374.com in your contents</li>
+				<li class=kor><a href=preference.html>Preference</a>를 클릭하여 내 배너의 카테고리와 국가 혹은 거리에 따른 옵션을 지정한다.</li>
+				<li class=eng>Click <a href=preference.html>Preference</a> button. Specify category of my banner ad and country, distance option</li>
 			</ol>
 		</div>
 
@@ -3279,9 +3283,13 @@ h1 {
 
 			<div class='w3-panel w3-card-4 w3-border-left w3-light-gray'>
 				<p class=container>
+				&lt;head>
 				&lt;script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js">&lt;/script><br>
 				&lt;script src=https://ad.zeta2374.com/adnet.js>&lt;/script><br>
+				&lt;/head>
+				&lt;body>
 				&lt;img id=adnet myid='your id' adtype=square category='computer programming' width=100%><br>
+				&lt;/body>
 				</p>
 			</div>
 			<p class=kor> adtype은 다음의 네 가지가 있습니다. 4종의 배너 중 지정된 배너가 보여질 것입니다.</p>
@@ -3293,12 +3301,14 @@ h1 {
 				<li>sky : 160 x 600</li>
 			</ul>
 
-			<p class=kor>category에 해당되는 배너가 더 자주 표시될 것입니다.
+			<p class=kor>카테고리를 지정하면, 지정한 category에 해당되는 배너가 더 자주 표시될 것입니다.
 			category를 지정하지 않으면, 모든 배너가 차별없이 표시됩니다.
-			category는 다음의 타입이 있습니다.</p>
+			category는 다음의 타입이 있으며, 여러 개를 동시에 지정할 수 있습니다.
+			이 때 각 카테고리의 사이는 스페이스로 띄어야 합니다.(i.e. category='education travel food')</p>
 			<p class=eng>Those banners that match designated category will be displayed more.
 			If you do not designate the category, then banner category will be ignored.
-			There are category types as follows.</p>
+			There are category types as follows. You can specify multiple categories together.
+			In that case, you should add a space between each categories.(i.e. category='education travel food')</p>
 			<ul>
 			<li>computer</li>
 			<li>programming</li>
@@ -3317,10 +3327,12 @@ h1 {
 			</ul>
 
 			<p class=kor>
-			img 태그의 id, myid, adtype은 정해진 것이지만,
+			img 태그의 id, myid, adtype은 항상 지정해야 하고, category는 생략할 수 있습니다.
 			width 혹은 height 요소는 마음대로 정할 수 있습니다.
+			부트스트랩 등을 사용하여 responsive한 웹페이지를 디자인하거나,
+			심지어는 모바일에서는 광고가 사라지게 할 수도 있습니다.
 			웹페이지에 적절한 범위를 광고가 점유하게 잘 조절하십시오.
-			그러나, 광고를 보여주는 것이 아니라, 광고를 클릭한 횟수가 중요하다는 것을 잊지 마십시오.
+			그러나, 광고를 보여주는 것이 아니라, 광고를 클릭한 횟수가 중요하다는 것을 잊지 마십시오.<br>
 			AdNET은 JQuery를 사용합니다. 
 			AdNET의 자바스크립트를 인용하기 전에 JQuery를 참조해야 합니다.
 			그리고 원하는 위치에 img 태그를 id를 adnet으로 하여 삽입하세요.
@@ -3330,10 +3342,11 @@ h1 {
 			모바일 혹은 데스크탑에서 화면 크기에 따라 다르게 표현되도록 할 수도 있습니다.
 			</p>
 			<p class=eng>
-			You should specify id, myid, adtype of img tag.
+			You should specify id, myid, adtype of img tag. category can be omitted.
 			You can arbitrarily decide width or height just as you did with your images.
+			You can even use Bootstrap to make the banner responsive or disappear on mobile devices.
 			Control these to make your banner occupy proper portion.
-			But we remind you that click induce matters not the view induce.
+			But we remind you that click induce matters not the view induce.<br>
 			AdNET uses JQuery.
 			So you should reference JQuery before including adnet.js.
 			And finally include img tag with id=adnet.
