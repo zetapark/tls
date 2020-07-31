@@ -7,7 +7,7 @@ function request_ad() {
 				var split = data.split('\n');
 				$('#adnet').attr('src', 'https://tomcat.zeta2374.com/banner/' + split[0] 
 					+ '-' + $('#adnet').attr('adtype') + '.jpg');//img
-				$('#adnet').off('click');
+				$('#adnet').off('mousedown');
 				$('#adnet').mousedown(function(e) {
 					switch(e.which) {
 						case 3 : window.open('https://adnet.zeta2374.com', '_blank'); break;
