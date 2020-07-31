@@ -54,14 +54,32 @@
 		});
 
 	</script>
+	<script src=lang.js></script>
 	</head>
 	<body>
 		<ol>
-			<li>이메일<input type=email id=em-text>로 <button id=id-search>아이디 찾기</button><br>
-				아이디<input type=text id=id-text>로 <button id=email-search>이메일 찾기</button></li>
-			<li>패스워드를 <input type=password id=pwd-text>로 리셋하는 메일을
-				<b></b>로 <button id=pwd-setting>보내기</button></li>
-			<li>새 패스워드를 활성화하기 위해 이메일에서 얻은 다섯자리 숫자<input type=text id=num-input>를 입력하세요.<button id=activate>활성화</button></li>
+			<li>
+				<span class=kor>이메일</span><span class=eng>Email</span>
+				<input type=email id=em-text> :
+				<button id=id-search>
+					<span class=kor>아이디 찾기</span><span class=eng>Find ID</span>
+				</button><br>
+				<span class=kor>아이디</span><span class=eng>ID</span> <input type=text id=id-text> :
+				<button id=email-search>
+					<span class=kor>이메일 찾기</span><span class=eng>Find ID</span>
+				</button>
+			</li>
+			<li>
+				<span class=kor>패스워드를</span><span class=eng>Password reset to</span>
+				<input type=password id=pwd-text> <span class=kor>로 리셋</span>
+				<button id=pwd-setting>OK</button>
+			</li>
+			<li>
+				<b></b> : <span class=kor>
+					새 패스워드를 활성화하기 위해 이메일로 받은 다섯자리 숫자를 입력하세요.</span>
+				<span class=eng>Enter 5 digit code from your email to activate new password</span>
+				<input type=text id=num-input><button id=activate>OK</button>
+			</li>
 		</ol>
 	</body>
 </html>
