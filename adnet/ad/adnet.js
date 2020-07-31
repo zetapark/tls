@@ -1,6 +1,7 @@
 function request_ad() {
 	if(document.hasFocus()) {
-		$.post('https://ad.zeta2374.com/request_ad.php',
+		$.post(
+			'https://ad.zeta2374.com/request_ad.php',
 			{ id : $('#adnet').attr('myid'), category : $('#adnet').attr('category'), 
 				url : window.location.href },
 			function(data) {
@@ -12,8 +13,8 @@ function request_ad() {
 					switch(e.which) {
 						case 3 : window.open('https://adnet.zeta2374.com', '_blank'); break;
 						default : 
-							$.post('https://ad.zeta2374.com/click_ad.php', {id : $('#adnet').attr('myid'),
-								click : split[0], token : split[2]});//id
+							$.post('https://ad.zeta2374.com/click_ad.php',
+								{id : $('#adnet').attr('myid'), click : split[0], token : split[2]});//id
 							window.open(split[1], '_blank');//link
 					}
 				});

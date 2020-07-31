@@ -31,58 +31,68 @@ input { display : table-cell; }
 			});
 		});
 	</script>
+	<script src=lang.js></script>
 </head>
 <body>
 
 <form action="index.html" style="border:1px solid #ccc">
   <div class="container">
     <h1>Sign Up</h1>
-    <p>
+    <p class=kor>
 		Please fill in this form to create an account.
 		Email and ID cannot be changed later.
-		ID will be used as a webpage url like https://adnet.zeta2374.com/your-id.
+		ID will be used as your identity.
 		Make it simple and easy to remember and represent your identity.
-		It should be unique in AdNET.
+		ID should be unique in AdNET.
+		</p><p class=eng>
+		다음의 양식을 채우십시오.
+		이메일과 아이디는 나중에 바꿀 수 없습니다.
+		아이디는 당신의 서비스를 잘 표현할 수 있는 것으로 만드세요.
+		간단하고 외우기 쉬운 것이 좋습니다.
+		아이디는 AdNET에서 유일해야 합니다.
 		</p>
     <hr>
 
 		<p>
-		<label for=id><b>ID</b></label>
+		<label for=id><b class=eng>ID</b><b class=kor>아이디</b></label>
 		<input type=text placeholder='Enter your id, do not use dot(.)' name=id required><br>
 		</p>
 
 		<p>
-    <label for="email"><b>Email</b></label>
+		<label for="email"><b class=eng>Email</b><b class=kor>이메일</b></label>
 		<input type="email" placeholder="Enter Email" name="email" required>
 		<input type=button value='check email' id=check><br>
 		</p>
 
 		<p>
-		<label for=num><b>Verification Code</b></label>
+		<label for=num><b class=eng>Verification Code</b><b class=kor>확인번호</b></label>
 		<input type=text placeholder='Enter 5 digit number' name=num required><br>
 		</p>
 
 		<p>
-    <label for="psw"><b>Password</b></label>
+		<label for="psw"><b class=eng>Password</b><b class=kor>암호</b></label>
 		<input type="password" placeholder="Enter Password" name="psw" required><br>
 		</p>
 
 		<p>
-    <label for="psw-repeat"><b>Repeat Password</b></label>
+		<label for="psw-repeat"><b class=eng>Repeat Password</b><b class=kor>암호 확인</b></label>
 		<input type="password" placeholder="Repeat Password" name="psw-repeat" required><br>
 		</p>
 
 		<p>
-		<label for=recommend><b>Recommender ID</b></label>
+		<label for=recommend><b class=eng>Recommender ID</b><b class=kor>추천인 아이디</b></label>
 		<input type=text placeholder='Enter recommender ID' name=recommender>
 		<input type=button value='check recommender' id=recommend><br>
 		</p>
     
 		<p>
-    <label>Remember me</label>
+		<label class=eng>Remember me</label><label class=kor>아이디 기억</label>
 		<input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px"> 
 		</p>
-		<a href=service.html>이용약관 및 개인정보취급방침</a>에 동의합니다. 
+		<span class=eng>I agree to </span>
+		<a href=service.html><span class=kor>이용약관 및 개인정보취급방침</span>
+		<span class=eng><span class=kor>Terms of Service and use of personal information</span>
+		</a><span class=kor>에 동의합니다. </span>
 		<input type=checkbox required><br>
     <div class="clearfix">
 			<a href=index.html class='w3-button w3-green'>Cancel</a>
