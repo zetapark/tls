@@ -11,7 +11,7 @@ class Tcpip
 public:
 	Tcpip(int port = 2001);
 	virtual ~Tcpip();
-	void send(const std::string& s, int fd = 0);
+	int send(const std::string& s, int fd = 0);
 //	void send(int n);
 	std::optional<std::string> recv(int fd = 0);
 

@@ -90,9 +90,8 @@ void Middle::connected(int fd)
 					LOGT << *a << endl;
 					if((*cl)->accumulate(*a)) {//multiple packets constitute one message
 						if((*cl)->try_lock_for(7s)) {
-							(*cl)->send();//to inner server. client_addr -> http header ip address
-							a = (*cl)->recv();
-							(*cl)->unlock();
+							if(a.reset(); (*cl)->send() != -1) a = (*cl)->recv();
+							(*cl)->unlock();//^ to inner server.client_addr -> http header ip address
 						} else break;
 						if(a) {
 							if(cookie != "") 
