@@ -88,16 +88,23 @@ void Middle::connected(int fd)
 						}
 					}
 					LOGT << *a << endl;
-					if((*cl)->accumulate(*a)) {//multiple packets constitute one message
+					bool ok;
+					try {
+						ok = (*cl)->accumulate(*a);
+					} catch(...) {
+						ok = false;
+					}
+					if(ok) {//multiple packets constitute one message
+						a.reset();
 						if((*cl)->try_lock_for(7s)) {
-							if(a.reset(); (*cl)->send() != -1) a = (*cl)->recv();
+							if((*cl)->send() != -1) a = (*cl)->recv();
 							(*cl)->unlock();//^ to inner server.client_addr -> http header ip address
 						} else break;
 						if(a) {
 							if(cookie != "") 
 								a->insert(a->find("\r\n\r\n"), "\r\nSet-Cookie: eZFramework=" + cookie);
 							send(t.encode(move(*a)), fd);//to browser
-						} else {//getting response from web server failed
+						} else {//getting response from web server failed or sending to web server fail
 							PSKnCLIENT.remove(*cl);//remove connection entry to errored web server
 							break;
 						}
