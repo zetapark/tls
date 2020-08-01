@@ -60,7 +60,7 @@ void Adnet::banner()
 						+ to_string(click_induce) + " where id = '" + id_ + "'");
 			}
 		}
-		prepend("<ul>", sq[0]["description"].asString());
+		prepend("<ul>", "<h4>" + sq[0]["description"].asString()) + "</h4>";
 		swap(":</li>", ": " + to_string(click_induce) + "</li>");
 		swap(":</li>", ": " + sq[0]["show_induce"].asString() + "</li>");
 		swap(":</li>", ": " + sq[0]["my_banner_show"].asString() + "</li>");
