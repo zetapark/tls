@@ -97,10 +97,14 @@ void Middle::connected(int fd)
 					}
 					if(ok) {//multiple packets constitute one message
 						a.reset();
+						try {
 						if((*cl)->try_lock_for(7s)) {
 							if((*cl)->send() != -1) a = (*cl)->recv();
 							(*cl)->unlock();//^ to inner server.client_addr -> http header ip address
 						} else break;
+						} catch(...) {
+							a.reset();
+						}
 						if(a) {
 							if(cookie != "") 
 								a->insert(a->find("\r\n\r\n"), "\r\nSet-Cookie: eZFramework=" + cookie);
