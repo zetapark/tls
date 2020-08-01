@@ -24,7 +24,8 @@ void Adnet::process()
 
 void Adnet::search()
 {
-	sq.select("Users", "where description like '%" + nameNvalue_["search_txt"] + "%'");
+	if(nameNvalue_["search_text"] == "") return;
+	sq.select("Users", "where description like '%" + nameNvalue_["search_text"] + "%'");
 	for(int i=0; i<sq.size(); i++) content_ += "<a href='" + sq[i]["link"].asString() + 
 		"'>" + sq[i]["id"].asString() + " : " + sq[i]["description"].asString() + "</a><br>";
 }
