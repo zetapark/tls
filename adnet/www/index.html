@@ -29,6 +29,11 @@ hr { clear: left; }
 				$('.eng').toggle();
 				$('.kor').toggle();
 			});
+			$('#search').click(function() {
+				$.post('search.php', {search : $('#search_text').val()}, function(data) {
+					$('#div1').append(data);
+				}
+			});
 		});
 	</script>
 	<script src=https://ad.zeta2374.com/adnet.js></script>
@@ -40,26 +45,24 @@ li, p {
 
 	</head>
 	<body>
-		<div class='w3-row-padding'>
-			<form action="index.html" method="post" class='w3-col l5 w3-panel'>	 
+		<div class='w3-bar' id=div1>
+			<form action="index.html" method="post" class='w3-bar-item w3-border'>
 				<label for="id">Your ID:</label>
 				<input type="text" id="id" name="id">
 				<label for="pwd">Password:</label>
 				<input type="password" name="pwd">
-				<input type="submit" name='submit' value='login'>
+				<input type="submit" name='submit' class='w3-button w3-green' value='login'>
 			</form> 
-			<div class='w3-bar w3-light-grey w3-card-4 w3-col l4 m8'>
-				<a href=signup.html id=signup class='w3-bar-item w3-button w3-border'>Signup</a>
-				<a href=banner.html id=profile class='w3-bar-item w3-button w3-border'>My Profile : @ID</a>
-				<a href=email.html id=email class='w3-bar-item w3-button w3-border'>Contact</a>
-				<a href=forgot.html id=forgot class='w3-bar-item w3-button w3-border'>Forgot Password</a>
-				<a href=index.html?opt=logout id=logout class='w3-bar-item w3-button w3-border'>Logout</a>
-				<a href=preference.html id=pref class='w3-bar-item w3-button w3-border'>Preference</a>
-				<button id=lang class='w3-bar-item w3-button w3-border'>Language</button>
-			</div>
-			<div class='w3-bar-item w3-border w3-col l3 m4'>
+			<a href=signup.html id=signup class='w3-bar-item w3-button w3-border'>Signup</a>
+			<a href=banner.html id=profile class='w3-bar-item w3-button w3-border'>My Profile : @ID</a>
+			<a href=email.html id=email class='w3-bar-item w3-button w3-border'>Contact</a>
+			<a href=forgot.html id=forgot class='w3-bar-item w3-button w3-border'>Forgot Password</a>
+			<a href=index.html?opt=logout id=logout class='w3-bar-item w3-button w3-border'>Logout</a>
+			<a href=preference.html id=pref class='w3-bar-item w3-button w3-border'>Preference</a>
+			<button id=lang class='w3-bar-item w3-button w3-border'>Language</button>
+			<div class='w3-bar-item w3-border'>
 				<input type=text id=search_text>
-				<button id=search class='w3-button'>Search</button>
+				<button id=search class='w3-button w3-green'>Search</button>
 			</div>
 		</div>
 

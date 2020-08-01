@@ -18,7 +18,15 @@ void Adnet::process()
 	else if(requested_document_ == "pref.php") pref();
 	else if(requested_document_ == "lang.php") lang_++;
 	else if(requested_document_ == "lang.js") content_ = langjs[lang_ % 2];
+	else if(requested_document_ == "search.php") search();
 //	else if(requested_document_.find('.') == string::npos) id_hit();//adnet.zeta2374.com/techlead
+}
+
+void Adnet::search()
+{
+	sq.select("Users", "where description like '%" + nameNvalue_["search_txt"] + "%'");
+	for(int i=0; i<sq.size(); i++) content_ += "<a href='" + sq[i]["link"].asString() + 
+		"'>" + sq[i]["id"].asString() + " : " + sq[i]["description"].asString() + "</a><br>";
 }
 
 void Adnet::db_ip(string ip)
