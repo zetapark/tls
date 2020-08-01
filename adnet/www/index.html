@@ -32,7 +32,7 @@ hr { clear: left; }
 			$('#search').click(function() {
 				$.post('search.php', {search : $('#search_text').val()}, function(data) {
 					$('#div1').append(data);
-				}
+				});
 			});
 		});
 	</script>
