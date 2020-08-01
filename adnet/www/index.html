@@ -31,7 +31,7 @@ hr { clear: left; }
 			});
 			$('#search').click(function() {
 				$.post('search.php', {search : $('#search_text').val()}, function(data) {
-					$('#div1').append(data);
+					$('#div1').html(data);
 				});
 			});
 		});
@@ -45,7 +45,7 @@ li, p {
 
 	</head>
 	<body>
-		<div class='w3-bar' id=div1>
+		<div class='w3-bar'>
 			<form action="index.html" method="post" class='w3-bar-item w3-border'>
 				<label for="id">Your ID:</label>
 				<input type="text" id="id" name="id">
@@ -65,6 +65,7 @@ li, p {
 				<button id=search class='w3-button w3-green'>Search</button>
 			</div>
 		</div>
+		<div id=div1></div>
 
 		<div class='w3-row-padding'>
 			<div class='w3-col l4 m6 s12 w3-card'>
