@@ -24,11 +24,12 @@ void Adnet::process()
 
 void Adnet::search()
 {
-	if(nameNvalue_["search"] == "") return;
-	sq.select("Users", "where description like '%" + nameNvalue_["search"] + "%'");
-	for(int i=0; i<sq.size(); i++)
-		content_ += "<a href='" + sq[i]["link"].asString() + "' target=_blank>" +
-			sq[i]["id"].asString() + " : " + sq[i]["description"].asString() + "</a><br>";
+	if(string s = nameNvalue_["search"]; s != ""){
+		sq.select("Users", "where description like '%" + s + "%' or id like '%" + s + "%'");
+		for(int i=0; i<sq.size(); i++)
+			content_ += "<a href='" + sq[i]["link"].asString() + "' target=_blank>" +
+				sq[i]["id"].asString() + " : " + sq[i]["description"].asString() + "</a><br>";
+	}
 }
 
 void Adnet::db_ip(string ip)
