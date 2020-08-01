@@ -92,7 +92,8 @@ void Middle::connected(int fd)
 					try {
 						ok = (*cl)->accumulate(*a);
 					} catch(...) {
-						ok = false;
+						PSKnCLIENT.remove(*cl);
+						break;
 					}
 					if(ok) {//multiple packets constitute one message
 						a.reset();
