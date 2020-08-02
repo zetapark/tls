@@ -27,7 +27,7 @@ tuple<string, int> HostNPort::operator[](string host)
 Middle::Middle(int outport, int timeout, int queue, string end)
 	: Server{outport, timeout, queue, end}
 {
-	signal(SIGPIPE, SIG_IGN);
+	signal(SIGPIPE, SIG_IGN);//this make Tcpip::send to return -1 even when exception
 } 
 	
 int Middle::get_full_length(const string &s) 
