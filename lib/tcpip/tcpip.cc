@@ -26,8 +26,7 @@ Tcpip::~Tcpip()
 }
 int Tcpip::send(const string& s, int fd) 
 {
-	try { return write(!fd ? client_fd : fd, s.data(), s.size()); }
-	catch(...) { return -1; }
+	return write(!fd ? client_fd : fd, s.data(), s.size());
 }
 
 //void Tcpip::send(int n)

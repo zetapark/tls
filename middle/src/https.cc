@@ -3,6 +3,7 @@
 #include<unistd.h>
 #include<cassert>
 #include<thread>
+#include<signal.h>
 #include"tls13.h"
 #include"https.h"
 #include<util/log.h>
@@ -25,7 +26,9 @@ tuple<string, int> HostNPort::operator[](string host)
 
 Middle::Middle(int outport, int timeout, int queue, string end)
 	: Server{outport, timeout, queue, end}
-{ } 
+{
+	signal(SIGPIPE, SIG_IGN);
+} 
 	
 int Middle::get_full_length(const string &s) 
 {//this make HTTP recv into TLS recv
@@ -88,23 +91,12 @@ void Middle::connected(int fd)
 						}
 					}
 					LOGT << *a << endl;
-					bool ok;
-					try {
-						ok = (*cl)->accumulate(*a);
-					} catch(...) {
-						PSKnCLIENT.remove(*cl);
-						break;
-					}
-					if(ok) {//multiple packets constitute one message
+					if((*cl)->accumulate(*a)) {//multiple packets constitute one message
 						a.reset();
-						try {
 						if((*cl)->try_lock_for(7s)) {
 							if((*cl)->send() != -1) a = (*cl)->recv();
 							(*cl)->unlock();//^ to inner server.client_addr -> http header ip address
 						} else break;
-						} catch(...) {
-							a.reset();
-						}
 						if(a) {
 							if(cookie != "") 
 								a->insert(a->find("\r\n\r\n"), "\r\nSet-Cookie: eZFramework=" + cookie);
