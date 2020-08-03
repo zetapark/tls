@@ -3,6 +3,7 @@
 #include<cmath>
 #include<database/util.h>
 #include"ad.h"
+#define ROUND 10
 using namespace std;
 using namespace std::chrono;
 
@@ -72,12 +73,13 @@ string Ad::request_ad()
 
 	int pick = 0;//category have priority : 3 point
 	for(int i=0, current_best_point=0, point=0; i<sq.size(); i++, point=0) {
+		point += rounds_[i] * 100;
 		if(!sq[i]["country"].asBool() || sq[i]["nation"].asString() == nation) point += 2;
 		if(!sq[i]["distance"].asBool() || distance(lat, lng, sq[i]["lat"].asFloat(),
 					sq[i]["lng"].asFloat()) < sq[i]["km"].asInt()) point += 2;
 		if(string s = nameNvalue_["category"]; s == "") point += 3;
 		else for(string t : divide_category(s)) if(sq[i][t].asBool()) { point += 3; break; }
-		if(point == 7) { pick = i; break; }
+		if(point == 107) { pick = i; break; }
 		else if(current_best_point < point) current_best_point = point, pick = i;
 	}
 	string id = nameNvalue_["id"], url = nameNvalue_["url"];
@@ -85,10 +87,11 @@ string Ad::request_ad()
 	url = url.substr(0, url.find('#'));
 	view_induce_[id]++;
 	view_increase_[sq[pick]["id"].asString()]++;
+	rounds_[pick]--;
 	if(urlNid_.find(url) == urlNid_.end() || urlNid_[url] != id) url_add_[url] = id;
 	string r = sq[pick]["id"].asString() + '\n' + sq[pick]["link"].asString() + '\n' + new_token();
-	if(sq.size() == 1) th_ = thread{&Ad::all_the_database_job, this};
-	else sq.removeIndex(pick, &sq[pick]);
+	if(accumulate(rounds_.begin(), rounds_.end(), 0) == 0)
+		th_ = thread{&Ad::all_the_database_job, this};
 	return r;
 }
 
@@ -113,6 +116,8 @@ void Ad::all_the_database_job()
 			"order by etc, (my_banner_show / click_induce) limit " + to_string(user_count)
 			+ ") as t1 on t1.id = Pref.id");//etc 1: postponed banner for coarse quality, 0: ok
 	sq.fetch(-1);//real fetched lines
+	rounds_.resize(sq.size());
+	for(int &i : rounds_) i = ROUND;
 }
 
 void Ad::insert_url()
