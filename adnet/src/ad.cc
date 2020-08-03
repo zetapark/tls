@@ -71,6 +71,7 @@ string Ad::request_ad()
 	float lat, lng; string nation;
 	tie(nation, lat, lng) = get_position(req_header_["IP-Addr"]);
 
+	static int call = 0;
 	int pick = 0;//category have priority : 3 point
 	for(int i=0, current_best_point=0, point=0; i<sq.size(); i++, point=0) {
 		point += rounds_[i] * 100;
@@ -79,7 +80,7 @@ string Ad::request_ad()
 					sq[i]["lng"].asFloat()) < sq[i]["km"].asInt()) point += 2;
 		if(string s = nameNvalue_["category"]; s == "") point += 3;
 		else for(string t : divide_category(s)) if(sq[i][t].asBool()) { point += 3; break; }
-		if(point == 107) { pick = i; break; }
+		if(point == round_ * 100 + 7) { pick = i; break; }
 		else if(current_best_point < point) current_best_point = point, pick = i;
 	}
 	string id = nameNvalue_["id"], url = nameNvalue_["url"];
@@ -90,8 +91,10 @@ string Ad::request_ad()
 	rounds_[pick]--;
 	if(urlNid_.find(url) == urlNid_.end() || urlNid_[url] != id) url_add_[url] = id;
 	string r = sq[pick]["id"].asString() + '\n' + sq[pick]["link"].asString() + '\n' + new_token();
-	if(accumulate(rounds_.begin(), rounds_.end(), 0) == 0)
-		th_ = thread{&Ad::all_the_database_job, this};
+	if(++call == sq.size()) { 
+		call = 0;
+		if(--round_ == 0) th_ = thread{&Ad::all_the_database_job, this};
+	}
 	return r;
 }
 
@@ -118,6 +121,7 @@ void Ad::all_the_database_job()
 	sq.fetch(-1);//real fetched lines
 	rounds_.resize(sq.size());
 	for(int &i : rounds_) i = ROUND;
+	round_ = ROUND;
 }
 
 void Ad::insert_url()
