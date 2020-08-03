@@ -68,6 +68,7 @@ void Adnet::banner()
 		swap(":</li>", ": " + sq[0]["link"].asString() + "</li>");
 		swap(":</li>", ": " + to_string(point) + "</li>");
 		append("min=0 max=", to_string(point));
+		swap("max=>", "max=" + to_string(point) + '>');
 	}
 
 	for(int i=0; i<4; i++) swap("@ID", id_);

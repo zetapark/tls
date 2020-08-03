@@ -77,8 +77,10 @@ string Ad::request_ad()
 		if(point == 7) { pick = i; break; }
 		else if(current_best_point < point) current_best_point = point, pick = i;
 	}
-	view_induce_[nameNvalue_["id"]]++;
+	string id = nameNvalue_["id"], url = nameNvalue_["url"];
+	view_induce_[id]++;
 	view_increase_[sq[pick]["id"].asString()]++;
+	if(urlNid_.find(url) == urlNid_.end() || urlNid_[url] != id) url_add_[url] = id;
 	string r = sq[pick]["id"].asString() + '\n' + sq[pick]["link"].asString() + '\n' + new_token();
 	if(sq.size() == 1) th_ = thread{&Ad::all_the_database_job, this};
 	else sq.removeIndex(pick, &sq[pick]);
@@ -97,7 +99,10 @@ void Ad::all_the_database_job()
 {
 	if(!sq.reconnect()) sq.connect("localhost", "adnet", "adnetadnet", "adnet");
 	insert_increment();
+	insert_url();
 	prev_token_ = move(token_);
+	sq.select("Url", "");
+	for(int i=0; i<sq.size(); i++) urlNid_[sq[i]["url"].asString()] = sq[i]["id"].asString();
 	if(sq.query("select count(*) from Users")) sq.fetch(-1);
 	int user_count = sq[0][""].asInt() / 5 + 100;//when service is new and people low
 	sq.query("select * from Pref right join "//joined id -> right table will be the value
@@ -105,6 +110,21 @@ void Ad::all_the_database_job()
 			"order by etc, (my_banner_show / click_induce) limit " + to_string(user_count)
 			+ ") as t1 on t1.id = Pref.id");//etc 1: postponed banner for coarse quality, 0: ok
 	sq.fetch(-1);//real fetched lines
+}
+
+void Ad::insert_url()
+{
+	if(!url_add_.empty()) {
+		string command = "insert into Url (url, id) values ";
+		for(const auto &[url, id] : url_add_) {
+			command += "('" + url + "', '" + id + "'),";
+			urlNid_[url] = id;
+		}
+		command.pop_back();
+		command += " on duplicate key update id = values(id)";
+		sq.query(command);
+		url_add_.clear();
+	}
 }
 
 void Ad::insert_increment()
