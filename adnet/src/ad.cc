@@ -81,6 +81,7 @@ string Ad::request_ad()
 		else if(current_best_point < point) current_best_point = point, pick = i;
 	}
 	string id = nameNvalue_["id"], url = nameNvalue_["url"];
+	url = url.substr(0, url.find('?'));
 	view_induce_[id]++;
 	view_increase_[sq[pick]["id"].asString()]++;
 	if(urlNid_.find(url) == urlNid_.end() || urlNid_[url] != id) url_add_[url] = id;
