@@ -11,6 +11,7 @@ std::vector<unsigned char> base64_decode(std::string s);
 
 Ad::Ad()
 {
+	sq.connect("localhost", "adnet", "adnetadnet", "adnet");
 	sq.select("Url", "");
 	for(int i=0; i<sq.size(); i++) urlNid_[sq[i]["url"].asString()] = sq[i]["id"].asString();
 	all_the_database_job();
