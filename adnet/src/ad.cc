@@ -11,6 +11,8 @@ std::vector<unsigned char> base64_decode(std::string s);
 
 Ad::Ad()
 {
+	sq.select("Url", "");
+	for(int i=0; i<sq.size(); i++) urlNid_[sq[i]["url"].asString()] = sq[i]["id"].asString();
 	all_the_database_job();
 }
 
@@ -101,8 +103,6 @@ void Ad::all_the_database_job()
 	insert_increment();
 	insert_url();
 	prev_token_ = move(token_);
-	sq.select("Url", "");
-	for(int i=0; i<sq.size(); i++) urlNid_[sq[i]["url"].asString()] = sq[i]["id"].asString();
 	if(sq.query("select count(*) from Users")) sq.fetch(-1);
 	int user_count = sq[0][""].asInt() / 5 + 100;//when service is new and people low
 	sq.query("select * from Pref right join "//joined id -> right table will be the value
