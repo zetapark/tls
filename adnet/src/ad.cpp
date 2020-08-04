@@ -23,6 +23,7 @@ int main(int ac, char** av)
 	if(!co.args(ac, av)) return 0;
 
 	signal(SIGINT, handler);
+	signal(SIGTERM, handler);
 	site.init(co.get<const char*>("dir"));
 	site.add_header("request_ad.php", "Access-Control-Allow-Origin: *");
 	site.add_header("request_ad.php", "Access-Control-Allow-Headers: x-requested-with");
