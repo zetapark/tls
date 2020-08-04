@@ -1,5 +1,3 @@
-//#include<arpa/inet.h>
-//#include<util/log.h>
 #include<cmath>
 #include<database/util.h>
 #include"ad.h"
@@ -8,7 +6,6 @@ using namespace std;
 using namespace std::chrono;
 
 std::string base64_encode(std::vector<unsigned char> v);
-std::vector<unsigned char> base64_decode(std::string s);
 
 Ad::Ad()
 {
@@ -21,8 +18,6 @@ Ad::Ad()
 void Ad::process()
 {
 	if(requested_document_ != "adnet.js" && th_.joinable()) th_.join();//from request ad function
-//	char client_ip[INET_ADDRSTRLEN];
-	//psstm(string{"geoiplookup "} + client_ip);
 	if(requested_document_ == "request_ad.php") content_ = request_ad();
 	else if(requested_document_ == "click_ad.php") click_ad();
 }
@@ -72,7 +67,7 @@ string Ad::request_ad()
 	tie(nation, lat, lng) = get_position(req_header_["IP-Addr"]);
 
 	static int call = 0;
-	int pick = 0;//category have priority : 3 point
+	int pick = 0;//priority : round(100) -> category(3) -> country, distance(2)
 	for(int i=0, current_best_point=0, point=0; i<sq.size(); i++, point=0) {
 		point += rounds_[i] * 100;
 		if(!sq[i]["country"].asBool() || sq[i]["nation"].asString() == nation) point += 2;

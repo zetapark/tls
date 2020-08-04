@@ -11,6 +11,7 @@ class Ad : public WebSite
 {
 public:
 	Ad();
+	void all_the_database_job();
 
 protected:
 	SqlQuery sq;
@@ -20,7 +21,7 @@ protected:
 	std::string request_ad();
 	
 private:
-	void all_the_database_job(), insert_increment(), insert_url();
+	void insert_increment(), insert_url();
 	bool check_token(std::string token);
 	std::string new_token();
 
