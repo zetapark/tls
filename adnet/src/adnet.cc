@@ -19,6 +19,7 @@ void Adnet::process()
 	else if(requested_document_ == "lang.php") lang_++;
 	else if(requested_document_ == "lang.js") content_ = langjs[lang_ % 2];
 	else if(requested_document_ == "search.php") search();
+	else if(requested_document_ == "askdesign.php") design();
 //	else if(requested_document_.find('.') == string::npos) id_hit();//adnet.zeta2374.com/techlead
 }
 
@@ -43,6 +44,21 @@ static string mailx(string src, string dst, string title, string content)
 		+ content + "\nHERE_CONTENT";
 	system(cmd.data());
 	return "mail sent";
+}
+
+void Adnet::design()
+{
+	if(string s = nameNvalue_["backgroundfilename"]; s != "") {
+		ofstream f{"design/" + id_ + '-' + s};
+		f << nameNvalue_["background"];
+	}
+	if(string s = nameNvalue_["logofilename"]; s != "") {
+		ofstream f{"design/" + id_ + '-' + s};
+		f << nameNvalue_["logo"];
+	}
+ 	mailx("ask@zeta2374.com", "adnet@zeta2374.com", "디자인 요청", id_ + "님이\n" +
+			nameNvalue_["desc"] + "\n위의 내용과 아래의 기타 요청사항\n" + nameNvalue_["other"]);
+	content_ = "<meta http-equiv=refresh content='0; url = https://adnet.zeta2374.com' />";
 }
 
 void Adnet::banner()
