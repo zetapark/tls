@@ -19,7 +19,7 @@ void Adnet::process()
 	else if(requested_document_ == "lang.php") lang_++;
 	else if(requested_document_ == "lang.js") content_ = langjs[lang_ % 2];
 	else if(requested_document_ == "search.php") search();
-	else if(requested_document_ == "askdesign.php") design();
+	else if(requested_document_ == "design.php") design();
 //	else if(requested_document_.find('.') == string::npos) id_hit();//adnet.zeta2374.com/techlead
 }
 
