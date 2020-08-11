@@ -1,3 +1,4 @@
+#include<cstdio>
 #include<string>
 #include<fstream>
 #include<database/mysqldata.h>
@@ -24,9 +25,27 @@ struct Seller {
 	}
 } seller;
 
+bool ok()
+{
+	puts(("product : " + seller.product).data());
+	puts(("email : " + seller.email).data());
+	puts(("name : " + seller.name).data());
+	puts(("company : " + seller.company).data());
+	puts(("tel : " + seller.tel).data());
+	puts(("addr : " + seller.address).data());
+	puts(("homepage : " + seller.homepage).data());
+	puts(("country : " + seller.country).data());
+	puts(("source : " + seller.source).data());
+	puts("is this ok?");
+	char c;
+	cin >> c;
+	return c == 'y';
+}
+
 istream &operator>>(istream &is, Seller &slr)
 {
 	string garbage;
+	for(string s; s != ""; getline(is, s));
 	getline(is, slr.product);
 	getline(is, slr.name);
 	getline(is, slr.company);
@@ -45,6 +64,6 @@ int main() {
 	seller.country = "KR";
 	sq.connect("localhost", "zeta", "cockcodk0", "email");
 	ifstream f{"/home/zeta/crawl/11st.txt"};
-	while(f >> seller) seller.insert_db();
+	while(f >> seller) if(ok()) seller.insert_db();
 }
 
