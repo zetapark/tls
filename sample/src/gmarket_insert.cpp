@@ -42,7 +42,7 @@ istream &operator>>(istream &is, Seller &slr)
 
 int main() {
 	sq.connect("localhost", "zeta", "cockcodk0", "email");
-	ifstream f{"~/crawl/11st.txt"};
+	ifstream f{"/home/zeta/crawl/11st.txt"};
 	while(f >> seller) seller.insert_db();
 }
 
