@@ -7,63 +7,36 @@ using namespace std;
 
 SqlQuery sq;
 
-struct Seller {
-	string email, name, company, tel, address, homepage, country, source, product;
-	void insert_db() {
-		int i = 0;
-		if(sq.select("email", "where email = '" + email + "'")) 
-			sq.query("insert into product values (" + sq[0]["id"].asString() + ", '" + product + "')");
-		else {
-			sq.query("insert into email (email, name, company, tel, addr, homepage, " 
-				"country, source) values ('" + email + "', '" + name + "', '" + company + 
-				"', '" + tel + "', '" + address + "', '" + homepage + "', '" + country + 
-				"', '" + source + "')");
-			sq.select("email", "where email = '" + email + "'");
-			sq.query("insert into product values (" + sq[0]["id"].asString() + ", '" + product + "')");
-		}
-		cout << i++ << ' ';
+void insert_db(string *sa) {
+	if(sq.select("email", "where email = '" + sa[7] + "'")) 
+		sq.query("insert into product values (" + sq[0]["id"].asString() + ", '" + sa[0] + "')");
+	else {
+		sq.query("insert into email (email, name, company, tel, addr, country, source)"
+				" values ('" + sa[7] + "', '" + sa[1] + "', '" + sa[2] + "', '" + sa[4] + "', '"
+				+ sa[8] + "', 'KR', 'G Market')");
+		sq.select("email", "where email = '" + sa[7] + "'");
+		sq.query("insert into product values (" + sq[0]["id"].asString() + ", '" + sa[0] + "')");
 	}
-} seller;
-
-bool ok()
-{
-	puts(("product : " + seller.product).data());
-	puts(("email : " + seller.email).data());
-	puts(("name : " + seller.name).data());
-	puts(("company : " + seller.company).data());
-	puts(("tel : " + seller.tel).data());
-	puts(("addr : " + seller.address).data());
-	puts(("homepage : " + seller.homepage).data());
-	puts(("country : " + seller.country).data());
-	puts(("source : " + seller.source).data());
-	puts("is this ok?");
-	char c;
-	cin >> c;
-	return c == 'y';
 }
 
-istream &operator>>(istream &is, Seller &slr)
-{
+istream &operator>>(istream &is, char)
+{//제품, 이름, 대표, *, 전화, 등록번호, *, 이메일, 주소, *, *
 	string garbage;
-	for(string s; s != ""; getline(is, s));
-	getline(is, slr.product);
-	getline(is, slr.name);
-	getline(is, slr.company);
-	getline(is, garbage);
-	getline(is, slr.tel);
-	getline(is, garbage);
-	getline(is, garbage);
-	getline(is, slr.email);
-	getline(is, slr.address);
-	for(int i=0; i<3; i++) getline(is, garbage);
+	string sa[30], s;
+	int i = 0;
+	do {
+		getline(is, s);
+		sa[i++] = s;
+	} while(s != "");
+	if(i == 12) insert_db(sa);
+
 	return is;
 }
 
 int main() {
-	seller.source = "G market";
-	seller.country = "KR";
 	sq.connect("localhost", "zeta", "cockcodk0", "email");
 	ifstream f{"/home/zeta/crawl/11st.txt"};
-	while(f >> seller) if(ok()) seller.insert_db();
+	char c;
+	while(f >> c);
 }
 
