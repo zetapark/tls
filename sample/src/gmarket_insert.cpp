@@ -41,6 +41,8 @@ istream &operator>>(istream &is, Seller &slr)
 }
 
 int main() {
+	seller.source = "G market";
+	seller.country = "KR";
 	sq.connect("localhost", "zeta", "cockcodk0", "email");
 	ifstream f{"/home/zeta/crawl/11st.txt"};
 	while(f >> seller) seller.insert_db();
