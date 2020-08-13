@@ -2,7 +2,7 @@ CXX = g++
 OBJ = $(wildcard *.src.o)
 EXE = $(patsubst %.x, ../%.x, $(wildcard *.x))
 LDFLAGS = -L../../ -Wl,-rpath=../
-LDLIBS = -lzeta -lzetatls -ljsoncpp -lstdc++fs -lrt -lmysqlcppconn
+LDLIBS = -lzeta -lzetatls -ljsoncpp -lstdc++fs -lrt -lmysqlcppconn -lpython3.6m
 
 all : $(EXE)
 
