@@ -74,13 +74,14 @@ static pair<string, string> get_hostncookie(string s)
 void Middle::connected(int fd)
 {//will be used in parallel
 	TLS13<SERVER> t;//TLS is decoupled from file descriptor
-	if(auto cl = t.handshake(bind(&Middle::recv, this, fd),//optional shared pointer
+	if(auto cl = t.handshake(bind(&Middle::recv, this, fd),//optional shared pointer MClient
 			bind(&Middle::send, this, placeholders::_1, fd))) {//handshake complete
 		while(1) {
 			if(auto a = recv(fd)) {//optional<string> a
 				if(string cookie; a = t.decode(move(*a))) {//check integrity
+					string tmp = *a;
 					if(!*cl) {//no session resumption, this part is for web server
-retry:			auto [host, id] = get_hostncookie(*a);//check html header
+retry:			auto [host, id] = get_hostncookie(tmp);//check html header
 						if(id != "") if(auto scl = PSKnCLIENT[base64_decode(id)])
 							*cl = scl->sp_client;//resume using cookie
 						if(!*cl) { //first connection
@@ -102,7 +103,6 @@ retry:			auto [host, id] = get_hostncookie(*a);//check html header
 								a->insert(a->find("\r\n\r\n"), "\r\nSet-Cookie: eZFramework=" + cookie);
 							send(t.encode(move(*a)), fd);//to browser
 						} else {//getting response from web server failed or sending to web server fail
-							*a = (*cl)->to_send;
 							PSKnCLIENT.remove(*cl);//remove connection entry to errored web server
 							goto retry;
 							break;//need to insert retry ^
