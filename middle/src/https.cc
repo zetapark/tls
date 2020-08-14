@@ -106,7 +106,6 @@ retry:
 						} else {//getting response from web server failed or sending to web server fail
 							//*a = move((*cl)->to_send);//thread local move no lock need
 							PSKnCLIENT.remove(*cl);//remove connection entry to errored web server
-							goto retry;
 							break;//need to insert retry ^
 						}
 					}//do not break here
