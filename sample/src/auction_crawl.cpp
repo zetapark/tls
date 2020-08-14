@@ -16,13 +16,13 @@ namespace py = pybind11;
 
 Graph<string> grp;
 ofstream f{"auction.txt", fstream::app};//crawl data write
-void save_before_exit(int) {
+void save_before_exit(int code) {
 	f.close();
 	{
 		ofstream g{"auction_link.graph"};
 		g << grp;
 	}
-	exit(1);
+	exit(code);
 }
 
 void insert_data(string parent, vector<string> v) {
@@ -105,12 +105,9 @@ int main(int ac, char **av)
 	signal(SIGTERM, save_before_exit);
 	ifstream g{"auction_link.graph"};
 	g >> grp;
-	try {
-		crawl(0, 3, grp.vertexes[0].edges.empty());
-	} catch(...) {
-		save_before_exit(1);
-	}
-	return 0;
+	try { crawl(0, 3, grp.vertexes[0].edges.empty()); }
+	catch(...) { save_before_exit(1); }
+	save_before_exit(0);
 }
 
 
