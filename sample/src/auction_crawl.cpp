@@ -107,9 +107,10 @@ int main(int ac, char **av)
 	g >> grp;
 	try {
 		crawl(0, 3, grp.vertexes[0].edges.empty());
-	} catch(exception &e) { cerr << e.what(); }
-	catch(...) { }
-	save_before_exit(1);
+	} catch(...) {
+		save_before_exit(1);
+	}
+	return 0;
 }
 
 
