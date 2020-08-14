@@ -68,7 +68,10 @@ static pair<string, string> get_hostncookie(string s)
 	regex e1{R"(Host: (.+?)\r\n)"}, e2{R"(Cookie: .*eZFramework=(.+?)[;\r])"};
 	regex_search(s, m1, e1);
 	regex_search(s, m2, e2);
-	return {m1[1].str(), m2[1].str()};
+	string host = m1[1].str();
+	stringstream ss; ss << host;
+	getline(ss, host, '.');
+	return {host, m2[1].str()};
 }
 
 void Middle::connected(int fd)
@@ -77,16 +80,15 @@ void Middle::connected(int fd)
 	if(auto cl = t.handshake(bind(&Middle::recv, this, fd),//optional shared pointer MClient
 			bind(&Middle::send, this, placeholders::_1, fd))) {//handshake complete
 		while(1) {
-			if(auto a = recv(fd)) {//optional<string> a
-				if(string cookie, host, id; a = t.decode(move(*a))) {//check integrity
+			if(int port; auto a = recv(fd)) {//optional<string> a
+				if(string cookie, host, id, ip; a = t.decode(move(*a))) {//check integrity
 					if(!*cl) {//no session resumption, this part is for web server
 						tie(host, id) = get_hostncookie(*a);//check html header
+retry:
 						if(id != "") if(auto scl = PSKnCLIENT[base64_decode(id)])
 							*cl = scl->sp_client;//resume using cookie
 						if(!*cl) { //first connection
-retry:				stringstream ss; ss << host;
-							getline(ss, host, '.');
-							auto [ip, port] = hostNport_[host];
+							tie(ip, port) = hostNport_[host];
 							tie(cookie, *cl) = t.new_session(ip, port, fd);//cookie:base64 encoded id, fd for real ip
 						}
 					}
