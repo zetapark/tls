@@ -7,24 +7,27 @@
 #include<pybind11/stl.h>
 #include<iostream>
 #include<fstream>
-#include"graph.h"
+#include<util/option.h>
+#include"cpp_graph.h"
 
 using namespace std;
 namespace py = pybind11;
 
 Graph<string> grp;
-ofstream f{"crawl.txt", fstream::app};//crawl data write
+ofstream f{"auction.txt", fstream::app};//crawl data write
 void save_before_exit(int) {
 	f.close();
-	ofstream g{"graph.sav"};
-	g << grp;
+	{
+		ofstream g{"auction_link.graph"};
+		g << grp;
+	}
 	exit(1);
 }
 
 void insert_data(string parent, vector<string> v) {
-	f << v[0] << '\n' << v[1] << "\n\n";
+	f << v[0] << v[1];
 	for(int i=2; i<v.size(); i++) {
-		if(!grp.find_vertex(v[i])) {
+		if(grp.find_vertex(v[i]) == -1) {//if not exist
 			grp.insert_vertex(v[i]);
 			grp.insert_edge(parent, v[i], 0);
 		}
@@ -33,9 +36,14 @@ void insert_data(string parent, vector<string> v) {
 
 int main(int ac, char **av)
 {
+	CMDoption co{
+		{"executable_path", "selenium executable path", "/home/zeta/crawl/phantomjs"}
+	};
+	if(!co.args(ac, av)) return 0;
+
 	py::scoped_interpreter guard{};
 	auto webdriver = py::module::import("selenium.webdriver");
-	auto drv = webdriver.attr("PhantomJS")();
+	auto drv = webdriver.attr("PhantomJS")(py::arg("executable_path") = co.get<const char*>("executable_path"));
 	auto json = py::module::import("json").attr("loads");
 	auto bs = py::module::import("bs4").attr("BeautifulSoup");
 
@@ -46,7 +54,7 @@ int main(int ac, char **av)
 		if(i++ == 20) {
 			i = 0;
 			drv.attr("close")();
-			drv = webdriver.attr("PhantomJS")();
+			drv = webdriver.attr("PhantomJS")(py::arg("executable_path") = co.get<const char*>("executable_path"));
 		}
 		drv.attr("get")(url);
 		return drv.attr("page_source").cast<string>();
@@ -58,12 +66,12 @@ int main(int ac, char **av)
 		auto title = soup.attr("find")("h1", json("{\"class\" : \"itemtit\" }"));
 		cout << title << endl;
 		r.push_back(title.is_none() ? "" : title.attr("get_text")().cast<string>());
-		py::str seller = soup.attr("find")("div", json("{\"class\" : \"bsellerinfo\"}"));
-		r.push_back(seller.cast<string>());
+		auto seller = soup.attr("find")("div", json("{\"class\" : \"bsellerinfo\"}"));
+		cout << seller << endl;
+		r.push_back(seller.is_none() ? "" : seller.attr("get_text")().cast<string>());
 		auto result = soup.attr("find_all")("a");
 		for(auto a : result)
 			if(auto link = a.attr("get")("href"); !link.is_none()) r.push_back(link.cast<string>());
-		for(auto a : r) cout << a << endl;
 		return r;
 	};
 
@@ -82,26 +90,27 @@ int main(int ac, char **av)
 		return r;
 	};
 
-	function<void(Vertex<string>*, int, bool)> crawl = [&](Vertex<string> *v, int depth,
-			bool read) {
+	function<void(int, int, bool)> crawl = [&](int idx, int depth, bool read) {
 		if(depth == 0) return;
-		if(read) insert_data(v->data, get_titleNsellerNlinks(get_url(v->data)));
-		for(auto e = v->edge; e; e = e->edge) {
-			auto w = e->weight;
-			e->weight = 1;//if error -> pass
-			crawl(e->vertex, depth - 1, w == 0i);
+		string link = grp.vertexes[idx].data;
+		if(read) insert_data(link, get_auction(get_url(link)));
+		for(auto &e : grp.vertexes[idx].edges) {
+			auto w = e.weight;
+			e.weight = 1;
+			crawl(e.index, depth - 1, w == 0i);
 		}
 	};
 
 	signal(SIGINT, save_before_exit);
 	signal(SIGKILL, save_before_exit);
 	signal(SIGTERM, save_before_exit);
-	ifstream g{"graph.sav"};
+	ifstream g{"auction_link.graph"};
 	g >> grp;
 	try {
-		crawl(grp.data(), 3, !grp.data()->edge);
+		crawl(0, 3, grp.vertexes[0].edges.empty());
 	} catch(exception &e) { cerr << e.what(); }
 	catch(...) { }
 	save_before_exit(1);
 }
+
 

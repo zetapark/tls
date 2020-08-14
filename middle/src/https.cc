@@ -80,7 +80,7 @@ void Middle::connected(int fd)
 			if(auto a = recv(fd)) {//optional<string> a
 				if(string cookie; a = t.decode(move(*a))) {//check integrity
 					if(!*cl) {//no session resumption, this part is for web server
-						auto [host, id] = get_hostncookie(*a);//check html header
+retry:			auto [host, id] = get_hostncookie(*a);//check html header
 						if(id != "") if(auto scl = PSKnCLIENT[base64_decode(id)])
 							*cl = scl->sp_client;//resume using cookie
 						if(!*cl) { //first connection
@@ -102,8 +102,10 @@ void Middle::connected(int fd)
 								a->insert(a->find("\r\n\r\n"), "\r\nSet-Cookie: eZFramework=" + cookie);
 							send(t.encode(move(*a)), fd);//to browser
 						} else {//getting response from web server failed or sending to web server fail
+							*a = move((*cl)->to_send);
 							PSKnCLIENT.remove(*cl);//remove connection entry to errored web server
-							break;
+							goto retry;
+							//break;//need to insert retry ^
 						}
 					}//do not break here
 				} else break;
