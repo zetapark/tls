@@ -91,9 +91,8 @@ void Middle::connected(int fd)
 							tie(cookie, *cl) = t.new_session(ip, port, fd);//cookie:base64 encoded id
 						}
 					}
-					LOGT << *a << endl;
 					if((*cl)->accumulate(*a)) {//multiple packets constitute one message
-						a.reset();
+						a.reset();//a -> bool false
 						if((*cl)->try_lock_for(7s)) {
 							if((*cl)->send() != -1) a = (*cl)->recv();
 							(*cl)->unlock();//^ to inner server.client_addr -> http header ip address

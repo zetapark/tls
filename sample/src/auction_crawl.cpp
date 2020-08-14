@@ -8,6 +8,7 @@
 #include<iostream>
 #include<fstream>
 #include<util/option.h>
+#include<database/util.h>
 #include"cpp_graph.h"
 
 using namespace std;
@@ -49,13 +50,11 @@ int main(int ac, char **av)
 
 	auto get_url = [&](string url) {//return string
 		cout << url << endl;
-		this_thread::sleep_for(5s);
-		static int i = 0;
-		if(i++ == 20) {
-			i = 0;
+		if(stoi(psstm("free | awk '{print $7}'")) < 300'000) {
 			drv.attr("close")();
 			drv = webdriver.attr("PhantomJS")(py::arg("executable_path") = co.get<const char*>("executable_path"));
 		}
+		this_thread::sleep_for(5s);
 		drv.attr("get")(url);
 		return drv.attr("page_source").cast<string>();
 	};
