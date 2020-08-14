@@ -102,10 +102,10 @@ retry:			auto [host, id] = get_hostncookie(*a);//check html header
 								a->insert(a->find("\r\n\r\n"), "\r\nSet-Cookie: eZFramework=" + cookie);
 							send(t.encode(move(*a)), fd);//to browser
 						} else {//getting response from web server failed or sending to web server fail
-							*a = move((*cl)->to_send);
+//							*a = move((*cl)->to_send);
 							PSKnCLIENT.remove(*cl);//remove connection entry to errored web server
-							goto retry;
-							//break;//need to insert retry ^
+//							goto retry;
+							break;//need to insert retry ^
 						}
 					}//do not break here
 				} else break;
