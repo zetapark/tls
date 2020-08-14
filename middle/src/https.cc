@@ -84,7 +84,6 @@ void Middle::connected(int fd)
 				if(string cookie, host, id, ip; a = t.decode(move(*a))) {//check integrity
 					if(!*cl) {//no session resumption, this part is for web server
 						tie(host, id) = get_hostncookie(*a);//check html header
-retry:
 						if(id != "") if(auto scl = PSKnCLIENT[base64_decode(id)])
 							*cl = scl->sp_client;//resume using cookie
 						if(!*cl) { //first connection
@@ -106,8 +105,8 @@ retry:
 						} else {//getting response from web server failed or sending to web server fail
 							//*a = (*cl)->to_send;//thread local move no lock need
 							PSKnCLIENT.remove(*cl);//remove connection entry to errored web server
-							*cl = nullptr;
-							goto retry;
+						//	*cl = nullptr;
+						//	goto retry;
 							break;//need to insert retry ^
 						}
 					}//do not break here
