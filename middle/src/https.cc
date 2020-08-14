@@ -104,7 +104,7 @@ retry:
 								a->insert(a->find("\r\n\r\n"), "\r\nSet-Cookie: eZFramework=" + cookie);
 							send(t.encode(move(*a)), fd);//to browser
 						} else {//getting response from web server failed or sending to web server fail
-							*a = move((*cl)->to_send);//thread local move no lock need
+							//*a = move((*cl)->to_send);//thread local move no lock need
 							PSKnCLIENT.remove(*cl);//remove connection entry to errored web server
 							goto retry;
 							break;//need to insert retry ^
