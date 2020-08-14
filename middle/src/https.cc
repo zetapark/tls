@@ -80,15 +80,15 @@ void Middle::connected(int fd)
 	if(auto cl = t.handshake(bind(&Middle::recv, this, fd),//optional shared pointer MClient
 			bind(&Middle::send, this, placeholders::_1, fd))) {//handshake complete
 		while(1) {
-			if(int port; auto a = recv(fd)) {//optional<string> a
-				if(string cookie, host, id, ip; a = t.decode(move(*a))) {//check integrity
+			if(auto a = recv(fd)) {//optional<string> a
+				if(string cookie; a = t.decode(move(*a))) {//check integrity
 					if(!*cl) {//no session resumption, this part is for web server
-						tie(host, id) = get_hostncookie(*a);//check html header
+						auto [host, id] = get_hostncookie(*a);//check html header
 						if(id != "") if(auto scl = PSKnCLIENT[base64_decode(id)])
 							*cl = scl->sp_client;//resume using cookie
 						if(!*cl) { //first connection
-							tie(ip, port) = hostNport_[host];
-							tie(cookie, *cl) = t.new_session(ip, port, fd);//cookie:base64 encoded id, fd for real ip
+							auto [ip, port] = hostNport_[host];//v fd for real ip
+							tie(cookie, *cl) = t.new_session(ip, port, fd);//cookie:base64 encoded id
 						}
 					}
 					LOGT << *a << endl;
@@ -103,10 +103,7 @@ void Middle::connected(int fd)
 								a->insert(a->find("\r\n\r\n"), "\r\nSet-Cookie: eZFramework=" + cookie);
 							send(t.encode(move(*a)), fd);//to browser
 						} else {//getting response from web server failed or sending to web server fail
-							//*a = (*cl)->to_send;//thread local move no lock need
 							PSKnCLIENT.remove(*cl);//remove connection entry to errored web server
-						//	*cl = nullptr;
-						//	goto retry;
 							break;//need to insert retry ^
 						}
 					}//do not break here
