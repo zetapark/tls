@@ -47,13 +47,15 @@ int main(int ac, char **av)
 	auto drv = webdriver.attr("PhantomJS")(py::arg("executable_path") = co.get<const char*>("executable_path"));
 	auto json = py::module::import("json").attr("loads");
 	auto bs = py::module::import("bs4").attr("BeautifulSoup");
+	auto renew = [&]() {
+		drv.attr("close")();
+		drv.attr("quit")();
+		drv = webdriver.attr("PhantomJS")(py::arg("executable_path") = co.get<const char*>("executable_path"));
+	};
 
 	auto get_url = [&](string url) {//return string
 		cout << url << endl;
-		if(stoi(psstm("free | awk '{print $7}'")) < 300'000) {
-			drv.attr("close")();
-			drv = webdriver.attr("PhantomJS")(py::arg("executable_path") = co.get<const char*>("executable_path"));
-		}
+		if(stoi(psstm("free | awk '{print $7}'")) < 300'000) renew();
 		this_thread::sleep_for(5s);
 		drv.attr("get")(url);
 		return drv.attr("page_source").cast<string>();
@@ -96,7 +98,11 @@ int main(int ac, char **av)
 		for(auto &e : grp.vertexes[idx].edges) {
 			auto w = e.weight;
 			e.weight = 1;
-			crawl(e.index, depth - 1, w == 0i);
+			try {
+				crawl(e.index, depth - 1, w == 0i);
+			} catch(...) {
+				renew();
+			}
 		}
 	};
 
@@ -105,8 +111,7 @@ int main(int ac, char **av)
 	signal(SIGTERM, save_before_exit);
 	ifstream g{"auction_link.graph"};
 	g >> grp;
-	try { crawl(0, 3, grp.vertexes[0].edges.empty()); }
-	catch(...) { save_before_exit(1); }
+	crawl(0, 3, grp.vertexes[0].edges.empty());
 	save_before_exit(0);
 }
 
