@@ -10,6 +10,8 @@ int main() {
 	g.insert_vertex("This");
 	g.insert_vertex("is");
 	g.insert_vertex("test");
+	g.insert_edge("Hello", "This", 0);
+	g.insert_edge("Hello", "is", 0);
 	g.insert_edge("is", "This", 2. + 4.i);
 	f << g;
 }

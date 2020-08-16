@@ -20,7 +20,12 @@ function request_ad() {
 }
 
 $(function() {
+	var tmp = $('#adnet').attr('src');
 	$('#adnet').on('error', function() {
+		$('#adnet').on('error', function() {
+			$('#adnet').attr('src', tmp);
+			$('#adnet').off('click');
+		});
 		$('#adnet').attr('src', 'https://tomcat.zeta2374.com/banner/adnet-' +
 			$('#adnet').attr('adtype') + '.jpg');
 		$('#adnet').off('click');
@@ -36,6 +41,8 @@ $(function() {
 	});
 
 	request_ad();
-	setInterval(request_ad, 10000);
+	var interval = parseInt($('#adnet').attr('interval'), 10) || 0;
+	if(interval < 10) interval = 10;
+	setInterval(request_ad, interval * 1000);
 	$('#adnet').css('cursor', 'pointer');
 });

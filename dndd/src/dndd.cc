@@ -2,6 +2,7 @@
 #include<cassert>
 #include<fstream>
 #include<regex>
+#include<rsa.h>
 #include"dndd.h"
 #include<database/util.h>
 using namespace std;
@@ -165,6 +166,28 @@ string DnDD::search(string s)
 	return t;
 }
 
+void DnDD::oauth()
+{
+#pragma pack(1)
+		struct {
+			time_t time;
+			char sha256_hash[32];
+		} sign;
+#pragma pack()
+		RSA rsa{K, e, d};
+		string s = nameNvalue_["sign"];
+		auto result = rsa.decode(bnd2mpz(s.begin(), s.end()));
+		unsigned char *p = &sign;
+		mpz2bnd(result, p, p + s.size());
+		sq.select("Users", "where email = '" + nameNvalue_["id"] + "' order by date desc limit 1");
+		if(system_clock::now() - from_time_t(sign.time) < 10s &&
+				equal(sign.sha256_hash, sign.sha256_hash + 32, sq[0]["password"].asString().data()) {
+			id = sq[0]["email"].asString();
+			level = sq[0]["level"].asString();
+			name = sq[0]["name"].asString();
+		}
+}
+
 void DnDD::mn()
 {//main.html
 	if(nameNvalue_["db"] != "" && nameNvalue_["db"] != db) {//if first connection -> set database
@@ -186,7 +209,7 @@ void DnDD::mn()
 			level = sq[0]["level"].asString();
 			name = sq[0]["name"].asString();
 		}
-	}
+	} else if(nameNvalue_["sign"] != "") oauth();//remote login from ADnet
 
 	regex e{R"(<form[\s\S]+?</form>)"};
 	if(id != "") content_ = regex_replace(content_, e, name + "님 레벨" + level +"으로 로그인되었습니다.");

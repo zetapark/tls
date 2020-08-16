@@ -8,9 +8,6 @@ struct Edge {
 	int index;
 	int v = 0;
 	std::complex<double> weight;
-	bool operator==(const Edge &r) {
-		return index == r.index;
-	}
 };
 
 template<class T> struct Vertex {
@@ -47,7 +44,7 @@ template<class T> struct Graph {
 		insert_edge_with_index(find_vertex(a), find_vertex(b), w);
 	}
 	void remove_edge_widh_index(int a, int b) {
-		vertexes[a].edges.remove(b);
+		vertexes[a].edges.remove_if([b](const Edge &e){return e.index == b;});
 	}
 	void remove_edge(T a, T b) {
 		remove_edge_widh_index(find_vertex(a), find_vertex(b));
@@ -60,14 +57,10 @@ template<class T> std::ostream &operator<<(std::ostream &os, const Graph<T> &r) 
 	os << -1 << ' ' << -1 << ' ';//-1 terminator
 	for(int i : r.deleted) os << i << ' ';
 	os << -1 << '\n';
-	std::vector<std::pair<int, Edge>> v;
-	for(int i=0; i < r.vertexes.size(); i++) {
-		os << r.vertexes[i].data << '\n';
-		for(auto a : r.vertexes[i].edges) v.push_back({i, a});
-	}
+	for(int i=0; i < r.vertexes.size(); i++) os << r.vertexes[i].data << '\n';
 	os << '\n';
-	for(const auto &[from, to] : v) 
-		os << from << ' ' << to.index << ' ' << to.weight << ' ' << to.v << '\n';
+	for(int i=0; i < r.vertexes.size(); i++) for(auto a : r.vertexes[i].edges)
+		os << i << ' ' << a.index << ' ' << a.weight << ' ' << a.v << '\n';
 	return os;
 }
 
