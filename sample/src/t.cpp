@@ -1,9 +1,12 @@
+#include<chrono>
 #include<fstream>
 #include<sstream>
 #include<cert_util.h>
+#include<mpz.h>
 #include<iostream>
 #include<rsa.h>
 using namespace std;
+using namespace std::chrono;
 
 int main()
 {
@@ -16,10 +19,13 @@ int main()
 	auto e = str2mpz(jv[2].asString());
 	auto d = str2mpz(jv[3].asString());
 	RSA rsa{e, d, K};
-	cout << hex << K << endl << e << endl << d << endl;
 
-	cout << rsa.decode(rsa.encode(sign) ) << endl;
-	cout << hex << rsa.decode(sign);
-
-
+	auto r = rsa.decode(sign);
+	unsigned char p[40];
+	mpz2bnd(r, p, p + 40);
+	for(int i=1; i<=40; i++) cout << i%10 << i%10;
+	cout << hex << r << endl;
+	for(int i=0; i<40; i++) cout << hex << +p[i];
+	cout << asctime(localtime((time_t*)p))  << endl;
+	//cout << asctime(gmtime((&st.time))) << endl << hexprint("pass", st.c) << endl;
 }

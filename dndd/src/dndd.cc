@@ -171,13 +171,7 @@ string DnDD::search(string s)
 
 void DnDD::oauth()
 {
-#pragma pack(1)
-	struct {
-		time_t time;
-		char sha256_hash[32];
-	} sign;
-#pragma pack()
-
+	unsigned char buf[52];//time_t(8byte) + sha256hash-base64(44byte)
 	ifstream f{"../privkey.pem"};
 	auto ss = remove_colon(pem2json(f)[0][2].asString());
 	auto jv = der2json(ss);
@@ -187,11 +181,10 @@ void DnDD::oauth()
 
 	RSA rsa{e, d, K};
 	mpz_class result = rsa.decode(mpz_class{"0x" + nameNvalue_["sign"]});
-	unsigned char *p = (unsigned char*)&sign;
-	mpz2bnd(result, p, p + sizeof(sign));
+	mpz2bnd(result, buf, buf + 52);
 	if(sq.select("Users", "where email = '" + nameNvalue_["id"] + "' order by date desc limit 1")
-			&& chrono::system_clock::now() - chrono::system_clock::from_time_t(sign.time) < 10s &&
-			equal(sign.sha256_hash, sign.sha256_hash + 32, sq[0]["password"].asString().data())) {
+			&& chrono::system_clock::now() - chrono::system_clock::from_time_t(time((time_t*)buf)) < 10s
+			&& equal(buf + 8, buf + 52, sq[0]["password"].asString().data())) {
 		id = sq[0]["email"].asString();
 		level = sq[0]["level"].asString();
 		name = sq[0]["name"].asString();
