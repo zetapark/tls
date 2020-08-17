@@ -186,8 +186,7 @@ void DnDD::oauth()
 	auto d = str2mpz(jv[3].asString());
 
 	RSA rsa{e, d, K};
-	string s = nameNvalue_["sign"];
-	mpz_class result = rsa.decode(bnd2mpz(s.begin(), s.end()));
+	mpz_class result = rsa.decode(mpz_class{"0x" + nameNvalue_["sign"]});
 	unsigned char *p = (unsigned char*)&sign;
 	mpz2bnd(result, p, p + s.size());
 	if(sq.select("Users", "where email = '" + nameNvalue_["id"] + "' order by date desc limit 1")
