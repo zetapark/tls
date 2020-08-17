@@ -188,7 +188,7 @@ void DnDD::oauth()
 	RSA rsa{e, d, K};
 	mpz_class result = rsa.decode(mpz_class{"0x" + nameNvalue_["sign"]});
 	unsigned char *p = (unsigned char*)&sign;
-	mpz2bnd(result, p, p + s.size());
+	mpz2bnd(result, p, p + sizeof(sign));
 	if(sq.select("Users", "where email = '" + nameNvalue_["id"] + "' order by date desc limit 1")
 			&& chrono::system_clock::now() - chrono::system_clock::from_time_t(sign.time) < 10s &&
 			equal(sign.sha256_hash, sign.sha256_hash + 32, sq[0]["password"].asString().data())) {
