@@ -7,6 +7,7 @@
 #include<database/util.h>
 #include<rsa.h>
 #include<mpz.h>
+#include<cert_util.h>
 using namespace std;
 
 void DnDD::process()
@@ -176,8 +177,14 @@ void DnDD::oauth()
 		char sha256_hash[32];
 	} sign;
 #pragma pack()
-	mpz_class K = 0xD728FBD450AA96D5E9F7E1E3C95CFFEB789B6B14E543F96035DF49D453D58B2C489DF5792EC2F2957368EAC50A7CBA5B8FC909B94AE8E91E0F5004BD8B14C3D93C2F5E0F722DCA610DABA2F8BB672233126117B5E98B4E15835CCFE56A8624C8380A9FF2C73D7CD0E5641CFCA954478B35F269D2838ED36D4258B2F1579135B7DEBB2450CD92280E0EAABE22CD84B4F9BE5604E7F64BF7E4E181EDE901FF5DF06DD24E9456E54AE06338AE516D9AB462BB20BBFDA89629026E95BDC1585DDF31EC2C8B61DE9A40DBF8F5645BEA05222E9E405288851E7D906117D2BD3C110A53BA20D9D00F27898E2FF910280345952CED9F94A85C170C4DC25F8CC57207C8EB_mpz;
-	mpz_class e = 0x10001_mpz, d = 0_mpz;
+
+	ifstream f{"../privkey.pem"};
+	auto ss = remove_colon(pem2json(f)[0][2].asString());
+	auto jv = der2json(ss);
+	auto K = str2mpz(jv[1].asString());
+	auto e = str2mpz(jv[2].asString());
+	auto d = str2mpz(jv[3].asString());
+
 	RSA rsa{K, e, d};
 	string s = nameNvalue_["sign"];
 	mpz_class result = rsa.decode(bnd2mpz(s.begin(), s.end()));
