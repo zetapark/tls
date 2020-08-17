@@ -1,10 +1,12 @@
+#include<chrono>
 #include<cctype>
 #include<cassert>
 #include<fstream>
 #include<regex>
-#include<rsa.h>
 #include"dndd.h"
 #include<database/util.h>
+#include<rsa.h>
+#include<mpz.h>
 using namespace std;
 
 void DnDD::process()
@@ -169,23 +171,25 @@ string DnDD::search(string s)
 void DnDD::oauth()
 {
 #pragma pack(1)
-		struct {
-			time_t time;
-			char sha256_hash[32];
-		} sign;
+	struct {
+		time_t time;
+		char sha256_hash[32];
+	} sign;
 #pragma pack()
-		RSA rsa{K, e, d};
-		string s = nameNvalue_["sign"];
-		auto result = rsa.decode(bnd2mpz(s.begin(), s.end()));
-		unsigned char *p = &sign;
-		mpz2bnd(result, p, p + s.size());
-		sq.select("Users", "where email = '" + nameNvalue_["id"] + "' order by date desc limit 1");
-		if(system_clock::now() - from_time_t(sign.time) < 10s &&
-				equal(sign.sha256_hash, sign.sha256_hash + 32, sq[0]["password"].asString().data()) {
-			id = sq[0]["email"].asString();
-			level = sq[0]["level"].asString();
-			name = sq[0]["name"].asString();
-		}
+	mpz_class K = 0xD728FBD450AA96D5E9F7E1E3C95CFFEB789B6B14E543F96035DF49D453D58B2C489DF5792EC2F2957368EAC50A7CBA5B8FC909B94AE8E91E0F5004BD8B14C3D93C2F5E0F722DCA610DABA2F8BB672233126117B5E98B4E15835CCFE56A8624C8380A9FF2C73D7CD0E5641CFCA954478B35F269D2838ED36D4258B2F1579135B7DEBB2450CD92280E0EAABE22CD84B4F9BE5604E7F64BF7E4E181EDE901FF5DF06DD24E9456E54AE06338AE516D9AB462BB20BBFDA89629026E95BDC1585DDF31EC2C8B61DE9A40DBF8F5645BEA05222E9E405288851E7D906117D2BD3C110A53BA20D9D00F27898E2FF910280345952CED9F94A85C170C4DC25F8CC57207C8EB_mpz;
+	mpz_class e = 0x10001_mpz, d = 0_mpz;
+	RSA rsa{K, e, d};
+	string s = nameNvalue_["sign"];
+	mpz_class result = rsa.decode(bnd2mpz(s.begin(), s.end()));
+	unsigned char *p = (unsigned char*)&sign;
+	mpz2bnd(result, p, p + s.size());
+	if(sq.select("Users", "where email = '" + nameNvalue_["id"] + "' order by date desc limit 1")
+			&& chrono::system_clock::now() - chrono::system_clock::from_time_t(sign.time) < 10s &&
+			equal(sign.sha256_hash, sign.sha256_hash + 32, sq[0]["password"].asString().data())) {
+		id = sq[0]["email"].asString();
+		level = sq[0]["level"].asString();
+		name = sq[0]["name"].asString();
+	}
 }
 
 void DnDD::mn()
