@@ -183,7 +183,7 @@ void DnDD::oauth()
 	mpz_class result = rsa.decode(mpz_class{"0x" + nameNvalue_["sign"]});
 	mpz2bnd(result, buf, buf + 52);
 	if(sq.select("Users", "where email = '" + nameNvalue_["id"] + "' order by date desc limit 1")
-			&& chrono::system_clock::now() - chrono::system_clock::from_time_t(time((time_t*)buf)) < 10s
+			&& chrono::system_clock::now() - chrono::system_clock::from_time_t(time((time_t*)buf)) < 30s
 			&& equal(buf + 8, buf + 52, sq[0]["password"].asString().data())) {
 		id = sq[0]["email"].asString();
 		level = sq[0]["level"].asString();

@@ -31,7 +31,7 @@ void Adnet::process()
 void Adnet::board()
 {//generate a link to login remotely somewhat like oauth service -> goto board 
 	if(id_ == "") return;
-	mpz_class K = 0xcfef40c72702c7f8f28bff1cad418831a874dd79b084c6efea4eb4c3e3b767ee373ef784e32aa3be50c064100ab2da02aca17cc6af4a8beab9cc47c54e353bf314ce44fbbd73b5e91ab2573fbfa7edb12f8c52120f0f6ddcb70205288302ac0813bfe66460880d9480e7112aed5f27abb93ca4bb311484d5569e23d4b39440ce53445d70bb0367f913a8a730d60192e4dbbb0e0cc2930b930e92223646be7f0e99e7ff2cfb7c16fbea074ef095f558c2bf2ddd5e1d749a1dffff3eff8b46d9b77ef2f61d8eae2b878ba665935c68c95562df09bedafccb0b9c44d9bab15b16b74e715a7c89a806b1463e7015b11115c155ffa4d3c6d27fc2f16946902b037ccb_mpz;
+	mpz_class K = 0xd728fbd450aa96d5e9f7e1e3c95cffeb789b6b14e543f96035df49d453d58b2c489df5792ec2f2957368eac50a7cba5b8fc909b94ae8e91e0f5004bd8b14c3d93c2f5e0f722dca610daba2f8bb672233126117b5e98b4e15835ccfe56a8624c8380a9ff2c73d7cd0e5641cfca954478b35f269d2838ed36d4258b2f1579135b7debb2450cd92280e0eaabe22cd84b4f9be5604e7f64bf7e4e181ede901ff5df06dd24e9456e54ae06338ae516d9ab462bb20bbfda89629026e95bdc1585ddf31ec2c8b61de9a40dbf8f5645bea05222e9e405288851e7d906117d2bd3c110a53ba20d9d00f27898e2ff910280345952ced9f94a85c170c4dc25f8cc57207c8eb_mpz;
 	mpz_class e = 0x10001;
 
 	RSA rsa{e, 1, K};
@@ -39,7 +39,7 @@ void Adnet::board()
 	string m = struct2str(time(nullptr)) + sq[0]["password"].asString();
 	stringstream ss;
 	ss << hex << rsa.encode(bnd2mpz(m.begin(), m.end()));
-	content_ = "<meta http-equiv=refresh content='0; url = https://dndd.zeta2374.com/main.html?db=zetapark&field=Adnet&id=" + id_ + "&sign=" + ss.str() + "' />";
+	content_ = "<meta http-equiv=refresh content='0; url = https://dndd.zeta2374.com/main.html?db=zetapark&field=AdNET&id=" + id_ + "&sign=" + ss.str() + "' />";
 }
 
 void Adnet::search()

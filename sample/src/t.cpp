@@ -10,7 +10,7 @@ using namespace std::chrono;
 
 int main()
 {
-	mpz_class sign = 0xb77ee943a05d91d44728bb98b8e0b2b64431d14c98e044b0dfd6ca9fd6f89b5859e1f862f0a93bbc809aa2313e9a911ac72247d6e7893ede9e9f6e34ec379c1b43a70ecfee53f5df4498c5d56861d44166377894881400606f72f71c2e115611d5d90433e920c432d57046a072f3c19288910fd0569dd6bca176d84db264627b3f16893367ce402f25ac13d7f2461b53def0a470dd39f760cd8f6ed93e76ad20c89522f34c150b87504af50ee921abb1ec25b3675ca1f7be3b0ec473d5de730575f2fff05a479919b4c93a0feec243ff0640b565b7c90e863d78e0f233366597e21a3bccbec7c439fe7fcb0b80d0bdd93f0a5b011e47a9b09f9d3e7ac7a34e6e_mpz;
+	mpz_class sign = 0x8579f6d9ff1d9caf6bb399aaefbcdbc8c0ff3badbb5e3779ebc5f1bd8510d7ddaef345c60aa3d5976894d2463f785e05cde0e6ac950a5534ae831371405b39fb5a80ee01fd38beadaf6fb0d5569d0494792d007194d57a48bb99f1dbb9842b3f7cfe1dfb64acc0f78d06b1d9bff5a5b19045d08044309a37e7a56e0329a1745d7c9edddd2c3439c3074388c7fd3b84a9a836db77cd12d2dfee616e1e724f24963251bc7e4bd837b4edcdc663a717a8fc568a330b63b844f67f68b03bb40ca8de12d3800581a3b2b32e3dd2ff60e5b73c7edf8d4ef50924fdee6ba399b4a6aa504e02e20f24c67396f9a1c1888bdee87908bf02e822f7a9da26462d43c1d96b2b_mpz;
 	ifstream f{"../privkey.pem"};
 
 	auto ss = remove_colon(pem2json(f)[0][2].asString());
@@ -18,14 +18,14 @@ int main()
 	auto K = str2mpz(jv[1].asString());
 	auto e = str2mpz(jv[2].asString());
 	auto d = str2mpz(jv[3].asString());
+	cout << hex << e << endl << d << endl << K << endl;
 	RSA rsa{e, d, K};
 
 	auto r = rsa.decode(sign);
-	unsigned char p[40];
-	mpz2bnd(r, p, p + 40);
-	for(int i=1; i<=40; i++) cout << i%10 << i%10;
+	unsigned char p[52];
+	mpz2bnd(r, p, p + 52);
 	cout << hex << r << endl;
-	for(int i=0; i<40; i++) cout << hex << +p[i];
-	cout << asctime(localtime((time_t*)p))  << endl;
+	cout << asctime(gmtime((time_t*)p))  << endl;
+	cout << p + 8 << endl;
 	//cout << asctime(gmtime((&st.time))) << endl << hexprint("pass", st.c) << endl;
 }
