@@ -1,5 +1,5 @@
 CFLAG = -c -g -std=c++17 -fmax-errors=1 -pthread
-INCLUDE = -I../ -I/usr/include/jsoncpp -I../../lib -I/usr/include/python3.6
+INCLUDE = -I../ -I/usr/include/jsoncpp -I../../lib -I/usr/include/python3.6 -I../../middle/src/
 DIR = $(notdir $(shell pwd))
 CC = g++
 OBJ = $(patsubst %.cc, ../obj/%.$(DIR).o, $(wildcard *.cc))
