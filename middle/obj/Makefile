@@ -2,7 +2,7 @@ CXX = g++
 TOBJ = $(wildcard *.tst.o)
 OBJ = $(wildcard *.src.o)
 EXE = $(patsubst %.x, ../%.x, $(wildcard *.x))
-LDFLAGS = -L../../ -Wl,-rpath=../
+LDFLAGS = -L../ -L../../lib/ -Wl,-rpath=../
 LDLIBS = -lgmpxx -lgmp -lnettle -ljsoncpp -lpthread -lhogweed -lzeta -lstdc++fs -lrt -lmysqlcppconn
 #filesystem library should be next to zeta library
 

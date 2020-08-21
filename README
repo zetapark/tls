@@ -1,32 +1,34 @@
-####   인증서 파일들   ####
+루트 디렉로리 스트럭쳐
 
-server-cert.pem : 9장 2절(Certificate장 PEM절)에서 사용된 인증서
+기본적인 eZ 프레임워크 파일들
+middle : eZ Framework의 미들 서버
+lib : eZ Framework의 여타 기능
+incltouch : 컴파일용 유틸리티
+eZ.conf 파일 : eZ 프레임워크 configuration 파일
+run.sh : 이지 프레임워크와 사이트들을 론칭하는 배시 스크립트
+cert.pem, key.pem : 이지 프레임워크에서 사용하는 인증서 파일
 
-key.pem : 22장(Certificate함수의 구현)에서 만든 키 파일
-cert.pem : 22장에서 만든 인증서
-
-ec_cert.pem : 35장 5절(TLS 1.3구현 인증서절)에서 생성한 인증서
-ec_key.pem : 35장 5절(TLS 1.3구현 인증서절)에서 생성한 비밀키 파일
-
-####   실행화일들   ####
-
-catch.tst.x : 테스트 실행 파일
-incltouch.x : 컴파일에 필요한 유틸리티 
-caesar.src.x : 카이사르 암호 실행 파일
-powm_primitive.src.x : 1장의 디피헬만에서 원시근 구하는 함수
-pem.src.x : PEM 파일을 출력
-cert.src.x : 9장의 인증서 체인의 확인
-
-svcl.src.x : 29장 TCPIP를 거치지 않는 테스트 실행 함수
-
-server.src.x, client.src.x : 31장 4절 암호화되지 않은 TCPIP통신 실행 파일
-
-tls-server.src.x, tls-client.src.x : 32장의 tls1.2 클라이언트 서버
-
-tls13-client.src.x : 36장 1절의 tls1.3 클라이언트
-
-https.src.x : 36장 2절 tls1.3 미들서버
-site.tcpip.x : 36장 2절에서 사용한 http 서버
+eZ 프레임워크를 이용하여 만든 웹사이트들
+dndd : 게시판 사이트
+biz : 명함관리 사이트
+ez : 메인사이트
+adnet : 배너광고 사이트
+suwon : 수원지역 지역화폐 가맹점 검색 사이트
 
 
-####### 질문 및 문의 사항은 www.zeta2374.com 을 방문해 주세요 ########
+
+인스톨 방법
+
+eZ Framework의 dependency
+sudo apt install libjsoncpp-dev nettle-dev libgmpxx4ldbl
+
+명함 관리 웹 앱의 경우 opencv와 gensim을 추가로 인스톨해야 한다.
+biz 디렉토리 : 명합관리 웹 앱의 dependency
+sudo apt install libopencv-dev tesseract-ocr tesseract-ocr-eng tesseract-ocr-kor 
+pip3 install gensim
+
+
+make 명령어를 루트 디렉토리에서 실행하면 모든 실행파일이 빌드된다.
+만일 실패할 경우, make safe를 먼저 실행해 보자.
+그 이후 다시 make을 실행해 본다.
+혹은 빠진 라이브러리를 설치해 본다.
