@@ -170,7 +170,7 @@ string DnDD::search(string s)
 }
 
 void DnDD::oauth()
-{
+{//login from adnet
 	unsigned char buf[52];//time_t(8byte) + sha256hash-base64(44byte)
 	ifstream f{"../privkey.pem"};
 	auto ss = remove_colon(pem2json(f)[0][2].asString());

@@ -17,7 +17,7 @@ Selenium::Selenium(string phantom_path)
 Selenium::~Selenium()
 {
 	drv.attr("quit")();
-	py::finalize_interpreter();
+	py::finalize_interpreter();//this will called before drv or json member variable destructor
 }
 
 auto Selenium::import(const char *p)
