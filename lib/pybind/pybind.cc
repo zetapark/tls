@@ -9,7 +9,7 @@ using namespace std;
 using namespace pybind11;
 using namespace pybind11::literals;
 
-PYBIND11_MODULE(z, m) {
+PYBIND11_MODULE(libzeta, m) {
 	m.doc() = "TLS python module";
 	m.def("base64_encode", &base64_encode);
 	m.def("base64_decode", &base64_decode);
