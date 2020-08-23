@@ -1,16 +1,47 @@
 SHELL := /bin/bash
+CXX = g++
 OPTION = -j $(CPU)
+CFLAG = -O3 -c -std=c++17 -fmax-errors=1 -pthread -DPYBIND11_PYTHON_VERSION=3.6m
+INCLUDE = -I../ -I/usr/include/jsoncpp -I/usr/include/python3.6m
+LFLAG = -L. -Wl,-rpath=.
+LIBS = -lgmpxx -lgmp -lnettle -ljsoncpp -lpthread -lhogweed -lstdc++fs -lrt -lmysqlcppconn -lpython3.6m
+DIR = $(notdir $(shell pwd))
+OBJ = $(patsubst %.cc, ../obj/%.$(DIR).o, $(wildcard *.cc))
+EXE = $(patsubst %.cpp, ../obj/%.$(DIR).x, $(wildcard *.cpp))
+SH1 = $(wildcard obj/*.o)
+SH2 = $(patsubst obj/%.tst.o, , $(SH1))
+SH3 = $(patsubst obj/%.pybind.o, , $(SH2))
 
 all : 
 	../incltouch.x
-	make $(OPTION) -C util/
-	make $(OPTION) -C tcpip/
-	make $(OPTION) -C database/
-	make $(OPTION) -C util/
-	make $(OPTION) -C obj/
+	for i in $(shell ls -d */); do if [ $$i != 'obj/' ]; then cd $$i; make obj -f ../Makefile $(OPTION); cd ..; fi; done
+	make libzeta.so 
+	make z.so 
+	make middle.tls.x
+	make catch.tst.x
+
+obj : $(OBJ) $(EXE)
+
+../obj/%.$(DIR).o : %.cc 
+	$(CXX) $(CFLAG) $(INCLUDE) -o $@ $< -fPIC
+
+../obj/%.$(DIR).x : %.cpp 
+	$(CXX) $(CFLAG) $(INCLUDE) -o $@ $<
+
+libzeta.so : $(SH3)
+	$(CXX) -shared -o $@ $^ $(LIBS)
+
+z.so : $(wildcard obj/*.pybind.o)
+	$(CXX) -shared -o $@ $^ -lzeta -Wl,-rpath=. -L.
+
+middle.tls.x : obj/middle.tls.x
+	$(CXX) -o $@ $< -lzeta $(LFLAG) 
+
+catch.tst.x : obj/catch.tst.x $(wildcard obj/*.tst.o)
+	$(CXX) -o $@ $^ $(LIBS) $(LFLAG) 
 
 clean :
-	rm libzeta.so
+	rm libzeta.so middle.tls.x catch.tst.x z.so
 	rm obj/*.?
 
 # incltouch will touch source files, according to inclusion of header files.
