@@ -15,11 +15,11 @@ using namespace std;
 namespace py = pybind11;
 
 Graph<string> grp;
-ofstream f{"auction.txt", fstream::app};//crawl data write
+ofstream f{"coupang.txt", fstream::app};//crawl data write
 void save_before_exit(int code) {
 	f.close();
 	{
-		ofstream g{"auction_link.graph"};
+		ofstream g{"coupang_link.graph"};
 		g << grp;
 	}
 	exit(code);
