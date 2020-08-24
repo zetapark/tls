@@ -1,8 +1,8 @@
 CXX = g++
 OBJ = $(wildcard *.src.o)
 EXE = $(patsubst %.x, ../%.x, $(wildcard *.x))
-LDFLAGS = -L../../ -Wl,-rpath=../
-LDLIBS = -lzeta -lzetatls -ljsoncpp -lstdc++fs -lrt -lmysqlcppconn -lpython3.6m -lgmpxx -lgmp
+LDFLAGS = -L../../lib/ -Wl,-rpath=../lib/
+LDLIBS = -lzeta 
 
 all : $(EXE)
 

@@ -36,7 +36,7 @@ catch.tst.x : obj/catch.tst.x $(wildcard obj/*.tst.o)
 	$(CXX) -o $@ $^ -lzeta $(LIBS) $(LFLAG) 
 
 clean :
-	rm libzeta.so middle.tls.x catch.tst.x z.so
+	rm libzeta.so middle.tls.x catch.tst.x 
 	rm obj/*.?
 
 # incltouch will touch source files, according to inclusion of header files.
