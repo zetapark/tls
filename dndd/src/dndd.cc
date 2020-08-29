@@ -1,9 +1,13 @@
+#include<chrono>
 #include<cctype>
 #include<cassert>
 #include<fstream>
 #include<regex>
 #include"dndd.h"
 #include<database/util.h>
+#include<rsa.h>
+#include<mpz.h>
+#include<cert_util.h>
 using namespace std;
 
 void DnDD::process()
@@ -165,6 +169,28 @@ string DnDD::search(string s)
 	return t;
 }
 
+void DnDD::oauth()
+{//login from adnet
+	unsigned char buf[52];//time_t(8byte) + sha256hash-base64(44byte)
+	ifstream f{"../privkey.pem"};
+	auto ss = remove_colon(pem2json(f)[0][2].asString());
+	auto jv = der2json(ss);
+	auto K = str2mpz(jv[1].asString());
+	auto e = str2mpz(jv[2].asString());
+	auto d = str2mpz(jv[3].asString());
+
+	RSA rsa{e, d, K};
+	mpz_class result = rsa.decode(mpz_class{"0x" + nameNvalue_["sign"]});
+	mpz2bnd(result, buf, buf + 52);
+	if(sq.select("Users", "where email = '" + nameNvalue_["id"] + "' order by date desc limit 1")
+			&& chrono::system_clock::now() - chrono::system_clock::from_time_t(time((time_t*)buf)) < 30s
+			&& equal(buf + 8, buf + 52, sq[0]["password"].asString().data())) {
+		id = sq[0]["email"].asString();
+		level = sq[0]["level"].asString();
+		name = sq[0]["name"].asString();
+	}
+}
+
 void DnDD::mn()
 {//main.html
 	if(nameNvalue_["db"] != "" && nameNvalue_["db"] != db) {//if first connection -> set database
@@ -186,7 +212,7 @@ void DnDD::mn()
 			level = sq[0]["level"].asString();
 			name = sq[0]["name"].asString();
 		}
-	}
+	} else if(nameNvalue_["sign"] != "") oauth();//remote login from ADnet
 
 	regex e{R"(<form[\s\S]+?</form>)"};
 	if(id != "") content_ = regex_replace(content_, e, name + "님 레벨" + level +"으로 로그인되었습니다.");

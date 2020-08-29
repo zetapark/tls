@@ -8,7 +8,7 @@ protected:
 	void process();
 
 private:
-	void signin(), index(), search(), mn(), pg(), edit(), new_book(), comment(),result(), google();
+	void signin(), index(), search(), mn(), pg(), edit(), new_book(), comment(),result(), google(), oauth();
 	std::string search(std::string s), field(std::string s), follow(), close(), vote();
 	std::array<int, 5> allowlevel(std::string table, std::string book);
 	std::vector<std::string> tables();

@@ -1,0 +1,32 @@
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport" />
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<title>애드넷(AdNET)</title>
+	<script src=lang.js></script>
+	</head>
+	<body>
+		<form action=design.php method=post enctype=multipart/form-data>
+
+			<label for=background><span class=eng>Background Image</span>
+				<span class=kor>배경 이미지</span></label>
+			<input type=file name=background><br>
+
+			<label for=logo><span class=eng>Logo image</span><span class=kor>로고 이미지</span></label>
+			<input type=file name=logo><br>
+			
+			<label for=desc><span class=eng>Text for Banner</span>
+				<span class=kor>배너 이미지에 삽입할 텍스트<span></label><br>
+			<input type=text name=desc size=60><br>
+
+			<label for=extra><span class=eng>Other requests</span>
+				<span class=kor>다른 요청사항</span></label><br>
+			<textarea name=other rows=10 cols=60></textarea><br>
+
+			<a href=index.html class='w3-green w3-button'>Cancel</a>&nbsp;
+			<input class='w3-green w3-button' type=submit>
+		</form>
+	</body>
+</html>

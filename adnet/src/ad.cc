@@ -1,24 +1,23 @@
-//#include<arpa/inet.h>
-//#include<util/log.h>
 #include<cmath>
 #include<database/util.h>
 #include"ad.h"
+#define ROUND 10
 using namespace std;
 using namespace std::chrono;
 
 std::string base64_encode(std::vector<unsigned char> v);
-std::vector<unsigned char> base64_decode(std::string s);
 
 Ad::Ad()
 {
+	sq.connect("localhost", "adnet", "adnetadnet", "adnet");
+	sq.select("Url", "");
+	for(int i=0; i<sq.size(); i++) urlNid_[sq[i]["url"].asString()] = sq[i]["id"].asString();
 	all_the_database_job();
 }
 
 void Ad::process()
 {
 	if(requested_document_ != "adnet.js" && th_.joinable()) th_.join();//from request ad function
-//	char client_ip[INET_ADDRSTRLEN];
-	//psstm(string{"geoiplookup "} + client_ip);
 	if(requested_document_ == "request_ad.php") content_ = request_ad();
 	else if(requested_document_ == "click_ad.php") click_ad();
 }
@@ -67,21 +66,30 @@ string Ad::request_ad()
 	float lat, lng; string nation;
 	tie(nation, lat, lng) = get_position(req_header_["IP-Addr"]);
 
-	int pick = 0;//category have priority : 3 point
+	static int call = 0;
+	int pick = 0;//priority : round(100) -> category(3) -> country, distance(2)
 	for(int i=0, current_best_point=0, point=0; i<sq.size(); i++, point=0) {
+		point += rounds_[i] * 100;
 		if(!sq[i]["country"].asBool() || sq[i]["nation"].asString() == nation) point += 2;
 		if(!sq[i]["distance"].asBool() || distance(lat, lng, sq[i]["lat"].asFloat(),
 					sq[i]["lng"].asFloat()) < sq[i]["km"].asInt()) point += 2;
 		if(string s = nameNvalue_["category"]; s == "") point += 3;
 		else for(string t : divide_category(s)) if(sq[i][t].asBool()) { point += 3; break; }
-		if(point == 7) { pick = i; break; }
+		if(point == round_ * 100 + 7) { pick = i; break; }
 		else if(current_best_point < point) current_best_point = point, pick = i;
 	}
-	view_induce_[nameNvalue_["id"]]++;
+	string id = nameNvalue_["id"], url = nameNvalue_["url"];
+	url = url.substr(0, url.find('?'));
+	url = url.substr(0, url.find('#'));
+	view_induce_[id]++;
 	view_increase_[sq[pick]["id"].asString()]++;
+	rounds_[pick]--;
+	if(urlNid_.find(url) == urlNid_.end() || urlNid_[url] != id) url_add_[url] = id;
 	string r = sq[pick]["id"].asString() + '\n' + sq[pick]["link"].asString() + '\n' + new_token();
-	if(sq.size() == 1) th_ = thread{&Ad::all_the_database_job, this};
-	else sq.removeIndex(pick, &sq[pick]);
+	if(++call == sq.size()) { 
+		call = 0;
+		if(--round_ == 0) th_ = thread{&Ad::all_the_database_job, this};
+	}
 	return r;
 }
 
@@ -97,6 +105,7 @@ void Ad::all_the_database_job()
 {
 	if(!sq.reconnect()) sq.connect("localhost", "adnet", "adnetadnet", "adnet");
 	insert_increment();
+	insert_url();
 	prev_token_ = move(token_);
 	if(sq.query("select count(*) from Users")) sq.fetch(-1);
 	int user_count = sq[0][""].asInt() / 5 + 100;//when service is new and people low
@@ -105,6 +114,24 @@ void Ad::all_the_database_job()
 			"order by etc, (my_banner_show / click_induce) limit " + to_string(user_count)
 			+ ") as t1 on t1.id = Pref.id");//etc 1: postponed banner for coarse quality, 0: ok
 	sq.fetch(-1);//real fetched lines
+	rounds_.resize(sq.size());
+	for(int &i : rounds_) i = ROUND;
+	round_ = ROUND;
+}
+
+void Ad::insert_url()
+{
+	if(!url_add_.empty()) {
+		string command = "insert into Url (url, id) values ";
+		for(const auto &[url, id] : url_add_) {
+			command += "('" + url + "', '" + id + "'),";
+			urlNid_[url] = id;
+		}
+		command.pop_back();
+		command += " on duplicate key update id = values(id)";
+		sq.query(command);
+		url_add_.clear();
+	}
 }
 
 void Ad::insert_increment()

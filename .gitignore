@@ -39,3 +39,5 @@ core
 obj/catch.tx
 *.db
 *.log
+*.seller
+*.graph

@@ -3,8 +3,16 @@
 #include<util/option.h>
 #include<tcpip/server.h>
 #include<tcpip/website.h>
+#include<csignal>
 #include"ad.h"
 using namespace std;
+
+Ad site;
+
+void handler(int)
+{//save database before exit
+	site.all_the_database_job();
+}
 
 int main(int ac, char** av)
 {
@@ -14,7 +22,8 @@ int main(int ac, char** av)
 	};
 	if(!co.args(ac, av)) return 0;
 
-	Ad site;
+	signal(SIGINT, handler);
+	signal(SIGTERM, handler);
 	site.init(co.get<const char*>("dir"));
 	site.add_header("request_ad.php", "Access-Control-Allow-Origin: *");
 	site.add_header("request_ad.php", "Access-Control-Allow-Headers: x-requested-with");

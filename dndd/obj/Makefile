@@ -1,7 +1,7 @@
 CXX = g++
 EXE = $(patsubst %.x, ../%.x, $(wildcard *.x))
 LDFLAGS = -L../../ -Wl,-rpath=../
-LDLIBS = -lzeta -ljsoncpp -lpthread -lstdc++fs -lrt -lmysqlcppconn -lzetatls
+LDLIBS = -lzeta -ljsoncpp -lpthread -lstdc++fs -lrt -lmysqlcppconn -lzetatls -lgmpxx -lgmp
 #filesystem library should be next to zeta library
 
 all : $(EXE)
