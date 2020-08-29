@@ -1,7 +1,7 @@
 SHELL := /bin/bash
 CXX = g++
 OPTION = -j $(CPU)
-CFLAG = -O3 -c -std=c++17 -fmax-errors=1 -pthread -DPYBIND11_PYTHON_VERSION=3.6m
+CFLAG = -g -c -std=c++17 -fmax-errors=1 -pthread -DPYBIND11_PYTHON_VERSION=3.6m
 INCLUDE = -I../ -I/usr/include/jsoncpp -I/usr/include/python3.6m
 LFLAG = -L. -Wl,-rpath=.
 LIBS = -lgmpxx -lgmp -lnettle -ljsoncpp -lpthread -lhogweed -lstdc++fs -lrt -lmysqlcppconn -lpython3.6m

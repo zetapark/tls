@@ -11,7 +11,7 @@ namespace py = pybind11;
 Selenium::Selenium(string phantom_path) 
 {
 	webdriver = py::module::import("selenium.webdriver");
-	drv = webdriver.attr("PhantomJS")(py::arg("executable_path") = phantom_path_ = phantom_path);
+	drv = webdriver.attr("Firefox")();//py::arg("executable_path") = phantom_path_ = phantom_path);
 	json = py::module::import("json").attr("loads");
 	bs = py::module::import("bs4").attr("BeautifulSoup");
 }
@@ -19,6 +19,7 @@ Selenium::Selenium(string phantom_path)
 Selenium::~Selenium()
 {
 	drv.attr("quit")();
+	save_graph();
 }
 
 void Selenium::title_tag(string s) { title_tag_ = s; }
@@ -28,16 +29,25 @@ void Selenium::seller_class(string s) { seller_class_ = s; }
 void Selenium::output_file(string s) { output_file_ = s; }
 void Selenium::graph_file(string s) { graph_file_ = s; }
 void Selenium::start_url(string s) { start_url_ = s; }
+void Selenium::delay(int i) { delay_ = i; }
 
 string Selenium::get_url(string url) 
 {//get html document of url using selenium
 	if(stoi(psstm("free | awk '{print $7}'")) < 300'000) {
 		drv.attr("close")();
 		drv.attr("quit")();
-		drv = webdriver.attr("PhantomJS")(py::arg("executable_path") = phantom_path_);
+		drv = webdriver.attr("Firefox")();//py::arg("executable_path") = phantom_path_);
 	}
-	this_thread::sleep_for(delay_ * 1s);
-	drv.attr("get")(url);
+	cout << url << endl;
+	if(url[0] == '/') url = "https:" + url;
+	//this_thread::sleep_for(delay_ * 1s);
+	drv.attr("set_page_load_timeout")(30);
+	try {
+		drv.attr("get")(url);
+	} catch(const exception &e) {
+		cerr << "error at " << url << '\n' << e.what() << '\n';
+		return "";
+	}
 	return drv.attr("page_source").cast<string>();
 }
 
@@ -46,6 +56,7 @@ vector<string> Selenium::extract(string doc) const
 	auto soup = bs(doc, "lxml");
 	vector<string> r;
 	auto title = soup.attr("find")(title_tag_, json("{\"class\" : \"" + title_class_ + "\" }"));
+	cout << title << endl;
 	r.push_back(title.is_none() ? "" : title.attr("get_text")().cast<string>());
 	auto seller = soup.attr("find")(seller_tag_, json("{\"class\" : \"" + seller_class_ + "\"}"));
 	r.push_back(seller.is_none() ? "" : seller.attr("get_text")().cast<string>());
@@ -63,7 +74,7 @@ void Selenium::crawl(int depth)
 		else grp_.insert_vertex(start_url_);
 	}
 	crawl(0, depth, grp_.vertexes[0].edges.empty());
-	{ ofstream f{graph_file_}; f << grp_; }
+	save_graph();
 }
 
 void Selenium::save_graph()
@@ -93,7 +104,6 @@ void Selenium::crawl(int idx, int depth, bool read)
 	for(auto &e : grp_.vertexes[idx].edges) {
 		auto w = e.weight;
 		e.weight = 1;//check visit
-		try { crawl(e.index, depth - 1, w == 0i); }//crawl exception -> next
-		catch(...) { }
+		crawl(e.index, depth - 1, w == 0i);
 	}
 }
