@@ -6,7 +6,6 @@ all :
 	make $(OPTION) -C incltouch/
 	make $(OPTION) -C lib/
 	if [ ! -f libzeta.so ]; then ln -s lib/libzeta.so libzeta.so; fi
-	make $(OPTION) -C middle/
 	if [ ! -f libzetatls.so ]; then ln -s middle/libzetatls.so libzetatls.so; fi
 	if [ ! -f zeta.so ]; then ln -s middle/zeta.so zeta.so; fi
 	make $(OPTION) -C biz/

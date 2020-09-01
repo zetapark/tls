@@ -5,9 +5,9 @@
 #include<regex>
 #include"dndd.h"
 #include<database/util.h>
-#include<rsa.h>
-#include<mpz.h>
-#include<cert_util.h>
+#include<tls/rsa.h>
+#include<tls/mpz.h>
+#include<tls/cert_util.h>
 using namespace std;
 
 void DnDD::process()

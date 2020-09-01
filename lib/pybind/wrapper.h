@@ -8,6 +8,7 @@
 #include"tls/sha1.h"
 #include"tls/naes.h"
 #include"tls/cert_util.h"
+#include"tcpip/website.h"
 #include<database/mysqldata.h>
 
 std::string pemtojson(std::string filename);

@@ -63,18 +63,18 @@ PYBIND11_MODULE(libzeta, m) {
 		.def("start", &Server::start)
 		;
 
-	bind_map<map<string, string>>(m, "mapstring");
-	class_<WebSite, Trampoline>(m, "WebSite")
-		.def(init<>())
-		.def_static("init", &WebSite::init)
-		.def_readonly("nameNvalue_", &Publicist::nameNvalue_)
-		.def_readwrite("content_", []() {return bytes(Publicist::content_))
-		.def_readonly("requested_document_", &Publicist::requested_document_)
-		.def("swap", &Publicist::swap)
-		.def("append", &Publicist::append)
-		.def("process", &Publicist::process)
-		.def("__call__", &WebSite::operator())
-		;
+	//bind_map<map<string, string>>(m, "mapstring");
+//	class_<WebSite, Trampoline>(m, "WebSite")
+//		.def(init<>())
+//		.def_static("init", &WebSite::init)
+//		.def_readonly("nameNvalue_", &Publicist::nameNvalue_)
+//		.def_readwrite("content_", []() {return bytes(Publicist::content_))
+//		.def_readonly("requested_document_", &Publicist::requested_document_)
+//		.def("swap", &Publicist::swap)
+//		.def("append", &Publicist::append)
+//		.def("process", &Publicist::process)
+//		.def("__call__", &WebSite::operator())
+//		;
 //	class_<PyDiffie>(m, "DiffieHellman")
 //		.def(init<int>(), "bit"_a = 1024)
 //		.def(init<int_, int_, int_>())

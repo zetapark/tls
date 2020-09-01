@@ -23,11 +23,13 @@ void destroy_shared_mem(int sig)
 void WebSite::init(string dir)
 {
 	map<string, string> fnh;
-	for(const path& a : directory_iterator{dir}) {//directory entry has operator path
-		ifstream f(a.string()); string s; char c;
-		while(f >> noskipws >> c) s += c;
-		fnh[a.filename()] = s;
-		cout << "loading " << a.filename() << endl;
+	for(const path& a : recursive_directory_iterator{dir}) {//directory entry has operator path
+		if(!is_directory(a)) {
+			ifstream f(a.string()); string s; char c;
+			while(f >> noskipws >> c) s += c;
+			fnh[a.relative_path().string().substr(dir.size() + 1)] = s;
+			cout << "loading " << a.filename() << endl;
+		}
 	}
 	fileNhtml_.load(move(fnh));
 	signal(SIGINT, destroy_shared_mem);
