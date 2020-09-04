@@ -25,6 +25,7 @@ public:
 		std::unique_lock<std::shared_mutex> lck{mtx_};
 		std::remove_if(ar_.begin() + b, ar_.begin() + e, true);
 		pos_ -= e - b;
+		return pos_;
 	}
 	template<class Cond> void remove_if(Cond cond) {
 		std::unique_lock<std::shared_mutex> lck{mtx_};
