@@ -2,7 +2,7 @@ CXX = g++
 OBJ = $(wildcard *.src.o)
 EXE = $(patsubst %.x, ../%.x, $(wildcard *.x))
 LDFLAGS = -L../../lib/ -Wl,-rpath=../lib/
-LDLIBS = -lzeta -ljsoncpp -lgmpxx -lgmp -lpython3.6m
+LDLIBS = -lzeta -ljsoncpp -lgmpxx -lgmp $(shell pkg-config --libs python3-embed)
 
 all : $(EXE)
 
