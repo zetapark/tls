@@ -2,9 +2,9 @@ SHELL := /bin/bash
 CXX = g++
 OPTION = -j $(CPU)
 CFLAG = -g -c -std=c++17 -fmax-errors=1 -pthread -DPYBIND11_PYTHON_VERSION=3.6m
-INCLUDE = -I../ -I/usr/include/jsoncpp -I/usr/include/python3.6m
+INCLUDE = -I../ -I/usr/include/jsoncpp $(shell pkg-config --cflags python3-embed)
 LFLAG = -L. -Wl,-rpath=.
-LIBS = -lgmpxx -lgmp -lnettle -ljsoncpp -lpthread -lhogweed -lstdc++fs -lrt -lmysqlcppconn -lpython3.6m
+LIBS = -lgmpxx -lgmp -lnettle -ljsoncpp -lpthread -lhogweed -lstdc++fs -lrt -lmysqlcppconn $(shell pkg-config --libs python3-embed)
 DIR = $(notdir $(shell pwd))
 OBJ = $(patsubst %.cc, ../obj/%.$(DIR).o, $(wildcard *.cc))
 EXE = $(patsubst %.cpp, ../obj/%.$(DIR).x, $(wildcard *.cpp))
