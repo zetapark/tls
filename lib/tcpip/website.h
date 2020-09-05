@@ -22,10 +22,9 @@ protected:
 	static SharedMem fileNhtml_;
 	void parse_all(string &&s);
 	std::string return_content();
+	std::string header(std::string req);
 
 private:
-	const std::string header_ = "HTTP/1.1 200 OK\r\n"
-															"Content-Type: text/html; charset=utf-8\r\n";
 	static std::multimap<std::string, std::string> added_header_;
 	void parse_multi(std::istream& is, std::string boundary);
 	std::istream& parse_one(std::istream& is, std::string boundary);
