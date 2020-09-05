@@ -22,7 +22,7 @@ protected:
 	static SharedMem fileNhtml_;
 	void parse_all(string &&s);
 	std::string return_content();
-	std::string header(std::string req);
+	std::string header();
 
 private:
 	static std::multimap<std::string, std::string> added_header_;

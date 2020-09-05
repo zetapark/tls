@@ -23,12 +23,13 @@ void destroy_shared_mem(int sig)
 void WebSite::init(string dir)
 {
 	map<string, string> fnh;
+	if(dir.back() == '/') dir.pop_back();
 	for(const path& a : recursive_directory_iterator{dir}) {//directory entry has operator path
 		if(!is_directory(a)) {
 			ifstream f(a.string()); string s; char c;
 			while(f >> noskipws >> c) s += c;
 			fnh[a.relative_path().string().substr(dir.size() + 1)] = s;
-			cout << "loading " << a.filename() << endl;
+			cout << "loading " << a << endl;
 		}
 	}
 	fileNhtml_.load(move(fnh));
@@ -109,10 +110,10 @@ string WebSite::return_content()
 	string s;
 	const auto &[begin, end] = added_header_.equal_range(requested_document_);
 	for(auto it = begin; it != end; it++) s += it->second + "\r\n";
-	return header(requested_document_) + s + "Content-Length: " + to_string(content_.size()) + "\r\n\r\n" + content_;
+	return header() + s + "Content-Length: " + to_string(content_.size()) + "\r\n\r\n" + content_;
 }
 
-string WebSite::header(string req)
+string WebSite::header()
 {
 	const char *extension[][2] = {
 		{".aac", "audio/aac"},
@@ -192,7 +193,9 @@ string WebSite::header(string req)
 	};
 
 	string r1 = "HTTP/1.1 200 OK\r\nContent-Type: ", r2 = "; charset=utf-8\r\n";
-	for(const auto &p : extension) if(req.substr(req.rfind('.')) == p[0]) return r1 + p[1] + r2;
+	for(const auto &p : extension)
+		if(requested_document_.substr(requested_document_.rfind('.')) == p[0]) 
+			return r1 + p[1] + r2;
 	return r1 + "text/html" + r2;
 }
 
