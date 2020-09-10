@@ -386,19 +386,15 @@ h1, h2, h3, h4, h5, h6 {
   color: #fff;
 }
 
+
 /*--------------------------------------------------------------
 # Hero Section
 --------------------------------------------------------------*/
 #hero {
   width: 100%;
-  height: 100vh;
-  background: white;
-  border-bottom: 2px solid white;
-  text-align: center;
-}
-
-#hero .container {
-  padding-top: 70px;
+  height: 80vh;
+  background: #fff;
+  padding-top: 82px;
 }
 
 #hero h1 {
@@ -406,53 +402,112 @@ h1, h2, h3, h4, h5, h6 {
   font-size: 48px;
   font-weight: 700;
   line-height: 56px;
-  color: #141d2b;
-  width: 60%;
-  color: #2d405f;
+  color: #3e4450;
 }
 
 #hero h2 {
-  color: #466393;
-  margin: 15px 0 0 0;
+  color: #858ea1;
+  margin: 10px 0  30px 0;
   font-size: 24px;
-  color: #2d405f;
 }
 
 #hero .btn-get-started {
-  font-family: "Krub", sans-serif;
+  font-family: "Raleway", sans-serif;
   font-weight: 500;
   font-size: 16px;
   letter-spacing: 1px;
-  display: block;
-  padding: 8px 32px 10px 32px;
-  margin-top: 25px;
-  border-radius: 5px;
+  display: inline-block;
+  padding: 8px 30px 10px 30px;
+  border-radius: 4px;
   transition: 0.5s;
   color: #fff;
-  background: #3b4ef8;
+  background: #16df7e;
+  box-shadow: 0 8px 28px rgba(22, 223, 126, 0.45);
 }
 
 #hero .btn-get-started:hover {
-  background: #0a22f6;
+  background: #206bfb;
+  box-shadow: 0 8px 28px rgba(32, 107, 251, 0.45);
 }
 
-#hero .hero-img {
-  max-width: 60%;
-  margin-top: 40px;
+#hero .btn-watch-video {
+  font-size: 16px;
+  display: inline-block;
+  padding: 8px 35px 8px 25px;
+  transition: 0.5s;
+  margin-left: 10px;
+  color: #5f687b;
+  position: relative;
 }
 
-@media (max-width: 992px) {
-  #hero h1 {
-    font-size: 36px;
-    line-height: 42px;
-    width: 100%;
+#hero .btn-watch-video i {
+  color: #949cac;
+  font-size: 24px;
+  position: absolute;
+  right: 0;
+  top: 8px;
+}
+
+#hero .btn-watch-video:hover i {
+  color: #16df7e;
+}
+
+#hero .animated {
+  animation: up-down 2s ease-in-out infinite alternate-reverse both;
+}
+
+@media (max-width: 991px) {
+  #hero {
+    height: 100vh;
   }
-  #hero h2 {
-    font-size: 20px;
-    line-height: 24px;
+  #hero .animated {
+    -webkit-animation: none;
+    animation: none;
   }
   #hero .hero-img {
-    max-width: 90%;
+    text-align: center;
+  }
+  #hero .hero-img img {
+    width: 50%;
+  }
+}
+
+@media (max-width: 768px) {
+  #hero h1 {
+    font-size: 28px;
+    line-height: 36px;
+  }
+  #hero h2 {
+    font-size: 18px;
+    line-height: 24px;
+    margin-bottom: 30px;
+  }
+  #hero .hero-img img {
+    width: 70%;
+  }
+}
+
+@media (max-width: 575px) {
+  #hero .hero-img img {
+    width: 80%;
+  }
+}
+
+@-webkit-keyframes up-down {
+  0% {
+    transform: translateY(10px);
+  }
+  100% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes up-down {
+  0% {
+    transform: translateY(10px);
+  }
+  100% {
+    transform: translateY(-10px);
   }
 }
 

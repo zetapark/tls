@@ -1,14 +1,14 @@
 #!/bin/bash
 
 while : ; do
-	cd middle
-	./https.src.x
+	cd lib 
+	./middle.tls.x -port 4433 
 	cd ..
 	sleep 10
 done &
 while : ; do
-	cd dndd
-	./dndd.dndd.x
+	cd biz
+	./biz.src.x -port 2001
 	cd ..
 	sleep 10
 done &
