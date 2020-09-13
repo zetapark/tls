@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Bikin Bootstrap Template - Index</title>
+  <title>AdNET 상호부조형 배너광고 플랫폼</title>
   <meta content="" name="descriptison">
   <meta content="" name="keywords">
 
@@ -26,6 +26,7 @@
 
   <!-- Template Main CSS File -->
   <link href="assets/css/style.css" rel="stylesheet">
+  <link href="index.css" rel="stylesheet">
 
   <!-- =======================================================
   * Template Name: Bikin - v2.1.0
@@ -33,36 +34,6 @@
   * Author: BootstrapMade.com
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
-<style>
-.arrow_box {
-	position: relative;
-	background: #e1f5fa;
-	border: 4px solid #e1f5fa;
-}
-.arrow_box:after, .arrow_box:before {
-	right: 100%;
-	top: 50%;
-	border: solid transparent;
-	content: " ";
-	height: 0;
-	width: 0;
-	position: absolute;
-	pointer-events: none;
-}
-
-.arrow_box:after {
-	border-color: rgba(225, 245, 250, 0);
-	border-right-color: #e1f5fa;
-	border-width: 30px;
-	margin-top: -30px;
-}
-.arrow_box:before {
-	border-color: rgba(225, 245, 250, 0);
-	border-right-color: #e1f5fa;
-	border-width: 36px;
-	margin-top: -36px;
-}
-</style>
 </head>
 
 <body>
@@ -78,13 +49,14 @@
       <nav class="nav-menu d-none d-lg-block">
         <ul>
           <li class="active"><a href="index.html">Home</a></li>
-          <li><a href=login.html>LogIn</a></li>
+          <li><a href=login.html class=hideonlog>LogIn</a></li>
+          <li><a href=index.html?command=logout class=viewonlog>LogOut</a></li>
           <li><a href="#contact" class=scrollto>Contact</a></li>
-          <li><a href="mypage.html">My Page</a></li>
-          <li><a href="#pricing">Board</a></li>
+          <li><a href="mypage.html" class=viewonlog>My Page</a></li>
+          <li><a href="board.php">Board</a></li>
         </ul>
       </nav><!-- .nav-menu -->
-      <a href="#about" class="get-started-btn">언어</a>
+      <a role=button id=lang class="get-started-btn">언어</a>
 
     </div>
   </header><!-- End Header -->
@@ -98,8 +70,8 @@
           <h1>상호부조형 배너광고 플랫폼 AdNET</h1>
 					<h2>회원 사이트간의 협조를 통해 상호간의 컨텐츠를 홍보해주고, 유료 광고가 있을 경우, 수익의 절반은 회원에게 돌아갑니다. AdNET 회원(<mark>가입무료</mark>)은 무료로 배너 광고를 게재할 수 있고, 수익도 올릴 수 있습니다.</h2>
           <div class="d-flex">
-						<input type=text></input>
-            <a href="#about" class="btn-get-started scrollto">Search</a>
+						<input id=search_text type=text></input>
+            <a role=button id=search class="btn-get-started scrollto">Search</a>
             <a href="https://www.youtube.com/watch?v=lR-rSeFcvkM" class="venobox btn-watch-video" data-vbtype="video" data-autoplay="true"> Watch Video <i class="icofont-play-alt-2"></i></a>
           </div>
         </div>
@@ -107,6 +79,7 @@
           <img src="assets/img/hero.jpg" class="img-fluid animated rounded-circle" alt="">
         </div>
       </div>
+			<div id=div1></div>
     </div>
 
   </section><!-- End Hero -->
@@ -127,7 +100,7 @@
 							AdNET이 무료로 4종의 배너를 만들어 드립니다.
 							될 수 있으면 직접 만들기를 추천드리며, AdNET이 대행하는 배너 디자인은 전문 디자이너가 하는 것이 아니기 때문에 생각보다 질이 떨어질 수 있음을 미리 알려드립니다.
 							</p>
-							<input type=submit class="about-btn" value='디자인 맡기기'><i class="bx bx-chevron-right"></i>
+							<input type=submit id=design class="about-btn" value='디자인 맡기기'><i class="bx bx-chevron-right"></i>
             </div>
           </div>
 
@@ -137,7 +110,7 @@
                 <div class="col-md-6 icon-box" data-aos="fade-up" data-aos-delay="100">
                   <i class="bx bx-images"></i>
                   <h4>배경 이미지</h4>
-									<input type=file name=back required>
+									<input type=file name=background required>
                 </div>
                 <div class="col-md-6 icon-box" data-aos="fade-up" data-aos-delay="200">
                   <i class="bx bx-cube-alt"></i>
@@ -147,12 +120,12 @@
                 <div class="col-md-6 icon-box" data-aos="fade-up" data-aos-delay="300">
                   <i class="bx bx-receipt"></i>
                   <h4>캐치 프레이즈</h4>
-									<input type=text name=catchphrase required>
+									<input type=text name=desc required>
                 </div>
                 <div class="col-md-6 icon-box" data-aos="fade-up" data-aos-delay="400">
                   <i class="bx bx-check-square"></i>
                   <h4>기타 요청 사항</h4>
-									<input type=text name=ect>
+									<input type=text name=other>
                 </div>
               </div>
             </div><!-- End .content-->
@@ -2337,7 +2310,8 @@
 
         <div class="section-title">
           <h2>Contact</h2>
-          <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
+          <p>AdNET 회원이 아니거나 로그인이 불가능하면 메일로 문의할 수 있습니다.
+답변은 메일로 받을 수 있으며, 문의 내역에서 조회할 수 없습니다.</p>
         </div>
 
         <div class="row">
@@ -2371,7 +2345,7 @@
           </div>
 
           <div class="col-lg-6 mt-4 mt-md-0">
-            <form action="forms/contact.php" method="post" role="form" class="php-email-form">
+            <form action="contact.php" method="post" id=contact-form role="form" class="php-email-form">
               <div class="form-row">
                 <div class="col-md-6 form-group">
                   <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" data-rule="minlen:4" data-msg="Please enter at least 4 chars" />
@@ -2383,17 +2357,11 @@
                 </div>
               </div>
               <div class="form-group">
-                <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" data-rule="minlen:4" data-msg="Please enter at least 8 chars of subject" />
+                <input type="text" class="form-control" name="title" id="subject" placeholder="Subject" data-rule="minlen:4" data-msg="Please enter at least 8 chars of subject" />
                 <div class="validate"></div>
               </div>
               <div class="form-group">
-                <textarea class="form-control" name="message" rows="5" data-rule="required" data-msg="Please write something for us" placeholder="Message"></textarea>
-                <div class="validate"></div>
-              </div>
-              <div class="mb-3">
-                <div class="loading">Loading</div>
-                <div class="error-message"></div>
-                <div class="sent-message">Your message has been sent. Thank you!</div>
+                <textarea class="form-control" name="content" rows="5" data-rule="required" data-msg="Please write something for us" placeholder="Message"></textarea>
               </div>
               <div class="text-center"><button type="submit">Send Message</button></div>
             </form>
@@ -2447,6 +2415,7 @@
 
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
+	<script src=index.js></script>
 
 	<script src=https://ad.zeta2374.com/adnet2.js></script>
 </body>

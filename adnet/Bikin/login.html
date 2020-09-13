@@ -16,9 +16,9 @@
             <div class="col-10 col-sm-8 col-md-6 col-lg-6 offset-1 offset-sm-2 offset-md-3 offset-lg-0 align-self-center d-lg-flex align-items-lg-center align-self-lg-stretch bg-white p-5 rounded rounded-lg-0 my-5 my-lg-0" id="login-block">
                 <div class="m-auto w-lg-75 w-xl-50">
                     <h2 class="text-info font-weight-light mb-5"><i class="bx bx-log-in"></i>&nbsp;AdNET</h2>
-                    <form>
-                        <div class="form-group"><label class="text-secondary">ID</label><input class="form-control" type="text" required="" inputmode="email"></div>
-                        <div class="form-group align-content-center"><label class="text-secondary">Password</label><input class="form-control" type="password" required=""></div>
+										<form>
+                        <div class="form-group"><label class="text-secondary">ID</label><input class="form-control" name=id type="text" required="" inputmode="email"></div>
+                        <div class="form-group align-content-center"><label class="text-secondary">Password</label><input class="form-control" name=pwd type="password" required=""></div>
 												<button class="btn btn-info mt-2" type="submit">Log In</button>
 												<a class="btn btn-info mt-2" href="signup.html">Sign Up</a>
                         <a href="index.html" class='btn btn-info mt-2'>Cancel</a>
@@ -31,6 +31,16 @@
     </div>
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+	<script>
+		$('form').submit(function(e) {
+			e.preventDefault();
+			$.post('login.php', $('form').serialize(),
+				function(data) {
+					alert(data);
+					if(data.localeCompare('login succeeded') == 0) window.location.href='index.html';
+				});
+		});
+	</script>
 </body>
 
 </html>
