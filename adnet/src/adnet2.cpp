@@ -6,7 +6,7 @@ using namespace std;
 int main(int ac, char** av)
 {
 	CMDoption co{
-		{"dir", "template directory", "www"},
+		{"dir", "template directory", "Bikin"},
 		{"port", "listening port", 2001},
 		{"database", "database ip", "localhost"}
 	};

@@ -316,7 +316,7 @@
  onerror="this.src='https://tomcat.zeta2374.com/banner/adnet-mobile.jpg'">
 								<figcaption>320x50 mobile</figcaption>
 							</figure>
-							<form action=banner.html method=post enctype=multipart/form-data>
+							<form action=mypage.html method=post enctype=multipart/form-data>
 								<label for=leader><b>728 x 90 file upload</b></label>
 								<input type=file name=leader onchange=filecheck(this)><br>
 								<label for=square><b>300 x 250 file upload</b></label>
@@ -352,7 +352,7 @@
 				</div>
 
 
-				<form action=option.php>
+				<form id=option>
 					<div class='mt-5 container border border-success p-3'>
 						<h3>Option Setting</h3>
 
@@ -695,5 +695,20 @@
 		</div>
 		<script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 		<script src="assets/vendor/jquery.easing/jquery.easing.min.js"></script>
+	<script>
+		function show_pos() {
+			navigator.geolocation.getCurrentPosition(function(position) {
+				$("input[name='lat']").val(position.coords.latitude);
+				$("input[name='lng']").val(position.coords.longitude);
+			});
+		}
+		$(function() {
+			$('#option').submit(function(event) {
+				event.preventDefault();
+				$.post('option.php', $('form').serialize(),
+					function(data) { alert(data); });
+			});
+		});
+	</script>
 	</body>
 </html>
