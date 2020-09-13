@@ -25,7 +25,7 @@ public:
 protected:
 	void process();
 private:
-	void indexcss(), design();
+	void indexcss(), design(), login(), index(), mypage();
 };
 
 template<class S> static std::string struct2str(const S &s)

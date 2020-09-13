@@ -14,4 +14,17 @@ $(function() {
 		$.post('https://misc.zeta2374.com/leave_message', $('form').serialize(),
 			function(data) { alert(data); });
 	});
+	$( '#design-request' ).submit( function( e ) {
+			$.ajax( {
+				url: 'design.php',
+				type: 'POST',
+				data: new FormData( this ),
+				processData: false,
+				contentType: false,
+				success: function(data) {
+					alert(data);
+				}
+			} );
+			e.preventDefault();
+		} );
 });

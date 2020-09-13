@@ -20,7 +20,7 @@
 						<li>
 						<div class="form-group">
 							<label class="text-secondary">ID</label>
-							<input class="form-control" type="text" required="" placeholder=''>
+							<input class="form-control" id=id-text type="text" required="" placeholder=''>
 							<button id=email-search class='btn btn-info'>
 								<span class=kor>이메일 찾기</span><span class=eng>Find email</span>
 							</button>
@@ -30,7 +30,7 @@
 						</div>
 						<div class="form-group">
 							<label class="text-secondary">Email</label>
-							<input class="form-control" type="text" required="" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,15}$" inputmode="email">
+							<input class="form-control" id=em-text type="text" required="" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,15}$" inputmode="email">
 							<button id=id-search class='btn btn-info'>
 								<span class=kor>아이디 찾기</span><span class=eng>Find ID</span>
 							</button>
@@ -39,7 +39,7 @@
 						<li>
 						<div class="form-group align-content-center">
 							<label class="text-secondary">New Password</label>
-							<input class="form-control" type="password" required="">
+							<input class="form-control" type="password" id=pwd-text required="">
 							<button id=id-search class='btn btn-info'>
 								<span class=kor>리셋</span><span class=eng>Reset</span>
 							</button>
@@ -48,7 +48,7 @@
 						<li>
 						<div class='form-group align-content-center'>
 							<label class=text-secondary>Verification Code</label>
-							<input class=form-control type=text>
+							<input class=form-control type=text id=num-input>
 							<button class='btn btn-info'>OK</button>
 						</div>
 						</li>
@@ -61,6 +61,52 @@
 	</div>
 	<script src="assets/js/jquery.min.js"></script>
 	<script src="assets/bootstrap/js/bootstrap.min.js"></script>
+	<script>
+		$(function() {
+			$('#email-search').click(function() {
+				if($('#id-text').val().localeCompare('') == 0) {
+					alert('empty');
+					return;
+				}
+				$.post('forgot.php', {id : $('#id-text').val()}, function(data) {
+					alert('found ' + data);
+					$('#em-text').val(data);
+				});
+			});
+
+			$('#id-search').click(function() {
+				if($('#em-text').val().localeCompare('') == 0) {
+					alert('empty');
+					return;
+				}
+				$.post('forgot.php', {email : $('#em-text').val()}, function(data) {
+					alert('found ' + data );
+					$('#id-text').val(data);
+				});
+			});
+
+			$('#activate').click(function() {
+				$.post('forgot.php', {num : $('#num-input').val()}, function(data) {
+					alert(data);
+				});
+			});
+
+			$('#pwd-setting').click(function() {
+				if($('b').html().localeCompare('') == 0 || $('#pwd-text').val().localeCompare('') == 0) {
+					alert('empty');
+					return;
+				}
+				$.post('forgot.php', 
+					{
+						pwd : $('#pwd-text').val(),
+						id_change : $('#id-text').val(),
+						dest : $('#em-text').val()
+					},
+					function() { alert('check your email to get the verification code');} 
+				);
+			});
+		});
+	</script>
 </body>
 
 </html>

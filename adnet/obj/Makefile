@@ -6,6 +6,9 @@ LDLIBS = -lzeta -ljsoncpp -lpthread -lstdc++fs -lrt -lmysqlcppconn -lzetatls -ln
 
 all : $(EXE)
 
+../adnet2.src.x : adnet.src.o adnet2.src.o adnet2.src.x
+	$(CXX) -o $@ $^ $(LDLIBS) $(LDFLAGS)
+
 ../%.x : %.x %.o
 	$(CXX) -o $@ $^ $(LDLIBS) $(LDFLAGS)
 
