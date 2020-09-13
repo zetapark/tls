@@ -103,6 +103,7 @@ void WebSite::parse_all(string &&s)
 	}
 	if(requested_document_ == "") requested_document_ = "index.html";
 	content_ = fileNhtml_[requested_document_];
+	cout << "requested_document : " << requested_document_ << endl;
 }
 
 string WebSite::return_content() 

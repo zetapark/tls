@@ -36,8 +36,8 @@
 			e.preventDefault();
 			$.post('login.php', $('form').serialize(),
 				function(data) {
-					alert(data);
 					if(data.localeCompare('login succeeded') == 0) window.location.href='index.html';
+					else alert(data);
 				});
 		});
 	</script>

@@ -6,15 +6,15 @@ void Adnet2::process()
 	if(!sq.reconnect()) sq.connect(db_ip_, "adnet", "adnetadnet", "adnet");
 	if(requested_document_ == "index.html") index();
 	else if(requested_document_ == "login.php") login();
-	else if(requested_document_ == "signup.php") content_ = this->signup();
+	else if(requested_document_ == "signup.php") content_ = signup();
 	else if(requested_document_ == "design.php") design();
 	else if(requested_document_ == "mypage.html") mypage();
 	else if(requested_document_ == "index.css") indexcss();
 	else if(requested_document_ == "board.php") board();
 	else if(requested_document_ == "lang.php") lang_++;
 	else if(requested_document_ == "lang.js") content_ = langjs[lang_ % 2];
-	else if(requested_document_ == "forgot.php") this->forgot();
-	else if(requested_document_ == "option.php") this->pref(), content_ = "option saved";
+	else if(requested_document_ == "forgot.php") forgot();
+	else if(requested_document_ == "option.php") pref(), content_ = "option saved";
 }
 
 void Adnet2::mypage()
