@@ -7,7 +7,6 @@ void Adnet2::process()
 	if(requested_document_ == "index.html") index();
 	else if(requested_document_ == "login.php") login();
 	else if(requested_document_ == "signup.php") content_ = this->signup();
-	else if(requested_document_ == "forgot.html") content_ = this->forgot();
 	else if(requested_document_ == "design.php") design();
 	else if(requested_document_ == "mypage.html") mypage();
 	else if(requested_document_ == "index.css") indexcss();
