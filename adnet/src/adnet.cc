@@ -57,10 +57,10 @@ void Adnet::db_ip(string ip)
 	db_ip_ = ip;
 }
 
-static string mailx(string src, string dst, string title, string content)
+static string mailx(string src, string dst, string title, string content, bool html = false)
 {
-	string cmd = "mailx " + dst + " -r " + src + " -s '" + title + "' <<HERE_CONTENT\n"
-		+ content + "\nHERE_CONTENT";
+	string cmd = "mailx " + dst + (html ? " -a 'Content-Type: text/html'" : "") +
+		" -r " + src + " -s '" + title + "' <<HERE_CONTENT\n" + content + "\nHERE_CONTENT";
 	system(cmd.data());
 	return "mail sent";
 }
@@ -212,7 +212,7 @@ string Adnet::forgot()
 		</div>
 	</body>
 </html>
-				)");
+				)", true);
 	} else if(s = nameNvalue_["num"]; s != "" && key_ > 9999 && key_ == stoi(s)) {
 		SHA2 sha;
 		auto a = sha.hash(pwd_.begin(), pwd_.end());
@@ -251,7 +251,7 @@ string Adnet::email_check()
 		</div>
 	</body>
 </html>
-				)");
+				)", true);
 }
 
 string Adnet::recommend()
