@@ -10,9 +10,10 @@ $(function() {
 		});
 	});
 	$('#contact-form').submit(function(event) {
+		alert('mail sent');
 		event.preventDefault();
 		$.post('https://misc.zeta2374.com/leave_message', $('form').serialize(),
-			function(data) { alert('mail sent'); });
+			function(data) { alert(data); });
 	});
 	$( '#design-request' ).submit( function( e ) {
 			$.ajax( {

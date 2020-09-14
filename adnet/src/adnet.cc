@@ -190,7 +190,29 @@ string Adnet::forgot()
 		pwd_ = s;
 		change_id_ = nameNvalue_["id_change"];
 		return mailx("adnet@zeta2374.com", nameNvalue_["dest"], "change password from AdNET",
-				"type next 5 digit number to activate the new password\n" + to_string(key_));
+				R"(
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport" />
+	</head>
+	<body>
+		<div style="text-align: center; padding-top: 200px; padding-bottom: 200; background: url('https://tomcat.zeta2374.com/image/back.jpg') repeat">
+			<a href=https://adnet.zeta2374.com>
+				<img src=https://tomcat.zeta2374.com/image/adnet.png width=150>
+			</a>
+			<p>
+			Thanks for using AdNET.
+			</p>
+			<h3>Please Enter this verification Code</h3>
+			<h4>)" + to_string(key_) + R"(</h4>
+			<p style=margin-top:100>
+			스팸 메일로 분류되었을 경우, adnet@zeta2374.com을 주소록에 추가해 주세요.
+			</p>
+		</div>
+	</body>
+</html>
+				)");
 	} else if(s = nameNvalue_["num"]; s != "" && key_ > 9999 && key_ == stoi(s)) {
 		SHA2 sha;
 		auto a = sha.hash(pwd_.begin(), pwd_.end());
@@ -207,7 +229,29 @@ string Adnet::email_check()
 	verify_code_ = di(rd);
 	email_ = nameNvalue_["email"];
 	return mailx("adnet@zeta2374.com", email_, "email verification", 
-			"type next 5 digits to verify email\n" + to_string(verify_code_));
+				R"(
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport" />
+	</head>
+	<body>
+		<div style="text-align: center; padding-top: 200px; padding-bottom: 200; background: url('https://tomcat.zeta2374.com/image/back.jpg') repeat">
+			<a href=https://adnet.zeta2374.com>
+				<img src=https://tomcat.zeta2374.com/image/adnet.png width=150>
+			</a>
+			<p>
+			Thanks for using AdNET.
+			</p>
+			<h3>Please Enter this verification Code</h3>
+			<h4>)" + to_string(verify_code_) + R"(</h4>
+			<p style=margin-top:100>
+			스팸 메일로 분류되었을 경우, adnet@zeta2374.com을 주소록에 추가해 주세요.
+			</p>
+		</div>
+	</body>
+</html>
+				)");
 }
 
 string Adnet::recommend()
