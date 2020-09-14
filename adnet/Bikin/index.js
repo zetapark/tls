@@ -12,7 +12,7 @@ $(function() {
 	$('#contact-form').submit(function(event) {
 		event.preventDefault();
 		$.post('https://misc.zeta2374.com/leave_message', $('form').serialize(),
-			function(data) { alert(data); });
+			function(data) { alert('mail sent'); });
 	});
 	$( '#design-request' ).submit( function( e ) {
 			$.ajax( {

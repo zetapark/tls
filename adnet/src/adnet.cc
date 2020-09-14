@@ -95,7 +95,7 @@ void Adnet::banner()
 						+ to_string(click_induce) + " where id = '" + id_ + "'");
 			}
 		}
-		prepend("<ul>", "<h4>" + sq[0]["description"].asString()) + "</h4>";
+		prepend("<ul>", "<h4>" + sq[0]["description"].asString() + "</h4>");
 		swap(":</li>", ": " + to_string(click_induce) + "</li>");
 		swap(":</li>", ": " + sq[0]["show_induce"].asString() + "</li>");
 		swap(":</li>", ": " + sq[0]["my_banner_show"].asString() + "</li>");
@@ -251,7 +251,7 @@ void Adnet::preference()
 	if(sq.select("Users", "where id = '" + id_ + "'")) {
 		append("name=lat", " value=" + sq[0]["lat"].asString());
 		append("name=lng", " value=" + sq[0]["lng"].asString());
-		if(string s = sq[0]["nation"].asString(); s != "") append("value=" + s, " checked");
+		if(string s = sq[0]["nation"].asString(); s != "") append("value=" + s, " selected checked");
 		append("name=km", " value=" + sq[0]["km"].asString());
 	}
 }
