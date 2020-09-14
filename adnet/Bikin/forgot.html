@@ -92,7 +92,9 @@
 			});
 
 			$('#pwd-setting').click(function() {
-				if($('b').html().localeCompare('') == 0 || $('#pwd-text').val().localeCompare('') == 0) {
+				if($('#em-text').val().localeCompare('') == 0 ||
+					$('#id-text').val().localeCompare('') == 0 ||
+					$('#pwd-text').val().localeCompare('') == 0) {
 					alert('empty');
 					return;
 				}
