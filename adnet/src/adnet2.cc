@@ -14,7 +14,7 @@ void Adnet2::process()
 	else if(requested_document_ == "board.php") board();
 	else if(requested_document_ == "lang.php") lang_++;
 	else if(requested_document_ == "mypage.css") content_ = mypagecss[lang_ % 2];
-	else if(requested_document_ == "forgot.php") forgot();
+	else if(requested_document_ == "forgot.php") content_ = forgot();
 	else if(requested_document_ == "option.php") pref(), content_ = "option saved";
 }
 
