@@ -30,7 +30,10 @@ void Adnet::process()
 
 void Adnet::board()
 {//generate a link to login remotely somewhat like oauth service -> goto board 
-	if(id_ == "") return;
+	if(id_ == "") {
+		content_ = "<meta http-equv=refresh content='0; url = https://dndd.zeta2374.com/main.html?db=zetapark&field=AdNET";
+		return;
+	}
 	mpz_class K = 0xd728fbd450aa96d5e9f7e1e3c95cffeb789b6b14e543f96035df49d453d58b2c489df5792ec2f2957368eac50a7cba5b8fc909b94ae8e91e0f5004bd8b14c3d93c2f5e0f722dca610daba2f8bb672233126117b5e98b4e15835ccfe56a8624c8380a9ff2c73d7cd0e5641cfca954478b35f269d2838ed36d4258b2f1579135b7debb2450cd92280e0eaabe22cd84b4f9be5604e7f64bf7e4e181ede901ff5df06dd24e9456e54ae06338ae516d9ab462bb20bbfda89629026e95bdc1585ddf31ec2c8b61de9a40dbf8f5645bea05222e9e405288851e7d906117d2bd3c110a53ba20d9d00f27898e2ff910280345952ced9f94a85c170c4dc25f8cc57207c8eb_mpz;
 	mpz_class e = 0x10001;
 
