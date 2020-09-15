@@ -24,7 +24,7 @@
 						<div class="form-group">
 							<label class="text-secondary">Email</label>
 							<input class="form-control" name=email type="text" required="" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,15}$" inputmode="email" id=em-text>
-							<button id=check-email class='btn btn-info'>Check email</button>
+							<button type=button id=check-email class='btn btn-info'>Check email</button>
 						</div>
 						<div class='form-group align-content-center'>
 							<label class=text-secondary>Verification Code</label>
@@ -40,8 +40,8 @@
 						</div>
 						<div class='form-group align-content-center'>
 							<label class=text-secondary>Recommender ID</label>
-							<input class=form-control name=recommender type=text placeholder='enter recommender id if you have any'>
-							<button class='btn btn-info'>Check recommender</button>
+							<input class=form-control name=recommender type=text id=rec-id placeholder='enter recommender id if you have any'>
+							<button type=button id=check-reco class='btn btn-info'>Check recommender</button>
 						</div>
 						<input type=checkbox name=terms checked required><a href=service.html>&nbsp;이용약관 및 개인정보 취급방침</a>에 동의합니다.
 						<button class="btn btn-info mt-2" type="submit">Sign Up</button>
@@ -56,6 +56,11 @@
 	<script src=https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/js/bootstrap.min.js></script>
 	<script>
 		$(function() {
+			$('#check-reco').click(function() {
+				$.post('recommend.php', {id : $('#rec-id').val()}, function(data) {
+					alert(data);
+				});
+			});
 			$('#check-email').click(function(e) {
 				$.post('emailcheck.php', {email : $('#em-text').val()},
 					function() { alert('Check your email to get the verification code. If mail has not arrived, please check spam folder.');} );

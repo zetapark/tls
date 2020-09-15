@@ -13,6 +13,7 @@ void Adnet2::process()
 	else if(requested_document_ == "index.css") indexcss();
 	else if(requested_document_ == "board.html") board();
 	else if(requested_document_ == "emailcheck.php") email_check();
+	else if(requested_document_ == "recommend.php") content_ = recommend();
 	else if(requested_document_ == "lang.php") lang_++;
 	else if(requested_document_ == "lang.css") content_ = langcss[lang_ % 2];
 	else if(requested_document_ == "forgot.php") content_ = forgot();
