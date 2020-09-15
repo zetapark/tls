@@ -143,6 +143,12 @@ string Adnet::signup()
 	string enc = base64_encode({a.begin(), a.end()});
 	sq.insert(nameNvalue_["id"], email_, enc, "", "", 0, 1, 0, 0, 0, "", 0, 0, 0, 0);
 
+	//for board use
+	SqlQuery sq2;
+	sq2.connect(db_ip_, "dndd", "dndddndd", "zetapark");
+	sq2.select("Users", "limit 1");
+	sq2.insert(nameNvalue_["id"], enc, 2, email_, "", sq2.now());
+
 	if(sq.select("Users", "where id = '" + nameNvalue_["recommender"] + "'")) {//recommend bonus
 		sq.query("update Users set click_induce = click_induce + 20 where id = '" +
 				nameNvalue_["recommender"] + "'");
@@ -219,8 +225,15 @@ string Adnet::forgot()
 	} else if(s = nameNvalue_["num"]; s != "" && key_ > 9999 && key_ == stoi(s)) {
 		SHA2 sha;
 		auto a = sha.hash(pwd_.begin(), pwd_.end());
-		sq.query("update Users set password = '" + base64_encode({a.begin(), a.end()})
-				+ "' where id = '" + change_id_ + "'");
+		auto enc = base64_encode({a.begin(), a.end()});
+		sq.query("update Users set password = '" + enc + "' where id = '" + change_id_ + "'");
+
+		//for board use
+		SqlQuery sq2;
+		sq2.connect(db_ip_, "dndd", "dndddndd", "zetapark");
+		sq2.select("Users", "limit 1");
+		sq2.insert(change_id_, enc, 2, email_, "", sq2.now());
+		
 		return "password changed";
 	}
 	return "";
