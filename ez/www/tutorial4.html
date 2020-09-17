@@ -9,7 +9,7 @@
 		<script>
 			$(function() {
 				$('button').click(function() {
-					$.post("result_view", {num : 123, name : 'abc'}, 
+					$.post("result_view.html", {num : 123, name : 'abc'}, 
 						function(data, status) { alert("Data : " + data + "\nStatus : " + status); });
 				});
 			});
@@ -38,7 +38,7 @@
 		&lt;script src="jquery.js">&lt;/script>
 		&lt;script>
 			function on_click() {
-				$.post('result', {name : 'abc', num : 123}, 
+				$.post('result_view.html', {name : 'abc', num : 123}, 
 					function(data, status) { alert(data); }
 				);
 			}

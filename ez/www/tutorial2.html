@@ -35,7 +35,7 @@ So, we need to change our server side programming a little bit.
 			<div class='w3-code notranslate'>
 				<pre>&lt;html>
 	&lt;body>
-	&lt;a href="result?name='park'&day='mon'">get method test&lt;/a>
+	&lt;a href="result_view.html?name='park'&day='mon'">get method test&lt;/a>
 	&lt;/body>
 &lt;/html></pre>
 			</div>
@@ -48,7 +48,7 @@ So, we need to change our server side programming a little bit.
 {
 protected:
 	void process() {
-		if(requested_document_ == "result") {
+		if(requested_document_ == "result_view.html") {
 			content_ = "&lt;html>&lt;h2>";
 			for(auto [a, b] : nameNvalue_) content_ += a + ':' + b + "&lt;br>";
 			content_ += "&lt;/h2>&lt;/html>";
