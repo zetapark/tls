@@ -11,7 +11,7 @@ class MySite : public WebSite
 {
 protected:
 	void process() {
-		if(requested_document_ == "result_view.php") {
+		if(requested_document_ == "result_view.html") {
 			content_ = "<html><h2>";
 			for(auto [a, b] : nameNvalue_) content_ += a + ':' + b + "<br>";
 			content_ += "</h2></html>";
