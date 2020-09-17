@@ -88,6 +88,7 @@
 			$('#activate').click(function() {
 				$.post('forgot.php', {num : $('#num-input').val()}, function(data) {
 					alert(data);
+					if(data.localeCompare('password changed') == 0) window.location.href='login.html';
 				});
 			});
 
