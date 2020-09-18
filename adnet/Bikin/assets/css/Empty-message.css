@@ -1,0 +1,16 @@
+.o-25 {
+  opacity: 0.35 !important;
+}
+
+.card {
+  border: none;
+  outline: none !important;
+  border-radius: 0.75rem;
+  box-shadow: 4px 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+.mh-medium {
+  height: 100%;
+  max-height: 27rem;
+}
+
