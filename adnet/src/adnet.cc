@@ -271,7 +271,7 @@ void Adnet::pref()
 		command.back() = ' ';
 		command += " where id = '" + id_ + "'";
 	} else {
-		command = "insert into Pref values ('" + id_ + "', ";
+		command = "insert into Pref values ('" + id_ + "' ";
 		for(const string &s : category) command += nameNvalue_[s] == "" ? ",0" : ",1";
 		command += ')';
 	}

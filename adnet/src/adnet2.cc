@@ -19,7 +19,9 @@ void Adnet2::process()
 	else if(requested_document_ == "forgot.php") content_ = forgot();
 	else if(requested_document_ == "search.php") search();
 	else if(requested_document_ == "option.php") pref(), content_ = "option saved";
-	else if(content_ == "") content_ = fileNhtml_["empty.html"];
+	else if(content_ == "" && 
+			requested_document_.substr(requested_document_.rfind('.'), 4) == ".htm")
+		content_ = fileNhtml_["empty.html"];
 }
 
 void Adnet2::mypage()
