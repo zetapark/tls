@@ -33,3 +33,7 @@ a.viewonlog {
 	border-width: 36px;
 	margin-top: -36px;
 }
+
+.bx-check {
+	color: green !important;
+}
