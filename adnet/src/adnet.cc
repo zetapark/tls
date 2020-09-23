@@ -111,19 +111,19 @@ void Adnet::banner()
 
 	for(int i=0; i<4; i++) swap("@ID", id_);
 	if(nameNvalue_["leaderfilename"] != "") {
-		ofstream f{"banner/" + id_ + "-leader.jpg"};
+		ofstream f{"stage/" + id_ + "-leader.jpg"};
 		f << nameNvalue_["leader"];
 	}
 	if(nameNvalue_["mobilefilename"] != "") {
-		ofstream f{"banner/" + id_ + "-mobile.jpg"};
+		ofstream f{"stage/" + id_ + "-mobile.jpg"};
 		f << nameNvalue_["mobile"];
 	}
 	if(nameNvalue_["squarefilename"] != "") {
-		ofstream f{"banner/" + id_ + "-square.jpg"};
+		ofstream f{"stage/" + id_ + "-square.jpg"};
 		f << nameNvalue_["square"];
 	}
 	if(nameNvalue_["skyfilename"] != "") {
-		ofstream f{"banner/" + id_ + "-sky.jpg"};
+		ofstream f{"stage/" + id_ + "-sky.jpg"};
 		f << nameNvalue_["sky"];
 	}
 	if(string s = nameNvalue_["link"]; s != "")
