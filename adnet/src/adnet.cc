@@ -109,7 +109,7 @@ void Adnet::banner()
 		swap("max=>", "max=" + to_string(point) + '>');
 	}
 
-	for(int i=0; i<4; i++) swap("@ID", id_);
+	for(int i=0; i<8; i++) swap("@ID", id_);
 	if(nameNvalue_["leaderfilename"] != "") {
 		ofstream f{"stage/" + id_ + "-leader.jpg"};
 		f << nameNvalue_["leader"];
