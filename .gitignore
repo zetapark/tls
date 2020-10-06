@@ -41,3 +41,4 @@ obj/catch.tx
 *.log
 *.seller
 *.graph
+sample/graph.sav
