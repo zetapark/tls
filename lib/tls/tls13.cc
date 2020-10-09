@@ -491,8 +491,7 @@ TLS13<SV>::handshake(function<optional<string>()> read_f, function<void(string)>
 	string s; optional<string> a;
 	switch(1) { case 1://to use break
 	if constexpr(SV) {
-		if(s = this->alert(2, 0);
-				!(a = read_f()) || (s = client_hello(move(*a))) != "") break;
+		if(s = this->alert(2, 0); !(a = read_f()) || (s = client_hello(move(*a))) != "") break;
 		if(s = server_hello(); premaster_secret_) {//premaster secret is set in extension if 1.3
 			protect_handshake();
 			s += this->change_cipher_spec();
@@ -505,8 +504,7 @@ TLS13<SV>::handshake(function<optional<string>()> read_f, function<void(string)>
 //			string tmp = this->accumulated_handshakes_;//save after server finished
 			s += encode(move(t), HANDSHAKE);//first condition true:read error->alert(2, 0)
 			write_f(s); //second condition true->error message of function v
-			if(s = this->alert(2, 49); !(a = read_f())
-					|| (s = this->change_cipher_spec(move(*a))) != "") break;
+			if(s = this->alert(2, 49); !(a = read_f()) || (s = this->change_cipher_spec(move(*a))) != "") break;
 			if(s = this->alert(2, 49); !(a = read_f())) break;
 			if(s = this->alert(2, 50); !(a = decode(move(*a)))) break;
 			set_aes(this->master_secret_, "c ap traffic", "s ap traffic");

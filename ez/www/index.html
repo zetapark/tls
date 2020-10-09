@@ -15,12 +15,12 @@ svg { vertical-align: middle; }
 	<script>
 		$(function() {
 			$('#koflag').click(function() {
-				$.get('korean', function(data) { console.log(data); });
+				$.get('korean.php', function(data) { console.log(data); });
 				$('.eng').hide();
 				$('.kor').show();
 			});
 			$('#enflag').click(function() { 
-				$.get('english', function(data) {console.log(data);});
+				$.get('english.php', function(data) {console.log(data);});
 				$('.kor').hide();
 				$('.eng').show();
 			});
