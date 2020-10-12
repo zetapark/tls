@@ -100,9 +100,11 @@ Web site is defined by a C++ class, thus enabling convenient structured programm
 
 
 
-#### - Virtual programming environment with State
+#### - Virtual programming environment with State : Use full power of C++
 
-C++ is a mature, versatile and very fast language. But it was almost never used in web development. The biggest reason is that web development is different from normal software development. It is segmented by pages users are seeing. This is why script-like languages are preferred, rather than fully edged languages. And, we need to use cookie or some other complex methods to store informations like login status. eZ framework provides a stateful virtual environment that a browser is constantly connected to a web server. This virtual environment removes the segmentation of web apps. Thanks to this, a programmer can just store those informations that should be sustained through multiple pages, to a normal C++ variables. This is very convenient. No more queries or cookies are needed to verify if the user is logged in. Just look at the local variable. 
+C++ is a mature, versatile and very fast language. But it was almost never used in web development. The biggest reason is that web development is different from normal software development. It is segmented by pages users are seeing,  because HTTP protocol is stateless. This is why script-like languages are preferred in web development, rather than fully edged languages. And, we need to use cookie or some other complex methods to store informations like login status. eZ framework provides a stateful virtual environment that a browser is constantly connected to a web server. This virtual environment removes the segmentation of web apps. Thanks to this, a programmer can just store those informations, that should be sustained through multiple pages, to a normal C++ variables. This is very convenient. No more queries or cookies are needed to verify if the user is logged in. Just look at the local variable. 
+
+In eZ Framwork, You will define your website as a class. This will make structured programming easy. You can roam free in your server programming as you are programming a normal application.
 
 
 
@@ -156,9 +158,13 @@ int main() {
 
 #### - MySql Utility class and easy adoptation of various libraries
 
-eZ framework has a utility class for MySql database. For other databases, developers can use appropriate library or use python or other language module. C/C++ language has long accumulated diverse libraries. It is a privilege to use these with simple linking. Of course, Web server program can easily run script file, and call python functions using pybind etc.
+eZ framework has a utility class for MySql database. For other databases, developers can use appropriate library or use python or other language module. C/C++ language has long list of accumulated diverse libraries. It is a privilege to use these with simple linking. Of course, Web server program can easily run script file, and call python functions using pybind etc.
 
 
+
+#### - Scalable, Small Footprint
+
+Middle server can distribute connections to many local web server machines. It can be achieved by editing a simple configuration text file. eZ Framework consumes little hardware. Base memory usage is less than 20M. Consequently, you can make full use of parallel connections of small computers like Raspberry Pi.
 
 
 
@@ -181,16 +187,16 @@ Edit eZ.conf to control connection distribution across local web server machines
 | ez          | 192.168.0.15          | 2001 | 2      |
 
 Middle server will read eZ.conf and distribute connections across local machines.
-In example connection to ez domain will be distributed 1 : 2 to 192.168.0.14 machine and 192.168.0.15 machine.
+In example, connections to ez domain will be distributed 1 : 2 to 192.168.0.14 machine and 192.168.0.15 machine.
 
 
 
 
 ## Resources
 
-[https://www.zeta2374.com/introduction.html](eZ Framework Officail Website) eZ Framework official website.
+[eZ Framework Officail Website](https://www.zeta2374.com/introduction.html)
 
-[https://www.zeta2374.com/tutorial.html](tutorial)Tutorials
+[Tutorials](https://www.zeta2374.com/tutorial.html)
 
 
 
