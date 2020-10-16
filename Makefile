@@ -13,7 +13,7 @@ all :
 	make $(OPTION) -C dndd/
 	make $(OPTION) -C suwon/
 	make $(OPTION) -C ez/
-	make $(OPTION) -C sample/
+	make $(OPTION) -C etc/
 	make $(OPTION) -C adnet/
 
 safe :

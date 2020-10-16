@@ -41,6 +41,27 @@ If you access localhost port 2000 with your browser, you will see the  result.
 
 
 
+## Directory Structure
+
+- lib : eZ Framework source(subdirectories are below)
+
+  - tcpip : for tcpip, http protocol
+  - database : mysql database wrapper
+  - tls : TLS 1.3, 1.2 library
+  - util : utility classes
+  - tst : test cases
+
+- Made with eZ Framework
+	- adnet : Banner Ad platform [AdNET](https://adnet.zeta2374.com)
+	- biz : Business card organizer [Biz](https://biz.zeta2374.com)
+	- dndd : Bulletin board system [Discussion and Democratic Decision making](https://dndd.zeta2374.com)
+	- ez : eZ Framework official site [eZ](https://www.zeta2374.com/introduction.html)
+	- suwon : stores in suwon city that use Kyungki province local currency [경기화폐](https://suwon.zeta2374.com)
+	
+- incltouch : makefile utility program
+
+  
+
 ## Install
 
 ##### - get source from Github
@@ -73,7 +94,7 @@ pip3 install gensim
 
 run make at the root directory. All the files will be built.
 If it fails, run make safe first. This will just compile eZ Framework core.
-the, run make. or install omitted libraries.
+then, run make. or install omitted libraries.
 
 ```bash
 make || make safe
@@ -158,7 +179,18 @@ int main() {
 
 #### - MySql Utility class and easy adoptation of various libraries
 
-eZ framework has a utility class for MySql database. For other databases, developers can use appropriate library or use python or other language module. C/C++ language has long list of accumulated diverse libraries. It is a privilege to use these with simple linking. Of course, Web server program can easily run script file, and call python functions using pybind etc.
+Currently, only MySql database utility class is supported. This class uses jsoncpp library. The result after executing a query will be json format. A developer can access the data with column name and row number.(Details are at [Jsoncpp Wiki](https://en.wikibooks.org/wiki/JsonCpp))
+
+```C++
+SqlQuery sq;
+sq.connect("ip address", "user", "password", "database name");
+sq.query("select * from table_name");
+sq.fetch(10)//fetch 10 rows
+sq[row]["column name"].asString();
+sq[row]["column name"].asInt();
+```
+
+For other databases, developers can use appropriate library or use python or other language module. C/C++ language has long list of accumulated diverse libraries. It is a privilege to use these with simple linking. Also, Web server program can easily run script file, and call python functions using pybind etc.
 
 
 
@@ -171,6 +203,12 @@ Middle server can distribute connections to many local web server machines. It c
 ## Basic mechanism
 
 eZ framework is based on the simple insight that web servers just get string and process it and return string. eZ framework stores all the parameters into *nameNvalue_*(map) regardless of GET, POST, multi-form file. It stores the requeseted document to variable *requeseted_document_*. If the template of requeseted document is present, it will be copied to *content_* variable. This *content_* will be sent back to browser. But before this, eZ framework will call a function to process server side procedures. This function(named process) is what developers will implement. **A developer should transform *content_* variable formed by the template within this process function, using *nameNvalue_* variable.** If there is nothing to be done in server side, no programming is needed. [Tutorial 1](https://www.zeta2374.com/tutorial1.html) is such example.
+
+
+
+## Why eZ Framework?
+
+## Benchmark
 
 
 
@@ -187,7 +225,7 @@ Edit eZ.conf to control connection distribution across local web server machines
 | ez          | 192.168.0.15          | 2001 | 2      |
 
 Middle server will read eZ.conf and distribute connections across local machines.
-In example, connections to ez domain will be distributed 1 : 2 to 192.168.0.14 machine and 192.168.0.15 machine.
+In this example, connections to ez domain will be distributed 1 : 2 to 192.168.0.14 machine and 192.168.0.15 machine.
 
 
 
@@ -203,6 +241,14 @@ In example, connections to ez domain will be distributed 1 : 2 to 192.168.0.14 m
 ## License
 
 LGPL
+
+
+
+## Contribution
+
+We appreciate all contributions. If you are planning to contribute back bug-fixes, please do so without any further discussion.
+
+If you plan to contribute new features, utility functions, or extensions, please first open an issue and discuss the feature with us. 
 
 
 
