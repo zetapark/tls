@@ -138,10 +138,12 @@ eZ framework directly makes an executable to run as a web server. We do not need
 Middle server categorize packets by browsers. Middle server makes some proxy client inside of itself to connect to a web server continuously. Middle server uses three methods to identify the packets according to browser.
 
 - TLS 1.3 session resumption ticket
+
 - TLS 1.2 session ID
+
 - Cookie
 
-
+  
 
 #### - Easy Template Usage
 
@@ -206,12 +208,6 @@ eZ framework is based on the simple insight that web servers just get string and
 
 
 
-## Why eZ Framework?
-
-## Benchmark
-
-
-
 ## Configuration
 
 Edit eZ.conf to control connection distribution across local web server machines.
@@ -227,6 +223,23 @@ Edit eZ.conf to control connection distribution across local web server machines
 Middle server will read eZ.conf and distribute connections across local machines.
 In this example, connections to ez domain will be distributed 1 : 2 to 192.168.0.14 machine and 192.168.0.15 machine.
 
+#### - Middle server command line parameters
+
+- -port : listening port(default 4433)
+
+- -log filter : log filter setting, use lower case to disable log(default tdIWEF)
+
+- -conf : config file(default ../eZ.conf)
+
+- -cert : rsa certificate pem file(default ../fullchain.pem)
+
+- -key : rsa private key pem file(default ../privkey.pem)
+
+  
+
+## Why eZ Framework?
+
+## Benchmark
 
 
 
