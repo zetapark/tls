@@ -37,7 +37,7 @@ $(function() {
 	});
 
 	$('#ad').bind('contextmenu', function() {
-		window.open('https://ad.zeta2374.com', '_blank');
+		window.open('https://adnet.zeta2374.com', '_blank');
 	});
 
 	request_ad();
