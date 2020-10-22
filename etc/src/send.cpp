@@ -15,14 +15,14 @@ string mailx(string src, string dst, string title, string filename, string optio
 	return "mail sent";
 }
 
-string mutt(string sender, string receiver, string title, string bodyfile, string attachfile = "")
-{
-	string cmd = "mutt " + receiver + " -e 'set from=" + sender + 
-		(bodyfile.ends_with("html") ? " content-type=text/html'" : "'")
-		+ " -s '" + title + (attachfile == "" ? "" : "' -a " + attachfile) + " < " + bodyfile;
-	system(cmd.data());
-	return "mail sent";
-}
+//string mutt(string sender, string receiver, string title, string bodyfile, string attachfile = "")
+//{
+//	string cmd = "mutt " + receiver + " -e 'set from=" + sender + 
+//		(bodyfile.ends_with("html") ? " content-type=text/html'" : "'")
+//		+ " -s '" + title + (attachfile == "" ? "" : "' -a " + attachfile) + " < " + bodyfile;
+//	system(cmd.data());
+//	return "mail sent";
+//}
 
 int main(int ac, char **av)
 {

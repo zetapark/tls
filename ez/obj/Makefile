@@ -1,7 +1,7 @@
 CXX = g++
 EXE = $(patsubst %.x, ../%.x, $(wildcard *.x))
-LDFLAGS = -L../../ -Wl,-rpath=../
-LDLIBS = -lzeta
+LDFLAGS = -L../../ -Wl,-rpath=..
+LDLIBS = -lzeta -lpython3.8
 #filesystem library should be next to zeta library
 
 all : $(EXE)
