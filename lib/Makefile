@@ -13,7 +13,6 @@ SH2 = $(patsubst obj/%.tst.o, , $(SH1))
 
 all : 
 	../incltouch.x
-	mkdir obj
 	for i in $(shell ls -d */); do if [ $$i != 'obj/' ]; then cd $$i; make obj -f ../Makefile $(OPTION); cd ..; fi; done
 	make libzeta.so 
 	make middle.tls.x

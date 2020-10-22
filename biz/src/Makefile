@@ -1,5 +1,5 @@
 CFLAG = -c -O3 -std=c++17 -fmax-errors=1 -pthread
-INCLUDE = -I../../lib/ -I/usr/include/jsoncpp -I/usr/include/opencv2 -I/usr/include/python3.6
+INCLUDE = -I../../lib/ -I/usr/include/jsoncpp -I/usr/include/opencv2 -I/usr/include/python3.8 $(shell pkg-config opencv4 --cflags)
 DIR = $(notdir $(shell pwd))
 CC = g++
 OBJ = $(patsubst %.cc, ../obj/%.$(DIR).o, $(wildcard *.cc))
