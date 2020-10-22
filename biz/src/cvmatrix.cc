@@ -117,62 +117,62 @@ void CVMat::get_businesscard(vector<Point> v)
 
 vector<DMatch> CVMat::match(const CVMat& r, double thres) const
 {
-	cout << "desc: " << descriptor_.size() << ", " << r.descriptor_.size() << endl;
-	BFMatcher matcher;
-	vector<DMatch> matches;
-	matcher.match(descriptor_, r.descriptor_, matches);
-	cout << "match size " << matches.size() << endl;
-
-	double max_dist = 0; double min_dist = 1000000;
-
-	//-- Quick calculation of max and min distances between keypoints
-	for( int i = 0; i < matches.size(); i++ ) { 
-		double dist = matches[i].distance;
-		if( dist < min_dist ) min_dist = dist;
-		if( dist > max_dist ) max_dist = dist;
-	}
-
-	printf("-- Max dist : %f \n", max_dist );
-	printf("-- Min dist : %f \n", min_dist );
-	double threshold = min_dist + (max_dist - min_dist) * thres;
-
-	//-- Draw only "good" matches (i.e. whose distance is less than 3*min_dist )
-	std::vector< DMatch > good_matches;
-
-	for( int i = 0; i < matches.size(); i++ ) 
-		if(matches[i].distance < threshold) good_matches.push_back( matches[i]);
-	cout << "good matches : " << good_matches.size() << endl;
-	Mat img_matches;
-	drawMatches( *this, keypoints_, r, r.keypoints_, good_matches, img_matches,
-			Scalar::all(-1), Scalar::all(-1), vector<char>(), 2 );
-	//-- Localize the object
-	std::vector<Point2f> obj;
-	std::vector<Point2f> scene;
-
-	for( int i = 0; i < good_matches.size(); i++ ) {
-		//-- Get the keypoints from the good matches
-		obj.push_back( keypoints_[ good_matches[i].queryIdx ].pt );
-		scene.push_back( r.keypoints_[ good_matches[i].trainIdx ].pt );
-	}
-	Mat H = findHomography( obj, scene, CV_RANSAC );
-
-	//-- Get the corners from the image_1 ( the object to be "detected" )
-	std::vector<Point2f> obj_corners(4);
-	obj_corners[0] = cvPoint(0,0); 
-	obj_corners[1] = cvPoint( cols, 0 );
-	obj_corners[2] = cvPoint( cols, rows ); 
-	obj_corners[3] = cvPoint( 0, rows );
-
-	std::vector<Point2f> scene_corners(4);
-	perspectiveTransform( obj_corners, scene_corners, H);
-
-	//-- Draw lines between the corners (the mapped object in the scene - image_2 )
-	line( img_matches, scene_corners[0] + Point2f(cols, 0), scene_corners[1] + Point2f(cols, 0), Scalar(0, 255, 0), 4 );
-	line( img_matches, scene_corners[1] + Point2f(cols, 0), scene_corners[2] + Point2f(cols, 0), Scalar( 0, 255, 0), 4 );
-	line( img_matches, scene_corners[2] + Point2f(cols, 0), scene_corners[3] + Point2f(cols, 0), Scalar( 0, 255, 0), 4 );
-	line( img_matches, scene_corners[3] + Point2f(cols, 0), scene_corners[0] + Point2f(cols, 0), Scalar( 0, 255, 0), 4 );
-	imshow("match", img_matches);
-	return good_matches;
+//	cout << "desc: " << descriptor_.size() << ", " << r.descriptor_.size() << endl;
+//	BFMatcher matcher;
+//	vector<DMatch> matches;
+//	matcher.match(descriptor_, r.descriptor_, matches);
+//	cout << "match size " << matches.size() << endl;
+//
+//	double max_dist = 0; double min_dist = 1000000;
+//
+//	//-- Quick calculation of max and min distances between keypoints
+//	for( int i = 0; i < matches.size(); i++ ) { 
+//		double dist = matches[i].distance;
+//		if( dist < min_dist ) min_dist = dist;
+//		if( dist > max_dist ) max_dist = dist;
+//	}
+//
+//	printf("-- Max dist : %f \n", max_dist );
+//	printf("-- Min dist : %f \n", min_dist );
+//	double threshold = min_dist + (max_dist - min_dist) * thres;
+//
+//	//-- Draw only "good" matches (i.e. whose distance is less than 3*min_dist )
+//	std::vector< DMatch > good_matches;
+//
+//	for( int i = 0; i < matches.size(); i++ ) 
+//		if(matches[i].distance < threshold) good_matches.push_back( matches[i]);
+//	cout << "good matches : " << good_matches.size() << endl;
+//	Mat img_matches;
+//	drawMatches( *this, keypoints_, r, r.keypoints_, good_matches, img_matches,
+//			Scalar::all(-1), Scalar::all(-1), vector<char>(), 2 );
+//	//-- Localize the object
+//	std::vector<Point2f> obj;
+//	std::vector<Point2f> scene;
+//
+//	for( int i = 0; i < good_matches.size(); i++ ) {
+//		//-- Get the keypoints from the good matches
+//		obj.push_back( keypoints_[ good_matches[i].queryIdx ].pt );
+//		scene.push_back( r.keypoints_[ good_matches[i].trainIdx ].pt );
+//	}
+//	Mat H = findHomography( obj, scene, CV_RANSAC );
+//
+//	//-- Get the corners from the image_1 ( the object to be "detected" )
+//	std::vector<Point2f> obj_corners(4);
+//	obj_corners[0] = cvPoint(0,0); 
+//	obj_corners[1] = cvPoint( cols, 0 );
+//	obj_corners[2] = cvPoint( cols, rows ); 
+//	obj_corners[3] = cvPoint( 0, rows );
+//
+//	std::vector<Point2f> scene_corners(4);
+//	perspectiveTransform( obj_corners, scene_corners, H);
+//
+//	//-- Draw lines between the corners (the mapped object in the scene - image_2 )
+//	line( img_matches, scene_corners[0] + Point2f(cols, 0), scene_corners[1] + Point2f(cols, 0), Scalar(0, 255, 0), 4 );
+//	line( img_matches, scene_corners[1] + Point2f(cols, 0), scene_corners[2] + Point2f(cols, 0), Scalar( 0, 255, 0), 4 );
+//	line( img_matches, scene_corners[2] + Point2f(cols, 0), scene_corners[3] + Point2f(cols, 0), Scalar( 0, 255, 0), 4 );
+//	line( img_matches, scene_corners[3] + Point2f(cols, 0), scene_corners[0] + Point2f(cols, 0), Scalar( 0, 255, 0), 4 );
+//	imshow("match", img_matches);
+//	return good_matches;
 }
 
 template<typename T> void CVMat::feature()
@@ -267,50 +267,50 @@ MatND CVMat::histo(string window)
 
 void CVMat::fourier(string window)
 {
-	using namespace cv;
-    Mat padded;                            //expand input image to optimal size
-    int m = getOptimalDFTSize( rows );
-    int n = getOptimalDFTSize( cols ); // on the border add zero values
-    copyMakeBorder(*this, padded, 0,m-rows,0,n-cols, BORDER_CONSTANT, Scalar::all(0));
-
-    Mat planes[] = {Mat_<float>(padded), Mat::zeros(padded.size(), CV_32F)};
-    Mat complexI;
-    merge(planes, 2, complexI);  // Add to the expanded another plane with zeros
-
-    dft(complexI, complexI);     // this way the result may fit in the source matrix
-
-    // compute the magnitude and switch to logarithmic scale
-    // => log(1 + sqrt(Re(DFT(I))^2 + Im(DFT(I))^2))
-    split(complexI, planes);       // planes[0] = Re(DFT(I), planes[1] = Im(DFT(I))
-    magnitude(planes[0], planes[1], planes[0]);// planes[0] = magnitude
-    Mat magI = planes[0];
-
-    magI += Scalar::all(1);                    // switch to logarithmic scale
-    log(magI, magI);
-
-    // crop the spectrum, if it has an odd number of rows or columns
-    magI = magI(Rect(0, 0, magI.cols & -2, magI.rows & -2));
-
-    // rearrange the quadrants of Fourier image  so that the origin is at the image center
-    int cx = magI.cols/2;
-    int cy = magI.rows/2;
-
-    Mat q0(magI, Rect(0, 0, cx, cy));   // Top-Left - Create a ROI per quadrant
-    Mat q1(magI, Rect(cx, 0, cx, cy));  // Top-Right
-    Mat q2(magI, Rect(0, cy, cx, cy));  // Bottom-Left
-    Mat q3(magI, Rect(cx, cy, cx, cy)); // Bottom-Right
-
-    Mat tmp;                           // swap quadrants (Top-Left with Bottom-Right)
-    q0.copyTo(tmp);
-    q3.copyTo(q0);
-    tmp.copyTo(q3);
-
-    q1.copyTo(tmp);                    // swap quadrant (Top-Right with Bottom-Left)
-    q2.copyTo(q1);
-    tmp.copyTo(q2);
-
-	cv::normalize(magI, magI, 0, 1, CV_MINMAX);//Transform the matrix with float values into a
-	imshow(window, magI);
+//	using namespace cv;
+//    Mat padded;                            //expand input image to optimal size
+//    int m = getOptimalDFTSize( rows );
+//    int n = getOptimalDFTSize( cols ); // on the border add zero values
+//    copyMakeBorder(*this, padded, 0,m-rows,0,n-cols, BORDER_CONSTANT, Scalar::all(0));
+//
+//    Mat planes[] = {Mat_<float>(padded), Mat::zeros(padded.size(), CV_32F)};
+//    Mat complexI;
+//    merge(planes, 2, complexI);  // Add to the expanded another plane with zeros
+//
+//    dft(complexI, complexI);     // this way the result may fit in the source matrix
+//
+//    // compute the magnitude and switch to logarithmic scale
+//    // => log(1 + sqrt(Re(DFT(I))^2 + Im(DFT(I))^2))
+//    split(complexI, planes);       // planes[0] = Re(DFT(I), planes[1] = Im(DFT(I))
+//    magnitude(planes[0], planes[1], planes[0]);// planes[0] = magnitude
+//    Mat magI = planes[0];
+//
+//    magI += Scalar::all(1);                    // switch to logarithmic scale
+//    log(magI, magI);
+//
+//    // crop the spectrum, if it has an odd number of rows or columns
+//    magI = magI(Rect(0, 0, magI.cols & -2, magI.rows & -2));
+//
+//    // rearrange the quadrants of Fourier image  so that the origin is at the image center
+//    int cx = magI.cols/2;
+//    int cy = magI.rows/2;
+//
+//    Mat q0(magI, Rect(0, 0, cx, cy));   // Top-Left - Create a ROI per quadrant
+//    Mat q1(magI, Rect(cx, 0, cx, cy));  // Top-Right
+//    Mat q2(magI, Rect(0, cy, cx, cy));  // Bottom-Left
+//    Mat q3(magI, Rect(cx, cy, cx, cy)); // Bottom-Right
+//
+//    Mat tmp;                           // swap quadrants (Top-Left with Bottom-Right)
+//    q0.copyTo(tmp);
+//    q3.copyTo(q0);
+//    tmp.copyTo(q3);
+//
+//    q1.copyTo(tmp);                    // swap quadrant (Top-Right with Bottom-Left)
+//    q2.copyTo(q1);
+//    tmp.copyTo(q2);
+//
+//	cv::normalize(magI, magI, 0, 1, CV_MINMAX);//Transform the matrix with float values into a
+//	imshow(window, magI);
 }
 
 void CVMat::noise(int scale)

@@ -1,9 +1,9 @@
 CXX = g++
 OBJ = $(wildcard *.src.o)
 EXE = $(patsubst %.x, ../%.x, $(wildcard *.x))
-LDFLAGS = -L../ -L../../lib/ -Wl,-rpath=../ 
+LDFLAGS = -L../ -L../../lib/ -Wl,-rpath=../lib/ -Wl,-rpath=.
 LDLIBS = -lgmpxx -lgmp -lnettle -ljsoncpp -lpthread -lhogweed -lzeta -lstdc++fs -lrt -lmysqlcppconn
-OPENCV = $(shell pkg-config opencv --libs)
+OPENCV = $(shell pkg-config opencv4 --libs)
 #filesystem library should be next to zeta library
 
 all : ../libbiz.so $(EXE)
