@@ -429,7 +429,7 @@ optional<vector<Point>> CVMat::get_rect()
 
 void CVMat::detect_circle(int can, int ct, int min, int max)
 {
-	HoughCircles(*this, circles_, CV_HOUGH_GRADIENT, 1, rows/8, can, ct, min, max);
+	//HoughCircles(*this, circles_, CV_HOUGH_GRADIENT, 1, rows/8, can, ct, min, max);
 	cout << circles_.size() << " circles detected\n";
 }
 
@@ -445,7 +445,7 @@ void CVMat::edge(int th, int tXr)
 
 void CVMat::draw_detected_line(cv::Scalar color)
 {
-	for(auto& a : lines_) line(*this, {a[0], a[1]}, {a[2], a[3]}, color, 1, CV_AA);
+//	for(auto& a : lines_) line(*this, {a[0], a[1]}, {a[2], a[3]}, color, 1, CV_AA);
 }
 
 void CVMat::filter(const Mat& ft)
@@ -465,7 +465,7 @@ void CVMat::median(int k)
 
 void CVMat::gray()
 {
-	cvtColor(*this, *this, CV_BGR2GRAY);
+//	cvtColor(*this, *this, CV_BGR2GRAY);
 }
 
 void CVMat::template_init()
