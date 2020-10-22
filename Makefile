@@ -5,11 +5,7 @@ OPTION = CPU=$(CPU)
 all : 
 	make $(OPTION) -C incltouch/
 	make $(OPTION) -C lib/
-	if [ ! -f libzeta.so ]; then ln -s lib/libzeta.so libzeta.so; fi
-	if [ ! -f libzetatls.so ]; then ln -s middle/libzetatls.so libzetatls.so; fi
-	if [ ! -f zeta.so ]; then ln -s middle/zeta.so zeta.so; fi
 	make $(OPTION) -C biz/
-	if [ ! -f libbiz.so ]; then ln -s biz/libbiz.so libbiz.so; fi
 	make $(OPTION) -C dndd/
 	make $(OPTION) -C suwon/
 	make $(OPTION) -C ez/
@@ -18,9 +14,7 @@ all :
 
 safe :
 	make -C lib/
-	if [ ! -f libzeta.so ]; then ln -s lib/libzeta.so libzeta.so; fi
 	cd middle/src/ && make && cd ../obj/ && make
-	if [ ! -f libzetatls.so ]; then ln -s middle/libzetatls.so libzetatls.so; fi
 	make -C sample/
 
 clean :
