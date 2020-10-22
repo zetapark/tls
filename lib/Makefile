@@ -21,7 +21,7 @@ all :
 obj : $(OBJ) $(EXE)
 
 ../obj/%.$(DIR).o : %.cc 
-	$(CXX) $(CFLAG) $(INCLUDE) -o $@ $< -fPIC
+	$(CXX) -o $@ $(CFLAG) $(INCLUDE) $< -fPIC
 
 ../obj/%.$(DIR).x : %.cpp 
 	$(CXX) $(CFLAG) $(INCLUDE) -o $@ $<
@@ -30,7 +30,7 @@ libzeta.so : $(SH2)
 	$(CXX) -shared -o $@ $^ $(LIBS)
 
 middle.tls.x : obj/middle.tls.x
-	$(CXX) -o $@ $< -lzeta $(LFLAG) 
+	$(CXX) -o $@ $< -lzeta $(LFLAG) -lpython3.8
 
 catch.tst.x : obj/catch.tst.x $(wildcard obj/*.tst.o)
 	$(CXX) -o $@ $^ -lzeta $(LIBS) $(LFLAG) 
