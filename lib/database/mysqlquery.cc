@@ -50,7 +50,9 @@ bool Mysqlquery::connect(string host, string user, string pass, string db)
 
 bool Mysqlquery::reconnect()
 {
-	if(con && !con->isValid()) return con->reconnect();
+	if(!con) return false;
+	if(con->isValid()) return true;
+	return con->reconnect();
 }
 
 void Mysqlquery::connect(Mysqlquery& copy)
