@@ -4,7 +4,7 @@ OPTION = -j $(CPU)
 CFLAG = -g -c -std=c++17 -fmax-errors=1 -pthread -DPYBIND11_PYTHON_VERSION=3.6m
 INCLUDE = -I../ -I/usr/include/jsoncpp $(shell pkg-config --cflags python3)
 LFLAG = -L. -Wl,-rpath=.
-LIBS = -lgmpxx -lgmp -lnettle -ljsoncpp -lpthread -lhogweed -lstdc++fs -lrt -lmysqlcppconn $(shell pkg-config --libs python3)
+LIBS = -lgmpxx -lgmp -lnettle -ljsoncpp -lpthread -lhogweed -lstdc++fs -lrt -lmysqlcppconn -lpython3.8
 DIR = $(notdir $(shell pwd))
 OBJ = $(patsubst %.cc, ../obj/%.$(DIR).o, $(wildcard *.cc))
 EXE = $(patsubst %.cpp, ../obj/%.$(DIR).x, $(wildcard *.cpp))
@@ -31,7 +31,7 @@ libzeta.so : $(SH2)
 	$(CXX) -shared -o $@ $^ $(LIBS)
 
 middle.tls.x : obj/middle.tls.x
-	$(CXX) -o $@ $< -lzeta $(LFLAG) -lpython3.8
+	$(CXX) -o $@ $< -lzeta $(LFLAG)
 
 catch.tst.x : obj/catch.tst.x $(wildcard obj/*.tst.o)
 	$(CXX) -o $@ $^ -lzeta $(LIBS) $(LFLAG) 
