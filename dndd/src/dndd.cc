@@ -157,7 +157,7 @@ string DnDD::search(string s)
 		sq.select( "(select tt.num, tt.page, title, edit from " + table + 
 				" tt inner join (select num, page, max(edit) as maxedit from " + table +
 				" group by num, page) tmp on tt.num = tmp.num and tt.page = tmp.page and tt.edit = tmp.maxedit) tt2",
-				"where title like '%" + s + "%' and title <> '코멘트임.';");
+				" where title like '%" + s + "%' and title <> '코멘트임.';");
 		for(const auto &a : sq) {
 			string n = a["num"].asString();
 			string p = a["page"].asString();

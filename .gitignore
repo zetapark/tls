@@ -41,3 +41,4 @@ obj/catch.tx
 *.seller
 *.graph
 sample/graph.sav
+etc/graph.sav

@@ -1,7 +1,7 @@
 CXX = g++
 EXE = $(patsubst %.x, ../%.x, $(wildcard *.x))
 LDFLAGS = -L../../lib/ -Wl,-rpath=../lib/
-LDLIBS = -lzeta -ljsoncpp -lpthread -lstdc++fs -lrt -lmysqlcppconn -lgmpxx -lgmp $(shell pkg-config --libs python3)
+LDLIBS = -lzeta -ljsoncpp -lpthread -lstdc++fs -lrt -lmysqlcppconn -lgmpxx -lgmp -lpython3.8
 #filesystem library should be next to zeta library
 
 all : $(EXE)
