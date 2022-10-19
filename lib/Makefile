@@ -4,7 +4,7 @@ OPTION = -j $(CPU)
 CFLAG = -g -c -std=c++17 -fmax-errors=1 -pthread -DPYBIND11_PYTHON_VERSION=3.6m
 INCLUDE = -I../ -I/usr/include/jsoncpp $(shell pkg-config --cflags python3)
 LFLAG = -L. -Wl,-rpath=.
-LIBS = -lgmpxx -lgmp -lnettle -ljsoncpp -lpthread -lhogweed -lstdc++fs -lrt -lmysqlcppconn -lpython3.8
+LIBS = -lgmpxx -lgmp -lnettle -ljsoncpp -lpthread -lhogweed -lstdc++fs -lrt -lmysqlcppconn -lpython3.10
 DIR = $(notdir $(shell pwd))
 OBJ = $(patsubst %.cc, ../obj/%.$(DIR).o, $(wildcard *.cc))
 EXE = $(patsubst %.cpp, ../obj/%.$(DIR).x, $(wildcard *.cpp))
@@ -17,6 +17,7 @@ all :
 	make libzeta.so 
 	make middle.tls.x
 	make catch.tst.x
+	make bitcoin.tls.x
 
 obj : $(OBJ) $(EXE)
 
@@ -34,6 +35,9 @@ middle.tls.x : obj/middle.tls.x
 
 catch.tst.x : obj/catch.tst.x $(wildcard obj/*.tst.o)
 	$(CXX) -o $@ $^ -lzeta $(LIBS) $(LFLAG) 
+
+bitcoin.tls.x : obj/bitcoin.tls.x 
+	$(CXX) -o $@ $< -lzeta $(LIBS) $(LFLAG)
 
 clean :
 	rm libzeta.so middle.tls.x catch.tst.x 

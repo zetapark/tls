@@ -120,6 +120,7 @@ int Server::start(function<string(string)> f)
 		else if(!fork()) {//string size 0 : error -> s.size() : verify 
 			for(optional<string> s; s = recv(); send(f(*s)));//recv server fail 시 에러
 			send(end_string);
+			close(client_fd);
 			break;//forked process ends here
 		}
 	}
@@ -135,6 +136,7 @@ int Server::nokeep_start(function<string(string)> f)
 		else {//connection established
 			cout << "accepting" << endl;
 			send(f(*recv()));
+			close(client_fd);
 		}
 	}
 	return 0;

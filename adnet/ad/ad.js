@@ -1,19 +1,28 @@
-function request_ad() {
-	if(document.hasFocus() && $('#ad').is(':visible')) {
-		$.post(
-			'https://ad.zeta2374.com/request_ad.php',
-			{ id : $('#ad').attr('myid'), category : $('#ad').attr('category'), 
-				url : window.location.href },
-			function(data) {
-				var split = data.split('\n');
+function request_ad() 
+{ if(document.hasFocus() && $('#ad').is(':visible')) 
+	{ $.post
+		( 'https://ad.zeta2374.com/request_ad.php'
+		, { id : $('#ad').attr('myid')
+			, category : $('#ad').attr('category')
+			, url : window.location.href 
+			}
+		, function(data) 
+			{ var split = data.split('\n');
 				$('#ad').attr('src', 'https://tomcat.zeta2374.com/banner/' + split[0] 
 					+ '-' + $('#ad').attr('type') + '.jpg');//img
 				$('#ad').off('click');
-				$('#ad').click(function() {
-					$.post('https://ad.zeta2374.com/click_ad.php',
-						{id : $('#ad').attr('myid'), click : split[0], token : split[2]});//id
-					window.open(split[1], '_blank');//link
-				});
+				$('#ad').click
+				( function() 
+					{ $.post
+						( 'https://ad.zeta2374.com/click_ad.php'
+						, { id : $('#ad').attr('myid')
+							, click : split[0]
+							, token : split[2]
+							}
+						);//id
+						window.open(split[1], '_blank');//link
+					}
+				);
 			}
 		);
 	}
