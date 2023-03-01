@@ -1,4 +1,5 @@
 //#include<iostream>
+#include<iostream>
 #include"ecdsa.h"
 using namespace std;
 
@@ -24,13 +25,14 @@ pair<mpz_class, mpz_class> ECDSA::sign(mpz_class m, mpz_class d) const
 	do {
 		do {
 			k = random_prime(31);
+			cout << "k " << hex << k << endl;
 			P = k * *this;
-//			cout << hex << "k * G" << endl << P << endl;
+			cout << hex << "k * G" << endl << P << endl;
 			r = P.x % n_;
-//			cout << hex << "r : " << r << endl;
+			cout << hex << "r : " << r << endl;
 		} while(r == 0);
 		s = (mod_inv(k) * (z + r * d)) % n_;
-//		cout << hex << "s : " << s << endl;
+		cout << hex << "s : " << s << endl;
 	} while(s == 0);
 	return {r, s};
 }

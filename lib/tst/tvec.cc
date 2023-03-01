@@ -1,7 +1,7 @@
 #include<optional>
 #include<algorithm>
 #include"tls/tvec.h"
-#include"catch.hpp"
+#include<catch.hpp>
 using namespace std;
 
 TEST_CASE("thread safe map test") {

@@ -1,10 +1,10 @@
 SHELL := /bin/bash
 CXX = g++
 OPTION = -j $(CPU)
-CFLAG = -g -c -std=c++17 -fmax-errors=1 -pthread -DPYBIND11_PYTHON_VERSION=3.6m
+CFLAG = -g -c -std=c++17 -fmax-errors=1 -pthread 
 INCLUDE = -I../ -I/usr/include/jsoncpp $(shell pkg-config --cflags python3)
 LFLAG = -L. -Wl,-rpath=.
-LIBS = -lgmpxx -lgmp -lnettle -ljsoncpp -lpthread -lhogweed -lstdc++fs -lrt -lmysqlcppconn -lpython3.10
+LIBS = -lgmpxx -lgmp -lnettle -ljsoncpp -lpthread -lhogweed -lrt -lmysqlcppconn -lpython3.10 -lstdc++fs
 DIR = $(notdir $(shell pwd))
 OBJ = $(patsubst %.cc, ../obj/%.$(DIR).o, $(wildcard *.cc))
 EXE = $(patsubst %.cpp, ../obj/%.$(DIR).x, $(wildcard *.cpp))

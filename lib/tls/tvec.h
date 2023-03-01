@@ -1,6 +1,7 @@
 #include<array>
 #include<atomic>
 #include<shared_mutex>
+#include<mutex>
 
 template<class T, int N = 1000> class ThreadSafeVector
 {

@@ -1,5 +1,5 @@
 #include<algorithm>
-#include"catch.hpp"
+#include<catch.hpp>
 #include"tls/mpz.h"
 #include"tls/sha256.h"
 #include"tls/hkdf.h"

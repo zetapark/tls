@@ -622,7 +622,7 @@ template<bool SV> string TLS13<SV>::encode13(string &&s, int type)
 	this->aes_[SV].xor_with_iv(seq);
 	frag += string{tag.begin(), tag.end()};
 	string s2 = struct2str(h1) + frag;
-	if(s.size() > chunk_size) s2 += encode(s.substr(chunk_size));
+	if(s.size() > chunk_size) s2 += encode13(s.substr(chunk_size));
 	return s2;
 }
 

@@ -1,5 +1,6 @@
 #include<gmpxx.h>
 #include<iomanip>
+#include<iostream>
 #include<istream>
 #include<string>
 #include"cert_util.h"
@@ -10,6 +11,7 @@ string get_certificate_core(istream& is) {//if certificate has no -----END hang.
 	while(s != "-----BEGIN") if(!(is >> s)) return r;//no more certificate
 	getline(is, s);
 	for(is >> s; s != "-----END"; is >> s) r += s;
+	cout << r << endl;
 	return r;
 }
 
@@ -22,6 +24,7 @@ mpz_class str2mpz(string s) {
 
 Json::Value pem2json(istream& is) {
 	auto v = base64_decode(get_certificate_core(is));
+	for(auto c : v) cout << hex << +c;
 	stringstream ss;
 	for(auto c : v) ss << c;
 	return der2json(ss);

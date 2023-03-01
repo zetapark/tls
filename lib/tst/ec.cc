@@ -1,5 +1,5 @@
 #include<iostream>
-#include"catch.hpp"
+#include<catch.hpp>
 #include"tls/mpz.h"
 #include"tls/diffie.h"
 using namespace std;

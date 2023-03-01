@@ -1,4 +1,3 @@
-#include<iostream>
 #include<cstring>
 #include"sha1.h"
 using namespace std;

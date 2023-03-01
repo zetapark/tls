@@ -3,6 +3,7 @@
 #include<chrono>
 #include<mutex>
 #include<tcpip/server.h>
+#include<memory>
 #include"tvec.h"
 
 struct MClient : Client, std::timed_mutex
